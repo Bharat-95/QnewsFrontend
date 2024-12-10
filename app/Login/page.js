@@ -19,7 +19,6 @@ const Page = () => {
     try {
       const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/auth/signin", {
         method: "POST",
-        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

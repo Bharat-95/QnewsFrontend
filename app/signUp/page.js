@@ -3,31 +3,34 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useLanguage } from "../../context/languagecontext";
 import { useRouter } from "next/navigation";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; 
 
 const SignUpPage = () => {
   const { translations } = useLanguage();
-  const router = useRouter();
+  const router = useRouter(); 
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
+  const [firstName, setFirstName] = useState(""); 
   const [lastName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("+91 ");
+  const [phoneNumber, setPhoneNumber] = useState("+91 "); 
   const [error, setError] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); 
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); 
 
-  const userRole = "User";
+  const userRole = "User"; 
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
+  
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
     }
+  
 
     const passwordRegex =
       /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
@@ -37,49 +40,43 @@ const SignUpPage = () => {
       );
       return;
     }
-
-    const phoneNumberWithoutCountryCode = phoneNumber
-      .replace("+91 ", "")
-      .trim();
-    if (
-      phoneNumberWithoutCountryCode.length !== 10 ||
-      isNaN(phoneNumberWithoutCountryCode)
-    ) {
+  
+  
+    const phoneNumberWithoutCountryCode = phoneNumber.replace("+91 ", "").trim();
+    if (phoneNumberWithoutCountryCode.length !== 10 || isNaN(phoneNumberWithoutCountryCode)) {
       setError("Phone number must be 10 digits long.");
       return;
     }
+  
 
     const emailInLowerCase = email.trim().toLowerCase();
+  
 
     try {
-      const response = await fetch(
-        "https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/auth/signup",
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: emailInLowerCase,
-            password,
-            firstName,
-            lastName,
-            phoneNumber: `+91 ${phoneNumberWithoutCountryCode}`,
-            role: userRole,
-          }),
-        }
-      );
-
+      const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: emailInLowerCase,
+          password,
+          firstName,
+          lastName,
+          phoneNumber: `+91 ${phoneNumberWithoutCountryCode}`,
+          role: userRole,
+        }),
+      });
+  
       const data = await response.json();
-
+  
       if (response.ok) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("email", data.user.email);
-        localStorage.setItem("role", data.user.role);
+        localStorage.setItem("role", data.user.role); 
         localStorage.setItem("firstName", data.user.firstName);
         localStorage.setItem("lastName", data.user.lastName);
-
+  
         router.push("/");
         window.location.href = "/";
       } else {
@@ -89,6 +86,8 @@ const SignUpPage = () => {
       setError("Network error, please try again");
     }
   };
+  
+  
 
   return (
     <div className="text-white p-4 flex items-center justify-center ">
@@ -198,9 +197,7 @@ const SignUpPage = () => {
 
           <div className="flex gap-2">
             <input type="checkbox" required />
-            <div className="lg:text-[14px] md:text-[14px] text-[10px]">
-              {translations.acceptTerms}
-            </div>
+            <div className="lg:text-[14px] md:text-[14px] text-[10px]">{translations.acceptTerms}</div>
           </div>
 
           <div className="py-4">
