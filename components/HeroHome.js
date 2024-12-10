@@ -86,8 +86,8 @@ const Page = () => {
               <Image
                 src={sub1Post.image}
                 alt="No Image Found"
-                width={100}
-                height={100}
+                width={500}
+                height={500}
                 className="w-[100%] h-[100%] shadow-md rounded-md"
               />
             </div>
