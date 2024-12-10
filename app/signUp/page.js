@@ -53,7 +53,7 @@ const SignUpPage = () => {
   
 
     try {
-      const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/auth/signup", {
+      const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
