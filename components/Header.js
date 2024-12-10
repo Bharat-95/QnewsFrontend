@@ -166,7 +166,7 @@ const Header = () => {
 
   return (
     <div className="bg-black lg:px-28 md:px-10 px-4 py-5 lg:space-y-10 md:space-y-5 space-y-2">
-      <div className="flex lg:justify-between md:justify-between lg:gap-0 md:gap-0 gap-4 items-center">
+      <div className="flex justify-between   items-center">
         <div>
           <Image
             src={Logo}
@@ -180,7 +180,7 @@ const Header = () => {
             <li>
               <button
                 onClick={toggleLanguage}
-                className="text-white lg:w-40 md:w-40 w-14 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-white lg:p-2 md:p-2 p-1 font-semibold"
+                className="text-white lg:w-40 md:w-40 w-20 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-white lg:p-2 md:p-2 p-1 font-semibold"
               >
                 {language === "en"
                   ? translations.switchTo
