@@ -1,0 +1,280 @@
+"use client"
+import Image from 'next/image';
+import React, { useState, useEffect } from 'react';
+import CustomModal from '../../components/CustomModal.js';
+import { useRouter } from "next/navigation";
+
+const Page = () => {
+  const router = useRouter();
+  const [newsList, setNewsList] = useState([]);
+  const [selectedNews, setSelectedNews] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [newImage, setNewImage] = useState(null); 
+  const [isAuthorized, setIsAuthorized] = useState(false);
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const response = await fetch('https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn');
+        const data = await response.json();
+        console.log(data);
+        setNewsList(data.data);
+      } catch (error) {
+        console.log('Error fetching news:', error);
+      }
+    };
+    fetchNews();
+  }, []);
+
+  const openModal = (news) => {
+    setSelectedNews(news);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    setSelectedNews(null);
+    setNewImage(null); 
+  };
+
+  useEffect(() => {
+    const role = localStorage.getItem("role"); 
+    const token = localStorage.getItem("token");
+
+    if (token && role === "Admin") {
+      setIsAuthorized(true);
+    } else {
+      router.push("/unauthorized");
+    }
+  }, [router]);
+
+  if (!isAuthorized) {
+    return null; 
+  }
+
+  const updateStatus = async (status) => {
+    try {
+      const updatedNews = { ...selectedNews, status, image: newImage || selectedNews.image };
+      const response = await fetch(`http://localhost:4000/newsEn/${selectedNews.newsId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedNews),
+      });
+
+      if (response.ok) {
+        setNewsList((prev) =>
+          prev.map((news) =>
+            news.newsId === selectedNews.newsId ? updatedNews : news
+          )
+        );
+        closeModal();
+      } else {
+        console.log('Failed to update news status');
+      }
+    } catch (error) {
+      console.log('Error updating news status:', error);
+    }
+  };
+
+  const handleEdit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`/api/news/${selectedNews.newsId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...selectedNews, image: newImage || selectedNews.image }),
+      });
+
+      if (response.ok) {
+        setNewsList((prev) =>
+          prev.map((news) =>
+            news.newsId === selectedNews.newsId ? selectedNews : news
+          )
+        );
+        closeModal();
+      } else {
+        console.log('Failed to update news');
+      }
+    } catch (error) {
+      console.log('Error updating news:', error);
+    }
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setNewImage(URL.createObjectURL(file)); // Preview the image
+    }
+  };
+
+  const handleBooleanChange = (field, value) => {
+    setSelectedNews({ ...selectedNews, [field]: value });
+  };
+
+  return (
+    <div className="p-6">
+      <h1 className="text-3xl font-semibold mb-6">News List</h1>
+      {/* Check if there are no pending news */}
+      {newsList.filter(news => news.status === 'Pending').length === 0 ? (
+        <p className="text-xl text-gray-500">No pending news to approve.</p>
+      ) : (
+        <div className="flex flex-wrap gap-6">
+          {newsList
+            .filter((news) => news.status === 'Pending')
+            .map((news) => (
+              <div
+                key={news.newsId}
+                className="border border-gray-300 p-4 rounded-lg w-72 text-center cursor-pointer hover:bg-gray-100"
+                onClick={() => openModal(news)}
+              >
+                <Image
+                  src={news.image}
+                  alt={news.headline}
+                  width={100}
+                  height={100}
+                  className="w-full h-48 object-cover mb-4 rounded"
+                />
+                <h3 className="text-xl font-semibold">{news.headline}</h3>
+              </div>
+            ))}
+        </div>
+      )}
+
+      {selectedNews && (
+        <CustomModal isOpen={modalIsOpen} closeModal={closeModal}>
+          <h2 className="text-2xl font-semibold mb-4">Edit News</h2>
+          <form onSubmit={handleEdit} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium">Headline:</label>
+              <input
+                type="text"
+                value={selectedNews.headline}
+                onChange={(e) =>
+                  setSelectedNews({ ...selectedNews, headline: e.target.value })
+                }
+                required
+                className="w-full p-2 border border-gray-300 rounded-md"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium">News:</label>
+              <textarea
+                value={selectedNews.news}
+                onChange={(e) =>
+                  setSelectedNews({ ...selectedNews, news: e.target.value })
+                }
+                required
+                className="w-full p-2 border border-gray-300 rounded-md h-32"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium">Category:</label>
+              <input
+                type="text"
+                value={selectedNews.category}
+                onChange={(e) =>
+                  setSelectedNews({ ...selectedNews, category: e.target.value })
+                }
+                required
+                className="w-full p-2 border border-gray-300 rounded-md"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium">Is Main ?:</label>
+              <select
+                value={selectedNews.isMain ? 'Yes' : 'No'}
+                onChange={(e) => handleBooleanChange('isMain', e.target.value === 'Yes')}
+                className="w-full p-2 border border-gray-300 rounded-md"
+              >
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            {/* Other Boolean Fields (issub1 and issub2) */}
+            <div>
+              <label className="block text-sm font-medium">Is Sub1 ?:</label>
+              <select
+                value={selectedNews.issub1 ? 'Yes' : 'No'}
+                onChange={(e) => handleBooleanChange('issub1', e.target.value === 'Yes')}
+                className="w-full p-2 border border-gray-300 rounded-md"
+              >
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium">Is Sub2 ?:</label>
+              <select
+                value={selectedNews.issub2 ? 'Yes' : 'No'}
+                onChange={(e) => handleBooleanChange('issub2', e.target.value === 'Yes')}
+                className="w-full p-2 border border-gray-300 rounded-md"
+              >
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            {/* Image Upload Section */}
+            <div>
+              <label className="block text-sm font-medium">Image:</label>
+              <div className="mb-4">
+                <Image
+                  src={newImage || selectedNews.image}
+                  alt="News Image"
+                  width={100}
+                  height={100}
+                  className="w-full h-48 object-cover rounded"
+                  onClick={() => document.getElementById('imageInput').click()} // Trigger file input on image click
+                />
+                <input
+                  id="imageInput"
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleImageChange}
+                />
+              </div>
+            </div>
+
+            <div className="mt-6 space-x-4">
+              <button
+                type="submit"
+                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+              >
+                Save Changes
+              </button>
+              <button
+                type="button"
+                onClick={() => updateStatus('Approved')}
+                className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+              >
+                Approve
+              </button>
+              <button
+                type="button"
+                onClick={() => updateStatus('Unapproved')}
+                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+              >
+                Unapprove
+              </button>
+              <button
+                type="button"
+                onClick={closeModal}
+                className="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </CustomModal>
+      )}
+    </div>
+  );
+};
+
+export default Page;
