@@ -27,7 +27,7 @@ const Page = () => {
   // Filter and sort the data
   const filteredData = data
     .filter(
-      (news) => news.category === "Politics" && news.status === "Approved"
+      (news) => news.category === "Political" && news.status === "Approved"
     )
     .sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort posts by date in descending order
 
