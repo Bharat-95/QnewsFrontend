@@ -310,8 +310,8 @@ const NewsPost = () => {
               <Image
                 alt="No Image Found"
                 src={newsData.image}
-                width={100}
-                height={100}
+                width={900}
+                height={500}
                 className="lg:w-[806px] md:w-[450px] w-[100%] rounded-md lg:h-[500px] md:h-[300px] h-[300px]"
               />
             </div>
