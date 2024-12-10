@@ -17,10 +17,11 @@ const Page = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/signin", {
+      const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/auth/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+           "Accept": "application/json"
         },
         body: JSON.stringify({ email, password }),
       });
