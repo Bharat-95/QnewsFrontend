@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import CustomModal from "../../components/CustomModal"; // Import CustomModal
+import Image from "next/image";
 
 const PapersPage = () => {
   const [papers, setPapers] = useState([]);
@@ -50,27 +51,22 @@ const PapersPage = () => {
         {papers.map((paper) => (
           <div
             key={paper.paperId}
-            onClick={() => setSelectedPaper(paper)} 
-            className="border rounded-lg shadow-md p-4 bg-white"
+            className="border rounded-lg shadow-md p-4 bg-orange-100"
           >
-           
+            {/* Show the thumbnail image */}
+            <Image
+              src={paper.thumbnailUrl}
+              alt={`Thumbnail for ${paper.date} ${paper.month} ${paper.year}`}
+              width={500}
+              height={500}
+              className="w-full h-48 object-cover rounded-md cursor-pointer"
+              onClick={() => setSelectedPaper(paper)} // Open modal when the thumbnail is clicked
+            />
 
-            {/* Show a preview of the PDF (Thumbnail image or first page) */}
-            <div
-              className="mb-4 cursor-pointer" // Added cursor pointer here
-              onClick={() => setSelectedPaper(paper)} // Open modal when clicked anywhere on the preview
+            <h3
+              className="text-xl font-semibold mb-2 mt-4 cursor-pointer"
+              onClick={() => setSelectedPaper(paper)} // Open modal when the title is clicked
             >
-              <iframe
-                src={paper.fileUrl}
-                width="100%"
-                height="200"
-                title={`Preview of paper ${paper.date} ${paper.month} ${paper.year}`}
-                className="border rounded-md mt-4 cursor-pointer"
-                onClick={() => setSelectedPaper(paper)} // This will trigger the modal opening when the iframe is clicked
-              />
-            </div>
-
-            <h3 className="text-xl font-semibold mb-2 cursor-pointer"  onClick={() => setSelectedPaper(paper)}>
               {paper.date} {paper.month} {paper.year}
             </h3>
 
@@ -89,7 +85,7 @@ const PapersPage = () => {
       {/* Modal to show the full paper */}
       {selectedPaper && (
         <CustomModal isOpen={true} closeModal={closeModal}>
-          <div className="mt-8 p-4 border rounded-lg shadow-md bg-white">
+          <div className="mt-8 p-4 border rounded-lg shadow-md bg-orange-50">
             <h2 className="text-xl font-bold mb-4">
               Viewing Paper: {selectedPaper.date} {selectedPaper.month}{" "}
               {selectedPaper.year}

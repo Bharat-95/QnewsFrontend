@@ -90,8 +90,8 @@ const SignUpPage = () => {
   
 
   return (
-    <div className="text-white p-4 flex items-center justify-center ">
-      <div className="rounded-md lg:p-[50px] md:p-20 p-6 bg-[#737373] space-y-10 lg:w-[40%] md:w-[80%]">
+    <div className="text-black p-4 flex items-center justify-center ">
+      <div className="rounded-md lg:p-[50px] md:p-20 p-6 bg-orange-200 space-y-10 lg:w-[40%] md:w-[80%]">
         <div className="text-2xl flex justify-center font-bold underline">
           {translations.signUp}
         </div>
@@ -108,7 +108,7 @@ const SignUpPage = () => {
             <input
               type="text"
               placeholder={translations.enterFirstName}
-              className="w-[90%] h-10 rounded-md p-2 text-black"
+              className="w-[90%] bg-orange-50 h-10 rounded-md p-2 text-black"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
@@ -119,7 +119,7 @@ const SignUpPage = () => {
             <input
               type="text"
               placeholder={translations.enterLastName}
-              className="w-[90%] h-10 rounded-md p-2 text-black"
+              className="w-[90%] bg-orange-50 h-10 rounded-md p-2 text-black"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
@@ -130,7 +130,7 @@ const SignUpPage = () => {
             <input
               type="tel"
               placeholder={translations.enterPhoneNumber}
-              className="w-[90%] h-10 rounded-md p-2 text-black"
+              className="w-[90%] bg-orange-50 h-10 rounded-md p-2 text-black"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
             />
@@ -141,7 +141,7 @@ const SignUpPage = () => {
             <input
               type="email"
               placeholder={translations.enterEmail}
-              className="w-[90%] h-10 rounded-md p-2 text-black"
+              className="w-[90%] h-10 bg-orange-50 rounded-md p-2 text-black"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -149,11 +149,11 @@ const SignUpPage = () => {
 
           <div className="space-y-1 relative">
             <div>{translations.password}</div>
-            <div className="w-[90%] bg-white justify-between rounded-md flex items-center px-2">
+            <div className="w-[90%] bg-orange-50 justify-between rounded-md flex items-center px-2">
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder={translations.password}
-                className="w-[90%] h-10 rounded-md p-2 text-black pr-10 focus:outline-none"
+                className="w-[90%] h-10 bg-orange-50 rounded-md p-2 text-black pr-10 focus:outline-none"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -172,11 +172,11 @@ const SignUpPage = () => {
 
           <div className="space-y-1 relative">
             <div>{translations.confirmPassword}</div>
-            <div className="w-[90%] bg-white justify-between rounded-md flex items-center px-2">
+            <div className="w-[90%] bg-orange-50 justify-between rounded-md flex items-center px-2">
               <input
                 type={showConfirmPassword ? "text" : "password"}
                 placeholder={translations.confirmPassword}
-                className="w-[90%] h-10 rounded-md p-2 text-black pr-10 focus:outline-none"
+                className="w-[90%] h-10 bg-orange-50 rounded-md p-2 text-black pr-10 focus:outline-none"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
@@ -193,7 +193,7 @@ const SignUpPage = () => {
             </div>
           </div>
 
-          {error && <div className="text-white text-[10px]">{error}</div>}
+          {error && <div className="text-black text-[10px]">{error}</div>}
 
           <div className="flex gap-2">
             <input type="checkbox" required />
@@ -203,7 +203,7 @@ const SignUpPage = () => {
           <div className="py-4">
             <button
               type="submit"
-              className="flex justify-center  bg-black text-white font-bold  rounded-md h-10 w-[90%] items-center shadow-md hover:text-white/80 hover:transform hover:translate-x-[1px] hover:-translate-y-[1px] duration-200"
+              className="flex justify-center  bg-orange-500 text-white font-bold  rounded-md h-10 w-[90%] items-center shadow-md hover:bg-orange-600 hover:transform hover:translate-x-[1px] hover:-translate-y-[1px] duration-200"
             >
               {translations.signUp}
             </button>

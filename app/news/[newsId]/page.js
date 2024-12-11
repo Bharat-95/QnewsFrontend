@@ -378,18 +378,18 @@ const NewsPost = () => {
               </div>
             </div>
             {showComments && (
-              <div className="h-96 overflow-y-scroll border border-black rounded-md shadow-md p-4 m-2 bg-gray-200">
+              <div className="h-96 overflow-y-scroll border border-orange-300 rounded-md shadow-md p-4 m-2 bg-orange-100">
                 <div className="text-xl mb-3">{comments.length} Comments</div>
                 <div className="mb-2">
                   <textarea
                     value={newComment}
                     onChange={(e) => setNewComment(e.target.value)}
                     rows="2"
-                    className="w-full p-2 border border-gray-300"
+                    className="w-full bg-orange-50 p-2 border border-orange-300"
                   ></textarea>
                   <button
                     onClick={handleCommentSubmit}
-                    className="mt-2 p-2 bg-blue-500 text-white rounded"
+                    className="mt-2 p-2 bg-orange-500 text-white rounded"
                   >
                     {language === "te" ? "ప్రస్తావించు" : "Comment"}
                   </button>
@@ -397,7 +397,7 @@ const NewsPost = () => {
                 {comments?.map((comment, index) => (
                   <div
                     key={comment?.commentId || index}
-                    className="border p-2 mb-2"
+                    className="border border-orange-200 p-2 mb-2"
                   >
                     <div className="flex justify-between">
                       <div>
@@ -463,7 +463,7 @@ const NewsPost = () => {
                               }))
                             }
                             rows="2"
-                            className="w-full p-2 border border-gray-300"
+                            className="w-full p-2 border border-orange-300"
                           ></textarea>
                           <button
                             onClick={() => handleReply(comment.commentId)}
@@ -475,7 +475,7 @@ const NewsPost = () => {
                       )}
                       <button
                         onClick={() => handleReplyToggle(comment.commentId)}
-                        className="text-blue-500 text-sm mt-2"
+                        className="text-orange-500 text-sm mt-2"
                       >
                         {showReplyInput[comment?.commentId]
                           ? language === "te"
@@ -490,7 +490,7 @@ const NewsPost = () => {
                 ))}
               </div>
             )}
-            <div className="text-[18px] pt-5 border-black border-t-[1px] pb-10 leading-relaxed">
+            <div className="text-[18px] pt-5 border-orange-300 border-t-[1px] pb-10 leading-relaxed">
               {language === "te"
                 ? newsData.newsTe.split("\n").map((line, index) => (
                     <React.Fragment key={index}>

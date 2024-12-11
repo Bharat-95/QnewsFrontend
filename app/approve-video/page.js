@@ -111,7 +111,7 @@ const VideoApproval = () => {
   
     return (
       <div>
-        <div className="flex flex-wrap gap-6">
+        <div className="flex min-h-screen mt-10 flex-wrap gap-6">
           {videosList.filter((video) => video.status === "Pending").length ===
           0 ? (
             <p>No pending videos to approve</p>
@@ -121,14 +121,14 @@ const VideoApproval = () => {
               .map((video) => (
                 <div
                   key={video.videoId}
-                  className="border border-gray-300 p-4 rounded-lg w-[30%] h-96 text-center cursor-pointer hover:bg-gray-100"
+                  className="border border-orange-300 p-4 rounded-lg w-[30%] h-96 text-center cursor-pointer hover:bg-orange-200"
                 >
                   <Image
                     src={video.thumbnail}
                     alt="Thumbnail"
                     className="mb-4 rounded w-[100%]"
-                    width={100}
-                    height={100}
+                    width={500}
+                    height={500}
                   />
                   <div className="flex justify-center gap-4 mb-4">
                     <button
@@ -174,7 +174,7 @@ const VideoApproval = () => {
                     })
                   }
                   required
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-orange-300 rounded-md"
                 />
               </div>
               <div>
@@ -191,7 +191,7 @@ const VideoApproval = () => {
                     })
                   }
                   required
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-orange-300 rounded-md"
                 />
               </div>
               <div>
@@ -200,14 +200,16 @@ const VideoApproval = () => {
                   type="file"
                   accept="image/*"
                   onChange={handleThumbnailChange}
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 "
                 />
                 {thumbnailPreview && (
                   <div className="mt-2">
                     <Image
                       src={thumbnailPreview}
                       alt="Thumbnail Preview"
-                      className="w-24 h-24 object-cover rounded-md"
+                      width={500}
+                      height={500}
+                      className="w-24 h-24 object-fit rounded-md"
                     />
                   </div>
                 )}

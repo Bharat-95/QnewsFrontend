@@ -49,8 +49,8 @@ const Page = () => {
   };
 
   return (
-    <div className="text-white p-4 flex items-center justify-center ">
-      <div className="rounded-md p-[50px]  bg-[#737373] space-y-10 lg:w-[40%] md:w-[60%]">
+    <div className="text-black p-4 flex items-center justify-center ">
+      <div className="rounded-md p-[50px]  bg-orange-200 space-y-10 lg:w-[40%] md:w-[60%]">
         <div className="text-2xl font-bold flex justify-center underline">{translations.logIn}</div>
 
         <form className="space-y-4 " onSubmit={handleSubmit}>
@@ -59,7 +59,7 @@ const Page = () => {
             <input
               type="email"
               placeholder={translations.enterEmail}
-              className="w-[90%] h-10 rounded-md p-2 text-black focus:outline-none" 
+              className="w-[90%] h-10 bg-orange-50 rounded-md p-2 text-black focus:outline-none" 
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -67,11 +67,11 @@ const Page = () => {
 
           <div className="space-y-1 relative">
             <div>{translations.password}</div>
-            <div className="w-[90%] bg-white justify-between rounded-md flex items-center px-2">
+            <div className="w-[90%] bg-orange-50 justify-between rounded-md flex items-center px-2">
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder={translations.password}
-                className="w-[90%] h-10 rounded-md p-2 text-black pr-10 focus:outline-none"
+                className="w-[90%] h-10 bg-orange-50 rounded-md p-2 text-black pr-10 focus:outline-none"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -102,7 +102,7 @@ const Page = () => {
           <div className="py-4">
             <button
               type="submit"
-              className="flex justify-center  bg-black text-white rounded-md font-bold h-10 w-[90%] items-center shadow-md hover:text-white/80 hover:transform hover:translate-x-[1px] hover:-translate-y-[1px] duration-200"
+              className="flex justify-center  bg-orange-500 text-white rounded-md font-bold h-10 w-[90%] items-center shadow-md hover:bg-orange-600 hover:transform hover:translate-x-[1px] hover:-translate-y-[1px] duration-200"
             >
               {translations.logIn}
             </button>

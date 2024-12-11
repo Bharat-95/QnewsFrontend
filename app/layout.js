@@ -31,11 +31,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="bg-[#F5F5F7]">
+    <html lang="en" className="bg-orange-100">
       <body className={`${poppins.className} font-sans`}>
         <LanguageProvider>
           <Header/>
-          <div className="lg:pt-[15%] md:pt-[20%] pt-[35%]">{children}</div>
+          <div className="lg:pt-[15%] md:pt-[20%] pt-[35%] ">{children}</div>
           <Footer />
         </LanguageProvider>
         

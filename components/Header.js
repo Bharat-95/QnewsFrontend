@@ -164,7 +164,7 @@ const Header = () => {
 
 
   return (
-    <div className="bg-black shadow-md  rounded-b-md fixed w-[100%] z-50 lg:px-28 md:px-10 px-4 lg:py-5 md:py-2 py-2 lg:space-y-4 md:space-y-1">
+    <div className="bg-orange-200 shadow-md  rounded-b-md fixed w-[100%] z-50 lg:px-28 md:px-10 px-4 lg:py-5 md:py-2 py-2 lg:space-y-2 md:space-y-1">
       <div className="flex justify-between items-center">
         <div>
           <Image
@@ -179,7 +179,7 @@ const Header = () => {
             <li>
               <button
                 onClick={toggleLanguage}
-                className="text-white lg:w-40 md:w-32 lg:text-[14px] md:text-[10px] text-[8px] w-14 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-white lg:p-2 md:p-2 p-1 font-semibold"
+                className="text-black lg:w-40 md:w-32 lg:text-[14px] md:text-[10px] text-[8px] w-14 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold"
               >
                 {language === "en"
                   ? translations.switchTo
@@ -187,7 +187,7 @@ const Header = () => {
               </button>
             </li>
 
-            <li className="text-white lg:w-40 md:w-32 w-14 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-white lg:p-2 md:p-2 p-1 font-semibold flex justify-center items-center">
+            <li className="text-black lg:w-40 md:w-32 w-14 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold flex justify-center items-center">
               <Link href="/e-paper" className="flex items-center gap-x-2 lg:text-[14px] md:text-[10px] text-[8px]">
                 <MdDownload /> {translations.epaper}
               </Link>
@@ -198,7 +198,7 @@ const Header = () => {
                 {userRole === "Admin" && (
                  <li className="lg:space-x-10 md:space-x-2 space-x-2 flex justify-center items-center relative">
                  <button
-                   className="text-white border lg:w-40 md:w-32 w-20 h-8 lg:h-10 md:h-10 border-1 lg:text-[14px] md:text-[10px] text-[8px] hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-white lg:p-2 md:p-2 p-1 font-semibold"
+                   className="text-black border lg:w-40 md:w-32 w-20 h-8 lg:h-10 md:h-10 border-1 lg:text-[14px] md:text-[10px] text-[8px] hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold"
                    onClick={() => setDropdownOpen((prev) => !prev)}
                  >
                    {translations.approve}
@@ -207,11 +207,11 @@ const Header = () => {
                
                  {/* Dropdown Menu */}
                  {dropdownOpen && (
-                   <ul className="absolute top-full left-0 mt-1 lg:w-36 md:w-32 w-32 bg-gray-800 text-white rounded shadow-lg">
+                   <ul className="absolute top-full left-0 mt-1 lg:w-36 md:w-32 w-32 bg-orange-100 text-black rounded shadow-lg">
                      <li>
                        <button
                          onClick={() => router.push("/approve-news")}
-                         className="block w-full text-left px-4 py-2 hover:bg-gray-700"
+                         className="block w-full text-left px-4 py-2 hover:bg-orange-700"
                        >
                          {translations.approvenews}
                          
@@ -220,7 +220,7 @@ const Header = () => {
                      <li>
                        <button
                          onClick={() => router.push("/approve-video")}
-                         className="block w-full text-left px-4 py-2 hover:bg-gray-700"
+                         className="block w-full text-left px-4 py-2 hover:bg-orange-700"
                        >
                          {translations.approveVideo}
                        </button>
@@ -236,7 +236,7 @@ const Header = () => {
                     {/* Dropdown for small and medium devices */}
                     <div className="lg:hidden relative">
                       <button
-                        className="text-white lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-1 border-white p-1 font-semibold flex items-center justify-center"
+                        className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-1 border-orange-600 p-1 font-semibold flex items-center justify-center"
                         onClick={() => setShowDropdown(!showDropdown)}
                       >
                         {translations.add}
@@ -244,22 +244,22 @@ const Header = () => {
                         {/* Down arrow symbol */}
                       </button>
                       {showDropdown && (
-                        <div className="absolute w-28 md:w-40 bg-gray-800 text-white border border-white mt-1 rounded  z-10">
+                        <div className="absolute w-28 md:w-40 bg-orange-100 text-black border border-orange-600 mt-1 rounded  z-10">
                           <button
                             onClick={() => router.push("/add-news")}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-700"
+                            className="block w-full text-left px-4 py-2 hover:bg-orange-700"
                           >
                             {translations.addnews}
                           </button>
                           <button
                             onClick={() => router.push("/add-video")}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-700"
+                            className="block w-full text-left px-4 py-2 hover:bg-orange-700"
                           >
                             {translations.addVideo}
                           </button>
                           <button
                             onClick={() => router.push("/add-paper")}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-700"
+                            className="block w-full text-left px-4 py-2 hover:bg-orange-700"
                           >
                             {translations.addPaper}
                           </button>
@@ -271,19 +271,19 @@ const Header = () => {
                     <div className="hidden lg:flex space-x-4">
                       <button
                         onClick={() => router.push("/add-news")}
-                        className="text-white lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-white lg:p-2 md:p-2 p-1 font-semibold"
+                        className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold"
                       >
                         {translations.addnews}
                       </button>
                       <button
                         onClick={() => router.push("/add-video")}
-                        className="text-white lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-white lg:p-2 md:p-2 p-1 font-semibold"
+                        className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold"
                       >
                         {translations.addVideo}
                       </button>
                       <button
                         onClick={() => router.push("/add-paper")}
-                        className="text-white lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-white lg:p-2 md:p-2 p-1 font-semibold"
+                        className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold"
                       >
                         {translations.addPaper}
                       </button>
@@ -294,7 +294,7 @@ const Header = () => {
                 <li style={{ position: "relative" }}>
                   <GiHamburgerMenu
                     size={24}
-                    color="white"
+                    color="black"
                     onClick={(event) => {
                       handleMenu(event);
                     }}
@@ -304,7 +304,7 @@ const Header = () => {
                     <div className="relative flex justify-center">
                       <ul
                         ref={menuRef}
-                        className="text-black absolute lg:mt-6 md:mt-4 lg:w-60 md:w-56 w-32 font-bold space-y-4 p-4 right-0 flex flex-col items-center bg-white shadow-md rounded-md"
+                        className="text-black absolute lg:mt-6 md:mt-4 lg:w-60 md:w-56 w-32 font-bold space-y-4 p-4 right-0 flex flex-col items-center bg-orange-100 shadow-md rounded-md"
                       >
                         {userRole === "Admin" && (
                           <>
@@ -354,10 +354,10 @@ const Header = () => {
             )}
             {!isLoggedIn && (
               <>
-                <li className="text-white hover:transform duration-150 lg:text-[14px] md:text-[10px] text-[8px] lg:w-40 md:w-32 w-14 lg:h-10 md:h-10 h-8  hover:translate-x-1 hover:-translate-y-1 border border-1 border-white bg-red-600 lg:p-2 md:p-2 p-1 font-semibold flex justify-center items-center">
+                <li className="text-black hover:transform duration-150 lg:text-[14px] md:text-[10px] text-[8px] lg:w-40 md:w-32 w-14 lg:h-10 md:h-10 h-8  hover:translate-x-1 hover:-translate-y-1 border border-1 border-orange-600 bg-red-500 lg:p-2 md:p-2 p-1 font-semibold flex justify-center items-center">
                   <Link href="/signUp">{translations.register}</Link>
                 </li>
-                <li className="text-white hover:transform duration-150 hover:translate-x-1 lg:text-[14px] md:text-[10px] text-[8px] hover:-translate-y-1 border border-1 border-white lg:p-2 md:p-2 p-1 font-semibold lg:w-40 md:w-32 w-14 lg:h-10 md:h-10 h-8 flex justify-center items-center">
+                <li className="text-black hover:transform duration-150 hover:translate-x-1 lg:text-[14px] md:text-[10px] text-[8px] hover:-translate-y-1 border border-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold lg:w-40 md:w-32 w-14 lg:h-10 md:h-10 h-8 flex justify-center items-center">
                   <Link href="/Login">{translations.login}</Link>
                 </li>
               </>
@@ -367,7 +367,7 @@ const Header = () => {
       </div>
 
       <div className="lg:px-20 py-2">
-  <ul className="text-white flex flex-wrap justify-evenly font-bold items-center lg:text-[14px] md:text-[12px] text-[12px]">
+  <ul className="text-black flex flex-wrap justify-evenly font-bold items-center lg:text-[14px] md:text-[12px] text-[12px]">
     <div className="flex lg:hidden md:hidden w-full overflow-x-auto" style={{
     scrollbarWidth: "none", // Firefox
     msOverflowStyle: "none", // IE and Edge
@@ -376,9 +376,9 @@ const Header = () => {
         {smallScreenNavItems.map((item) => (
           <li
             key={item.path}
-            className={`inline-block p-2 hover:rounded-md hover:bg-gray-700 hover:translate-x-1 hover:-translate-y-1 duration-150 ${
+            className={`inline-block p-2 hover:rounded-md hover:bg-orange-700 hover:text-white hover:translate-x-1 hover:-translate-y-1 duration-150 ${
               pathname === item.path
-                ? "bg-gray-700 rounded-md text-yellow-300"
+                ? "bg-orange-700 rounded-md text-yellow-300"
                 : ""
             }`}
           >
@@ -392,9 +392,9 @@ const Header = () => {
     {navItems.map((item) => (
       <li
         key={item.path}
-        className={`hidden lg:flex md:flex justify-center p-2 hover:rounded-md hover:bg-gray-700 hover:translate-x-1 hover:-translate-y-1 duration-150 ${
+        className={`hidden lg:flex md:flex justify-center p-2 hover:rounded-md hover:bg-orange-700 hover:text-white hover:translate-x-1 hover:-translate-y-1 duration-150 ${
           pathname === item.path
-            ? "bg-gray-700 rounded-md text-yellow-300"
+            ? "bg-orange-700 rounded-md text-yellow-300"
             : ""
         }`}
       >
@@ -403,12 +403,12 @@ const Header = () => {
     ))}
 
     {/* Additional Info */}
-    <li className="lg:flex md:hidden hidden space-x-1 text-gray-400 text-[14px]">
+    <li className="lg:flex md:hidden hidden space-x-1 text-gray-600 text-[14px]">
       <TiWeatherCloudy size={20} />
       <div>{temperature ? `${temperature}°C` : ""}</div>
     </li>
-    <li className="lg:flex md:hidden hidden">{currentTime}</li>
-    <li className="lg:flex md:hidden hidden">{currentDate}</li>
+    <li className="lg:flex md:hidden hidden text-gray-600">{currentTime}</li>
+    <li className="lg:flex md:hidden hidden text-gray-600">{currentDate}</li>
   </ul>
 </div>
 

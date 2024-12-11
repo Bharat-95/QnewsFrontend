@@ -125,7 +125,7 @@ const Page = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 my-10">
+    <div className="flex items-center justify-center min-h-screen bg-orange-100 my-10">
       <div className="  p-10  w-[90%] md:w-[80%]">
         <div className="text-center text-[24px] font-bold py-5">
           {translations.addnews} :
@@ -139,7 +139,7 @@ const Page = () => {
               type="text"
               placeholder={translations.headlineEn}
               value={headlineEn}
-              className="w-full border border-gray-300 p-2 rounded-md"
+              className="w-full border  bg-orange-50 border-orange-300 p-2 rounded-md"
               onChange={(e) => setHeadlineEn(e.target.value)}
               required
             />
@@ -153,7 +153,7 @@ const Page = () => {
               type="text"
               placeholder={translations.headlineTe}
               value={headlineTe}
-              className="w-full border border-gray-300 p-2 rounded-md"
+              className="w-full border bg-orange-50 border-orange-300 p-2 rounded-md"
               onChange={(e) => setHeadlineTe(e.target.value)}
               required
             />
@@ -167,7 +167,7 @@ const Page = () => {
               type="text"
               value={newsEn}
               placeholder={translations.newsEn}
-              className="w-full border border-gray-300 p-2 rounded-md"
+              className="w-full border bg-orange-50 border-orange-300 p-2 rounded-md"
               onChange={(e) => setNewsEn(e.target.value)}
               required
             />
@@ -181,7 +181,7 @@ const Page = () => {
               type="text"
               value={newsTe}
               placeholder={translations.newsTe}
-              className="w-full border border-gray-300 p-2 rounded-md"
+              className="w-full border bg-orange-50 border-orange-300 p-2 rounded-md"
               onChange={(e) => setNewsTe(e.target.value)}
               required
             />
@@ -192,7 +192,7 @@ const Page = () => {
               {translations.category} :
             </label>
             <select
-              className="w-full border border-gray-300 p-2 rounded-md"
+              className="w-full border bg-orange-50 border-orange-300 p-2 rounded-md"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
               required
@@ -210,7 +210,7 @@ const Page = () => {
               {translations.isMain} :
             </label>
             <select
-              className="w-full border border-gray-300 p-2 rounded-md"
+              className="w-full border bg-orange-50 border-orange-300 p-2 rounded-md"
               value={isMain}
               onChange={(e) => setIsMain(e.target.value)}
               required
@@ -228,7 +228,7 @@ const Page = () => {
               {translations.issub1} :
             </label>
             <select
-              className="w-full border border-gray-300 p-2 rounded-md"
+              className="w-full border bg-orange-50 border-orange-300 p-2 rounded-md"
               value={isSub1}
               onChange={(e) => setIsSub1(e.target.value)}
               required
@@ -246,7 +246,7 @@ const Page = () => {
               {translations.issub2} :
             </label>
             <select
-              className="w-full border border-gray-300 p-2 rounded-md"
+              className="w-full border bg-orange-50 border-orange-300 p-2 rounded-md"
               value={isSub2}
               onChange={(e) => setIsSub2(e.target.value)}
               required
@@ -267,7 +267,7 @@ const Page = () => {
               type="text"
               value={employeeId}
               placeholder={translations.employeeid}
-              className="w-full border border-gray-300 p-2 rounded-md"
+              className="w-full border bg-orange-50 border-orange-300 p-2 rounded-md"
               onChange={(e) => setEmployeeId(e.target.value)}
               required
             />
@@ -279,7 +279,7 @@ const Page = () => {
               {translations.tag} :
             </label>
             <select
-              className="w-full border border-gray-300 p-2 rounded-md"
+              className="w-full border bg-orange-50 border-orange-300 p-2 rounded-md"
               value={tag}
               onChange={(e) => setTags(e.target.value)}
               required
@@ -298,7 +298,7 @@ const Page = () => {
             </label>
             <input
               type="file"
-              className="w-full border border-gray-300 p-2 rounded-md"
+              className="w-full  p-2 rounded-md"
               onChange={(e) => setImage(e.target.files[0])}
               required
             />
@@ -306,7 +306,7 @@ const Page = () => {
 
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-md"
+            className="w-full bg-orange-500 text-white py-2 rounded-md"
             disabled={loading}
           >
             {loading ? translations.loading : translations.submit}

@@ -17,24 +17,24 @@ const Footer = () => {
     const { language, translations } = useLanguage();
 
   return (
-    <div className='lg:h-64 md:h-64 bg-black text-white p-4'>
+    <div className='lg:h-64 md:h-64 bg-orange-200 text-black p-4'>
        <div className='h-[100%] lg:grid-cols-4 md:grid md:grid-cols-4 lg:grid grid grid-cols-1 gap-10'>
-        <div className='flex justify-center items-center lg:border-r-[1px] md:border-r-[1px] '>
+        <div className='flex justify-center items-center lg:border-r-[1px] md:border-r-[1px] border-orange-400 '>
             <Image
             src={Logo}
             alt='No Logo Found'
             width={100}
             height={100} />
         </div>
-        <div className='flex flex-col items-center lg:border-r-[1px] md:border-r-[1px]'>
+        <div className='flex flex-col items-center lg:border-r-[1px] md:border-r-[1px] border-orange-400'>
             <div className='text-[24px]  font-semibold underline underline-offset-2'>{translations.contactUs}</div>
-            <div>Ph no:-</div>
+            <div>Address :</div>
         </div>
-        <div className='flex flex-col items-center lg:border-r-[1px] md:border-r-[1px] space-y-4'>
+        <div className='flex flex-col items-center lg:border-r-[1px] md:border-r-[1px] border-orange-400 space-y-4'>
             <div className='text-[24px]  font-semibold underline underline-offset-2'>{translations.helpNsupport} :</div>
-            <div className='font-light hover:text-white/90'><Link href='/terms'>{translations.termsNconditions}</Link></div>
-            <div className='font-light hover:text-white/90'><Link href='/privacy'>{translations.privacy}</Link></div>
-            <div className='font-light hover:text-white/90'><Link href='/help'>{translations.helpNsupport}</Link></div>
+            <div className='font-light hover:text-orange-400'><Link href='/terms'>{translations.termsNconditions}</Link></div>
+            <div className='font-light hover:text-orange-400'><Link href='/privacy'>{translations.privacy}</Link></div>
+            <div className='font-light hover:text-orange-400'><Link href='/help'>{translations.helpNsupport}</Link></div>
         </div>
         <div className='flex flex-col items-center space-y-4'>
             <div className='text-[24px]  font-semibold underline underline-offset-2'>{translations.social} :</div>

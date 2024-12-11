@@ -69,6 +69,7 @@ const Page = () => {
   
 
   return (
+    <div className="flex justify-center mt-10 min-h-screen px-6">
     <div className="max-w-4xl min-h-screen mx-10 p-6 mt-10">
       <h2 className="text-2xl font-semibold text-center mb-6">{translations.uploadEPaper}</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -80,7 +81,7 @@ const Page = () => {
             accept=".pdf"
             onChange={handleFileChange}
             required
-            className="px-4 py-2 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="px-4 py-2  focus:outline-none focus:ring-2 focus:ring-orange-400"
           />
         </div>
         <div className="flex flex-col">
@@ -89,7 +90,7 @@ const Page = () => {
             type="file"
             onChange={(e) => setThumbnail(e.target.files[0])} 
             required
-            className="px-4 py-2 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="px-4 py-2  focus:outline-none focus:ring-2 focus:ring-orange-400"
           />
         </div>
 
@@ -103,7 +104,7 @@ const Page = () => {
               value={date}
               onChange={(e) => setDate(e.target.value)}
               required
-              className="px-4 py-2 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="px-4 py-2 bg-orange-50 border rounded-md border-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
           </div>
           <div className="flex flex-col w-1/3">
@@ -115,7 +116,7 @@ const Page = () => {
               value={month}
               onChange={(e) => setMonth(e.target.value)}
               required
-              className="px-4 py-2 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="px-4 py-2 bg-orange-50 border rounded-md border-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
           </div>
           <div className="flex flex-col w-1/3">
@@ -127,18 +128,19 @@ const Page = () => {
               value={year}
               onChange={(e) => setYear(e.target.value)}
               required
-              className="px-4 py-2 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="px-4 py-2 bg-orange-50 border rounded-md border-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
           </div>
         </div>
 
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
         >
           {translations.submitPaper}
         </button>
       </form>
+    </div>
     </div>
   );
 };

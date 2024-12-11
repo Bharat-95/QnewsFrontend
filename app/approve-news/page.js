@@ -116,11 +116,11 @@ const Page = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 min-h-screen">
       <h1 className="text-3xl font-semibold mb-6">News List</h1>
       {/* Check if there are no pending news */}
       {newsList.filter(news => news.status === 'Pending').length === 0 ? (
-        <p className="text-xl text-gray-500">No pending news to approve.</p>
+        <p className="text-xl text-orange-500">No pending news to approve.</p>
       ) : (
         <div className="flex flex-wrap gap-6">
           {newsList
@@ -128,15 +128,15 @@ const Page = () => {
             .map((news) => (
               <div
                 key={news.newsId}
-                className="border border-gray-300 p-4 rounded-lg w-72 text-center cursor-pointer hover:bg-gray-100"
+                className="border border-orange-300 p-4 rounded-lg w-72 text-center cursor-pointer hover:bg-orange-200"
                 onClick={() => openModal(news)}
               >
                 <Image
                   src={news.image}
-                  alt={news.headline}
-                  width={100}
-                  height={100}
-                  className="w-full h-48 object-cover mb-4 rounded"
+                  alt="No Image Found"
+                  width={500}
+                  height={500}
+                  className="w-full h-48 object-fit mb-4 rounded"
                 />
                 <h3 className="text-xl font-semibold">{news.headline}</h3>
               </div>
@@ -157,7 +157,7 @@ const Page = () => {
                   setSelectedNews({ ...selectedNews, headline: e.target.value })
                 }
                 required
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="w-full bg-orange-50 p-2 border border-orange-300 rounded-md"
               />
             </div>
             <div>
@@ -168,7 +168,7 @@ const Page = () => {
                   setSelectedNews({ ...selectedNews, news: e.target.value })
                 }
                 required
-                className="w-full p-2 border border-gray-300 rounded-md h-32"
+                className="w-full bg-orange-50 p-2 border border-orange-300 rounded-md h-32"
               />
             </div>
             <div>
@@ -180,7 +180,7 @@ const Page = () => {
                   setSelectedNews({ ...selectedNews, category: e.target.value })
                 }
                 required
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="w-full bg-orange-50 p-2 border border-orange-300 rounded-md"
               />
             </div>
             <div>
@@ -188,7 +188,7 @@ const Page = () => {
               <select
                 value={selectedNews.isMain ? 'Yes' : 'No'}
                 onChange={(e) => handleBooleanChange('isMain', e.target.value === 'Yes')}
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="w-full bg-orange-50 p-2 border border-orange-300 rounded-md"
               >
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
@@ -201,7 +201,7 @@ const Page = () => {
               <select
                 value={selectedNews.issub1 ? 'Yes' : 'No'}
                 onChange={(e) => handleBooleanChange('issub1', e.target.value === 'Yes')}
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="w-full bg-orange-50 p-2 border border-orange-300 rounded-md"
               >
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
@@ -212,7 +212,7 @@ const Page = () => {
               <select
                 value={selectedNews.issub2 ? 'Yes' : 'No'}
                 onChange={(e) => handleBooleanChange('issub2', e.target.value === 'Yes')}
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="w-full bg-orange-50 p-2 border border-orange-300 rounded-md"
               >
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
@@ -226,8 +226,8 @@ const Page = () => {
                 <Image
                   src={newImage || selectedNews.image}
                   alt="News Image"
-                  width={100}
-                  height={100}
+                  width={500}
+                  height={500}
                   className="w-full h-48 object-cover rounded"
                   onClick={() => document.getElementById('imageInput').click()} // Trigger file input on image click
                 />
