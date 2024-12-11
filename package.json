@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@react-pdf-viewer/default-layout": "^3.12.0",
     "aws-amplify": "^6.9.0",
     "axios": "^1.7.8",
     "next": "15.0.3",
