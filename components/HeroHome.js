@@ -50,7 +50,10 @@ const Page = () => {
       {/* Main Post */}
       {mainPost && (
         <Link
-          href={`/news/${mainPost.newsId}`}
+        href={{
+          pathname: `/news/${mainPost.newsId}`,
+          query: { language },
+        }}
           passHref
           key={mainPost.newsId}
           className="lg:w-[60%] md:w-[60%]  space-y-2"
@@ -77,7 +80,10 @@ const Page = () => {
       <div className="space-y-10 lg:w-[40%] md:w-[40%] lg:h-[500px] md:h-[500px] h-[300px]">
         {sub1Post && (
           <Link
-            href={`/news/${sub1Post.newsId}`}
+            href={{
+              pathname: `/news/${sub1Post.newsId}`,
+              query: { language },
+            }}
             passHref
             key={sub1Post.newsId}
             className="w-[100%] h-[40%] flex lg:gap-10 md:gap-5 gap-2"
@@ -104,7 +110,10 @@ const Page = () => {
 
         {sub2Post && (
           <Link
-            href={`/news/${sub2Post.newsId}`}
+            href={{
+              pathname: `/news/${sub2Post.newsId}`,
+              query: { language },
+            }}
             passHref
             key={sub2Post.newsId}
             className="w-[100%] h-[40%] flex lg:gap-10 md:gap-5 gap-2"

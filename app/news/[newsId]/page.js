@@ -8,10 +8,13 @@ import { FaHeart } from "react-icons/fa";
 import { LuMessageCircle } from "react-icons/lu";
 import { FaStar } from "react-icons/fa";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 const NewsPost = () => {
+  const searchParams = useSearchParams();
   const { newsId } = useParams();
-  const { language } = useLanguage();
+  const urlLanguage = searchParams.get("language");
+  const { language, setLanguage } = useLanguage();
   const [newsData, setNewsData] = useState(null);
   const [likes, setLikes] = useState(0);
   const [hasLiked, setHasLiked] = useState(false);
@@ -59,12 +62,18 @@ const NewsPost = () => {
   };
 
   useEffect(() => {
+    if (urlLanguage && urlLanguage !== language) {
+      setLanguage(urlLanguage);  // Set language from URL if it's different from the current language
+    }
+  }, [urlLanguage, language, setLanguage]); 
+
+  useEffect(() => {
     if (newsId) {
       const langPath = language === "te" ? "newsTe" : "newsEn";
       const userEmail = localStorage.getItem("email");
 
       axios
-        .get(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/${langPath}/${newsId}`, {
+        .get(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}`, {
           params: { userEmail },
         })
         .then((res) => {
