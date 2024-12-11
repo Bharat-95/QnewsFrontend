@@ -19,6 +19,40 @@ const Page = () => {
     }
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    return date.toLocaleDateString("en-GB", options);
+  };
+
+  const timeAgo = (dateString) => {
+    const postDate = new Date(dateString);
+    const nowDate = new Date();
+    const difference = nowDate - postDate;
+
+    const secondsDifference = Math.floor(difference / 1000);
+    const minutesDifference = Math.floor(difference / (1000 * 60));
+    const hoursDifference = Math.floor(difference / (1000 * 60 * 60));
+    const daysDifference = Math.floor(difference / (1000 * 60 * 60 * 24));
+
+    if (secondsDifference < 60) {
+      return `${secondsDifference} sec ago`;
+    } else if (minutesDifference < 60) {
+      return `${minutesDifference} min ago`;
+    } else if (hoursDifference < 24) {
+      return `${hoursDifference} hrs ago`;
+    } else if (daysDifference < 30) {
+      return `${daysDifference} days ago`;
+    } else {
+      return postDate.toLocaleDateString("en-GB", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+    }
+  };
+  
+
   useEffect(() => {
     fetchData(); // Fetch data initially
     const interval = setInterval(() => {
@@ -72,12 +106,16 @@ const Page = () => {
               {language === "en" ? mainPost.headlineEn : mainPost.headlineTe}
             </div>
           </div>
+          <div className="flex items-center gap-10 font-light text-gray-500">
+                <div>{formatDate(mainPost.createdAt)}</div>
+                <div> {timeAgo(mainPost.createdAt)}</div>
+              </div>
         </Link>
       )}
 
       <div className="h-[500px] w-[1px] lg:flex md:flex hidden bg-gray-400"></div>
 
-      <div className="space-y-10 lg:w-[40%] md:w-[40%] lg:h-[500px] md:h-[500px] h-[300px]">
+      <div className="space-y-14 lg:w-[40%] md:w-[40%] lg:h-[500px] md:h-[500px] h-[300px]">
         {sub1Post && (
           <Link
             href={{
@@ -97,14 +135,15 @@ const Page = () => {
                 className="w-[100%] h-[100%] shadow-md rounded-md"
               />
             </div>
-            <div className="w-[50%] space-y-4">
+            <div className="w-[50%] lg:space-y-4 md:space-y-4 space-y-1">
               <div className="text-[13px] font-semibold hover:underline line-clamp-3 overflow-hidden text-ellipsis">
                 {language === "en" ? sub1Post.headlineEn : sub1Post.headlineTe}
               </div>
-              <div className="text-[13px] line-clamp-5 overflow-hidden text-ellipsis">
+              <div className="text-[13px] lg:line-clamp-5 md:line-clamp-5 line-clamp-3 overflow-hidden text-ellipsis">
                 {language === "en" ? sub1Post.newsEn : sub1Post.newsTe}
               </div>
             </div>
+            
           </Link>
         )}
 
@@ -118,20 +157,20 @@ const Page = () => {
             key={sub2Post.newsId}
             className="w-[100%] h-[40%] flex lg:gap-10 md:gap-5 gap-2"
           >
-            <div className="w-[50%] h-[100%]">
+            <div className="w-[50%] lg:h-[100%] md:h-[100%] h-[100%]">
               <Image
                 src={sub2Post.image}
                 alt="No Image Found"
-                width={100}
-                height={100}
+                width={500}
+                height={500}
                 className="w-[100%] h-[100%] shadow-md rounded-md"
               />
             </div>
-            <div className="w-[50%] space-y-4">
+            <div className="w-[50%] lg:space-y-4 md:space-y-4 space-y-1">
               <div className="text-[13px] font-semibold hover:underline line-clamp-3 overflow-hidden text-ellipsis">
                 {language === "en" ? sub2Post.headlineEn : sub2Post.headlineTe}
               </div>
-              <div className="text-[13px] line-clamp-5 overflow-hidden text-ellipsis">
+              <div className="text-[13px] lg:line-clamp-5 md:line-clamp-5 line-clamp-3 overflow-hidden text-ellipsis">
                 {language === "en" ? sub2Post.newsEn : sub2Post.newsTe}
               </div>
             </div>

@@ -165,7 +165,7 @@ const Header = () => {
 
 
   return (
-    <div className="bg-black lg:px-28 md:px-10 px-4 py-5 lg:space-y-10 md:space-y-5 space-y-2">
+    <div className="bg-black lg:px-28 md:px-10 px-4 py-5 lg:space-y-4 md:space-y-5 space-y-2">
       <div className="flex justify-between   items-center">
         <div>
           <Image
