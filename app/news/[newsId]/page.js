@@ -305,32 +305,31 @@ const NewsPost = () => {
   };
 
   return (
-    <div className="lg:mx-10 md:mx-5 mx-4 lg:my-[32px] md:my-20 my-4 flex justify-between">
-      <div className="lg:w-[60%] md:w-[60%] space-y-4">
+    <div className="lg:mx-10 md:mx-5 mx-4 lg:my-10 flex justify-between">
+      <div className="lg:w-[60%] md:space-y-6 lg:space-y-6 space-y-4">
         {newsData ? (
           <>
-            <div className="lg:w-[806px] md:w-[450px] w-[100%] lg:h-[500px] md:h-[300px] h-[300px]">
+            <div className="lg:w-[806px] w-[100%] lg:h-[500px] md:h-[400px] h-[300px]">
               <Image
                 alt="No Image Found"
                 src={newsData.image}
                 width={900}
                 height={500}
-                className="lg:w-[806px] md:w-[450px] w-[100%] rounded-md lg:h-[500px] md:h-[300px] h-[300px]"
+                className="lg:w-[806px]  w-[100%] rounded-md lg:h-[500px] md:h-[400px] h-[300px]"
               />
             </div>
             <div className="text-[24px] line-clamp-2 font-semibold">
               {language === "te" ? newsData.headlineTe : newsData.headlineEn}
             </div>
-            <div className="flex justify-between font-light text-gray-500">
-              <div className="flex items-center gap-10">
+            <div className="flex justify-between font-light text-gray-700">
+              <div className="flex items-center lg:gap-10 md:gap-5 gap-2 lg:text-sm md:text-sm text-[10px]">
                 <div>{formatDate(newsData.createdAt)}</div>{" "}
                 <div> {timeAgo(newsData.createdAt)}</div>
               </div>
-              <div className="flex gap-4">
+              <div className="flex gap-4 px-2">
                 <button>
                   <div className="flex items-center">
                     {[...Array(5)].map((_, index) => {
-                      // Check if this star is part of the average rating
                       const starFill = averageRating - index;
                       const isRated = rating > 0; // Check if the user has rated
 
@@ -348,9 +347,8 @@ const NewsPost = () => {
                       return (
                         <FaStar
                           key={index}
-                          size={24}
                           color={fillColor}
-                          className="cursor-pointer"
+                          className="lg:text-[24px] md:text-[24px] text-[20px]"
                           onClick={
                             !isRated ? () => handleRating(index + 1) : undefined
                           } // Disable click after rating
@@ -372,10 +370,10 @@ const NewsPost = () => {
                   className="flex items-center space-x-2"
                   onClick={handleLike}
                 >
-                  <FaHeart size={24} color={hasLiked ? "red" : "gray"} />
+                  <FaHeart className="lg:text-[24px] md:text-[24px] text-[20px]" color={hasLiked ? "red" : "gray"} />
                 </button>
                 <button onClick={toggleComments}>
-                  <LuMessageCircle size={24} color="gray" />
+                  <LuMessageCircle className="lg:text-[24px] md:text-[24px] text-[20px]" color="gray" />
                 </button>
               </div>
             </div>
@@ -410,7 +408,7 @@ const NewsPost = () => {
                               }`
                             : "Anonymous"}
                         </span>
-                        <span className="text-sm text-gray-500 ml-2">
+                        <span className="lg:text-sm md:text-sm text-gray-500 ml-2">
                           {comment?.createdAt ? timeAgo(comment.createdAt) : ""}
                         </span>
                       </div>
@@ -492,7 +490,7 @@ const NewsPost = () => {
                 ))}
               </div>
             )}
-            <div className="text-[18px] leading-relaxed">
+            <div className="text-[18px] pt-5 border-black border-t-[1px] pb-10 leading-relaxed">
               {language === "te"
                 ? newsData.newsTe.split("\n").map((line, index) => (
                     <React.Fragment key={index}>
@@ -512,9 +510,9 @@ const NewsPost = () => {
           <div>Loading...</div>
         )}
       </div>
-      <div className="lg:w-[30%] md:w-[30%] md:block lg:block hidden space-y-10">
+      <div className="lg:w-[30%] md:w-[30%]  lg:block hidden space-y-4">
         <h3 className="font-bold  text-xl flex justify-center">Related News</h3>
-        <div className="">
+        <div>
           {relatedNews.length > 0 ? (
             relatedNews.map((newsItem) => (
               <Link

@@ -9,6 +9,7 @@ const Page = () => {
   const [date, setDate] = useState('');
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
+  const [thumbnail, setThumbnail] = useState('');
   const [isAuthorized, setIsAuthorized] = useState(false);
   const {translations, language} = useLanguage();
 
@@ -42,6 +43,7 @@ const Page = () => {
     formData.append("date", date);
     formData.append("month", month);
     formData.append("year", year);
+    formData.append("thumbnail", thumbnail);
   
     try {
       const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/paper", {
@@ -77,6 +79,15 @@ const Page = () => {
             id="file"
             accept=".pdf"
             onChange={handleFileChange}
+            required
+            className="px-4 py-2 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+        <div className="flex flex-col">
+        <label htmlFor="URL" className="text-lg font-medium text-gray-700 mb-2">{translations.uploadThumbnail}</label>
+          <input
+            type="file"
+            onChange={(e) => setThumbnail(e.target.files[0])} 
             required
             className="px-4 py-2 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />

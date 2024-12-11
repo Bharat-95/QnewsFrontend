@@ -12,7 +12,7 @@ const te = {
     epaper: "ఈపేపర్",
     register: "నమోదు",
     switchTo: "Switch to English",
-    login: "ప్రవేశించండి",
+    login: "లాగిన్",
     welcomeBack: "స్వాగతం!",
     credentialsPrompt: "మీ అకౌంట్‌ని యాక్సెస్ చేయడానికి మీ ప్రామాణిక వివరాలను ఎంటర్ చేయండి",
     emailAddress: "ఈమెయిల్",
@@ -73,7 +73,6 @@ const te = {
     registerusers:'వినియోగదారులను నమోదు',
     manageusers:'వినియోగదారులను నిర్వహించండి',
     settings:'సెట్టింగ్‌లు',
-    register:'నమోదు చేయండి',
     registeremployee:'ఉద్యోగి నమోదు',
     role:'పాత్ర',
     userlist:'వాడుకరి జాబితా',
@@ -140,7 +139,8 @@ const te = {
     termsNconditions:'నిబంధనలు & షరతులు',
     privacy:'గోప్యతా విధానం',
     social:'సోషల్ మీడియా',
-    add:'జోడించండి'
+    add:'జోడించండి',
+    approve:'ఆమోదించండి',
 
 
 

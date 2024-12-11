@@ -80,7 +80,7 @@ const Page = () => {
   );
 
   return (
-    <div className="lg:flex md:flex lg:gap-10 md:gap-5 lg:space-y-0 md:space-y-0 space-y-10">
+    <div className="lg:flex lg:gap-10 md:gap-5 lg:space-y-0 md:space-y-10 space-y-10">
       {/* Main Post */}
       {mainPost && (
         <Link
@@ -92,13 +92,13 @@ const Page = () => {
           key={mainPost.newsId}
           className="lg:w-[60%] md:w-[60%]  space-y-2"
         >
-          <div className="w-[100%] lg:h-[393px] md:h-[393px] h-[300px] overflow-hidden">
+          <div className="w-[100%] lg:h-[420px] md:h-[393px] h-[250px] overflow-hidden">
             <Image
               alt="No Image Found"
               src={mainPost.image}
               width={500}
               height={500}
-              className="w-[100%] lg:h-[393px] md:h-[393px] h-[300px] rounded-md shadow-md"
+              className="w-[100%] lg:h-[420px] md:h-[393px] h-[250px] rounded-md shadow-md"
             />
           </div>
           <div>
@@ -113,9 +113,9 @@ const Page = () => {
         </Link>
       )}
 
-      <div className="h-[500px] w-[1px] lg:flex md:flex hidden bg-gray-400"></div>
+      <div className="h-[500px] w-[1px] lg:flex md:hidden hidden bg-gray-400"></div>
 
-      <div className="space-y-14 lg:w-[40%] md:w-[40%] lg:h-[500px] md:h-[500px] h-[300px]">
+      <div className="space-y-14 lg:w-[40%] lg:h-[500px] md:h-[500px] h-[300px]">
         {sub1Post && (
           <Link
             href={{

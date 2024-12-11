@@ -117,18 +117,16 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setMenu(false);
+    const handleClickOutside = (event) => {
+      if (!event.target.closest(".relative")) {
+        setDropdownOpen(false);
       }
     };
-
-    document.addEventListener("mousedown", handleOutsideClick);
-
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
   }, []);
+  
+
 
   const handleMenu = (event) => {
     event.stopPropagation();
@@ -149,6 +147,7 @@ const Header = () => {
     setMenu(false);
   };
 
+  
   const navItems = [
     { path: "/", label: translations.home },
     { path: "/hyderabad", label: translations.hyderabad },
@@ -165,8 +164,8 @@ const Header = () => {
 
 
   return (
-    <div className="bg-black lg:px-28 md:px-10 px-4 py-5 lg:space-y-4 md:space-y-5 space-y-2">
-      <div className="flex justify-between   items-center">
+    <div className="bg-black shadow-md  rounded-b-md fixed w-[100%] z-50 lg:px-28 md:px-10 px-4 lg:py-5 md:py-2 py-2 lg:space-y-4 md:space-y-1">
+      <div className="flex justify-between items-center">
         <div>
           <Image
             src={Logo}
@@ -180,7 +179,7 @@ const Header = () => {
             <li>
               <button
                 onClick={toggleLanguage}
-                className="text-white lg:w-40 md:w-40 w-20 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-white lg:p-2 md:p-2 p-1 font-semibold"
+                className="text-white lg:w-40 md:w-32 lg:text-[14px] md:text-[10px] text-[8px] w-14 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-white lg:p-2 md:p-2 p-1 font-semibold"
               >
                 {language === "en"
                   ? translations.switchTo
@@ -188,29 +187,48 @@ const Header = () => {
               </button>
             </li>
 
-            <li className="text-white lg:w-40 md:w-40 w-14 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-white lg:p-2 md:p-2 p-1 font-semibold flex justify-center items-center">
-              <Link href="/e-paper" className="flex items-center gap-x-2">
+            <li className="text-white lg:w-40 md:w-32 w-14 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-white lg:p-2 md:p-2 p-1 font-semibold flex justify-center items-center">
+              <Link href="/e-paper" className="flex items-center gap-x-2 lg:text-[14px] md:text-[10px] text-[8px]">
                 <MdDownload /> {translations.epaper}
               </Link>
             </li>
 
             {isLoggedIn && (
-              <ul className="flex lg:gap-10 md:gap-4 gap-10 items-center">
+              <ul className="flex lg:gap-10 md:gap-4 gap-4 items-center">
                 {userRole === "Admin" && (
-                  <li className="lg:space-x-10 md:space-x-2 space-x-2 flex">
-                    <button
-                      onClick={() => router.push("/approve-news")}
-                      className="text-white border lg:w-40 md:w-32 w-14 h-8 lg:h-10 md:h-10 border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-white lg:p-2 md:p-2 p-1 font-semibold"
-                    >
-                      {translations.approvenews}
-                    </button>
-                    <button
-                      onClick={() => router.push("/approve-video")}
-                      className="text-white border lg:w-40 md:w-32 w-14 h-8 lg:h-10 md:h-10 border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-white lg:p-2 md:p-2 p-1 font-semibold"
-                    >
-                      {translations.approveVideo}
-                    </button>
-                  </li>
+                 <li className="lg:space-x-10 md:space-x-2 space-x-2 flex justify-center items-center relative">
+                 <button
+                   className="text-white border lg:w-40 md:w-32 w-20 h-8 lg:h-10 md:h-10 border-1 lg:text-[14px] md:text-[10px] text-[8px] hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-white lg:p-2 md:p-2 p-1 font-semibold"
+                   onClick={() => setDropdownOpen((prev) => !prev)}
+                 >
+                   {translations.approve}
+                   <span className="ml-2">&#x25BC;</span>
+                 </button>
+               
+                 {/* Dropdown Menu */}
+                 {dropdownOpen && (
+                   <ul className="absolute top-full left-0 mt-1 lg:w-36 md:w-32 w-32 bg-gray-800 text-white rounded shadow-lg">
+                     <li>
+                       <button
+                         onClick={() => router.push("/approve-news")}
+                         className="block w-full text-left px-4 py-2 hover:bg-gray-700"
+                       >
+                         {translations.approvenews}
+                         
+                       </button>
+                     </li>
+                     <li>
+                       <button
+                         onClick={() => router.push("/approve-video")}
+                         className="block w-full text-left px-4 py-2 hover:bg-gray-700"
+                       >
+                         {translations.approveVideo}
+                       </button>
+                     </li>
+                   </ul>
+                 )}
+               </li>
+               
                 )}
 
                 {userRole === "Employee" && (
@@ -222,11 +240,11 @@ const Header = () => {
                         onClick={() => setShowDropdown(!showDropdown)}
                       >
                         {translations.add}
-                        <span className="ml-2">&#x25BC;</span>{" "}
+                        <span className="ml-2">&#x25BC;</span>
                         {/* Down arrow symbol */}
                       </button>
                       {showDropdown && (
-                        <div className="absolute w-20 md:w-32 bg-gray-800 text-white border border-white mt-1 rounded  z-10">
+                        <div className="absolute w-28 md:w-40 bg-gray-800 text-white border border-white mt-1 rounded  z-10">
                           <button
                             onClick={() => router.push("/add-news")}
                             className="block w-full text-left px-4 py-2 hover:bg-gray-700"
@@ -336,10 +354,10 @@ const Header = () => {
             )}
             {!isLoggedIn && (
               <>
-                <li className="text-white hover:transform duration-150 lg:w-40 md:w-40 w-12 lg:h-10 md:h-10 h-8  hover:translate-x-1 hover:-translate-y-1 border border-1 border-white bg-red-600 lg:p-2 md:p-2 p-1 font-semibold flex justify-center items-center">
+                <li className="text-white hover:transform duration-150 lg:text-[14px] md:text-[10px] text-[8px] lg:w-40 md:w-32 w-14 lg:h-10 md:h-10 h-8  hover:translate-x-1 hover:-translate-y-1 border border-1 border-white bg-red-600 lg:p-2 md:p-2 p-1 font-semibold flex justify-center items-center">
                   <Link href="/signUp">{translations.register}</Link>
                 </li>
-                <li className="text-white hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border border-1 border-white lg:p-2 md:p-2 p-1 font-semibold lg:w-40 md:w-40 w-10 lg:h-10 md:h-10 h-8 flex justify-center items-center">
+                <li className="text-white hover:transform duration-150 hover:translate-x-1 lg:text-[14px] md:text-[10px] text-[8px] hover:-translate-y-1 border border-1 border-white lg:p-2 md:p-2 p-1 font-semibold lg:w-40 md:w-32 w-14 lg:h-10 md:h-10 h-8 flex justify-center items-center">
                   <Link href="/Login">{translations.login}</Link>
                 </li>
               </>
@@ -349,9 +367,11 @@ const Header = () => {
       </div>
 
       <div className="lg:px-20 py-2">
-  <ul className="text-white flex flex-wrap justify-evenly font-bold items-center lg:text-[14px] md:text-[12px] text-[14px]">
-    {/* Single Navigation for All Screens */}
-    <div className="flex lg:hidden md:hidden w-full overflow-x-auto">
+  <ul className="text-white flex flex-wrap justify-evenly font-bold items-center lg:text-[14px] md:text-[12px] text-[12px]">
+    <div className="flex lg:hidden md:hidden w-full overflow-x-auto" style={{
+    scrollbarWidth: "none", // Firefox
+    msOverflowStyle: "none", // IE and Edge
+  }}>
       <div className="flex w-max whitespace-nowrap">
         {smallScreenNavItems.map((item) => (
           <li

@@ -104,7 +104,7 @@ const Page = () => {
               </div>
             ))
           ) : (
-            <p>No news available</p>
+            <p></p>
           )}
         </div>
       </div>

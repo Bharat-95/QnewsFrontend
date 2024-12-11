@@ -141,7 +141,8 @@ const en = {
      termsNconditions:'Terms & Conditions',
      privacy:'Privacy Policy',
      social:'Social Media',
-     add:'Add'
+     add:'Add',
+     approve:'Approve',
 
 
 

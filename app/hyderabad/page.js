@@ -40,7 +40,7 @@ const Page = () => {
   const otherPosts = filteredData.slice(1, 7); // Limit to the next 6 posts
 
   return (
-    <div className="flex min-h-screen flex-col lg:flex-row gap-8 mx-4 md:mx-6 lg:mx-10 my-6 md:my-8 lg:my-10">
+    <div className="flex min-h-screen  flex-col lg:flex-row gap-8 mx-4 md:mx-6 lg:mx-10 my-6 md:my-8 lg:my-10">
       {/* 70% Section: Latest News */}
       <div className="flex-[7]">
         {/* Show most recent post */}
@@ -104,7 +104,7 @@ const Page = () => {
               </div>
             ))
           ) : (
-            <p>No news available</p>
+            <p></p>
           )}
         </div>
       </div>
