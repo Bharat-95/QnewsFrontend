@@ -530,7 +530,7 @@ const NewsPost = () => {
                 </div>
 
                 <div className="text-lg font-semibold line-clamp-2 rounded-md flex justify-center">
-                  {newsItem.headlineEn}
+                {language === "te" ? newsItem.headlineTe : newsItem.headlineEn}
                 </div>
               </Link>
             ))
