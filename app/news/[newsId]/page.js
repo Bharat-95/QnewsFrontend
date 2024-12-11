@@ -60,16 +60,10 @@ const NewsPost = () => {
       });
     }
   };
-
-  useEffect(() => {
-    if (urlLanguage && urlLanguage !== language) {
-      setLanguage(urlLanguage);  // Set language from URL if it's different from the current language
-    }
-  }, [urlLanguage, language, setLanguage]); 
+  
 
   useEffect(() => {
     if (newsId) {
-      const langPath = language === "te" ? "newsTe" : "newsEn";
       const userEmail = localStorage.getItem("email");
 
       axios
