@@ -103,7 +103,7 @@ const Latest = () => {
                 className="w-full h-[200px] object-cover shadow-md rounded-md"
               />
               <div className="text-[13px] font-semibold line-clamp-2 text-ellipsis overflow-hidden hover:underline">
-                {video.titleEn}
+              {language === "te" ? video.titleTe : video.titleEn}
               </div>
 
               <div className="text-[12px] flex justify-between font-light text-gray-500">
