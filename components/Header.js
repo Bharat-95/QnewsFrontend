@@ -368,7 +368,7 @@ const Header = () => {
 
       <div className="lg:px-10">
   <ul className="text-black flex flex-wrap justify-evenly font-bold items-center lg:text-[14px] md:text-[12px] text-[12px]">
-    <div className="flex lg:hidden justify-center  w-full overflow-x-auto" style={{
+    <div className="flex lg:hidden md:justify-center  w-full overflow-x-auto" style={{
     scrollbarWidth: "none", // Firefox
     msOverflowStyle: "none", // IE and Edge
   }}>
@@ -376,7 +376,7 @@ const Header = () => {
         {smallScreenNavItems.map((item) => (
           <li
             key={item.path}
-            className={`inline-block p-2 hover:rounded-md hover:bg-orange-600 hover:text-white hover:translate-x-1 hover:-translate-y-1 duration-150 ${
+            className={`inline-block lg:p-2 md:p-2 p-1 hover:rounded-md hover:bg-orange-600 hover:text-white lg:hover:translate-x-1 lg:hover:-translate-y-1 duration-150 ${
               pathname === item.path
                 ? "bg-orange-600 rounded-md text-yellow-300"
                 : ""
