@@ -20,7 +20,7 @@ const Page = () => {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
 
     try {
-      const response = await fetch(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/${qnews}`, {
+      const response = await fetch(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/users/${qnews}`, {
         method: "DELETE",
       });
 
@@ -72,17 +72,17 @@ const Page = () => {
   }, []);
 
   return (
-    <div className="bg-black min-h-screen">
-      <div className="text-white text-2xl font-bold underline flex justify-center py-10">
+    <div className=" min-h-screen lg:py-10 py-5">
+      <div className="text-black text-2xl font-bold underline flex justify-center pb-4">
         {translations.userlist}
       </div>
-      <div className="grid grid-cols-3 text-black gap-10 m-20">
+      <div className="lg:grid lg:grid-cols-3 md:grid md:grid-cols-2  text-black gap-10 lg:m-20 md:m-4 m-2 lg:space-y-0 md:space-y-0 space-y-5">
         {data
           .filter((user) => user.role === "User")
           .map((user) => (
             <div
               key={user.qnews}
-              className="bg-white hover:transform duration-500 hover:translate-x-2 hover:-translate-y-2 cursor-pointer space-y-2 px-10 py-4 shadow-md rounded-md shadow-gray-500 w-[100%]"
+              className="bg-orange-200 lg:hover:transform duration-500 lg:hover:translate-x-2 lg:hover:-translate-y-2 cursor-pointer space-y-2 px-10 py-4 shadow-md rounded-md shadow-gray-500 w-[100%]"
             >
               <div className="flex gap-2">
                 <div className="font-bold">{translations.name} : </div>

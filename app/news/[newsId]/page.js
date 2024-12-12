@@ -9,12 +9,21 @@ import { LuMessageCircle } from "react-icons/lu";
 import { FaStar } from "react-icons/fa";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { FaShare } from "react-icons/fa";
+import { CgFacebook } from "react-icons/cg";
+import { AiFillInstagram } from "react-icons/ai";
+import { FaLinkedin } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { RiTwitterXLine } from "react-icons/ri";
+import { IoLogoWhatsapp } from "react-icons/io";
+import { FaCopy } from "react-icons/fa";
+import Speak from "@/components/Speak";
 
 const NewsPost = () => {
   const searchParams = useSearchParams();
   const { newsId } = useParams();
   const urlLanguage = searchParams.get("language");
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, translations } = useLanguage();
   const [newsData, setNewsData] = useState(null);
   const [likes, setLikes] = useState(0);
   const [hasLiked, setHasLiked] = useState(false);
@@ -27,6 +36,7 @@ const NewsPost = () => {
   const [averageRating, setAverageRating] = useState(3.5);
   const [isRated, setIsRated] = useState(false);
   const [relatedNews, setRelatedNews] = useState([]);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -60,16 +70,83 @@ const NewsPost = () => {
       });
     }
   };
-  
+  const handleShareClick = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  const handleSocialShare = (platform) => {
+    const url = window.location.href; // URL of the current page
+    const title = newsData.headlineEn; // Title of the post
+    const text = `${title} - ${url}`;
+
+    switch (platform) {
+      case "facebook":
+        window.open(
+          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+            url
+          )}`,
+          "_blank"
+        );
+        break;
+      case "twitter":
+        window.open(
+          `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+            url
+          )}&text=${encodeURIComponent(title)}`,
+          "_blank"
+        );
+        break;
+      case "linkedin":
+        window.open(
+          `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+            url
+          )}`,
+          "_blank"
+        );
+        break;
+      case "email":
+        window.location.href = `mailto:?subject=${encodeURIComponent(
+          title
+        )}&body=${encodeURIComponent(text)}`;
+        break;
+      case "whatsapp":
+        window.open(
+          `https://wa.me/?text=${encodeURIComponent(text)}`,
+          "_blank"
+        );
+        break;
+      case "instagram":
+        alert(
+          "Instagram does not support direct sharing via URL. Please share the link manually."
+        );
+        break;
+      case "copy":
+        navigator.clipboard
+          .writeText(url)
+          .then(() => {
+            alert("Link copied to clipboard!");
+          })
+          .catch((error) => {
+            alert("Failed to copy the link.");
+          });
+        break;
+      default:
+        break;
+    }
+    setDropdownOpen(false);
+  };
 
   useEffect(() => {
     if (newsId) {
       const userEmail = localStorage.getItem("email");
 
       axios
-        .get(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}`, {
-          params: { userEmail },
-        })
+        .get(
+          `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}`,
+          {
+            params: { userEmail },
+          }
+        )
         .then((res) => {
           const {
             likes,
@@ -82,7 +159,6 @@ const NewsPost = () => {
           setLikes(likes);
           setComments(comments || []);
 
-          // Ensure likedBy is an array before calling includes
           setHasLiked(Array.isArray(likedBy) && likedBy.includes(userEmail));
 
           if (ratings) {
@@ -92,19 +168,35 @@ const NewsPost = () => {
 
           if (category) {
             axios
-              .get(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/related`)
-              .then((response) => {
-                setRelatedNews(response.data.data);
-                console.log("related", response.data.data);
-              })
+              .get(
+                `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/related`
+              )
+              .then((response) => setRelatedNews(response.data.data))
               .catch((error) =>
                 console.log("Error fetching related news:", error)
               );
           }
         })
         .catch((error) => console.log("Error fetching news:", error));
+
+      // Check if the user has already rated
+      axios
+        .get(
+          `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/rating`,
+          {
+            params: { userEmail },
+          }
+        )
+        .then((res) => {
+          if (res.data.hasRated) {
+            setRating(res.data.userRating);
+            setIsRated(true);
+            localStorage.setItem("hasRated_" + newsId, "true"); // Save in localStorage
+          }
+        })
+        .catch((error) => console.log("Error fetching user rating:", error));
     }
-  }, [newsId, language]);
+  }, [newsId]);
 
   const handleLike = () => {
     const userEmail = localStorage.getItem("email");
@@ -145,12 +237,15 @@ const NewsPost = () => {
     }
 
     axios
-      .put(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/comment`, {
-        userEmail,
-        firstName,
-        lastName,
-        comment: newComment,
-      })
+      .put(
+        `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/comment`,
+        {
+          userEmail,
+          firstName,
+          lastName,
+          comment: newComment,
+        }
+      )
       .then((res) => {
         setNewComment("");
         axios
@@ -196,13 +291,16 @@ const NewsPost = () => {
     }
 
     axios
-      .put(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/reply`, {
-        commentId,
-        userEmail,
-        firstName,
-        lastName,
-        reply: replyText,
-      })
+      .put(
+        `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/reply`,
+        {
+          commentId,
+          userEmail,
+          firstName,
+          lastName,
+          reply: replyText,
+        }
+      )
       .then((res) => {
         setComments((prevComments) =>
           prevComments.map((comment) =>
@@ -235,10 +333,13 @@ const NewsPost = () => {
 
     if (commentLiked) {
       axios
-        .put(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/comment/unlike`, {
-          commentId,
-          userEmail,
-        })
+        .put(
+          `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/comment/unlike`,
+          {
+            commentId,
+            userEmail,
+          }
+        )
         .then(() => {
           setComments((prevComments) =>
             prevComments.map((comment) =>
@@ -257,10 +358,13 @@ const NewsPost = () => {
         .catch((error) => console.log("Error unliking comment:", error));
     } else {
       axios
-        .put(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/comment/like`, {
-          commentId,
-          userEmail,
-        })
+        .put(
+          `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/comment/like`,
+          {
+            commentId,
+            userEmail,
+          }
+        )
         .then(() => {
           setComments((prevComments) =>
             prevComments.map((comment) =>
@@ -285,23 +389,32 @@ const NewsPost = () => {
       return;
     }
 
-    setRating(selectedRating); // Set the rating to the selected value
-    setIsRated(true); // Disable the stars after rating
+    // Check if the user has already rated this news
+    if (localStorage.getItem("hasRated_" + newsId)) {
+      alert("You have already rated this news.");
+      return;
+    }
 
     axios
-      .put(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/rate`, {
-        userEmail,
-        newsId,
-        rating: selectedRating,
-      })
+      .put(
+        `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/rate`,
+        {
+          userEmail,
+          newsId,
+          rating: selectedRating,
+        }
+      )
       .then((res) => {
-        setAverageRating(res.data.averageRating); // Update the average rating
-        setIsRated(false); // Allow for state change again (if needed)
+        if (res.data.success) {
+          setRating(selectedRating);
+          setAverageRating(res.data.averageRating);
+          setIsRated(true);
+          localStorage.setItem("hasRated_" + newsId, "true"); // Set the hasRated flag
+        } else {
+          alert(res.data.message || "You have already rated this news.");
+        }
       })
-      .catch((error) => {
-        console.log("Error submitting rating:", error);
-        setIsRated(false); // Reset the loading state in case of error
-      });
+      .catch((error) => console.log("Error submitting rating:", error));
   };
 
   return (
@@ -330,50 +443,148 @@ const NewsPost = () => {
                 <button>
                   <div className="flex items-center">
                     {[...Array(5)].map((_, index) => {
-                      const starFill = averageRating - index;
-                      const isRated = rating > 0; // Check if the user has rated
+                      const starFill = averageRating - index; // Calculate how much the average rating fills this star
 
-                      // Determine the color of the star:
-                      let fillColor = "gray"; // Default color is gray for unfilled stars
+                      // Default to gray for empty stars
+                      let fillColor = "gray";
 
-                      if (isRated) {
-                        // If the user has rated, fill stars with gold
-                        fillColor = index < rating ? "gold" : "gray";
-                      } else if (starFill >= 1) {
-                        // If showing average rating, fill stars with gold
-                        fillColor = "gold";
+                      // First, set stars to gold for average rating
+                      if (starFill >= 1) {
+                        fillColor = "gold"; // Fully filled star for the average rating
+                      } else if (starFill > 0 && starFill < 1) {
+                        fillColor = "gold"; // Partial gold if the average rating is partial
                       }
+
+                      // Handle user rating override:
+                      if (rating > 0 && index < rating) {
+                        fillColor = "gold"; // User's rating takes precedence
+                      }
+
+                      // Partial star logic using clip-path for average rating
+                      const clipPath =
+                        starFill > 0 && starFill < 1
+                          ? `inset(0 ${Math.max(0, 1 - starFill) * 100}% 0 0)` // Apply partial fill for average rating
+                          : "none"; // No partial fill if it's fully filled or empty
 
                       return (
                         <FaStar
                           key={index}
-                          color={fillColor}
+                          color={fillColor} // Apply the calculated color (either gray or gold)
                           className="lg:text-[24px] md:text-[24px] text-[20px]"
                           onClick={
-                            !isRated ? () => handleRating(index + 1) : undefined
-                          } // Disable click after rating
+                            rating === 0
+                              ? () => handleRating(index + 1) // Allow rating only if the user hasn't rated yet
+                              : undefined
+                          }
                           style={{
-                            clipPath:
-                              starFill >= 1
-                                ? "none"
-                                : `inset(0 ${
-                                    Math.max(0, 1 - starFill) * 100
-                                  }% 0 0)`,
+                            clipPath: clipPath, // Apply partial fill effect for the stars based on average rating
                           }}
                         />
                       );
                     })}
                   </div>
                 </button>
+                <div className="flex gap-4 px-2">
+                  <div className="relative">
+                    {/* Share Icon */}
+                    <button
+                      onClick={handleShareClick}
+                      className="flex items-center space-x-2"
+                    >
+                      <FaShare className="lg:text-[24px] md:text-[24px] text-[20px]" />
+                    </button>
+
+                    {/* Dropdown with Share Options */}
+                    {dropdownOpen && (
+                      <div className="absolute top-[35px] right-0 bg-orange-50 shadow-lg rounded-md p-4 w-48">
+                        <ul className="space-y-2">
+                          <li>
+                            <button
+                              onClick={() => handleSocialShare("facebook")}
+                              className="flex items-center space-x-2 w-full text-blue-600"
+                            >
+                              <span className="flex items-center gap-2">
+                                <CgFacebook size={20} />
+                                {translations.facebook}
+                              </span>
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              onClick={() => handleSocialShare("twitter")}
+                              className="flex items-center space-x-2 w-full text-blue-400"
+                            >
+                              <span className="flex items-center gap-2">
+                                <RiTwitterXLine size={20} />
+                                {translations.twitter}
+                              </span>
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              onClick={() => handleSocialShare("linkedin")}
+                              className="flex items-center space-x-2 w-full text-blue-700"
+                            >
+                              <span className="flex items-center gap-2">
+                                <FaLinkedin size={20} />
+                                {translations.linkedin}
+                              </span>
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              onClick={() => handleSocialShare("email")}
+                              className="flex items-center space-x-2 w-full text-orange-800"
+                            >
+                              <span className="flex items-center gap-2">
+                                <MdEmail size={20} />
+                                {translations.email}
+                              </span>
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              onClick={() => handleSocialShare("whatsapp")}
+                              className="flex items-center space-x-2 w-full text-green-600"
+                            >
+                              <span className="flex items-center gap-2">
+                                <IoLogoWhatsapp size={20} />
+                                {translations.whatsapp}
+                              </span>
+                            </button>
+                          </li>
+
+                          <li>
+                            <button
+                              onClick={() => handleSocialShare("copy")}
+                              className="flex items-center space-x-2 w-full text-gray-800"
+                            >
+                              <span className="flex items-center gap-2">
+                                <FaCopy size={20} />
+                                {translations.copy}
+                              </span>
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </div>
 
                 <button
                   className="flex items-center space-x-2"
                   onClick={handleLike}
                 >
-                  <FaHeart className="lg:text-[24px] md:text-[24px] text-[20px]" color={hasLiked ? "red" : "gray"} />
+                  <FaHeart
+                    className="lg:text-[24px] md:text-[24px] text-[20px]"
+                    color={hasLiked ? "red" : "gray"}
+                  />
                 </button>
                 <button onClick={toggleComments}>
-                  <LuMessageCircle className="lg:text-[24px] md:text-[24px] text-[20px]" color="gray" />
+                  <LuMessageCircle
+                    className="lg:text-[24px] md:text-[24px] text-[20px]"
+                    color="gray"
+                  />
                 </button>
               </div>
             </div>
@@ -531,7 +742,9 @@ const NewsPost = () => {
                 </div>
 
                 <div className="text-lg font-semibold line-clamp-2 rounded-md flex justify-center">
-                {language === "te" ? newsItem.headlineTe : newsItem.headlineEn}
+                  {language === "te"
+                    ? newsItem.headlineTe
+                    : newsItem.headlineEn}
                 </div>
               </Link>
             ))

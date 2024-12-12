@@ -144,6 +144,13 @@ const en = {
      add:'Add',
      approve:'Approve',
      address:'Address',
+     facebook:'Facebook',
+     instagram:'Instagram',
+     twitter:'Twitter',
+     linkedin:'LinkedIn',
+     email:'Email',
+     whatsapp:'Whatsapp',
+     copy:'Copy'
 
 
 

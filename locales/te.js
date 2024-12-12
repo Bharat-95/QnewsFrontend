@@ -142,6 +142,13 @@ const te = {
     add:'జోడించండి',
     approve:'ఆమోదించండి',
     address:'చిరునామా',
+    facebook:'ఫేస్‌బుక్',
+    instagram:'ఇన్‌స్టాగ్రామ్',
+    twitter:'ట్విట్టర్',
+    whatsapp:'WhatsApp',
+    linkedin:'లింక్డ్‌ఇన్',
+    email:'ఇమెయిల్',
+    copy:'కాపీ',
 
 
 

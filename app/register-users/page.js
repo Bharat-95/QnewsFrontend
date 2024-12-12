@@ -76,8 +76,8 @@ const Page = () => {
   };
   
   return (
-    <div className="text-white p-4 flex items-center justify-center ">
-      <div className="rounded-md p-[50px] bg-[#737373] space-y-10 lg:w-[40%] md:w-[80%]">
+    <div className="text-black px-4 my-10 flex items-center justify-center ">
+      <div className="rounded-md p-[50px] bg-orange-200 space-y-10 lg:w-[40%] md:w-[80%]">
         <div className="text-2xl flex justify-center font-bold underline">
           {translations.registeremployee}
         </div>
@@ -94,7 +94,7 @@ const Page = () => {
             <input
               type="text"
               placeholder={translations.enterFirstName}
-              className="w-[90%] h-10 rounded-md p-2 text-black"
+              className="w-[90%] bg-orange-50 h-10 rounded-md p-2 text-black"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
@@ -105,7 +105,7 @@ const Page = () => {
             <input
               type="text"
               placeholder={translations.enterLastName}
-              className="w-[90%] h-10 rounded-md p-2 text-black"
+              className="w-[90%] bg-orange-50 h-10 rounded-md p-2 text-black"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
@@ -116,7 +116,7 @@ const Page = () => {
             <input
               type="tel"
               placeholder={translations.enterPhoneNumber}
-              className="w-[90%] h-10 rounded-md p-2 text-black"
+              className="w-[90%] bg-orange-50 h-10 rounded-md p-2 text-black"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
             />
@@ -131,7 +131,7 @@ const Page = () => {
             <input
               type="email"
               placeholder={translations.enterEmail}
-              className="w-[90%] h-10 rounded-md p-2 text-black"
+              className="w-[90%] bg-orange-50 h-10 rounded-md p-2 text-black"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -140,7 +140,7 @@ const Page = () => {
           <div className="space-y-1">
             <div>{translations.role}</div>
             <select
-              className="w-[90%] h-10 rounded-md p-2 text-black"
+              className="w-[90%] h-10 rounded-md p-2 bg-orange-50 text-black"
               value={role}
               onChange={(e) => setRole(e.target.value)}
             >
@@ -156,7 +156,7 @@ const Page = () => {
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder={translations.password}
-                className="w-[90%] h-10 rounded-md p-2 text-black pr-10 focus:outline-none"
+                className="w-[90%] h-10 rounded-md p-2 bg-orange-50 text-black pr-10 focus:outline-none"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -179,7 +179,7 @@ const Page = () => {
               <input
                 type={showConfirmPassword ? "text" : "password"}
                 placeholder={translations.confirmPassword}
-                className="w-[90%] h-10 rounded-md p-2 text-black pr-10 focus:outline-none"
+                className="w-[90%] h-10 rounded-md p-2 bg-orange-50 text-black pr-10 focus:outline-none"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
@@ -203,7 +203,7 @@ const Page = () => {
           <div className="py-4">
             <button
               type="submit"
-              className="flex justify-center  bg-black text-white font-bold  rounded-md h-10 w-[90%] items-center shadow-md hover:text-white/80 hover:transform hover:translate-x-[1px] hover:-translate-y-[1px] duration-200"
+              className="flex justify-center  bg-orange-500 hover:bg-orange-600 text-white font-bold  rounded-md h-10 w-[90%] items-center shadow-md  hover:transform hover:translate-x-[1px] hover:-translate-y-[1px] duration-200"
             >
               {translations.registerusers}
             </button>

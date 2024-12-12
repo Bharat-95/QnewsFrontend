@@ -79,19 +79,20 @@ const Page = () => {
   }, []);
 
   return (
-    <div className="bg-black">
-      <div className="text-white text-2xl font-bold underline flex justify-center py-10">
+    <div className="py-10">
+      <div className="text-black text-2xl font-bold underline flex justify-center pb-4">
         {translations.employeelist}
       </div>
-      <div className="grid grid-cols-3 text-black gap-10 p-20">
+      <div className="lg:grid lg:grid-cols-3 md:grid md:grid-cols-2 text-black gap-10 lg:p-20 p-4 space-y-5 md:space-y-0 lg:space-y-0">
         {data
           .filter((user) => user.role === "Employee")
           .map((user) => (
             <div
               key={user.qnews}
-              className="bg-white hover:transform duration-500 hover:translate-x-2 hover:-translate-y-2  p-4 shadow-md space-y-2 rounded-md shadow-gray-500 cursor-pointer"
-              onClick={() => openModal(user)}
+              className="bg-orange-200 lg:hover:transform duration-500 lg:hover:translate-x-2 lg:hover:-translate-y-2  p-4 shadow-md space-y-2 rounded-md shadow-gray-500 cursor-pointer"
+              
             >
+              <div onClick={() => openModal(user)}>
               <div className="flex gap-2">
                 <div className="font-bold">Name :</div>
                 {user.firstName} {user.lastName}
@@ -106,15 +107,20 @@ const Page = () => {
                 <div className="font-bold">Role:</div> {user.role}
               </div>
               <div>
-              <button
+             
+            </div>
+            </div>
+            <button
               onClick={() => deleteUser(user.qnews)}
               className="mt-4 flex justify-center bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-700"
             >
               Delete
             </button>
+           
             </div>
-            </div>
+            
           ))}
+          
       </div>
 
       {isModalOpen && (
@@ -123,7 +129,7 @@ const Page = () => {
           onClick={closeModal}
         >
           <div
-            className="bg-white w-[40%] p-8 rounded-md shadow-md space-y-4"
+            className="bg-white lg:w-[40%] w-[80%] p-8 rounded-md shadow-md space-y-4"
             onClick={(e) => e.stopPropagation()}
           >
             <h2 className="text-xl font-bold">Edit Employee</h2>
