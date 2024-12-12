@@ -17,7 +17,7 @@ const Footer = () => {
     const { language, translations } = useLanguage();
 
   return (
-    <div className='lg:h-64 md:h-64 bg-orange-200 text-black p-4'>
+    <div className=' bg-orange-200 text-black p-4'>
        <div className='h-[100%] lg:grid-cols-4 md:grid md:grid-cols-4 lg:grid grid grid-cols-1 gap-10'>
         <div className='flex justify-center items-center lg:border-r-[1px] md:border-r-[1px] border-orange-400 '>
             <Image
@@ -27,19 +27,19 @@ const Footer = () => {
             height={100} />
         </div>
         <div className='flex flex-col items-center lg:border-r-[1px] md:border-r-[1px] border-orange-400 space-y-4'>
-            <div className='text-[24px]  font-semibold underline underline-offset-2'>{translations.address} :</div>
-            <div>
+            <div className='lg:text-[24px] md:text-[20px] text-[14px]  font-semibold underline underline-offset-2'>{translations.address} :</div>
+            <div className='lg:text-[14px] md:text-[12px] text-[14px] '>
             1-89/4, Raghavendra Nagar Colony,  Bhagya Nagar Colony, Boduppal, Hyderabad, Telangana 500092
             </div>
         </div>
         <div className='flex flex-col items-center lg:border-r-[1px] md:border-r-[1px] border-orange-400 space-y-4'>
-            <div className='text-[24px]  font-semibold underline underline-offset-2'>{translations.helpNsupport} :</div>
-            <div className='font-light hover:text-orange-400'><Link href='/terms'>{translations.termsNconditions}</Link></div>
-            <div className='font-light hover:text-orange-400'><Link href='/privacy'>{translations.privacy}</Link></div>
-            <div className='font-light hover:text-orange-400'><Link href='/help'>{translations.helpNsupport}</Link></div>
+            <div className='lg:text-[24px] md:text-[20px] text-[14px] font-semibold underline underline-offset-2'>{translations.helpNsupport} :</div>
+            <div className='font-light hover:text-orange-400 lg:text-[14px] md:text-[12px] text-[14px]'><Link href='/terms'>{translations.termsNconditions}</Link></div>
+            <div className='font-light hover:text-orange-400 lg:text-[14px] md:text-[12px] text-[14px]'><Link href='/privacy'>{translations.privacy}</Link></div>
+            <div className='font-light hover:text-orange-400 lg:text-[14px] md:text-[12px] text-[14px]'><Link href='/help'>{translations.helpNsupport}</Link></div>
         </div>
         <div className='flex flex-col items-center space-y-4'>
-            <div className='text-[24px]  font-semibold underline underline-offset-2'>{translations.social} :</div>
+            <div className='lg:text-[24px] md:text-[20px] text-[14px]  font-semibold underline underline-offset-2'>{translations.social} :</div>
             <div className='flex gap-2'>
                 <Link href='https://www.instagram.com/qgroupmedia7200/' target='_blank' className='lg:hover:translate-x-[1px] lg:hover:-translate-y-[1px]  '><FaInstagram size={30} /></Link>
                 <Link href='https://x.com/QGroupMedia'  className='lg:hover:translate-x-[1px] lg:hover:-translate-y-[1px]' target='_blank'><FaXTwitter size={30} /></Link>
