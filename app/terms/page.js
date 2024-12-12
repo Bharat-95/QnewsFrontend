@@ -3,8 +3,8 @@ import React from 'react'
 
 const Terms = () => {
   return (
-    <div className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <div className="min-h-screen py-8 bg-orange-50 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto bg-orange-100 p-6 rounded-lg shadow-lg">
         <header className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-800">Q Media Group - Terms and Conditions</h1>
         </header>

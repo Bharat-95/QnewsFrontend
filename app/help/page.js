@@ -19,8 +19,8 @@ const Contact = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <div className="min-h-screen bg-orange-50 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto bg-orange-100 p-6 rounded-lg shadow-lg">
         <header className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-800">Q Media Group - Contact Us</h1>
         </header>
@@ -41,7 +41,7 @@ const Contact = () => {
                 value={formData.name}
                 onChange={handleInputChange}
                 required
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="mt-1 block w-full px-4 py-2 border border-orange-300 bg-orange-50 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
@@ -54,7 +54,7 @@ const Contact = () => {
                 value={formData.email}
                 onChange={handleInputChange}
                 required
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="mt-1 block w-full px-4 py-2 border border-orange-300 bg-orange-50 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
@@ -67,13 +67,13 @@ const Contact = () => {
                 onChange={handleInputChange}
                 required
                 rows="4"
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="mt-1 block w-full px-4 py-2 border border-orange-300 bg-orange-50 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               ></textarea>
             </div>
 
             <button
               type="submit"
-              className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full py-2 px-4 bg-orange-500 text-white rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               Submit
             </button>
@@ -81,7 +81,7 @@ const Contact = () => {
 
           <h3 className="text-xl font-semibold text-gray-700 mt-8">Other Ways to Reach Us</h3>
           <p className="text-gray-600">
-            You can also contact us via email at <a href="mailto:support@qmediagroup.com" className="text-blue-500 underline">qgroupmedia1@gmail.com</a>.
+            You can also contact us via email at <a href="mailto:support@qmediagroup.com" className="text-orange-500 underline">qgroupmedia1@gmail.com</a>.
           </p>
         </section>
       </div>
