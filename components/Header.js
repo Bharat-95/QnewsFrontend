@@ -376,9 +376,9 @@ const Header = () => {
         {smallScreenNavItems.map((item) => (
           <li
             key={item.path}
-            className={`inline-block p-2 hover:rounded-md hover:bg-orange-700 hover:text-white hover:translate-x-1 hover:-translate-y-1 duration-150 ${
+            className={`inline-block p-2 hover:rounded-md hover:bg-orange-600 hover:text-white hover:translate-x-1 hover:-translate-y-1 duration-150 ${
               pathname === item.path
-                ? "bg-orange-700 rounded-md text-yellow-300"
+                ? "bg-orange-600 rounded-md text-yellow-300"
                 : ""
             }`}
           >
@@ -394,7 +394,7 @@ const Header = () => {
         key={item.path}
         className={`hidden lg:flex md:hidden justify-center p-2 hover:rounded-md hover:bg-orange-600 hover:text-white hover:translate-x-1 hover:-translate-y-1 duration-150 ${
           pathname === item.path
-            ? "bg-orange-700 rounded-md text-yellow-300"
+            ? "bg-orange-600 rounded-md text-yellow-300"
             : ""
         }`}
       >
