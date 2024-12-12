@@ -35,7 +35,7 @@ export default function RootLayout({ children }) {
       <body className={`${poppins.className} font-sans`}>
         <LanguageProvider>
           <Header/>
-          <div className="lg:pt-[15%] md:pt-[20%] pt-[35%] ">{children}</div>
+          <div className="lg:pt-[10%] md:pt-[20%] pt-[35%] ">{children}</div>
           <Footer />
         </LanguageProvider>
         
