@@ -41,10 +41,10 @@ const Footer = () => {
         <div className='flex flex-col items-center space-y-4'>
             <div className='text-[24px]  font-semibold underline underline-offset-2'>{translations.social} :</div>
             <div className='flex gap-2'>
-                <Link href='https://www.instagram.com/teenmarmallanna/?hl=en' target='_blank' className='lg:hover:translate-x-[1px] lg:hover:-translate-y-[1px]  '><FaInstagram size={30} /></Link>
-                <Link href='/'  className='lg:hover:translate-x-[1px] lg:hover:-translate-y-[1px]' target='_blank'><FaXTwitter size={30} /></Link>
+                <Link href='https://www.instagram.com/qgroupmedia7200/' target='_blank' className='lg:hover:translate-x-[1px] lg:hover:-translate-y-[1px]  '><FaInstagram size={30} /></Link>
+                <Link href='https://x.com/QGroupMedia'  className='lg:hover:translate-x-[1px] lg:hover:-translate-y-[1px]' target='_blank'><FaXTwitter size={30} /></Link>
                 <Link href='https://www.youtube.com/@TeenmaarMallannaOfficial' target='_blank'  className='lg:hover:translate-x-[1px] lg:hover:-translate-y-[1px]  '><CiYoutube  size={30}/></Link>
-                <Link href='https://www.facebook.com/QNewsMallanna?modal=admin_todo_tou' target='_blank'  className='lg:hover:translate-x-[1px] lg:hover:-translate-y-[1px]  '><FaFacebookF size={30}/></Link>
+                <Link href='https://www.facebook.com/QNewsMallanna' target='_blank'  className='lg:hover:translate-x-[1px] lg:hover:-translate-y-[1px]  '><FaFacebookF size={30}/></Link>
 
             </div>
         </div>

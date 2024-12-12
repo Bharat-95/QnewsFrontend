@@ -55,28 +55,19 @@ const Page = () => {
   const updateStatus = async (status) => {
     try {
       const { newsId, ...newsDataWithoutId } = selectedNews;
-  
-      const updatedNews = {
-        ...newsDataWithoutId,
-        status,
-        image: newImage || selectedNews.image,
-      };
-  
-      const response = await fetch(
-        `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(updatedNews),
-        }
-      );
-  
+      const updatedNews = { ...newsDataWithoutId, status, image: newImage || selectedNews.image };
+      const response = await fetch(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${selectedNews.newsId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedNews),
+      });
+
       if (response.ok) {
         setNewsList((prev) =>
           prev.map((news) =>
-            news.newsId === newsId ? { ...updatedNews, newsId } : news
+            news.newsId === selectedNews.newsId ? updatedNews : news
           )
         );
         closeModal();
@@ -87,7 +78,6 @@ const Page = () => {
       console.log('Error updating news status:', error);
     }
   };
-  
 
   const handleEdit = async (e) => {
     e.preventDefault();
@@ -233,8 +223,8 @@ const Page = () => {
             <div>
               <label className="block text-sm font-medium">Is Sub1 ?:</label>
               <select
-                value={selectedNews.issub1 ? 'Yes' : 'No'}
-                onChange={(e) => handleBooleanChange('issub1', e.target.value === 'Yes')}
+                value={selectedNews.isSub1 ? 'Yes' : 'No'}
+                onChange={(e) => handleBooleanChange('isSub1', e.target.value === 'Yes')}
                 className="w-full bg-orange-50 p-2 border border-orange-300 rounded-md"
               >
                 <option value="Yes">Yes</option>
@@ -244,8 +234,8 @@ const Page = () => {
             <div>
               <label className="block text-sm font-medium">Is Sub2 ?:</label>
               <select
-                value={selectedNews.issub2 ? 'Yes' : 'No'}
-                onChange={(e) => handleBooleanChange('issub2', e.target.value === 'Yes')}
+                value={selectedNews.isSub2 ? 'Yes' : 'No'}
+                onChange={(e) => handleBooleanChange('isSub2', e.target.value === 'Yes')}
                 className="w-full bg-orange-50 p-2 border border-orange-300 rounded-md"
               >
                 <option value="Yes">Yes</option>

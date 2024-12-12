@@ -113,7 +113,7 @@ const Page = () => {
         setIsSub2("");
         setEmployeeId("");
         setTags("");
-        setImage(null);
+        setImage("");
       } else {
         alert("Failed to add news.");
       }
