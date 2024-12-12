@@ -143,6 +143,7 @@ const en = {
      social:'Social Media',
      add:'Add',
      approve:'Approve',
+     address:'Address',
 
 
 

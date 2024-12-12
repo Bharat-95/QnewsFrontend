@@ -54,19 +54,29 @@ const Page = () => {
 
   const updateStatus = async (status) => {
     try {
-      const updatedNews = { ...selectedNews, status, image: newImage || selectedNews.image };
-      const response = await fetch(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${selectedNews.newsId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedNews),
-      });
-
+      const { newsId, ...newsDataWithoutId } = selectedNews;
+  
+      const updatedNews = {
+        ...newsDataWithoutId,
+        status,
+        image: newImage || selectedNews.image,
+      };
+  
+      const response = await fetch(
+        `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updatedNews),
+        }
+      );
+  
       if (response.ok) {
         setNewsList((prev) =>
           prev.map((news) =>
-            news.newsId === selectedNews.newsId ? updatedNews : news
+            news.newsId === newsId ? { ...updatedNews, newsId } : news
           )
         );
         closeModal();
@@ -77,6 +87,7 @@ const Page = () => {
       console.log('Error updating news status:', error);
     }
   };
+  
 
   const handleEdit = async (e) => {
     e.preventDefault();

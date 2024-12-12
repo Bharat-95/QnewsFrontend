@@ -26,9 +26,11 @@ const Footer = () => {
             width={100}
             height={100} />
         </div>
-        <div className='flex flex-col items-center lg:border-r-[1px] md:border-r-[1px] border-orange-400'>
-            <div className='text-[24px]  font-semibold underline underline-offset-2'>{translations.contactUs}</div>
-            <div>Address :</div>
+        <div className='flex flex-col items-center lg:border-r-[1px] md:border-r-[1px] border-orange-400 space-y-4'>
+            <div className='text-[24px]  font-semibold underline underline-offset-2'>{translations.address} :</div>
+            <div>
+            1-89/4, Raghavendra Nagar Colony,  Bhagya Nagar Colony, Boduppal, Hyderabad, Telangana 500092
+            </div>
         </div>
         <div className='flex flex-col items-center lg:border-r-[1px] md:border-r-[1px] border-orange-400 space-y-4'>
             <div className='text-[24px]  font-semibold underline underline-offset-2'>{translations.helpNsupport} :</div>
@@ -39,7 +41,7 @@ const Footer = () => {
         <div className='flex flex-col items-center space-y-4'>
             <div className='text-[24px]  font-semibold underline underline-offset-2'>{translations.social} :</div>
             <div className='flex gap-2'>
-                <Link href='/'><FaInstagram size={30} /></Link>
+                <Link href='https://www.instagram.com/qnewsofficial/'><FaInstagram size={30} /></Link>
                 <Link href='/'><FaXTwitter size={30} /></Link>
                 <Link href='/'><CiYoutube  size={30}/></Link>
                 <Link href='/'><FaFacebookF size={30}/></Link>
