@@ -41,7 +41,7 @@ const timeAgo = (dateString) => {
 const Latest = () => {
   const [data, setData] = useState([]);
   const { translations, language } = useLanguage();
-  const [visibleCount, setVisibleCount] = useState(8); // Start with 8 visible news items
+  const [visibleCount, setVisibleCount] = useState(8); 
   const loaderRef = useRef(null);
 
   const fetchData = async () => {

@@ -26,7 +26,7 @@ const timeAgo = (dateString) => {
 const Latest = () => {
   const { translations, language } = useLanguage();
   const [data, setData] = useState([]);
-  const [visibleCount, setVisibleCount] = useState(8); // Set initial visible count to 8
+  const [visibleCount, setVisibleCount] = useState(20);
   const loaderRef = useRef(null); 
 
   const fetchData = async () => {
@@ -44,7 +44,7 @@ const Latest = () => {
   };
 
   const loadMoreImages = useCallback(() => {
-    if (visibleCount < data.length) {
+    if (visibleCount < data.length &&  visibleCount < 20) {
       setVisibleCount((prevCount) => Math.min(prevCount + 1, data.length)); 
     }
   }, [visibleCount, data.length]);
