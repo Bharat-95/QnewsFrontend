@@ -55,7 +55,7 @@ const Page = () => {
   const updateStatus = async (status) => {
     try {
       const updatedNews = { ...selectedNews, status, image: newImage || selectedNews.image };
-      const response = await fetch(`http://localhost:4000/newsEn/${selectedNews.newsId}`, {
+      const response = await fetch(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${selectedNews.newsId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ const Page = () => {
   const handleEdit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`/api/news/${selectedNews.newsId}`, {
+      const response = await fetch(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${selectedNews.newsId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -149,23 +149,46 @@ const Page = () => {
           <h2 className="text-2xl font-semibold mb-4">Edit News</h2>
           <form onSubmit={handleEdit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium">Headline:</label>
+              <label className="block text-sm font-medium">Headline (English) :</label>
               <input
                 type="text"
-                value={selectedNews.headline}
+                value={selectedNews.headlineEn}
                 onChange={(e) =>
-                  setSelectedNews({ ...selectedNews, headline: e.target.value })
+                  setSelectedNews({ ...selectedNews, headlineEn: e.target.value })
                 }
                 required
-                className="w-full bg-orange-50 p-2 border border-orange-300 rounded-md"
+                className="w-full bg-orange-50 text-black p-2 border border-orange-300 rounded-md"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium">News:</label>
-              <textarea
-                value={selectedNews.news}
+              <label className="block text-sm font-medium">Headline (Telugu):</label>
+              <input
+                type="text"
+                value={selectedNews.headlineTe}
                 onChange={(e) =>
-                  setSelectedNews({ ...selectedNews, news: e.target.value })
+                  setSelectedNews({ ...selectedNews, headlineTe: e.target.value })
+                }
+                required
+                className="w-full bg-orange-50 text-black p-2 border border-orange-300 rounded-md"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium">News (English):</label>
+              <textarea
+                value={selectedNews.newsEn}
+                onChange={(e) =>
+                  setSelectedNews({ ...selectedNews, newsEn: e.target.value })
+                }
+                required
+                className="w-full bg-orange-50 p-2 border border-orange-300 rounded-md h-32"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium">News (Telugu):</label>
+              <textarea
+                value={selectedNews.newsTe}
+                onChange={(e) =>
+                  setSelectedNews({ ...selectedNews, newsTe: e.target.value })
                 }
                 required
                 className="w-full bg-orange-50 p-2 border border-orange-300 rounded-md h-32"
