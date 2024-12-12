@@ -164,7 +164,7 @@ const Header = () => {
 
 
   return (
-    <div className="bg-orange-200 shadow-md  rounded-b-md fixed w-[100%] z-50 lg:px-20 md:px-10 px-4 lg:py-5 md:py-2 py-2 lg:space-y-2 md:space-y-1">
+    <div className="bg-orange-200 shadow-md  rounded-b-md fixed w-[100%] z-50 lg:px-10 md:px-10 px-4 lg:py-5 md:py-2 py-2 lg:space-y-2 md:space-y-1">
       <div className="flex justify-between">
         <div>
           <Image
@@ -366,7 +366,7 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="">
+      <div className="lg:px-10">
   <ul className="text-black flex flex-wrap justify-evenly font-bold items-center lg:text-[14px] md:text-[12px] text-[12px]">
     <div className="flex lg:hidden justify-center  w-full overflow-x-auto" style={{
     scrollbarWidth: "none", // Firefox

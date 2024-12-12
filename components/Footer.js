@@ -24,7 +24,8 @@ const Footer = () => {
             src={Logo}
             alt='No Logo Found'
             width={100}
-            height={100} />
+            height={100}
+            className='w-[50px] md:w-[80px] lg:w-[100px]' />
         </div>
         <div className='flex flex-col items-center lg:border-r-[1px] md:border-r-[1px] border-orange-400 space-y-4'>
             <div className='lg:text-[24px] md:text-[20px] text-[14px]  font-semibold underline underline-offset-2'>{translations.address} :</div>
