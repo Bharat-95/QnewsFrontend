@@ -60,6 +60,7 @@ const Trending = () => {
     {data.length > 0 ? (
       data
         .slice(0, 4) // Show only the top 4 posts
+        .filter((trending) => trending.status === "Approved")
         .map((trending) => (
           <div key={trending.newsId}>
             <Link
