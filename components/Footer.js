@@ -50,7 +50,7 @@ const Footer = () => {
        <div className='font-extralight flex flex-wrap justify-center lg:gap-10 gap-2'>
 
        <div className='lg:flex lg:items-center lg:justify-center text-[10px] md:text-[16px] gap-2'>© copyright <Link href='/' className='hover:text-orange-600 font-normal'>Q Group Media. </Link> All Rights Reserved</div>
-       <div className='lg:flex lg:items-center lg:justify-center text-[10px] md:text-[16px] gap-2'>Built by: <Link href='https://www.nandak.co'  className='hover:text-orange-600 font-normal'>Nandak Innovations Private Limited</Link></div>
+       <div className='lg:flex lg:items-center lg:justify-center text-[10px] md:text-[16px] gap-2'>Built by: <Link href='https://www.nandak.co' target='_blank' className='hover:text-orange-600 font-normal'>Nandak Innovations Private Limited</Link></div>
        </div>
 
     </div>
