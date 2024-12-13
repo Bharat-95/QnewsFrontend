@@ -15,7 +15,16 @@ const PapersPage = () => {
       try {
         const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/paper"); // Replace with your actual API endpoint
         const data = await response.json();
-        setPapers(data.data);
+        
+        // Assuming papers have date, month, and year fields that are strings
+        const sortedPapers = data.data.sort((a, b) => {
+          // Convert date, month, and year to Date objects for proper sorting
+          const dateA = new Date(`${a.month} ${a.date}, ${a.year}`);
+          const dateB = new Date(`${b.month} ${b.date}, ${b.year}`);
+          return dateB - dateA; // Sort descending to show latest first
+        });
+
+        setPapers(sortedPapers);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching papers:", error);
