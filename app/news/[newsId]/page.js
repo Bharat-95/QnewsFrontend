@@ -436,12 +436,16 @@ const NewsPost = () => {
             </div>
             <div className="flex justify-between font-light text-gray-700">
               
-              <div className="flex items-center lg:gap-10 md:gap-5 gap-2 lg:text-sm md:text-sm text-[10px]">
+              <div className="lg:flex md:flex hidden items-center lg:gap-10 md:gap-5 gap-2 lg:text-sm md:text-sm text-[10px]">
                 <div>{formatDate(newsData.createdAt)}</div>{" "}
                 <div> {timeAgo(newsData.createdAt)}</div>
               </div>
               
               <div className="flex gap-4 px-2">
+              <div> <Speak newsText={language === "te"
+                    ? newsData.newsTe
+                    : newsData.newsEn} 
+                    language={language === "te" ? "te-IN" : "en-IN"}/></div>
                 <button>
                   <div className="flex items-center">
                     {[...Array(5)].map((_, index) => {
