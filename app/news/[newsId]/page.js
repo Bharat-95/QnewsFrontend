@@ -435,10 +435,12 @@ const NewsPost = () => {
               {language === "te" ? newsData.headlineTe : newsData.headlineEn}
             </div>
             <div className="flex justify-between font-light text-gray-700">
+              
               <div className="flex items-center lg:gap-10 md:gap-5 gap-2 lg:text-sm md:text-sm text-[10px]">
                 <div>{formatDate(newsData.createdAt)}</div>{" "}
                 <div> {timeAgo(newsData.createdAt)}</div>
               </div>
+              
               <div className="flex gap-4 px-2">
                 <button>
                   <div className="flex items-center">
@@ -716,6 +718,7 @@ const NewsPost = () => {
                     </React.Fragment>
                   ))}
             </div>
+            
           </>
         ) : (
           <div>Loading...</div>
@@ -746,6 +749,7 @@ const NewsPost = () => {
                     ? newsItem.headlineTe
                     : newsItem.headlineEn}
                 </div>
+                
               </Link>
             ))
           ) : (

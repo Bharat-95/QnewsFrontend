@@ -1,47 +1,57 @@
-import { useState } from 'react';
+import React, { useState } from "react";
+import axios from "axios";
 
-const Speak = ({ newsData, language }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [audioUrl, setAudioUrl] = useState('');
-  const [error, setError] = useState(null);
+const Header = ({ newsText }) => {
+  const [language, setLanguage] = useState("en-US"); // Default to English
+  const [isSpeaking, setIsSpeaking] = useState(false);
 
-  const handleReadClick = async () => {
+  const toggleLanguage = () => {
+    setLanguage((prev) => (prev === "en-US" ? "te-IN" : "en-US"));
+  };
+
+  const speakText = async () => {
+    if (isSpeaking) return;
+
+    setIsSpeaking(true);
+    const apiKey = "YOUR_GOOGLE_API_KEY"; // Replace with your API key
+    const url = `https://texttospeech.googleapis.com/v1/text:synthesize?key=${apiKey}`;
+
+    const data = {
+      input: { text: newsText },
+      voice: {
+        languageCode: language,
+        ssmlGender: "NEUTRAL",
+      },
+      audioConfig: {
+        audioEncoding: "MP3",
+      },
+    };
+
     try {
-      setIsPlaying(!isPlaying);
+      const response = await axios.post(url, data);
+      const audioContent = response.data.audioContent;
 
-      const text = language === 'te' ? newsData.headlineTe : newsData.headlineEn;
-      const languageCode = language === 'te' ? 'te-IN' : 'en-IN';
-      const voiceType = language === 'te' ? 'te-IN-Wavenet-A' : 'en-IN-Wavenet-D';
-
-      const res = await fetch(
-        `/api/text-to-speech?text=${encodeURIComponent(text)}&languageCode=${languageCode}&voiceType=${voiceType}`
-      );
-
-      if (!res.ok) {
-        throw new Error('Failed to fetch audio.');
-      }
-
-      const data = await res.json();
-      setAudioUrl(data.audioUrl);
-
-      const audio = new Audio(data.audioUrl);
+      // Convert the base64 audio to a playable format
+      const audio = new Audio(`data:audio/mp3;base64,${audioContent}`);
       audio.play();
-      audio.onended = () => setIsPlaying(false);
-    } catch (err) {
-      console.error('Error fetching audio:', err);
-      setError('Failed to play audio. Please try again.');
+
+      audio.onended = () => setIsSpeaking(false);
+    } catch (error) {
+      console.error("Error synthesizing speech:", error);
+      setIsSpeaking(false);
     }
   };
 
   return (
-    <div>
-      <button onClick={handleReadClick}>
-        {isPlaying ? 'Pause' : 'Read News'}
+    <header>
+      <button onClick={toggleLanguage}>
+        Switch to {language === "en-US" ? "Telugu" : "English"}
       </button>
-      {audioUrl && <audio src={audioUrl} controls autoPlay />}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-    </div>
+      <button onClick={speakText} disabled={isSpeaking}>
+        {isSpeaking ? "Speaking..." : "Read News"}
+      </button>
+    </header>
   );
 };
 
-export default Speak;
+export default Header;

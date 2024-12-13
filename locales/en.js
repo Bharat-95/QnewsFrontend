@@ -150,7 +150,9 @@ const en = {
      linkedin:'LinkedIn',
      email:'Email',
      whatsapp:'Whatsapp',
-     copy:'Copy'
+     copy:'Copy',
+     followus:'FOLLOW US ON',
+     advertise:'Advertise With Us'
 
 
 
