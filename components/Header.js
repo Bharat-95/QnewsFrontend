@@ -368,11 +368,11 @@ const Header = () => {
 
       <div className="lg:px-10">
   <ul className="text-black flex flex-wrap justify-evenly font-bold items-center lg:text-[14px] md:text-[12px] text-[12px]">
-    <div className="flex lg:hidden md:justify-center  w-full overflow-x-auto" style={{
+    <div className="flex lg:hidden md:justify-center  w-full overflow-x-auto scrollbar-hide" style={{
     scrollbarWidth: "none", // Firefox
     msOverflowStyle: "none", // IE and Edge
   }}>
-      <div className="flex w-max whitespace-nowrap">
+      <div className="flex w-max p-1 whitespace-nowrap">
         {smallScreenNavItems.map((item) => (
           <li
             key={item.path}

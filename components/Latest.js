@@ -100,7 +100,7 @@ const Latest = () => {
         <div className="lg:w-[300px] md:w-[200px] w-[100px] h-[1px] bg-gray-400"></div>
       </div>
 
-      <div className="overflow-x-auto sm:w-screen lg:w-auto md:w-auto py-4">
+      <div className="overflow-x-auto scrollbar-hide sm:w-screen lg:w-auto md:w-auto py-4">
         <div className="flex gap-4">
           {data
             .filter((latest) => latest.status === "Approved")

@@ -48,7 +48,7 @@ const Footer = () => {
                 <Link href='https://www.facebook.com/QNewsMallanna' target='_blank'  className='lg:hover:translate-x-[1px] lg:hover:-translate-y-[1px]  '><FaFacebookF size={30}/></Link>
 
             </div>
-            <div className='flex justify-center gap-1 text-[12px] font-bold'>Built By : <Link href='https://www.nandak.co' target='_blank'>  Nandak Innovations Private Limited</Link></div>
+            <div className='flex justify-center gap-1 text-[12px] md:text-[10px] font-bold'>Built By : <Link href='https://www.nandak.co' target='_blank'>  Nandak Innovations Private Limited</Link></div>
         </div>
 
        </div>
