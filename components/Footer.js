@@ -38,7 +38,7 @@ const Footer = () => {
         </div>
         </div>
         <div className='flex flex-wrap justify-center items-center lg:gap-20 gap-4'>
-        <div className='font-light hover:text-orange-400 lg:text-[14px] md:text-[12px] text-[14px]'><Link href='/terms'>{translations.advertise}</Link></div>
+        <div className='font-light hover:text-orange-400 lg:text-[14px] md:text-[12px] text-[14px]'><Link href='/advertise'>{translations.advertise}</Link></div>
             <div className='font-light hover:text-orange-400 lg:text-[14px] md:text-[12px] text-[14px]'><Link href='/terms'>{translations.termsNconditions}</Link></div>
             <div className='font-light hover:text-orange-400 lg:text-[14px] md:text-[12px] text-[14px]'><Link href='/privacy'>{translations.privacy}</Link></div>
             <div className='font-light hover:text-orange-400 lg:text-[14px] md:text-[12px] text-[14px]'><Link href='/help'>{translations.helpNsupport}</Link></div>
