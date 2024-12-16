@@ -26,18 +26,18 @@ const Page = () => {
 
   // Filter and sort the data
   const filteredData = data
-    .filter(
-      (news) => news.category === "Hyderabad" && news.status === "Approved"
-    )
-    .sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort posts by date in descending order
+  .filter(
+    (news) => news.category === "Hyderabad" && news.status === "Approved"
+  )
+  .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   const trendingNews = [...data]
     .filter((news) => news.status === "Approved")
     .sort((a, b) => b.likes - a.likes) // Sort by most likes
     .slice(0, 4); // Top 4 trending news
 
-  const mostRecentPost = filteredData[0]; // The most recent post
-  const otherPosts = filteredData.slice(1, 7); // Limit to the next 6 posts
+    const mostRecentPost = filteredData[0]; // The most recent post
+    const otherPosts = filteredData.slice(1, 7);  // Limit to the next 6 posts
 
   return (
     <div className="flex min-h-screen  flex-col lg:flex-row gap-8 mx-4 md:mx-6 lg:mx-10 my-6 md:my-8 lg:my-10">
@@ -56,12 +56,12 @@ const Page = () => {
                   className="object-cover w-full h-full rounded-lg"
                 />
               </div>
-              <div className="text-xl md:text-2xl lg:text-3xl font-bold">
+              <div className="text-xl md:text-2xl lg:text-3xl font-bold ">
                 {language === "te"
                   ? mostRecentPost.headlineTe
                   : mostRecentPost.headlineEn}
               </div>
-              <div className="line-clamp-4 text-sm md:text-lg mt-2">
+              <div className="line-clamp-2 text-sm md:text-lg mt-2">
                 {language === "te"
                   ? mostRecentPost.newsTe
                   : mostRecentPost.newsEn}

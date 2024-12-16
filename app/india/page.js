@@ -29,7 +29,7 @@ const Page = () => {
     .filter(
       (news) => news.category === "India" && news.status === "Approved"
     )
-    .sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort posts by date in descending order
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // Sort posts by date in descending order
 
   const trendingNews = [...data]
     .filter((news) => news.status === "Approved")
@@ -61,7 +61,7 @@ const Page = () => {
                   ? mostRecentPost.headlineTe
                   : mostRecentPost.headlineEn}
               </div>
-              <div className="line-clamp-4 text-sm md:text-lg mt-2">
+              <div className="line-clamp-2 text-sm md:text-lg mt-2">
                 {language === "te"
                   ? mostRecentPost.newsTe
                   : mostRecentPost.newsEn}
