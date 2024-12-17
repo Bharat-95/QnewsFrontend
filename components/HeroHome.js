@@ -80,8 +80,15 @@ const Page = () => {
   );
 
   return (
-    <div className="lg:flex lg:gap-10 md:gap-5 lg:space-y-0 md:space-y-10 space-y-10">
-      {/* Main Post */}
+    <div>
+      <div className="h-64 w-[100%] border border-orange-300 rounded-md shadow-md mb-10">
+        <div className="m-4 absolute left-[45%] text-[12px]">Advertisement</div>
+        <img
+        src="/"
+        alt="No Advertisement to display" />
+      </div>
+      <div className="lg:flex lg:gap-10 md:gap-5 lg:space-y-0 md:space-y-10 space-y-10">      
+        {/* Main Post */}
       {mainPost && (
         <Link
         href={{
@@ -132,7 +139,7 @@ const Page = () => {
                 alt="No Image Found"
                 width={500}
                 height={500}
-                className="w-[100%] h-[100%] shadow-md rounded-md"
+                className="w-[100%] object-fit h-[100%] shadow-md rounded-md"
               />
             </div>
             <div className="w-[50%] lg:space-y-4 md:space-y-4 space-y-1">
@@ -178,6 +185,8 @@ const Page = () => {
         )}
       </div>
     </div>
+    </div>
+
   );
 };
 
