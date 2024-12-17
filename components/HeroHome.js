@@ -85,7 +85,7 @@ const Page = () => {
         <div className="m-4 absolute left-[45%] text-[12px]">Advertisement</div>
         <img
         src="/"
-        alt="No Advertisement to display" />
+        alt="" />
       </div>
       <div className="lg:flex lg:gap-10 md:gap-5 lg:space-y-0 md:space-y-10 space-y-10">      
         {/* Main Post */}
@@ -139,7 +139,7 @@ const Page = () => {
                 alt="No Image Found"
                 width={500}
                 height={500}
-                className="w-[100%] object-fit h-[100%] shadow-md rounded-md"
+                className="w-[100%] object-cover h-[100%] shadow-md rounded-md"
               />
             </div>
             <div className="w-[50%] lg:space-y-4 md:space-y-4 space-y-1">
@@ -170,7 +170,7 @@ const Page = () => {
                 alt="No Image Found"
                 width={500}
                 height={500}
-                className="w-[100%] h-[100%] shadow-md rounded-md"
+                className="w-[100%] h-[100%] object-cover shadow-md rounded-md"
               />
             </div>
             <div className="w-[50%] lg:space-y-4 md:space-y-4 space-y-1">
