@@ -4,6 +4,8 @@ import { LanguageProvider } from "@/context/languagecontext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer"
 import { Poppins } from "next/font/google";
+import { Analytics } from '@vercel/analytics/next';
+
 
 
 
@@ -37,7 +39,10 @@ export default function RootLayout({ children }) {
           <Header/>
           <div className="lg:pt-[10%] md:pt-[20%] pt-[35%] ">{children}</div>
           <Footer />
+
         </LanguageProvider>
+        <Analytics/>
+      
         
       </body>
     </html>
