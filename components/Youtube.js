@@ -95,7 +95,7 @@ const Latest = () => {
               href={video.URL}
               key={video.videoId}
               target="_blank"
-              className="flex-shrink-0  w-[80%] md:w-[40%] lg:w-[30%]  md: border border-black lg:p-4 p-2 rounded-md shadow-lg space-y-2 hover:transform duration-500 hover:translate-x-2 hover:-translate-y-2"
+              className="flex-shrink-0  w-[80%] md:w-[40%] lg:w-[30%]  md: border border-black  p-2 rounded-md shadow-lg space-y-2 hover:transform duration-500 hover:translate-x-2 hover:-translate-y-2"
             >
               <Image
                 alt="No Image Found"

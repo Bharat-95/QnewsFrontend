@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 import { useLanguage } from "../context/languagecontext";
+import advertisement from '../public/shanarti.png'
 
 const Page = () => {
   const { language } = useLanguage();
@@ -81,11 +82,13 @@ const Page = () => {
 
   return (
     <div>
-      <div className="h-64 w-[100%] border border-orange-300 rounded-md shadow-md mb-10">
-        <div className="m-4 absolute left-[45%] text-[12px]">Advertisement</div>
-        <img
-        src="/"
-        alt="" />
+      <div className="lg:h-64 h-32 md:h-56 w-[100%] border border-orange-300 rounded-md shadow-md mb-10">
+        <Image
+        src={advertisement}
+        height={500}
+        width={500}
+        alt="No Image Found"
+        className="w-[100%] h-[100%] " />
       </div>
       <div className="lg:flex lg:gap-10 md:gap-5 lg:space-y-0 md:space-y-10 space-y-10">      
         {/* Main Post */}
