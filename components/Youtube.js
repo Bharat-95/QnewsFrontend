@@ -88,7 +88,9 @@ const Latest = () => {
 
       <div className="overflow-x-auto scrollbar-hide sm:w-screen lg:w-auto md:w-auto py-4">
         <div className="flex gap-4">
-          {data.slice(0, visibleCount).map((video) => (
+          {data.slice(0, visibleCount)
+          .filter((video) => video.status === "Approved")
+          .map((video) => (
             <Link
               href={video.URL}
               key={video.videoId}
