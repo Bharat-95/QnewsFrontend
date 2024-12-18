@@ -156,7 +156,10 @@ const en = {
      youtube:'Youtube',
      advertiseText1:'If you`re interested in advertising on our platform, feel free to get in touch with us! We offer a variety of advertising opportunities to help you reach your target audience.',
      advertiseText2:'  You can reach us at the following:',
-     phone:'Phone'
+     phone:'Phone',
+     addlive:'Add Live',
+     videocategory:'Video Category',
+     enterCategory:'Enter Video Category',
 
 
 

@@ -11,6 +11,7 @@ const Page = () => {
   const [titleTe, setTitleTe] = useState('');
   const [thumbnail, setThumbnail] = useState('');
   const { translations, language } = useLanguage();
+  const [category, setCategory] = useState('');
 
   useEffect(() => {
     const role = localStorage.getItem("role");
@@ -33,6 +34,7 @@ const Page = () => {
     const formData = new FormData();
     formData.append("titleEn", titleEn);
     formData.append("titleTe", titleTe);
+    formData.append("category", category);
     formData.append("URL", URL);
     formData.append("thumbnail", thumbnail);
 
@@ -46,6 +48,7 @@ const Page = () => {
         alert("Video added successfully");
         setTitleEn('');
         setTitleTe('');
+        setCategory('');
         setUrl('');
         setThumbnail('');
       } else {
@@ -87,6 +90,26 @@ const Page = () => {
               className="mx-auto px-4 py-2 border bg-orange-50 rounded-md border-orange-300 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full"
             />
           </div>
+
+          <div className="flex flex-col">
+  <label htmlFor="category" className="text-lg font-medium text-gray-700 mb-2">
+    {translations.videocategory}
+  </label>
+  <select
+    id="category"
+    value={category}
+    onChange={(e) => setCategory(e.target.value)}
+    required
+    className="mx-auto px-4 py-2 border bg-orange-50 rounded-md border-orange-300 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full"
+  >
+    <option value="" disabled>
+      {translations.enterCategory} {/* This will act as a placeholder */}
+    </option>
+    <option value="Live">Live</option>
+    <option value="Recorded">Recorded</option>
+  </select>
+</div>
+
 
           <div className="flex flex-col">
             <label htmlFor="URL" className="text-lg font-medium text-gray-700 mb-2 ">{translations.enterUrl}</label>

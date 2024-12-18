@@ -205,7 +205,6 @@ const Header = () => {
                    <span className="ml-2">&#x25BC;</span>
                  </button>
                
-                 {/* Dropdown Menu */}
                  {dropdownOpen && (
                    <ul className="absolute top-full left-0 mt-1 lg:w-36 md:w-32 w-32 bg-orange-100 text-black rounded shadow-lg">
                      <li>
@@ -234,7 +233,7 @@ const Header = () => {
                 {userRole === "Employee" && (
                   <li className="lg:space-x-4 md:space-x-5 space-x-4">
                     {/* Dropdown for small and medium devices */}
-                    <div className="lg:hidden relative">
+                    <div className=" relative">
                       <button
                         className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-1 border-orange-600 p-1 font-semibold flex items-center justify-center"
                         onClick={() => setShowDropdown(!showDropdown)}
@@ -268,7 +267,7 @@ const Header = () => {
                     </div>
 
                     {/* Buttons for large screens */}
-                    <div className="hidden lg:flex space-x-4">
+                    <div className="hidden  space-x-4">
                       <button
                         onClick={() => router.push("/add-news")}
                         className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold"
