@@ -179,7 +179,7 @@ const Header = () => {
             <li>
               <button
                 onClick={toggleLanguage}
-                className="text-black lg:w-40 md:w-32 lg:text-[14px] md:text-[10px] text-[8px] w-14 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold"
+                className="text-white bg-orange-600 shadow-md rounded-md lg:w-40 md:w-32 lg:text-[14px] md:text-[10px] text-[8px] w-14 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold"
               >
                 {language === "en"
                   ? translations.switchTo
@@ -187,8 +187,8 @@ const Header = () => {
               </button>
             </li>
 
-            <li className="text-black lg:w-40 md:w-32 w-14 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold flex justify-center items-center">
-              <Link href="/e-paper" className="flex items-center gap-x-2 lg:text-[14px] md:text-[10px] text-[8px]">
+            <li className="text-white bg-orange-600 shadow-md rounded-md lg:w-40 md:w-32 w-14 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold flex justify-center items-center">
+              <Link href="/e-paper" className="flex  items-center gap-x-2 lg:text-[14px] md:text-[10px] text-[8px]">
                 <MdDownload /> {translations.epaper}
               </Link>
             </li>
@@ -198,7 +198,7 @@ const Header = () => {
                 {userRole === "Admin" && (
                  <li className="lg:space-x-10 md:space-x-2 space-x-2 flex justify-center items-center relative">
                  <button
-                   className="text-black border lg:w-40 md:w-32 w-20 h-8 lg:h-10 md:h-10 border-1 lg:text-[14px] md:text-[10px] text-[8px] hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold"
+                   className="text-white bg-orange-600 shadow-md rounded-md border lg:w-40 md:w-32 w-20 h-8 lg:h-10 md:h-10 border-1 lg:text-[14px] md:text-[10px] text-[8px] hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold"
                    onClick={() => setDropdownOpen((prev) => !prev)}
                  >
                    {translations.approve}
@@ -235,7 +235,7 @@ const Header = () => {
                     {/* Dropdown for small and medium devices */}
                     <div className=" relative">
                       <button
-                        className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-1 border-orange-600 p-1 font-semibold flex items-center justify-center"
+                        className="text-white bg-orange-600 shadow-md rounded-md lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-1 border-orange-600 p-1 font-semibold flex items-center justify-center"
                         onClick={() => setShowDropdown(!showDropdown)}
                       >
                         {translations.add}
@@ -293,7 +293,7 @@ const Header = () => {
                 <li style={{ position: "relative" }}>
                   <GiHamburgerMenu
                     size={24}
-                    color="black"
+                    color="#F54545"
                     onClick={(event) => {
                       handleMenu(event);
                     }}
@@ -303,7 +303,7 @@ const Header = () => {
                     <div className="relative flex justify-center">
                       <ul
                         ref={menuRef}
-                        className="text-black absolute lg:mt-6 md:mt-4 lg:w-60 md:w-56 w-32 font-bold space-y-4 p-4 right-0 flex flex-col items-center bg-orange-100 shadow-md rounded-md"
+                        className="text-black absolute lg:mt-6 md:mt-4 lg:w-60 md:w-56 w-32 font-bold space-y-4 p-4 right-0 flex flex-col items-center bg-orange-50 border border-orange-300 shadow-md rounded-md"
                       >
                         {userRole === "Admin" && (
                           <>
@@ -353,10 +353,10 @@ const Header = () => {
             )}
             {!isLoggedIn && (
               <>
-                <li className="text-black hover:transform duration-150 lg:text-[14px] md:text-[10px] text-[8px] lg:w-40 md:w-32 w-14 lg:h-10 md:h-10 h-8  hover:translate-x-1 hover:-translate-y-1 border border-1 border-orange-600 bg-red-500 lg:p-2 md:p-2 p-1 font-semibold flex justify-center items-center">
+                <li className="text-white shadow-md rounded-md  hover:transform duration-150 lg:text-[14px] md:text-[10px] text-[8px] lg:w-40 md:w-32 w-14 lg:h-10 md:h-10 h-8  hover:translate-x-1 hover:-translate-y-1 border border-1 border-orange-600 bg-orange-600 lg:p-2 md:p-2 p-1 font-semibold flex justify-center items-center">
                   <Link href="/signUp">{translations.register}</Link>
                 </li>
-                <li className="text-black hover:transform duration-150 hover:translate-x-1 lg:text-[14px] md:text-[10px] text-[8px] hover:-translate-y-1 border border-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold lg:w-40 md:w-32 w-14 lg:h-10 md:h-10 h-8 flex justify-center items-center">
+                <li className="text-white bg-orange-600 rounded-md shadow-md hover:transform duration-150 hover:translate-x-1 lg:text-[14px] md:text-[10px] text-[8px] hover:-translate-y-1 border border-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold lg:w-40 md:w-32 w-14 lg:h-10 md:h-10 h-8 flex justify-center items-center">
                   <Link href="/Login">{translations.login}</Link>
                 </li>
               </>

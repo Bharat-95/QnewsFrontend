@@ -91,7 +91,6 @@ const Page = () => {
         className="w-[100%] h-[100%] " />
       </div>
       <div className="lg:flex lg:gap-10 md:gap-5 lg:space-y-0 md:space-y-10 space-y-10">      
-        {/* Main Post */}
       {mainPost && (
         <Link
         href={{
@@ -123,7 +122,7 @@ const Page = () => {
         </Link>
       )}
 
-      <div className="h-[500px] w-[1px] lg:flex md:hidden hidden bg-gray-400"></div>
+      <div className="h-[500px] w-[1px] lg:flex md:hidden hidden bg-orange-600"></div>
 
       <div className="space-y-14 lg:w-[40%] lg:h-[500px] md:h-[500px] h-[300px]">
         {sub1Post && (

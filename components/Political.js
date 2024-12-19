@@ -106,7 +106,7 @@ const Latest = () => {
           {data
           .filter((latest) => latest.category === "Political")
           .slice(0, visibleCount).map((latest) => (
-            <Link href={`/news/${latest.newsId}`} key={latest.newsId} className="flex-shrink-0  w-[80%] md:w-[40%] lg:w-[30%]  md: border border-black lg:p-3 p-2 rounded-md shadow-lg space-y-2 hover:transform duration-500 hover:translate-x-2 hover:-translate-y-2">
+            <Link href={`/news/${latest.newsId}`} key={latest.newsId} className="flex-shrink-0  w-[80%] md:w-[40%] lg:w-[30%]  md: border border-orange-600 lg:p-3 p-2 rounded-md shadow-lg space-y-2 hover:transform duration-500 hover:translate-x-2 hover:-translate-y-2">
               <Image
                 alt="No Image Found"
                 src={latest.image}
