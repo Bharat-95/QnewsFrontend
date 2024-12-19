@@ -12,8 +12,8 @@ const Speak = ({ newsText, language }) => {
     // Replace periods (.) with SSML break tag to insert a pause.
     const cleanedText = text
       .replace(/[^\w\s\u0C00-\u0C7F.]/g, "") // Only allow valid characters and period
-      .replace(/\./g, '<break time="100ms"/>') 
-      .replace(/\,/g, '<break time="100ms"/>')// Add a pause for each period
+      .replace(/\./g, '<break time="200ms"/>') 
+      .replace(/\,/g, '<break time="200ms"/>')// Add a pause for each period
       .replace(/\s+/g, " ") // Remove extra spaces
       .trim();
     return cleanedText;
