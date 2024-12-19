@@ -125,7 +125,7 @@ const Page = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-orange-100 my-10">
+    <div className="flex items-center justify-center min-h-screen  my-10">
       <div className="  p-10  w-[90%] md:w-[80%]">
         <div className="text-center text-[24px] font-bold py-5">
           {translations.addnews} :

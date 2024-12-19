@@ -33,7 +33,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="bg-orange-100">
+    <html lang="en" className="bg-orange-50">
       <body className={`${poppins.className} font-sans`}>
         <LanguageProvider>
           <Header/>
