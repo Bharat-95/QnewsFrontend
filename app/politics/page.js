@@ -37,7 +37,7 @@ const Page = () => {
     .slice(0, 4); // Top 4 trending news
 
   const mostRecentPost = filteredData[0]; // The most recent post
-  const otherPosts = filteredData.slice(1, 7); // Limit to the next 6 posts
+  const otherPosts = filteredData.slice(1, 11); // Limit to the next 6 posts
 
   return (
     <div className="flex min-h-screen flex-col lg:flex-row gap-8 mx-4 md:mx-6 lg:mx-10 my-6 md:my-8 lg:my-10">
@@ -76,7 +76,7 @@ const Page = () => {
             otherPosts.map((news) => (
               <div
                 key={news.newsId}
-                className="flex gap-4 items-center border rounded-md"
+                className="flex gap-4 items-center border border-orange-300 rounded-md"
               >
                 {/* 70% Text Section */}
                 <div className="flex-[7] p-4">

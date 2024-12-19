@@ -164,7 +164,7 @@ const Header = () => {
 
 
   return (
-    <div className="bg-orange-200 shadow-md  rounded-b-md fixed w-[100%] z-50 lg:px-10 md:px-10 px-4 lg:py-5 md:py-2 py-2 lg:space-y-2 md:space-y-1">
+    <div className="bg-orange-300 shadow-md  rounded-b-md fixed w-[100%] z-50 lg:px-10 md:px-10 px-4 lg:py-5 md:py-2 py-2 lg:space-y-2 md:space-y-1">
       <div className="flex justify-between">
         <div>
           <Image

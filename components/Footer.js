@@ -17,7 +17,7 @@ const Footer = () => {
     const { language, translations } = useLanguage();
 
   return (
-    <div className=' bg-orange-200 text-black px-20 py-4 space-y-6'>
+    <div className=' bg-orange-300 text-black px-20 py-4 space-y-6'>
        <div className='h-[100%] lg:flex md:flex justify-between gap-10 lg:space-y-0 md:space-y-0 space-y-4'>
         <div className='flex justify-center items-center gap-10 '>
             <Image
