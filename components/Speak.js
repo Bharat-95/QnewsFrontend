@@ -9,18 +9,15 @@ const Speak = ({ newsText, language }) => {
   const audioRef = useRef(null); // Ref to store the audio object
 
   const cleanText = (text) => {
-    // Replace periods and commas with SSML break tags to insert a pause.
+    // Replace periods (.) with SSML break tag to insert a pause.
     const cleanedText = text
-      .replace(/[^\w\s\u0C00-\u0C7F.,]/g, "") // Allow valid characters, periods, and commas
-      .replace(/\./g, '<break time="100ms"/>') // Add a pause for periods
-      .replace(/,/g, '<break time="100ms"/>') // Add a pause for commas
+      .replace(/[^\w\s\u0C00-\u0C7F.]/g, "") // Only allow valid characters and period
+      .replace(/\./g, '<break time="200ms"/>') 
+      .replace(/\,/g, '<break time="200ms"/>')// Add a pause for each period
       .replace(/\s+/g, " ") // Remove extra spaces
       .trim();
-  
-    // Wrap the cleaned text in SSML <speak> tags
-    return `<speak>${cleanedText}</speak>`;
+    return cleanedText;
   };
-  
 
   const stopText = () => {
     console.log("stopText function called");
