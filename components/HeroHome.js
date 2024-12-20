@@ -88,7 +88,7 @@ const Page = () => {
         height={500}
         width={500}
         alt="No Image Found"
-        className="w-[100%] h-[100%] " />
+        className="w-[100%]  h-[100%] " />
       </div>
       <div className="lg:flex lg:gap-10 md:gap-5 lg:space-y-0 md:space-y-10 space-y-10">      
       {mainPost && (
@@ -107,7 +107,7 @@ const Page = () => {
               src={mainPost.image}
               width={500}
               height={500}
-              className="w-[100%] lg:h-[420px] md:h-[393px] h-[250px] rounded-md shadow-md"
+              className="w-[100%] lg:h-[420px] md:h-[393px] h-[250px] object-cover rounded-md shadow-md"
             />
           </div>
           <div>

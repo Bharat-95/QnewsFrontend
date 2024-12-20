@@ -428,7 +428,7 @@ const NewsPost = () => {
                 src={newsData.image}
                 width={900}
                 height={500}
-                className="lg:w-[806px]  w-[100%] rounded-md lg:h-[500px] md:h-[400px] h-[300px]"
+                className="lg:w-[806px] object-cover  w-[100%] rounded-md lg:h-[500px] md:h-[400px] h-[300px]"
               />
             </div>
             <div className="text-[24px] line-clamp-2 font-semibold">
