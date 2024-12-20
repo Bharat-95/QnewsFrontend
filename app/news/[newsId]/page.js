@@ -18,6 +18,7 @@ import { RiTwitterXLine } from "react-icons/ri";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { FaCopy } from "react-icons/fa";
 import Speak from "@/components/Speak";
+import Add from '../../../public/Nandak Add.png'
 
 const NewsPost = () => {
   const searchParams = useSearchParams();
@@ -729,6 +730,14 @@ const NewsPost = () => {
         )}
       </div>
       <div className="lg:w-[30%] md:w-[30%]  lg:block hidden space-y-4">
+        <Link href='https://www.nandak.co' className=" rounded-md shadow-md">
+          <Image 
+          src={Add}
+          alt="No Image Found"
+          width={500}
+          height={500}
+          className="rounded-md border border-orange-300"/>
+        </Link>
         <h3 className="font-bold  text-xl flex justify-center">Related News</h3>
         <div>
           {relatedNews.length > 0 ? (

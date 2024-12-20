@@ -52,7 +52,6 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
-        {/* Main App Structure */}
         <LanguageProvider>
           <Header />
           <div className="lg:pt-[10%] md:pt-[20%] pt-[35%]">{children}</div>
