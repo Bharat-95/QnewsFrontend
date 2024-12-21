@@ -252,22 +252,22 @@ const Header = () => {
                         {/* Down arrow symbol */}
                       </button>
                       {showDropdown && (
-                        <div className={`absolute w-28 md:w-40 bg-orange-100 text-black border border-orange-600 mt-1 rounded  z-10 ${language === "en" ? ` lg:w-36 md:w-32 w-32`: `lg:w-40 md:w-40 w-32`}`}>
+                        <div className={`absolute w-28 md:w-40 bg-white text-orange-600 border border-orange-600 mt-1 rounded  z-10 ${language === "en" ? ` lg:w-36 md:w-32 w-32`: `lg:w-40 md:w-40 w-32`}`}>
                           <button
                             onClick={() => router.push("/add-news")}
-                            className="block w-full text-left px-4 py-2 hover:bg-orange-700"
+                            className="block w-full text-left px-4 py-2 hover:bg-orange-100"
                           >
                             {translations.addnews}
                           </button>
                           <button
                             onClick={() => router.push("/add-video")}
-                            className="block w-full text-left px-4 py-2 hover:bg-orange-700"
+                            className="block w-full text-left px-4 py-2 hover:bg-orange-100"
                           >
                             {translations.addVideo}
                           </button>
                           <button
                             onClick={() => router.push("/add-paper")}
-                            className="block w-full text-left px-4 py-2 hover:bg-orange-700"
+                            className="block w-full text-left px-4 py-2 hover:bg-orange-100"
                           >
                             {translations.addPaper}
                           </button>
