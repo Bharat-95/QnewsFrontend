@@ -5,6 +5,7 @@ import { LanguageProvider } from "@/context/languagecontext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Poppins } from "next/font/google";
+import FontWrapper from "@/components/Fontwrapper";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -32,10 +33,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="bg-orange-50">
       <head>
-        {/* Add any additional head content here */}
       </head>
-      <body className={`${poppins.className} font-sans`}>
-        {/* Google Tag Manager Scripts */}
+      <body className= "font-sans">
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-REH7Y6Y3XH"
           strategy="afterInteractive"
@@ -53,9 +52,13 @@ export default function RootLayout({ children }) {
           }}
         />
         <LanguageProvider>
+        <FontWrapper>
           <Header />
+          
           <div className="lg:pt-[10%] md:pt-[20%] pt-[35%]">{children}</div>
+         
           <Footer />
+          </FontWrapper>
         </LanguageProvider>
       </body>
     </html>

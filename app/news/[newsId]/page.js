@@ -19,6 +19,15 @@ import { IoLogoWhatsapp } from "react-icons/io";
 import { FaCopy } from "react-icons/fa";
 import Speak from "@/components/Speak";
 import Add from '../../../public/Nandak Add.png'
+import { Ramaraja } from "next/font/google";
+
+
+const ramaraja = Ramaraja({
+  subsets: ["latin", "telugu"],
+  weight: "400", 
+});
+
+
 
 const NewsPost = () => {
   const searchParams = useSearchParams();
@@ -180,7 +189,6 @@ const NewsPost = () => {
         })
         .catch((error) => console.log("Error fetching news:", error));
 
-      // Check if the user has already rated
       axios
         .get(
           `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/rating`,
@@ -432,13 +440,13 @@ const NewsPost = () => {
                 className="lg:w-[806px] object-cover  w-[100%] rounded-md lg:h-[500px] md:h-[400px] h-[300px]"
               />
             </div>
-            <div className="text-[24px] line-clamp-2 font-semibold">
+            <div className={`line-clamp-2 font-semibold ${language === "te" ? `${ramaraja.className} text-[30px]`:`text-[24px] `}`}>
               {language === "te" ? newsData.headlineTe : newsData.headlineEn}
             </div>
             <div className="flex justify-between font-light text-gray-700">
               
               <div className="lg:flex md:flex hidden items-center lg:gap-10 md:gap-5 gap-2 lg:text-sm md:text-sm text-[10px]">
-                <div>{formatDate(newsData.createdAt)}</div>{" "}
+                <div>{formatDate(newsData.createdAt)}</div>
                 <div> {timeAgo(newsData.createdAt)}</div>
               </div>
               
@@ -450,41 +458,33 @@ const NewsPost = () => {
                 <button>
                   <div className="flex items-center">
                     {[...Array(5)].map((_, index) => {
-                      const starFill = averageRating - index; // Calculate how much the average rating fills this star
-
-                      // Default to gray for empty stars
+                      const starFill = averageRating - index;
                       let fillColor = "gray";
-
-                      // First, set stars to gold for average rating
                       if (starFill >= 1) {
-                        fillColor = "gold"; // Fully filled star for the average rating
+                        fillColor = "gold";
                       } else if (starFill > 0 && starFill < 1) {
-                        fillColor = "gold"; // Partial gold if the average rating is partial
+                        fillColor = "gold";
                       }
-
-                      // Handle user rating override:
                       if (rating > 0 && index < rating) {
-                        fillColor = "gold"; // User's rating takes precedence
+                        fillColor = "gold";
                       }
-
-                      // Partial star logic using clip-path for average rating
                       const clipPath =
                         starFill > 0 && starFill < 1
-                          ? `inset(0 ${Math.max(0, 1 - starFill) * 100}% 0 0)` // Apply partial fill for average rating
-                          : "none"; // No partial fill if it's fully filled or empty
+                          ? `inset(0 ${Math.max(0, 1 - starFill) * 100}% 0 0)`
+                          : "none";
 
                       return (
                         <FaStar
                           key={index}
-                          color={fillColor} // Apply the calculated color (either gray or gold)
+                          color={fillColor}
                           className="lg:text-[24px] md:text-[24px] text-[20px]"
                           onClick={
                             rating === 0
-                              ? () => handleRating(index + 1) // Allow rating only if the user hasn't rated yet
+                              ? () => handleRating(index + 1)
                               : undefined
                           }
                           style={{
-                            clipPath: clipPath, // Apply partial fill effect for the stars based on average rating
+                            clipPath: clipPath,
                           }}
                         />
                       );
@@ -501,7 +501,6 @@ const NewsPost = () => {
                       <FaShare className="lg:text-[24px] md:text-[24px] text-[20px]" />
                     </button>
 
-                    {/* Dropdown with Share Options */}
                     {dropdownOpen && (
                       <div className="absolute top-[35px] right-0 bg-orange-50 shadow-lg rounded-md p-4 w-48">
                         <ul className="space-y-2">
@@ -708,7 +707,7 @@ const NewsPost = () => {
                 ))}
               </div>
             )}
-            <div className="text-[18px] pt-5 border-orange-300 border-t-[1px] pb-10 leading-relaxed">
+            <div className={` pt-5 border-orange-300 border-t-[1px] pb-10 leading-relaxed ${language === "te" ? `text-[22px]`:`text-[18px]`}`}>
               {language === "te"
                 ? newsData.newsTe.split("\n").map((line, index) => (
                     <React.Fragment key={index}>
@@ -730,18 +729,20 @@ const NewsPost = () => {
         )}
       </div>
       <div className="lg:w-[30%] md:w-[30%]  lg:block hidden space-y-4">
-        <Link href='https://www.nandak.co' className=" rounded-md shadow-md">
+        <Link href='https://www.nandak.co' className=" rounded-md shadow-md m-20">
           <Image 
           src={Add}
           alt="No Image Found"
           width={500}
           height={500}
           className="rounded-md border border-orange-300"/>
-        </Link>
-        <h3 className="font-bold  text-xl flex justify-center">Related News</h3>
+        </Link> 
+        <h3 className={`font-bold  text-xl flex justify-center ${language === "te" ? `${ramaraja.className} text-[26px]`:``}`}>{translations.related}</h3>
         <div>
           {relatedNews.length > 0 ? (
-            relatedNews.map((newsItem) => (
+            relatedNews
+            .slice(0, 3) 
+            .map((newsItem) => (
               <Link
                 href={`/news/${newsItem.newsId}`}
                 key={newsItem.newsId}
@@ -757,7 +758,7 @@ const NewsPost = () => {
                   />
                 </div>
 
-                <div className="text-lg font-semibold line-clamp-2 rounded-md flex justify-center">
+                <div className={`font-semibold line-clamp-2 rounded-md flex justify-center ${language === "te" ? `${ramaraja.className} text-[24px]`:`text-lg`}`}>
                   {language === "te"
                     ? newsItem.headlineTe
                     : newsItem.headlineEn}

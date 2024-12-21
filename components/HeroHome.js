@@ -5,6 +5,12 @@ import Link from "next/link";
 import axios from "axios";
 import { useLanguage } from "../context/languagecontext";
 import advertisement from '../public/shanarti.png'
+import { Ramaraja } from "next/font/google";
+
+const ramaraja = Ramaraja({
+    subsets: ["latin", "telugu"], // Specify subsets
+    weight: "400", // Specify font weight
+  });
 
 const Page = () => {
   const { language } = useLanguage();
@@ -55,21 +61,18 @@ const Page = () => {
   
 
   useEffect(() => {
-    fetchData(); // Fetch data initially
+    fetchData();
     const interval = setInterval(() => {
-      fetchData(); // Poll new data every 30 seconds
+      fetchData(); 
     }, 30000);
 
-    // Cleanup on unmount
     return () => clearInterval(interval);
   }, []);
 
-  // Function to get the latest post based on createdAt timestamp
   const getLatestPost = (posts) => {
     return posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
   };
 
-  // Filter the posts based on categories
   const mainPost = getLatestPost(
     data.filter((news) => news.isMain === "Yes" && news.status === "Approved")
   );
@@ -111,7 +114,7 @@ const Page = () => {
             />
           </div>
           <div>
-            <div className="font-semibold text-[24px] hover:underline line-clamp-2 overflow-hidden text-ellipsis">
+            <div className={`font-semibold hover:underline line-clamp-2 overflow-hidden text-ellipsis ${language === 'en' ? `text-[24px]`:`text-[28px] ${ramaraja.className}` }`}>
               {language === "en" ? mainPost.headlineEn : mainPost.headlineTe}
             </div>
           </div>
@@ -145,10 +148,10 @@ const Page = () => {
               />
             </div>
             <div className="w-[50%] lg:space-y-4 md:space-y-4 space-y-1">
-              <div className="text-[13px] font-semibold hover:underline line-clamp-3 overflow-hidden text-ellipsis">
+              <div className={`font-semibold hover:underline line-clamp-3 overflow-hidden text-ellipsis ${language === "en" ? `text-[13px]`:`text-[16px] ${ramaraja.className}`}`}>
                 {language === "en" ? sub1Post.headlineEn : sub1Post.headlineTe}
               </div>
-              <div className="text-[13px] lg:line-clamp-5 md:line-clamp-5 line-clamp-3 overflow-hidden text-ellipsis">
+              <div className={`lg:line-clamp-5 md:line-clamp-5 line-clamp-2 overflow-hidden text-ellipsis ${language === "en" ? `text-[13px]`:`text-[15px]`}`}>
                 {language === "en" ? sub1Post.newsEn : sub1Post.newsTe}
               </div>
             </div>
@@ -176,10 +179,10 @@ const Page = () => {
               />
             </div>
             <div className="w-[50%] lg:space-y-4 md:space-y-4 space-y-1">
-              <div className="text-[13px] font-semibold hover:underline line-clamp-3 overflow-hidden text-ellipsis">
+              <div className={`font-semibold hover:underline line-clamp-3 overflow-hidden text-ellipsis ${language === "en" ? `text-[13px]`:`text-[16px] ${ramaraja.className}`}`}>
                 {language === "en" ? sub2Post.headlineEn : sub2Post.headlineTe}
               </div>
-              <div className="text-[13px] lg:line-clamp-5 md:line-clamp-5 line-clamp-3 overflow-hidden text-ellipsis">
+              <div className={`lg:line-clamp-5 md:line-clamp-5 line-clamp-2 overflow-hidden text-ellipsis  ${language === "en" ? `text-[13px]`:`text-[15px]`}`}>
                 {language === "en" ? sub2Post.newsEn : sub2Post.newsTe}
               </div>
             </div>

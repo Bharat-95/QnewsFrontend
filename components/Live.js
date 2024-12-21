@@ -5,6 +5,13 @@ import axios from "axios";
 import Image from "next/image";
 import advertisement from '../public/shanarti.png'
 import { LanguageProvider, useLanguage } from "@/context/languagecontext";
+import { Ramaraja } from "next/font/google";
+
+
+const ramaraja = Ramaraja({
+  subsets: ["latin", "telugu"], // Specify subsets
+  weight: "400", // Specify font weight
+});
 
 const Live = () => {
   const [data, setData] = useState([]);
@@ -48,7 +55,7 @@ const Live = () => {
                     height={500}
                     className="w-full h-[100%] object-fit shadow-md rounded-md" />
                 </div>
-                <div className="px-2 font-bold">{language === "te" ? video.titleTe : video.titleEn}</div>
+                <div className={`px-2 font-bold ${language === "te" ? `text-[18px] ${ramaraja.className}`:``}`}>{language === "te" ? video.titleTe : video.titleEn}</div>
               </Link>
             </div>
             <div className="md:w-[50%] lg:w-[70%] w-[100%] border border-orange-300 lg:h-[100%] md:h-40 h-32 rounded-md shadow-md flex justify-center text-[12px]">

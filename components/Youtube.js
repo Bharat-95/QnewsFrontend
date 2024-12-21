@@ -3,6 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useLanguage } from "../context/languagecontext";
+import { Ramaraja } from "next/font/google";
+
+
+const ramaraja = Ramaraja({
+  subsets: ["latin", "telugu"],
+  weight: "400", 
+});
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -104,7 +111,7 @@ const Latest = () => {
                 height={200}
                 className="w-full h-[200px] object-fit shadow-md rounded-md"
               />
-              <div className="text-[13px] font-semibold line-clamp-2 text-ellipsis overflow-hidden hover:underline">
+              <div className={` line-clamp-2 text-ellipsis overflow-hidden hover:underline ${language === "te" ? `${ramaraja.className} text-[16px]`:`text-[13px] font-semibold`} `}>
               {language === "te" ? video.titleTe : video.titleEn}
               </div>
 

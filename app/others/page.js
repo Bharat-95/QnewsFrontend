@@ -4,10 +4,18 @@ import React, { useState, useEffect } from "react";
 import { useLanguage } from "@/context/languagecontext";
 import Image from "next/image";
 import Link from "next/link";
+import { Ramaraja } from "next/font/google";
+
+
+const ramaraja = Ramaraja({
+  subsets: ["latin", "telugu"],
+  weight: "400", 
+});
+
 
 const Page = () => {
   const [data, setData] = useState([]);
-  const { language } = useLanguage();
+  const { language, translations } = useLanguage();
 
   // Fetch data from API
   const fetchData = async () => {
@@ -56,12 +64,12 @@ const Page = () => {
                   className="object-cover w-full h-full rounded-lg"
                 />
               </div>
-              <div className="text-xl md:text-2xl lg:text-3xl font-bold">
+              <div className={`  font-bold ${language === "te"? `${ramaraja.className} text-[34px]`:`md:text-2xl lg:text-3xl`}`}>
                 {language === "te"
                   ? mostRecentPost.headlineTe
                   : mostRecentPost.headlineEn}
               </div>
-              <div className="line-clamp-2 text-sm md:text-lg mt-2">
+              <div className={`line-clamp-2 mt-2 ${language === "te" ? `text-[20px]`:`text-sm md:text-lg`}`}>
                 {language === "te"
                   ? mostRecentPost.newsTe
                   : mostRecentPost.newsEn}
@@ -109,16 +117,14 @@ const Page = () => {
         </div>
       </div>
 
-      {/* 30% Section: Trending News */}
       <div className="hidden lg:block flex-[3] p-4 rounded-lg">
-        <h2 className="text-lg md:text-xl font-bold mb-4 flex justify-center">Trending News</h2>
+        <h2 className={`  font-bold mb-4 flex justify-center ${language === "te" ?`text-[24px] ${ramaraja.className}`:`text-lg md:text-xl`}`}>{translations.trendingHeadlines}</h2>
         {trendingNews.length > 0 ? (
           trendingNews.map((news) => (
             <div
               key={news.newsId}
               className="flex flex-col gap-2 p-4 rounded-md mb-4"
             >
-              {/* Image Section */}
               <div className="w-full h-[160px] md:h-[200px] lg:h-[250px]">
                 <Link href={`/news/${news.newsId}`}>
                   <Image
@@ -130,10 +136,9 @@ const Page = () => {
                   />
                 </Link>
               </div>
-              {/* Text Section */}
               <div className="flex-grow">
                 <Link href={`/news/${news.newsId}`}>
-                  <div className="font-bold text-xs md:text-sm hover:underline">
+                  <div className={`font-bold hover:underline ${language === "te" ? `${ramaraja.className} text-[20px]`:`text-xs md:text-sm` }`}>
                     {language === "te" ? news.headlineTe : news.headlineEn}
                   </div>
                 </Link>

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource/ramabhadra": "^5.1.0",
     "@google-cloud/text-to-speech": "^5.6.0",
     "@vercel/analytics": "^1.4.1",
     "aws-amplify": "^6.9.0",

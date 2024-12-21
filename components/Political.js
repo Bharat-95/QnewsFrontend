@@ -4,6 +4,13 @@ import Link from "next/link";
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
 import { useLanguage } from "../context/languagecontext";
+import { Ramaraja } from "next/font/google";
+
+
+const ramaraja = Ramaraja({
+  subsets: ["latin", "telugu"],
+  weight: "400", 
+});
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -114,7 +121,7 @@ const Latest = () => {
                 height={200}
                 className="w-full h-[200px] object-cover shadow-md rounded-md"
               />
-              <div className="text-[13px] font-semibold line-clamp-2 text-ellipsis overflow-hidden hover:underline">{language === "te" ? latest.headlineTe : latest.headlineEn}</div>
+              <div className={` line-clamp-2 text-ellipsis overflow-hidden hover:underline ${language === "te" ? `${ramaraja.className} text-[16px]`:`text-[13px] font-semibold`} `}>{language === "te" ? latest.headlineTe : latest.headlineEn}</div>
               
               <div className="text-[12px] flex justify-between font-light text-gray-500">
                 <p>{formatDate(latest.createdAt)}</p>

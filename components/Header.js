@@ -9,6 +9,16 @@ import { TiWeatherCloudy } from "react-icons/ti";
 import { useLanguage } from "../context/languagecontext";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useRouter, usePathname } from "next/navigation";
+import { Ramaraja } from "next/font/google";
+
+
+
+
+const ramaraja = Ramaraja({
+    subsets: ["latin", "telugu"],
+    weight: "400",
+  });
+
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -160,13 +170,13 @@ const Header = () => {
     { path: "/others", label: translations.others },
   ];
 
-  const smallScreenNavItems = navItems // Home, Telangana, Hyderabad
+  const smallScreenNavItems = navItems
 
 
   return (
-    <div className="bg-orange-300 shadow-md  rounded-b-md fixed w-[100%] z-50 lg:px-10 md:px-10 px-4 lg:py-5 md:py-2 py-2 lg:space-y-2 md:space-y-1">
+    <div className="bg-gradient-to-r from-orange-400  to-orange-600  bg-orange-300 shadow-md  rounded-b-md fixed w-[100%] z-50 lg:px-10 md:px-10 px-4 lg:py-5 md:py-2 py-2 lg:space-y-2 md:space-y-1">
       <div className="flex justify-between">
-        <div>
+        <div className="bg-white rounded-md shadow-md">
           <Image
             src={Logo}
             alt="No Logo Found"
@@ -175,11 +185,11 @@ const Header = () => {
         </div>
 
         <div>
-          <ul className="flex lg:space-x-4 md:space-x-2 space-x-2 lg:text-[14px] md:text-[14px] text-[8px]">
+          <ul className="flex lg:space-x-4 md:space-x-2 space-x-2 lg:text-[14px] md:text-[14px] text-[8px] ">
             <li>
               <button
                 onClick={toggleLanguage}
-                className="text-white bg-orange-600 shadow-md rounded-md lg:w-40 md:w-32 lg:text-[14px] md:text-[10px] text-[8px] w-14 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold"
+                className="text-orange-600 bg-white shadow-md rounded-md lg:w-40 md:w-32 lg:text-[14px] md:text-[10px] text-[8px] w-14 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold" 
               >
                 {language === "en"
                   ? translations.switchTo
@@ -187,7 +197,7 @@ const Header = () => {
               </button>
             </li>
 
-            <li className="text-white bg-orange-600 shadow-md rounded-md lg:w-40 md:w-32 w-14 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold flex justify-center items-center">
+            <li className="text-orange-600 bg-white shadow-md rounded-md lg:w-40 md:w-32 w-14 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold flex justify-center items-center">
               <Link href="/e-paper" className="flex  items-center gap-x-2 lg:text-[14px] md:text-[10px] text-[8px]">
                 <MdDownload /> {translations.epaper}
               </Link>
@@ -198,7 +208,7 @@ const Header = () => {
                 {userRole === "Admin" && (
                  <li className="lg:space-x-10 md:space-x-2 space-x-2 flex justify-center items-center relative">
                  <button
-                   className="text-white bg-orange-600 shadow-md rounded-md border lg:w-40 md:w-32 w-20 h-8 lg:h-10 md:h-10 border-1 lg:text-[14px] md:text-[10px] text-[8px] hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold"
+                   className="text-orange-600 bg-white shadow-md rounded-md border lg:w-40 md:w-32 w-20 h-8 lg:h-10 md:h-10 border-1 lg:text-[14px] md:text-[10px] text-[8px] hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold"
                    onClick={() => setDropdownOpen((prev) => !prev)}
                  >
                    {translations.approve}
@@ -206,11 +216,11 @@ const Header = () => {
                  </button>
                
                  {dropdownOpen && (
-                   <ul className="absolute top-full left-0 mt-1 lg:w-36 md:w-32 w-32 bg-orange-100 text-black rounded shadow-lg">
+                   <ul className={`absolute top-full left-0 mt-1 bg-white text-orange-600 rounded shadow-lg ${language === "en" ? ` lg:w-36 md:w-32 w-32`: `lg:w-40 md:w-40 w-32`}`}>
                      <li>
                        <button
                          onClick={() => router.push("/approve-news")}
-                         className="block w-full text-left px-4 py-2 hover:bg-orange-700"
+                         className="block w-full text-left px-4 py-2 hover:bg-orange-100"
                        >
                          {translations.approvenews}
                          
@@ -219,7 +229,7 @@ const Header = () => {
                      <li>
                        <button
                          onClick={() => router.push("/approve-video")}
-                         className="block w-full text-left px-4 py-2 hover:bg-orange-700"
+                         className="block w-full text-left px-4 py-2 hover:bg-orange-100"
                        >
                          {translations.approveVideo}
                        </button>
@@ -232,10 +242,9 @@ const Header = () => {
 
                 {userRole === "Employee" && (
                   <li className="lg:space-x-4 md:space-x-5 space-x-4">
-                    {/* Dropdown for small and medium devices */}
                     <div className=" relative">
                       <button
-                        className="text-white bg-orange-600 shadow-md rounded-md lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-1 border-orange-600 p-1 font-semibold flex items-center justify-center"
+                        className="text-orange-600 bg-white shadow-md rounded-md lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-1 border-orange-600 p-1 font-semibold flex items-center justify-center"
                         onClick={() => setShowDropdown(!showDropdown)}
                       >
                         {translations.add}
@@ -243,7 +252,7 @@ const Header = () => {
                         {/* Down arrow symbol */}
                       </button>
                       {showDropdown && (
-                        <div className="absolute w-28 md:w-40 bg-orange-100 text-black border border-orange-600 mt-1 rounded  z-10">
+                        <div className={`absolute w-28 md:w-40 bg-orange-100 text-black border border-orange-600 mt-1 rounded  z-10 ${language === "en" ? ` lg:w-36 md:w-32 w-32`: `lg:w-40 md:w-40 w-32`}`}>
                           <button
                             onClick={() => router.push("/add-news")}
                             className="block w-full text-left px-4 py-2 hover:bg-orange-700"
@@ -293,7 +302,7 @@ const Header = () => {
                 <li style={{ position: "relative" }}>
                   <GiHamburgerMenu
                     size={24}
-                    color="#F54545"
+                    color="white"
                     onClick={(event) => {
                       handleMenu(event);
                     }}
@@ -303,7 +312,7 @@ const Header = () => {
                     <div className="relative flex justify-center">
                       <ul
                         ref={menuRef}
-                        className="text-black absolute lg:mt-6 md:mt-4 lg:w-60 md:w-56 w-32 font-bold space-y-4 p-4 right-0 flex flex-col items-center bg-orange-50 border border-orange-300 shadow-md rounded-md"
+                        className={`text-orange-600 absolute lg:mt-6 md:mt-4 lg:w-60 md:w-56 w-32 font-bold space-y-4 p-4 right-0 flex flex-col items-center bg-white border border-orange-300 shadow-md rounded-md ${language === "te" ? ` lg:text-[16px] md:text-[14px] ${ramaraja.className}`:``} `}
                       >
                         {userRole === "Admin" && (
                           <>
@@ -366,48 +375,61 @@ const Header = () => {
       </div>
 
       <div className="lg:px-10">
-  <ul className="text-black flex flex-wrap justify-evenly font-bold items-center lg:text-[14px] md:text-[12px] text-[12px]">
+  <ul className={`text-white flex flex-wrap justify-evenly font-bold items-center ${
+  language === 'en' 
+    ? 'lg:text-[14px] md:text-[12px] text-[12px]' 
+    : `lg:text-[17px] md:text-[14px] text-[14px] ${ramaraja.className}`
+}`}
+
+>
     <div className="flex lg:hidden md:justify-center  w-full overflow-x-auto scrollbar-hide" style={{
     scrollbarWidth: "none", // Firefox
     msOverflowStyle: "none", // IE and Edge
   }}>
-      <div className="flex w-max p-1 whitespace-nowrap">
-        {smallScreenNavItems.map((item) => (
-          <li
-            key={item.path}
-            className={`inline-block lg:p-2 md:p-2 p-1 hover:rounded-md hover:bg-orange-600 hover:text-white lg:hover:translate-x-1 lg:hover:-translate-y-1 duration-150 ${
-              pathname === item.path
-                ? "bg-orange-600 rounded-md text-yellow-300"
-                : ""
-            }`}
-          >
-            <Link href={item.path}>{item.label}</Link>
-          </li>
-        ))}
-      </div>
-    </div>
-
-    {/* For Medium and Large Screens, Same Items */}
-    {navItems.map((item) => (
+      <div className="flex items-center w-max p-1 whitespace-nowrap">
+  {smallScreenNavItems.map((item, index) => (
+    <React.Fragment key={item.path}>
       <li
-        key={item.path}
-        className={`hidden lg:flex md:hidden justify-center p-2 hover:rounded-md hover:bg-orange-600 hover:text-white hover:translate-x-1 hover:-translate-y-1 duration-150 ${
+        className={`inline-block lg:p-2 md:p-2 p-1 hover:rounded-md hover:bg-orange-600 hover:text-white lg:hover:translate-x-1 lg:hover:-translate-y-1 duration-150 ${
           pathname === item.path
-            ? "bg-orange-600 rounded-md text-yellow-300"
+            ? "bg-white rounded-md text-orange-600"
             : ""
         }`}
       >
         <Link href={item.path}>{item.label}</Link>
       </li>
-    ))}
+      {index < smallScreenNavItems.length - 1 && (
+        <span className="inline-block px-2 text-white">|</span>
+      )}
+    </React.Fragment>
+  ))}
+</div>
 
-  <div className="flex space-x-2">
-    <li className="lg:flex md:hidden hidden space-x-1 text-gray-600 text-[14px]">
+    </div>
+
+    {navItems.map((item, index) => (
+  <React.Fragment key={item.path}>
+    <li
+      className={`hidden lg:flex md:hidden justify-center p-2 hover:rounded-md hover:bg-white hover:text-orange-600 hover:translate-x-1 hover:-translate-y-1 duration-150 ${
+        pathname === item.path ? "bg-white rounded-md text-orange-600" : ""
+      }`}
+    >
+      <Link href={item.path}>{item.label}</Link>
+    </li>
+    {index < navItems.length - 1 && (
+      <span className="hidden lg:flex md:hidden px-2 text-white">|</span>
+    )}
+  </React.Fragment>
+))}
+
+
+  <div className="flex space-x-2 font-light items-center">
+    <li className="lg:flex md:hidden hidden space-x-1 text-white text-[14px]">
       <TiWeatherCloudy size={20} />
       <div>{temperature ? `${temperature}°C` : ""}</div>
     </li>
-    <li className="lg:flex md:hidden hidden text-gray-600">{currentTime}</li>
-    <li className="lg:flex md:hidden hidden text-gray-600">{currentDate}</li>
+    <li className="lg:flex md:hidden hidden text-white">{currentTime}</li>
+    <li className="lg:flex md:hidden hidden text-white">{currentDate}</li>
     </div>
   </ul>
 </div>

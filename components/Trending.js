@@ -4,6 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 import { useLanguage } from "@/context/languagecontext";
+import { Ramaraja } from "next/font/google";
+
+
+const ramaraja = Ramaraja({
+  subsets: ["latin", "telugu"],
+  weight: "400", 
+});
+
 
 const Trending = () => {
   const [data, setData] = useState([]);
@@ -16,15 +24,29 @@ const Trending = () => {
   };
 
   const timeAgo = (dateString) => {
-    const postDate = new Date(dateString);
-    const now = new Date();
-    const diffInMs = now - postDate;
-    const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
-    if (diffInMinutes < 60) {
-      return `${diffInMinutes} min ago`;
+    const postDate = new Date(dateString); 
+    const nowDate = new Date();
+    const difference = nowDate - postDate; 
+  
+    const secondsDifference = Math.floor(difference / 1000); 
+    const minutesDifference = Math.floor(difference / (1000 * 60)); 
+    const hoursDifference = Math.floor(difference / (1000 * 60 * 60)); 
+    const daysDifference = Math.floor(difference / (1000 * 60 * 60 * 24)); 
+  
+    if (secondsDifference < 60) {
+      return `${secondsDifference} sec ago`; 
+    } else if (minutesDifference < 60) {
+      return `${minutesDifference} min ago`; 
+    } else if (hoursDifference < 24) {
+      return `${hoursDifference} hrs ago`;
+    } else if (daysDifference < 30) {
+      return `${daysDifference} days ago`; 
     } else {
-      const diffInHours = Math.floor(diffInMinutes / 60);
-      return `${diffInHours} hour${diffInHours > 1 ? "s" : ""} ago`;
+      return postDate.toLocaleDateString('en-GB', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      });
     }
   };
 
@@ -32,10 +54,8 @@ const Trending = () => {
     try {
       const response = await axios.get("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn");
       const responseData = await response.data;
-  
-      // Sort posts by likes in descending order (highest likes first)
       const trendingData = responseData.data
-        .sort((a, b) => b.likes - a.likes); // Sort by likes in descending order
+        .sort((a, b) => b.likes - a.likes); 
   
       setData(trendingData);
     } catch (error) {
@@ -49,17 +69,17 @@ const Trending = () => {
   }, []);
 
   return (
-    <div className="space-y-4 px-[32px] py-[20px]">
+    <div className="space-y-4 m-[20px]">
   <div className="flex items-center justify-evenly">
     <div className="h-[1px] w-[20%] bg-gray-400"></div>
     <div className="text-[20px]">{translations.trendingHeadlines}</div>
     <div className="h-[1px] w-[20%] bg-gray-400"></div>
   </div>
 
-  <div className="space-y-10 overflow-y-auto">
+  <div className="space-y-10 overflow-y-auto scrollbar-hide">
     {data.length > 0 ? (
       data
-        .slice(0, 4) // Show only the top 4 posts
+        .slice(0, 4) 
         .filter((trending) => trending.status === "Approved")
         .map((trending) => (
           <div key={trending.newsId}>
@@ -77,7 +97,7 @@ const Trending = () => {
                   className="rounded-md"
                 />
               </div>
-              <div className="line-clamp-3 text-ellipsis overflow-hidden text-[13px] font-semibold">
+              <div className={`line-clamp-3 text-ellipsis overflow-hidden font-semibold ${language === "te" ? ` ${ramaraja.className} text-[16px]`:` text-[13px]`}`}>
                 {language === 'te' ? trending.headlineTe : trending.headlineEn}
               </div>
               <div className="text-[12px] flex justify-between font-light text-gray-500">
