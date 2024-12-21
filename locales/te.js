@@ -158,7 +158,9 @@ const te = {
     addlive:'ప్రత్యక్ష ప్రసారం',
     videocategory:'వీడియో వర్గం',
     enterCategory:'వీడియో వర్గాన్ని నమోదు చేయండి',
-    related:'సంబంధిత వార్తలు'
+    related:'సంబంధిత వార్తలు',
+    business:'వ్యాపారం',
+    health:'ఆరోగ్యం',
 
 
 

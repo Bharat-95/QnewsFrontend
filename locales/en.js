@@ -160,7 +160,9 @@ const en = {
      addlive:'Add Live',
      videocategory:'Video Category',
      enterCategory:'Enter Video Category',
-     related:'Related News'
+     related:'Related News',
+     business:'Business',
+     health: 'Health'
 
 
 
