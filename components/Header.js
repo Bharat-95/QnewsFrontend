@@ -376,87 +376,65 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="lg:px-32 lg:py-0 md:py-4 py-4">
-  <ul
-    className={`text-white flex justify-between items-center ${
-      language === "en"
-        ? "lg:text-[14px] md:text-[12px] text-[12px]"
-        : `lg:text-[17px] md:text-[14px] text-[14px] ${ramaraja.className}`
-    }`}
-  >
-    {/* For small screens */}
-    <div
-      className="flex lg:hidden md:justify-center w-full overflow-x-auto scrollbar-hide"
-      style={{
-        scrollbarWidth: "none", // Firefox
-        msOverflowStyle: "none", // IE and Edge
-      }}
-    >
+      <div className="lg:px-20 lg:py-0 md:py-4 py-4 ">
+  <ul className={`text-white flex flex-wrap justify-evenly font-bold items-center ${
+  language === 'en' 
+    ? 'lg:text-[14px] md:text-[12px] text-[12px]' 
+    : `lg:text-[17px] md:text-[14px] text-[14px] ${ramaraja.className}`
+}`}
+
+>
+    <div className="flex lg:hidden md:justify-center  w-full overflow-x-auto scrollbar-hide" style={{
+    scrollbarWidth: "none", // Firefox
+    msOverflowStyle: "none", // IE and Edge
+  }}>
       <div className="flex items-center w-max p-1 whitespace-nowrap">
-        {smallScreenNavItems.map((item, index) => (
-          <React.Fragment key={item.path}>
-            <li
-              className={`inline-block lg:p-2 md:p-2 p-1 hover:rounded-md hover:bg-orange-600 hover:text-white lg:hover:translate-x-1 lg:hover:-translate-y-1 duration-150 ${
-                pathname === item.path
-                  ? "bg-white rounded-md text-orange-600"
-                  : ""
-              }`}
-            >
-              <Link href={item.path}>{item.label}</Link>
-            </li>
-            {index < smallScreenNavItems.length - 1 && (
-              <span className="inline-block px-2 text-white">|</span>
-            )}
-          </React.Fragment>
-        ))}
-      </div>
+  {smallScreenNavItems.map((item, index) => (
+    <React.Fragment key={item.path}>
+      <li
+        className={`inline-block lg:p-2 md:p-2 p-1 hover:rounded-md hover:bg-orange-600 hover:text-white lg:hover:translate-x-1 lg:hover:-translate-y-1 duration-150 ${
+          pathname === item.path
+            ? "bg-white rounded-md text-orange-600"
+            : ""
+        }`}
+      >
+        <Link href={item.path}>{item.label}</Link>
+      </li>
+      {index < smallScreenNavItems.length - 1 && (
+        <span className="inline-block px-2 text-white">|</span>
+      )}
+    </React.Fragment>
+  ))}
+</div>
+
     </div>
 
-    {/* For large screens - Scrollable navItems */}
-    <div className="flex items-center justify-between w-full lg:space-x-4">
-  {/* Scrollable nav items */}
-  <div className="flex-1 hidden lg:flex overflow-x-auto whitespace-nowrap scrollbar-hide">
-    <div className="flex items-center space-x-4">
-      {navItems.map((item, index) => (
-        <React.Fragment key={item.path}>
-          <li
-            className={`inline-block p-2 hover:rounded-md font-bold hover:bg-white hover:text-orange-600 hover:translate-x-1 hover:-translate-y-1 duration-150 ${
-              pathname === item.path ? "bg-white rounded-md text-orange-600" : ""
-            }`}
-          >
-            <Link href={item.path}>{item.label}</Link>
-          </li>
-          {index < navItems.length - 1 && (
-            <span className="inline-block px-2 text-white">|</span>
-          )}
-        </React.Fragment>
-      ))}
-    </div>
-  </div>
-
-  {/* Temperature, time, and date */}
-  <div
-    className={`flex items-center space-x-4 ml-auto ${
-      language === "te" ? `text-[18px]` : ""
-    }`}
-  >
+    {navItems.map((item, index) => (
+  <React.Fragment key={item.path}>
     <li
-      className={`lg:flex md:hidden hidden items-center space-x-1 text-white ${
-        language === "te" ? `text-[18px]` : `text-[14px]`
+      className={`hidden lg:flex md:hidden justify-center p-2 hover:rounded-md hover:bg-white hover:text-orange-600 hover:translate-x-1 hover:-translate-y-1 duration-150 ${
+        pathname === item.path ? "bg-white rounded-md text-orange-600" : ""
       }`}
     >
+      <Link href={item.path}>{item.label}</Link>
+    </li>
+    {index < navItems.length - 1 && (
+      <span className="hidden lg:flex md:hidden px-2 text-white">|</span>
+    )}
+  </React.Fragment>
+))}
+
+
+  <div className="flex space-x-2 font-light items-center">
+    <li className="lg:flex md:hidden hidden space-x-1 text-white text-[14px]">
       <TiWeatherCloudy size={20} />
       <div>{temperature ? `${temperature}°C` : ""}</div>
     </li>
     <li className="lg:flex md:hidden hidden text-white">{currentTime}</li>
     <li className="lg:flex md:hidden hidden text-white">{currentDate}</li>
-  </div>
-</div>
-
+    </div>
   </ul>
 </div>
-
-
 
 
 
