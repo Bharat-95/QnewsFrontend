@@ -448,6 +448,7 @@ const NewsPost = () => {
               <div className="lg:flex md:flex hidden items-center lg:gap-10 md:gap-5 gap-2 lg:text-sm md:text-sm text-[10px]">
                 <div>{formatDate(newsData.createdAt)}</div>
                 <div> {timeAgo(newsData.createdAt)}</div>
+                <div>NewsBy : {newsData.employeeId}</div>
               </div>
               
               <div className="flex gap-4 px-2">
