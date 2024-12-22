@@ -36,7 +36,7 @@ const PaperDetailPage = () => {
   }
 
   return (
-    <div className="container mx-auto my-10 p-4">
+    <div className="container mx-auto mb-10  p-4">
       <h1 className="text-2xl font-bold mb-6 text-center">
         {paper.date} {paper.month} {paper.year}
       </h1>
@@ -47,7 +47,7 @@ const PaperDetailPage = () => {
           width="100%"
           height="600"
           title="PDF Viewer"
-          className="border rounded-md w-[100%]"
+          className="border rounded-md w-[100%] h-screen"
         />
       </div>
     </div>
