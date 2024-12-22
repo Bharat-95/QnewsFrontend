@@ -32,11 +32,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="bg-orange-50">
-      <head>
-      </head>
-      <body className= "font-sans">
+      <head></head>
+      <body className="font-sans">
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-REH7Y6Y3XH"
+          strategy="afterInteractive"
+        />
+
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5147970592590624"
+          crossorigin="anonymous"
           strategy="afterInteractive"
         />
         <Script
@@ -52,12 +58,12 @@ export default function RootLayout({ children }) {
           }}
         />
         <LanguageProvider>
-        <FontWrapper>
-          <Header />
-          
-          <div className="lg:pt-[10%] md:pt-[20%] pt-[35%]">{children}</div>
-         
-          <Footer />
+          <FontWrapper>
+            <Header />
+
+            <div className="lg:pt-[10%] md:pt-[20%] pt-[35%]">{children}</div>
+
+            <Footer />
           </FontWrapper>
         </LanguageProvider>
       </body>
