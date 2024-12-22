@@ -1,63 +1,57 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
+import { useParams } from "next/navigation"; // Correct import for dynamic params
+import axios from "axios";
 
-const PaperDetailsPage = ({ params }) => {
-  const [paperId, setPaperId] = useState(null); // Store the unwrapped paperId
-  const [paper, setPaper] = useState(null); // Store the fetched paper data
-
-  // Unwrap params.paperId using React.use() or a similar approach
-  useEffect(() => {
-    (async () => {
-      const unwrappedParams = await params; // Unwrap params
-      setPaperId(unwrappedParams.paperId);
-    })();
-  }, [params]);
+const PaperDetailPage = () => {
+  const { paperId } = useParams(); // Get paperId from URL parameters
+  const [paper, setPaper] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (paperId) {
-      // Fetch paper details from your API
-      const fetchPaperDetails = async () => {
+      // Fetch paper details using the paperId
+      const fetchPaper = async () => {
         try {
-          const response = await fetch(
-            `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/paper/${paperId}`
-          );
-          const data = await response.json();
-          setPaper(data);
+          const response = await axios.get(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/paper/${paperId}`);
+          const responseData = response.data;
+          
+          setPaper(responseData.data); // Assuming data is the paper object
+          setLoading(false);
         } catch (error) {
-          console.log("Error fetching paper details:", error);
+          console.error("Error fetching paper details:", error);
+          setLoading(false);
         }
       };
-      fetchPaperDetails();
+      fetchPaper();
     }
   }, [paperId]);
 
+  if (loading) {
+    return <div className="text-center text-xl">Loading paper...</div>;
+  }
+
   if (!paper) {
-    return <div>Loading...</div>;
+    return <div className="text-center text-xl">Paper not found</div>;
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-6">
-        {paper.title || "Paper Details"}
+    <div className="container mx-auto my-10 p-4">
+      <h1 className="text-2xl font-bold mb-6 text-center">
+        {paper.date} {paper.month} {paper.year}
       </h1>
-      <iframe
-        src={paper.fileUrl}
-        width="100%"
-        height="600"
-        title="Paper Viewer"
-        className="border rounded-md"
-      />
-      <div className="mt-4">
-        <button
-          className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
-          onClick={() => history.back()} // Navigate back to the previous page
-        >
-          Back
-        </button>
+      
+      <div className="text-center">
+        <iframe
+          src={paper.fileUrl}
+          width="100%"
+          height="600"
+          title="PDF Viewer"
+          className="border rounded-md w-[100%]"
+        />
       </div>
     </div>
   );
 };
 
-export default PaperDetailsPage;
+export default PaperDetailPage;
