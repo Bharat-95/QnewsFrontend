@@ -443,13 +443,18 @@ const NewsPost = () => {
             <div className={`line-clamp-2 font-semibold ${language === "te" ? `${ramaraja.className} text-[30px]`:`text-[24px] `}`}>
               {language === "te" ? newsData.headlineTe : newsData.headlineEn}
             </div>
-            <div className="flex justify-between font-light text-gray-700">
+            <div className="lg:flex md:flex lg:space-y-0 md:space-y-0 space-y-4 justify-between font-light text-gray-700">
               
-              <div className="lg:flex md:flex hidden items-center lg:gap-10 md:gap-5 gap-2 lg:text-sm md:text-sm text-[10px]">
+              <div className="lg:flex md:flex flex items-center lg:px-0 md:px-0 px-2  lg:gap-10 md:gap-5 gap-2 lg:text-sm md:text-sm text-[10px]">
                 <div>{formatDate(newsData.createdAt)}</div>
                 <div> {timeAgo(newsData.createdAt)}</div>
-                <div>NewsBy : {newsData.employeeId}</div>
+                <div>NewsBy: {newsData.employeeId}</div>
+                
               </div>
+
+
+              
+             
               
               <div className="flex gap-4 px-2">
               <div> <Speak newsText={language === "te"
