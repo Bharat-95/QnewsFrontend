@@ -159,8 +159,11 @@ const te = {
     videocategory:'వీడియో వర్గం',
     enterCategory:'వీడియో వర్గాన్ని నమోదు చేయండి',
     related:'సంబంధిత వార్తలు',
-    business:'వ్యాపారం',
-    health:'ఆరోగ్యం',
+    business:'బిజినెస్',
+    health:'హెల్త్‌',
+
+    
+
 
 
 

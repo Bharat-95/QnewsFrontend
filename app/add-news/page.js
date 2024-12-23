@@ -29,9 +29,13 @@ const Page = () => {
     translations.telangana,
     translations.india,
     translations.world,
+    translations.business,
+    translations.health,
     translations.sports,
     translations.film,
     translations.others,
+    translations.business,
+    translations.health,
   ];
 
   const mainyesNoOptions = [
@@ -56,6 +60,8 @@ const Page = () => {
     translations.politics,
     translations.telangana,
     translations.india,
+    translations.business,
+    translations.health,
     translations.world,
     translations.sports,
     translations.film,
