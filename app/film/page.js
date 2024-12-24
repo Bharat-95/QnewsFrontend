@@ -60,7 +60,7 @@ const Page = () => {
                   alt="No Image Found"
                   width={600}
                   height={400}
-                  className="object-cover w-full h-full rounded-lg"
+                  className="object-contain w-full h-full rounded-lg"
                 />
               </div>
               <div className={`  font-bold ${language === "te"? `${ramaraja.className} text-[34px]`:`md:text-2xl lg:text-3xl`}`}>
