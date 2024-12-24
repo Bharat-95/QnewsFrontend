@@ -161,6 +161,8 @@ const te = {
     related:'సంబంధిత వార్తలు',
     business:'బిజినెస్',
     health:'హెల్త్‌',
+    profile:'ప్రొఫైల్',
+    loading:'లోడ్ అవుతోంది',
 
     
 

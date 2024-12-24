@@ -355,7 +355,7 @@ const Header = () => {
                         )}
 
                         <li className="hover:text-black/70 hover:transform hover:translate-x-[1px] hover:translate-y-[1px] duration-200">
-                          <Link href="/" onClick={handleLinkClick}>
+                          <Link href="/settings">
                             {translations.settings}
                           </Link>
                         </li>

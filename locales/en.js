@@ -162,7 +162,10 @@ const en = {
      enterCategory:'Enter Video Category',
      related:'Related News',
      business:'Business',
-     health: 'Health'
+     health: 'Health',
+     profile:'Profile',
+     loading:'Loading'
+
 
 
 

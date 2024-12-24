@@ -87,7 +87,7 @@ const Page = () => {
           <div className="flex justify-between text-[10px] px-12">
             <div></div>
             <div>
-              <Link href="/" className="hover:">
+              <Link href="/password" className="hover:">
                 {translations.forgotPassword}
               </Link>
             </div>
