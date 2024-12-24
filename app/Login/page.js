@@ -50,7 +50,7 @@ const Page = () => {
 
   return (
     <div className="text-black p-4 flex items-center justify-center ">
-      <div className="rounded-md p-[50px]  bg-orange-200 space-y-10 lg:w-[40%] md:w-[60%]">
+      <div className="rounded-md p-[50px]   space-y-10 lg:w-[40%] md:w-[60%]">
         <div className="text-2xl font-bold flex justify-center underline">{translations.logIn}</div>
 
         <form className="space-y-4 " onSubmit={handleSubmit}>
@@ -59,19 +59,19 @@ const Page = () => {
             <input
               type="email"
               placeholder={translations.enterEmail}
-              className="w-[90%] h-10 bg-orange-50 rounded-md p-2 text-black focus:outline-none" 
+              className="w-[90%] h-10 bg-orange-200 rounded-md p-2 text-black focus:outline-none" 
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
-          <div className="space-y-1 relative">
+          <div className="space-y-1 relative ">
             <div>{translations.password}</div>
-            <div className="w-[90%] bg-orange-50 justify-between rounded-md flex items-center px-2">
+            <div className="w-[90%] bg-orange-200 justify-between rounded-md flex items-center px-2">
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder={translations.password}
-                className="w-[90%] h-10 bg-orange-50 rounded-md p-2 text-black pr-10 focus:outline-none"
+                className="w-[90%] h-10 bg-orange-200 rounded-md p-2 text-black pr-10 focus:outline-none"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -109,7 +109,7 @@ const Page = () => {
           </div>
           <div className="flex justify-center gap-2 lg:text-[14px] md:text-[14px] text-[10px]">
             {translations.noAccount}
-            <Link href="/signUp">{translations.signUp}</Link>
+            <Link href="/signUp" className="text-orange-600">{translations.signUp}</Link>
           </div>
         </form>
       </div>
