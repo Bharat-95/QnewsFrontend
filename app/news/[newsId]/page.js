@@ -437,7 +437,7 @@ const NewsPost = () => {
                 src={newsData.image}
                 width={900}
                 height={500}
-                className="lg:w-[806px] object-fit  w-[100%] rounded-md lg:h-[500px] md:h-[400px] h-[300px]"
+                className="lg:w-[806px] object-contain  w-[100%] rounded-md lg:h-[500px] md:h-[400px] h-[300px]"
               />
             </div>
             <div className={`line-clamp-2 font-semibold ${language === "te" ? `${ramaraja.className} text-[30px]`:`text-[24px] `}`}>
