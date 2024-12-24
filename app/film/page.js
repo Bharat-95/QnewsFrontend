@@ -104,7 +104,7 @@ const Page = () => {
                       alt="No Image Found"
                       width={200}
                       height={150}
-                      className="object-cover w-full lg:h-48 h-28 md:h-40 rounded-md"
+                      className="object-contain w-full lg:h-48 h-28 md:h-40 rounded-md"
                     />
                   </Link>
                 </div>
