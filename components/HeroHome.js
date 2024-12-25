@@ -128,7 +128,7 @@ const Page = () => {
           </Link>
         )}
 
-        <div className="lg:w-[40%] overflow-y-scroll h-[500px]">
+        <div className="lg:w-[40%] overflow-y-scroll my-10 h-[500px]">
           {latestPosts.map((post) => (
             <Link
               href={{

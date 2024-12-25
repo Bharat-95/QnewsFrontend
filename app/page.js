@@ -10,7 +10,8 @@ const Page = () => {
   return (
     <div className="lg:p-[32px] md:p-[20px] p-[10px] space-y-[32px]">
       <HeroHome />
-      <Live />
+      {/* Hide Live component on large screens */}
+      <div className="lg:hidden"><Live /></div>
       <div className="flex justify-between gap-4">
         <div className="lg:w-[70%] md:w-[100%] w-[100%]">
           <Youtube />

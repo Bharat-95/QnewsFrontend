@@ -45,7 +45,7 @@ const Live = () => {
         .slice(0, 1)
         .map((video) => (
           <div key={video.videoId} className="lg:flex md:flex w-[100%]  gap-10 h-[100%] lg:space-y-0 md:space-y-0 space-y-4">
-            <div className="md:w-[50%] lg:w-[30%] w-[100%] border border-orange-300 rounded-md shadow-md">
+            <div className="md:w-[50%] lg:w-[100%] w-[100%] border border-orange-300 rounded-md shadow-md">
               <Link href={video.URL} className="space-y-2">
                 <div className="w-[100%] h-[80%] md:h-[70%]">
                   <Image
@@ -59,19 +59,7 @@ const Live = () => {
               </Link>
             </div>
 
-            <div className="md:w-[50%] lg:w-[30%] w-[100%] border border-orange-300 rounded-md shadow-md">
-              <Link href={video.URL} className="space-y-2">
-                <div className="w-[100%] h-[80%] md:h-[70%]">
-                  <Image
-                    src={video.thumbnail}
-                    alt="No thumbnail found"
-                    width={500}
-                    height={500}
-                    className="w-full h-[100%] object-fit shadow-md rounded-md" />
-                </div>
-                <div className={`px-2 font-bold ${language === "te" ? `text-[18px] ${ramaraja.className}`:``}`}>{language === "te" ? video.titleTe : video.titleEn}</div>
-              </Link>
-            </div>
+          
 
           
             
