@@ -209,41 +209,6 @@ const Page = () => {
                 className="w-full bg-orange-50 p-2 border border-orange-300 rounded-md"
               />
             </div>
-            <div>
-            <label className="block text-sm font-medium">Is Main ?:</label>
-  <select
-    value={selectedNews.isMain} // Use the value directly as "Yes" or "No"
-    onChange={(e) => handleBooleanChange('isMain', e.target.value)} // Pass the selected string directly
-    className="w-full bg-orange-50 p-2 border border-orange-300 rounded-md"
-  >
-    <option value="Yes">Yes</option>
-    <option value="No">No</option>
-  </select>
-</div>
-
-<div>
-  <label className="block text-sm font-medium">Is Sub1 ?:</label>
-  <select
-    value={selectedNews.isSub1} // Use the value directly as "Yes" or "No"
-    onChange={(e) => handleBooleanChange('isSub1', e.target.value)} // Pass the selected string directly
-    className="w-full bg-orange-50 p-2 border border-orange-300 rounded-md"
-  >
-    <option value="Yes">Yes</option>
-    <option value="No">No</option>
-  </select>
-</div>
-
-<div>
-  <label className="block text-sm font-medium">Is Sub2 ?:</label>
-  <select
-    value={selectedNews.isSub2} // Use the value directly as "Yes" or "No"
-    onChange={(e) => handleBooleanChange('isSub2', e.target.value)} // Pass the selected string directly
-    className="w-full bg-orange-50 p-2 border border-orange-300 rounded-md"
-  >
-    <option value="Yes">Yes</option>
-    <option value="No">No</option>
-  </select>
-</div>
 
             {/* Image Upload Section */}
             <div>
