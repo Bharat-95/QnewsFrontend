@@ -4,5 +4,6 @@
 
 
 .hide-scrollbar::-webkit-scrollbar {
-    display: none; /* For Chrome, Safari, and Edge */
+    display: none; 
+    scrollbar-width: none;/* For Chrome, Safari, and Edge */
   }
