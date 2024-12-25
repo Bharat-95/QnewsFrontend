@@ -34,20 +34,6 @@ const Page = () => {
 
   
 
-  const tags = [
-    translations.selecttag,
-    translations.home,
-    translations.hyderabad,
-    translations.politics,
-    translations.telangana,
-    translations.india,
-    translations.business,
-    translations.health,
-    translations.world,
-    translations.sports,
-    translations.film,
-    translations.others,
-  ];
 
   useEffect(() => {
     const role = localStorage.getItem("role");
@@ -75,7 +61,6 @@ const Page = () => {
     formData.append("newsTe", newsTe);
     formData.append("category", category);
     formData.append("employeeId", employeeId);
-    formData.append("tag", tag);
     formData.append("image", image);
 
     try {
@@ -93,7 +78,6 @@ const Page = () => {
         setNewsTe("");
         setCategory("");
         setEmployeeId("");
-        setTags("");
         setImage("");
       } else {
         alert("Failed to add news.");
