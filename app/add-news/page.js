@@ -13,11 +13,7 @@ const Page = () => {
   const [newsEn, setNewsEn] = useState("");
   const [newsTe, setNewsTe] = useState("");
   const [category, setCategory] = useState("");
-  const [isMain, setIsMain] = useState("");
-  const [isSub1, setIsSub1] = useState("");
-  const [isSub2, setIsSub2] = useState("");
   const [employeeId, setEmployeeId] = useState("");
-  const [tag, setTags] = useState("");
   const [image, setImage] = useState(null);
   const [loading, setIsLoading] = useState(false);
 
@@ -37,7 +33,7 @@ const Page = () => {
   ];
 
   
-  
+
   const tags = [
     translations.selecttag,
     translations.home,
@@ -211,24 +207,6 @@ const Page = () => {
             />
           </div>
 
-
-          <div>
-            <label className="block text-[18px] mb-2">
-              {translations.tag} :
-            </label>
-            <select
-              className="w-full border bg-orange-50 border-orange-300 p-2 rounded-md"
-              value={tag}
-              onChange={(e) => setTags(e.target.value)}
-              required
-            >
-              {tags.map((option, index) => (
-                <option key={index} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </div>
 
           <div>
             <label className="block text-[18px] mb-2">

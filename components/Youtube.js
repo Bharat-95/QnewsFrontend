@@ -89,7 +89,7 @@ const Latest = () => {
   return (
     <div>
       <div className="flex items-center gap-2 mb-4">
-        <div className="lg:text-[24px] md:text-[20px] text-[16px]">{translations.videos}</div>
+        <div className="lg:text-[24px] md:text-[20px]  text-orange-600 text-[16px]">Q News {translations.videos}</div>
         <div className="lg:w-[300px] md:w-[200px] w-[100px] h-[1px] bg-gray-400"></div>
       </div>
 
