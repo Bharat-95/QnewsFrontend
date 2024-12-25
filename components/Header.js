@@ -423,7 +423,7 @@ const Header = () => {
 
           <div className="flex justify-between items-center w-[100%]">
   {/* Scrollable Nav Items */}
-  <div className="flex items-center w-[70%] overflow-x-scroll scrollbar-hide scrollbar-width:none space-x-4">
+  <div className="flex items-center w-[70%] overflow-x-scroll scrollbar-hide space-x-4">
     {navItems.map((item, index) => (
       <React.Fragment key={item.path}>
         <li
