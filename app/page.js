@@ -13,7 +13,6 @@ const Page = () => {
       <Live />
       <div className="flex justify-between gap-4">
         <div className="lg:w-[70%] md:w-[100%] w-[100%]">
-          <Latest />
           <Youtube />
           <Politics />
         </div>

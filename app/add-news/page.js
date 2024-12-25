@@ -34,25 +34,10 @@ const Page = () => {
     translations.sports,
     translations.film,
     translations.others,
-    translations.business,
-    translations.health,
   ];
 
-  const mainyesNoOptions = [
-    translations.isthismain,
-    translations.yes,
-    translations.no,
-  ];
-  const sub1YesnoOptions = [
-    translations.issub1,
-    translations.yes,
-    translations.no,
-  ];
-  const sub2YesnoOptions = [
-    translations.issub2,
-    translations.yes,
-    translations.no,
-  ];
+  
+  
   const tags = [
     translations.selecttag,
     translations.home,
@@ -211,59 +196,6 @@ const Page = () => {
             </select>
           </div>
 
-          <div>
-            <label className="block text-[18px] mb-2">
-              {translations.isMain} :
-            </label>
-            <select
-              className="w-full border bg-orange-50 border-orange-300 p-2 rounded-md"
-              value={isMain}
-              onChange={(e) => setIsMain(e.target.value)}
-              required
-            >
-              {mainyesNoOptions.map((option, index) => (
-                <option key={index} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-[18px] mb-2">
-              {translations.issub1} :
-            </label>
-            <select
-              className="w-full border bg-orange-50 border-orange-300 p-2 rounded-md"
-              value={isSub1}
-              onChange={(e) => setIsSub1(e.target.value)}
-              required
-            >
-              {sub1YesnoOptions.map((option, index) => (
-                <option key={index} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-[18px] mb-2">
-              {translations.issub2} :
-            </label>
-            <select
-              className="w-full border bg-orange-50 border-orange-300 p-2 rounded-md"
-              value={isSub2}
-              onChange={(e) => setIsSub2(e.target.value)}
-              required
-            >
-              {sub2YesnoOptions.map((option, index) => (
-                <option key={index} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </div>
 
           <div>
             <label className="block text-[18px] mb-2">

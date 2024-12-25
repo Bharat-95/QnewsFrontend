@@ -4,13 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 import { useLanguage } from "../context/languagecontext";
-import advertisement from '../public/shanarti.png'
+import advertisement from "../public/shanarti.png";
 import { Ramaraja } from "next/font/google";
 
 const ramaraja = Ramaraja({
-    subsets: ["latin", "telugu"], // Specify subsets
-    weight: "400", // Specify font weight
-  });
+  subsets: ["latin", "telugu"], 
+  weight: "400",
+});
 
 const Page = () => {
   const { language } = useLanguage();
@@ -18,8 +18,11 @@ const Page = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn");
+      const response = await axios.get(
+        "https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn"
+      );
       const responseData = response.data.data;
+      responseData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); 
       setData(responseData);
     } catch (error) {
       console.log("Unable to Fetch News", error);
@@ -58,141 +61,119 @@ const Page = () => {
       });
     }
   };
-  
 
   useEffect(() => {
     fetchData();
-    const interval = setInterval(() => {
-      fetchData(); 
-    }, 30000);
-
+    const interval = setInterval(fetchData, 30000);
     return () => clearInterval(interval);
   }, []);
 
-  const getLatestPost = (posts) => {
-    return posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
+  const getMainPost = () => {
+    return data.find(post => post.status === "Approved");
   };
 
-  const mainPost = getLatestPost(
-    data.filter((news) => news.isMain === "Yes" && news.status === "Approved")
-  );
-  const sub1Post = getLatestPost(
-    data.filter((news) => news.isSub1 === "Yes" && news.isMain === "No" && news.isSub2 === "No" && news.status === "Approved")
-  );
-  const sub2Post = getLatestPost(
-    data.filter((news) => news.isSub2 === "Yes" && news.isMain === "No" && news.isSub1 === "No" && news.status === "Approved")
-  );
+  const mainPost = getMainPost(); // Get the first approved post
+  const latestPosts = data
+    .slice(1, 20)
+    .filter(post => post.status === "Approved" && post.newsId !== mainPost?.newsId); // Remove the main post
 
   return (
     <div>
       <div className="lg:h-64 h-32 md:h-56 w-[100%] border border-orange-300 rounded-md shadow-md mb-10">
         <Image
-        src={advertisement}
-        height={500}
-        width={500}
-        alt="No Image Found"
-        className="w-[100%]  h-[100%] " />
+          src={advertisement}
+          height={500}
+          width={500}
+          alt="No Image Found"
+          className="w-[100%] h-[100%]"
+        />
       </div>
-      <div className="lg:flex lg:gap-10 md:gap-5 lg:space-y-0 md:space-y-10 space-y-10">      
-      {mainPost && (
-        <Link
-        href={{
-          pathname: `/news/${mainPost.newsId}`,
-          query: { language },
-        }}
-          passHref
-          key={mainPost.newsId}
-          className="lg:w-[60%] md:w-[60%]  space-y-2"
-        >
-          <div className="w-[100%] lg:h-[420px] md:h-[393px] h-[250px] overflow-hidden">
-            <Image
-              alt="No Image Found"
-              src={mainPost.image}
-              width={500}
-              height={500}
-              className="w-[100%] lg:h-[420px] md:h-[393px] h-[250px] object-cover rounded-md shadow-md"
-            />
-          </div>
-          <div>
-            <div className={`font-semibold hover:underline line-clamp-2 overflow-hidden text-ellipsis ${language === 'en' ? `text-[24px]`:`text-[28px] ${ramaraja.className}` }`}>
-              {language === "en" ? mainPost.headlineEn : mainPost.headlineTe}
-            </div>
-          </div>
-          <div className="flex items-center gap-10 font-light text-gray-500">
-                <div>{formatDate(mainPost.createdAt)}</div>
-                <div> {timeAgo(mainPost.createdAt)}</div>
-              </div>
-        </Link>
-      )}
-
-      <div className="h-[500px] w-[1px] lg:flex md:hidden hidden bg-orange-600"></div>
-
-      <div className="space-y-14 lg:w-[40%] lg:h-[500px] md:h-[500px] h-[300px]">
-        {sub1Post && (
+      <div className="lg:flex lg:gap-10 md:gap-5 lg:space-y-0 md:space-y-10 space-y-10">
+        {mainPost && (
           <Link
             href={{
-              pathname: `/news/${sub1Post.newsId}`,
+              pathname: `/news/${mainPost.newsId}`,
               query: { language },
             }}
             passHref
-            key={sub1Post.newsId}
-            className="w-[100%] h-[40%] flex lg:gap-10 md:gap-5 gap-2"
+            key={mainPost.newsId}
+            className="lg:w-[60%] md:w-[60%] space-y-2"
           >
-            <div className="w-[50%] lg:h-[100%] md:h-[100%] h-[100%]">
+            <div className="w-[100%] lg:h-[420px] md:h-[393px] h-[250px] overflow-hidden">
               <Image
-                src={sub1Post.image}
                 alt="No Image Found"
+                src={mainPost.image}
                 width={500}
                 height={500}
-                className="w-[100%] object-cover h-[100%] shadow-md rounded-md"
+                className="w-[100%] lg:h-[420px] md:h-[393px] h-[250px] object-cover rounded-md shadow-md"
               />
             </div>
-            <div className="w-[50%] lg:space-y-4 md:space-y-4 space-y-1">
-              <div className={`font-semibold hover:underline line-clamp-3 overflow-hidden text-ellipsis ${language === "en" ? `text-[13px]`:`text-[16px] ${ramaraja.className}`}`}>
-                {language === "en" ? sub1Post.headlineEn : sub1Post.headlineTe}
-              </div>
-              <div className={`lg:line-clamp-5 md:line-clamp-5 line-clamp-2 overflow-hidden text-ellipsis ${language === "en" ? `text-[13px]`:`text-[15px]`}`}>
-                {language === "en" ? sub1Post.newsEn : sub1Post.newsTe}
+            <div>
+              <div
+                className={`font-semibold hover:underline line-clamp-2 overflow-hidden text-ellipsis ${
+                  language === "en"
+                    ? `text-[24px]`
+                    : `text-[28px] ${ramaraja.className}`
+                }`}
+              >
+                {language === "en"
+                  ? mainPost.headlineEn
+                  : mainPost.headlineTe}
               </div>
             </div>
-            
+            <div className="flex items-center gap-10 font-light text-gray-500">
+              <div>{formatDate(mainPost.createdAt)}</div>
+              <div>{timeAgo(mainPost.createdAt)}</div>
+            </div>
           </Link>
         )}
 
-        {sub2Post && (
-          <Link
-            href={{
-              pathname: `/news/${sub2Post.newsId}`,
-              query: { language },
-            }}
-            passHref
-            key={sub2Post.newsId}
-            className="w-[100%] h-[40%] flex lg:gap-10 md:gap-5 gap-2"
-          >
-            <div className="w-[50%] lg:h-[100%] md:h-[100%] h-[100%]">
-              <Image
-                src={sub2Post.image}
-                alt="No Image Found"
-                width={500}
-                height={500}
-                className="w-[100%] h-[100%] object-cover shadow-md rounded-md"
-              />
-            </div>
-            <div className="w-[50%] lg:space-y-4 md:space-y-4 space-y-1">
-              <div className={`font-semibold hover:underline line-clamp-3 overflow-hidden text-ellipsis ${language === "en" ? `text-[13px]`:`text-[16px] ${ramaraja.className}`}`}>
-                {language === "en" ? sub2Post.headlineEn : sub2Post.headlineTe}
+        <div className="lg:w-[40%] overflow-y-scroll h-[500px]">
+          {latestPosts.map((post) => (
+            <Link
+              href={{
+                pathname: `/news/${post.newsId}`,
+                query: { language },
+              }}
+              passHref
+              key={post.newsId}
+              className=""
+            >
+              <div className="flex w-full gap-4 pb-4">
+                {/* Image container with 40% width */}
+                <div className="w-[30%] h-24 overflow-hidden rounded-md flex items-center justify-center bg-gray-200">
+                  <Image
+                    alt="No Image Found"
+                    src={post.image}
+                    width={160} // Fixed aspect ratio
+                    height={96} // Fixed aspect ratio
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+                {/* Text container with 60% width */}
+                <div className="w-[70%]">
+                  <div
+                    className={`font-semibold hover:underline line-clamp-2 overflow-hidden text-ellipsis ${
+                      language === "en"
+                        ? `text-[16px]`
+                        : `text-[18px] ${ramaraja.className}`
+                    }`}
+                  >
+                    {language === "en" ? post.headlineEn : post.headlineTe}
+                  </div>
+                  <div className="text-gray-500 font-light text-sm">
+                    {timeAgo(post.createdAt)}
+                  </div>
+                </div>
               </div>
-              <div className={`lg:line-clamp-5 md:line-clamp-5 line-clamp-2 overflow-hidden text-ellipsis  ${language === "en" ? `text-[13px]`:`text-[15px]`}`}>
-                {language === "en" ? sub2Post.newsEn : sub2Post.newsTe}
-              </div>
-            </div>
-          </Link>
-        )}
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
-    </div>
-
   );
 };
 
 export default Page;
+
+
