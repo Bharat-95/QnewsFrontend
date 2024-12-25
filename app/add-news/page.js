@@ -74,9 +74,6 @@ const Page = () => {
     formData.append("newsEn", newsEn);
     formData.append("newsTe", newsTe);
     formData.append("category", category);
-    formData.append("isMain", isMain);
-    formData.append("isSub1", isSub1);
-    formData.append("isSub2", isSub2);
     formData.append("employeeId", employeeId);
     formData.append("tag", tag);
     formData.append("image", image);
@@ -95,9 +92,6 @@ const Page = () => {
         setNewsEn("");
         setNewsTe("");
         setCategory("");
-        setIsMain("");
-        setIsSub1("");
-        setIsSub2("");
         setEmployeeId("");
         setTags("");
         setImage("");
