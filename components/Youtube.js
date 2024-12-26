@@ -23,10 +23,10 @@ const timeAgo = (dateString) => {
   const diffInMs = now - postDate;
   const diffInMinutes = Math.floor(diffInMs / (1000 * 60)); // Convert to minutes
   if (diffInMinutes < 60) {
-    return `${diffInMinutes} min ago`;
+    return `${diffInMinutes} m`;
   } else {
     const diffInHours = Math.floor(diffInMinutes / 60); // Convert to hours
-    return `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
+    return `${diffInHours} h${diffInHours > 1 ? 's' : ''}`;
   }
 };
 

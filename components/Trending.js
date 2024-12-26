@@ -72,7 +72,7 @@ const Trending = () => {
   return (
     <div className="space-y-4 m-[20px]">
       <div className="my-10 space-y-4">
-        <div className="font-bold text-red-600">Live</div>
+        
       <Live />
       </div>
   <div className="flex items-center justify-evenly">
