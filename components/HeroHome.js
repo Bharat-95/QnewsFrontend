@@ -124,7 +124,7 @@ const Page = () => {
             <div className="flex items-center gap-10 font-light text-gray-500">
               <div>{formatDate(mainPost.createdAt)}</div>
               <div>{timeAgo(mainPost.createdAt)}</div>
-              <div>NewsBy : <span className="font-semibold text-black">{mainPost.employeeId}</span></div>
+              
             </div>
           </Link>
         )}
