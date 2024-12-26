@@ -1,72 +1,47 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import React, { useState, useEffect } from "react";
 
 const QnewsHd = () => {
   const [videos, setVideos] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const [nextPageToken, setNextPageToken] = useState(null);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState([]);
   const [filteredVideos, setFilteredVideos] = useState([]);
 
   const API_KEY = "AIzaSyBVDXvDJ7-h7Nix2892N72LPJ1QniARzis";
   const CHANNEL_ID = "UCbivggwUD5UjHhYmkha8DdQ";
-  const MAX_RESULTS = 50;
-
-  const decodeHtmlEntities = (text) => {
-    const element = document.createElement("textarea");
-    element.innerHTML = text;
-    return element.value;
-  };
-
-  const fetchVideos = useCallback(async (pageToken = "") => {
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet&type=video&maxResults=1&order=date`
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      if (data.error) {
-        throw new Error(`API Error: ${data.error.message}`);
-      }
-
-      const cleanedVideos = data.items
-        .map((video) => ({
-          ...video,
-          snippet: {
-            ...video.snippet,
-            title: decodeHtmlEntities(video.snippet.title),
-          },
-        }))
-        .filter(
-          (video) =>
-            !video.snippet.title.toLowerCase().includes("shorts") && // Exclude videos with "Shorts" in the title
-            !video.snippet.description?.toLowerCase().includes("shorts")&&
-            !video.snippet.title.toLowerCase().includes("#") // Exclude videos with "Shorts" in the description
-        );
-
-      setVideos(cleanedVideos);
-      setFilteredVideos(cleanedVideos);
-      setNextPageToken(data.nextPageToken || null);
-      setLoading(false);
-    } catch (err) {
-      setError(err.message);
-      setLoading(false);
-    }
-  }, []); // Empty dependency array ensures fetchVideos is stable
+  const MAX_RESULTS = 10;
 
   useEffect(() => {
+    const fetchVideos = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(
+          `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet&type=video&maxResults=${MAX_RESULTS}&order=date`
+        );
+        const data = await response.json();
+
+        if (!response.ok || data.error) {
+          throw new Error(data.error?.message || "Failed to fetch videos.");
+        }
+
+        const cleanedVideos = data.items.filter(
+          (video) =>
+            !video.snippet.title.toLowerCase().includes("shorts") && // Exclude Shorts
+            !video.snippet.description?.toLowerCase().includes("shorts")
+        );
+
+        setVideos(cleanedVideos);
+        setFilteredVideos(cleanedVideos);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
     fetchVideos();
-  }, [fetchVideos]);
+  }, []);
 
   const handleSearch = (e) => {
     const query = e.target.value.toLowerCase();
@@ -82,11 +57,6 @@ const QnewsHd = () => {
         )
       );
     }
-  };
-
-  const handlePageChange = (newPage) => {
-    setPage(newPage);
-    fetchVideos(nextPageToken);
   };
 
   return (
@@ -117,53 +87,36 @@ const QnewsHd = () => {
           <h2>Latest Videos</h2>
           {filteredVideos.map((video) => (
             <div key={video.id.videoId} style={{ marginBottom: "20px" }}>
-              <Link
-                href={`https://www.youtube.com/watch?v=${video.id.videoId}`}
-                passHref
-              >
-                <div>
-                  <div style={{ fontWeight: "bold" }}>{video.snippet.title}</div>
-                  {video.snippet.thumbnails?.high?.url && (
-                    <div>
-                      <Image
-                        src={video.snippet.thumbnails.high.url}
-                        alt="No Thumbnail Found"
-                        width={200}
-                        height={200}
-                      />
-                    </div>
-                  )}
+              <div>
+                <div style={{ fontWeight: "bold" }}>{video.snippet.title}</div>
+                <div
+                  style={{
+                    position: "relative",
+                    paddingTop: "56.25%", // Maintain 16:9 aspect ratio
+                  }}
+                >
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={`https://www.youtube.com/embed/${video.id.videoId}`}
+                    title={video.snippet.title}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  ></iframe>
                 </div>
-              </Link>
+              </div>
             </div>
           ))}
         </div>
       )}
-
-      {/* Pagination */}
-      <div
-        style={{
-          marginTop: "20px",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <button
-          onClick={() => handlePageChange(page - 1)}
-          disabled={page === 1}
-          style={{ marginRight: "10px", padding: "10px", fontSize: "16px" }}
-        >
-          Previous
-        </button>
-        <span style={{ padding: "10px", fontSize: "16px" }}>Page {page}</span>
-        <button
-          onClick={() => handlePageChange(page + 1)}
-          disabled={!nextPageToken}
-          style={{ marginLeft: "10px", padding: "10px", fontSize: "16px" }}
-        >
-          Next
-        </button>
-      </div>
     </div>
   );
 };
