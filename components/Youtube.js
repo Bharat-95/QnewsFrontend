@@ -21,11 +21,11 @@ const timeAgo = (dateString) => {
   const postDate = new Date(dateString);
   const now = new Date();
   const diffInMs = now - postDate;
-  const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+  const diffInMinutes = Math.floor(diffInMs / (1000 * 60)); // Convert to minutes
   if (diffInMinutes < 60) {
     return `${diffInMinutes} min ago`;
   } else {
-    const diffInHours = Math.floor(diffInMinutes / 60);
+    const diffInHours = Math.floor(diffInMinutes / 60); // Convert to hours
     return `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
   }
 };
@@ -96,30 +96,29 @@ const Latest = () => {
       <div className="overflow-x-auto scrollbar-hide sm:w-screen lg:w-auto md:w-auto py-4">
         <div className="flex gap-4">
           {data.slice(0, visibleCount)
-          .filter((video) => video.status === "Approved" && video.category !== 'Live')
           .map((video) => (
-            <Link
-              href={video.URL}
-              key={video.videoId}
-              target="_blank"
-              className="flex-shrink-0  w-[80%] md:w-[40%] lg:w-[30%]  md: border border-orange-600 lg:p-3 p-2 rounded-md shadow-lg space-y-2 hover:transform duration-500 hover:translate-x-2 hover:-translate-y-2"
-            >
-              <Image
-                alt="No Image Found"
-                src={video.thumbnail}
-                width={300}
-                height={200}
-                className="w-full h-[200px] object-fit shadow-md rounded-md"
-              />
-              <div className={` line-clamp-2 text-ellipsis overflow-hidden hover:underline ${language === "te" ? `${ramaraja.className} text-[16px]`:`text-[13px] font-semibold`} `}>
-              {language === "te" ? video.titleTe : video.titleEn}
+            <div key={video.videoId} className="flex-shrink-0 w-[80%] md:w-[40%] lg:w-[30%] md:border border-orange-600 lg:p-3 p-2 rounded-md shadow-lg space-y-2 hover:transform duration-500 hover:translate-x-2 hover:-translate-y-2">
+              <div className="w-full">
+                {/* YouTube Video Embed */}
+                <iframe
+                  width="100%"
+                  height="200"
+                  src={`https://www.youtube.com/embed/${video.videoId}`}
+                  title={video.title}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="rounded-md"
+                ></iframe>
               </div>
-
+              <div className={`line-clamp-2 text-ellipsis overflow-hidden hover:underline ${language === "te" ? `${ramaraja.className} text-[16px]` : `text-[13px] font-semibold`}`}>
+                {video.title}
+              </div>
               <div className="text-[12px] flex justify-between font-light text-gray-500">
-                <p>{formatDate(video.createdAt)}</p>
-                <p>{timeAgo(video.createdAt)}</p>
+                <p>{formatDate(video.published)}</p>
+                <p>{timeAgo(video.published)}</p>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>
