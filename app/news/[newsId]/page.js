@@ -65,13 +65,13 @@ const NewsPost = () => {
     const daysDifference = Math.floor(difference / (1000 * 60 * 60 * 24));
 
     if (secondsDifference < 60) {
-      return `${secondsDifference} sec ago`;
+      return `${secondsDifference} s`;
     } else if (minutesDifference < 60) {
-      return `${minutesDifference} min ago`;
+      return `${minutesDifference} m`;
     } else if (hoursDifference < 24) {
-      return `${hoursDifference} hrs ago`;
+      return `${hoursDifference} h`;
     } else if (daysDifference < 30) {
-      return `${daysDifference} days ago`;
+      return `${daysDifference} d`;
     } else {
       return postDate.toLocaleDateString("en-GB", {
         year: "numeric",
