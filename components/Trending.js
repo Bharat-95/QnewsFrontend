@@ -70,11 +70,7 @@ const Trending = () => {
   }, []);
 
   return (
-    <div className="space-y-4 m-[20px]">
-      <div className="my-10 space-y-4">
-        
-      <Live />
-      </div>
+    <div className="space-y-4 m-[20px]"> 
   <div className="flex items-center justify-evenly">
     <div className="h-[1px] w-[20%] bg-gray-400"></div>
     <div className="text-[20px]">{translations.trendingHeadlines}</div>
