@@ -4,7 +4,6 @@ import Latest from '@/components/Latest';
 import Youtube from '@/components/Youtube';
 import Trending from '@/components/Trending';
 import Politics from '@/components/Political'
-import Live from '@/components/Live';
 import Hyderabad from '@/components/Hyderabad'
 import Telangana from '@/components/Telangana'
 import India from '@/components/India'
