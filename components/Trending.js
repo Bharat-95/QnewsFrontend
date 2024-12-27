@@ -5,7 +5,7 @@ import Link from "next/link";
 import axios from "axios";
 import { useLanguage } from "@/context/languagecontext";
 import { Ramaraja } from "next/font/google";
-import Live from "./Live";
+
 
 
 const ramaraja = Ramaraja({
