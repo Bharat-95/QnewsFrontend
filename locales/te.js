@@ -163,6 +163,15 @@ const te = {
     health:'హెల్త్‌',
     profile:'ప్రొఫైల్',
     loading:'లోడ్ అవుతోంది',
+    hyderabadNews:'హైదరాబాద్ న్యూస్ ',
+    indiaNews:'ఇండియా న్యూస్ ',
+    telanaganNews:'తెలంగాణ న్యూస్',
+    worldnews:'వరల్డ్ న్యూస్',
+    businessnews:'బిజినెస్ న్యూస్',
+    healthnews:'హెల్త్ న్యూస్',
+    sportsmews:'స్పోర్ట్స్ న్యూస్',
+    filmnews:'ఫిల్మ్ న్యూస్',
+    othernews:'ఇతర వార్తలు',
 
     
 

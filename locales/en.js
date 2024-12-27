@@ -164,7 +164,16 @@ const en = {
      business:'Business',
      health: 'Health',
      profile:'Profile',
-     loading:'Loading'
+     loading:'Loading',
+     hyderabadNews:'Hyderabad News',
+     indiaNews:'India News',
+     telanaganNews:'Telanagan News',
+     worldnews:'World News',
+     businessnews:'Business News',
+     healthnews:'Health News',
+     sportsmews:'Sports News',
+     filmnews:'Film News',
+     othernews:'Other News',
 
 
 

@@ -80,7 +80,7 @@ const Trending = () => {
   <div className="space-y-10 overflow-y-auto scrollbar-hide">
     {data.length > 0 ? (
       data
-        .slice(0, 4) 
+        .slice(0, 14) 
         .filter((trending) => trending.status === "Approved")
         .map((trending) => (
           <div key={trending.newsId}>

@@ -72,7 +72,7 @@ const Page = () => {
     return data.find(post => post.status === "Approved");
   };
 
-  const mainPost = getMainPost(); // Get the first approved post
+  const mainPost = getMainPost();
   const latestPosts = data
     .slice(1, 20)
     .filter(post => post.status === "Approved" && post.newsId !== mainPost?.newsId); // Remove the main post

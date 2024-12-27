@@ -109,11 +109,11 @@ const Latest = () => {
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2 w-full">
           <div className="lg:text-[24px] md:text-[20px] text-[16px] whitespace-nowrap">
-            {translations.politicalnews}
+            {translations.worldnews}
           </div>
           <div className="flex-1 h-[1px] bg-gray-400"></div>
           <Link
-            href="/politics"
+            href="/world"
             className="text-orange-600 border border-gray-400  p-2 m-1 font-semibold rounded-3xl"
           >
             more {">>"}
@@ -126,7 +126,7 @@ const Latest = () => {
           {data
             .filter(
               (latest) =>
-                latest.category === "Political" && latest.status === "Approved"
+                latest.category === "World" && latest.status === "Approved"
             )
             .slice(0, visibleCount)
             .map((latest) => (

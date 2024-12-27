@@ -54,6 +54,18 @@ const NewsPost = () => {
     return date.toLocaleDateString("en-GB", options);
   };
 
+  
+const formatTime = (dateString) => {
+  const date = new Date(dateString);
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+  return `${hours}:${minutes} ${ampm}`;
+};
+
   const timeAgo = (dateString) => {
     const postDate = new Date(dateString);
     const nowDate = new Date();
@@ -84,16 +96,20 @@ const NewsPost = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
+  
   const handleSocialShare = (platform) => {
     const url = window.location.href; // URL of the current page
-    const title = newsData.headlineEn; // Title of the post
+    const title = language === "te" ? newsData.headlineTe : newsData.headlineEn // Title of the post
     const text = `${title} - ${url}`;
+    const photo = newsData.image;
 
     switch (platform) {
       case "facebook":
         window.open(
           `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-            url
+            title,
+            photo,
+            url,
           )}`,
           "_blank"
         );
@@ -101,7 +117,8 @@ const NewsPost = () => {
       case "twitter":
         window.open(
           `https://twitter.com/intent/tweet?url=${encodeURIComponent(
-            url
+            title,
+            url,
           )}&text=${encodeURIComponent(title)}`,
           "_blank"
         );
@@ -109,22 +126,26 @@ const NewsPost = () => {
       case "linkedin":
         window.open(
           `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-            url
+            title,
+            url,
           )}`,
           "_blank"
         );
         break;
       case "email":
         window.location.href = `mailto:?subject=${encodeURIComponent(
-          title
+          title,
+            url,
         )}&body=${encodeURIComponent(text)}`;
         break;
-      case "whatsapp":
-        window.open(
-          `https://wa.me/?text=${encodeURIComponent(text)}`,
-          "_blank"
-        );
-        break;
+        case "whatsapp":
+          const whatsappText = `${title}\n\n${url}`;
+          window.open(
+            `https://wa.me/?text=${encodeURIComponent(whatsappText)}`,
+            "_blank"
+          );
+          break;
+        
       case "instagram":
         alert(
           "Instagram does not support direct sharing via URL. Please share the link manually."
@@ -132,7 +153,9 @@ const NewsPost = () => {
         break;
       case "copy":
         navigator.clipboard
-          .writeText(url)
+          .writeText( title,
+            photo,
+            url,)
           .then(() => {
             alert("Link copied to clipboard!");
           })
@@ -446,10 +469,7 @@ const NewsPost = () => {
             <div className="lg:flex md:flex lg:space-y-0 md:space-y-0 space-y-4 justify-between font-light text-gray-700">
               
               <div className="lg:flex md:flex flex items-center lg:px-0 md:px-0 px-2  lg:gap-10 md:gap-5 gap-2 lg:text-sm md:text-sm text-[10px]">
-                <div>{formatDate(newsData.createdAt)}</div>
-                <div> {timeAgo(newsData.createdAt)}</div>
-                <div >NewsBy: <span className="font-semibold">{newsData.employeeId}</span></div>
-                
+               <div><span className="font-semibold" >{newsData.employeeId}</span> {"|"}  On {formatDate(newsData.createdAt)} {"|"} {formatTime(newsData.createdAt)}  </div>
               </div>
 
 
