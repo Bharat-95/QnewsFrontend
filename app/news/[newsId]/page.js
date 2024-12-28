@@ -421,6 +421,20 @@ const formatTime = (dateString) => {
     }
   };
 
+
+  useEffect(() => {
+    // Check if the language query param is passed in the URL using searchParams
+    const languageParam = searchParams.get("language");
+    if (languageParam === "te") {
+      setLanguage("te");
+    } else {
+      setLanguage("en");
+    }
+  }, [searchParams, setLanguage]); // Add searchParams to the dependency array
+  
+
+
+
   const handleRating = (selectedRating) => {
     const userEmail = localStorage.getItem("email");
     if (!userEmail) {
@@ -433,6 +447,7 @@ const formatTime = (dateString) => {
       alert("You have already rated this news.");
       return;
     }
+    
 
     axios
       .put(
