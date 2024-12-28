@@ -108,7 +108,7 @@ const Latest = () => {
     <div>
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2 w-full">
-          <div className="lg:text-[24px] md:text-[20px] text-[16px] whitespace-nowrap">
+          <div className="lg:text-[24px] md:text-[20px]  text-orange-600 text-[16px]">
             {translations.politicalnews}
           </div>
           <div className="flex-1 h-[1px] bg-gray-400"></div>
