@@ -102,7 +102,7 @@ const formatTime = (dateString) => {
 
   // Construct the URL with the appropriate language query parameter
   const languageParam = language === "te" ? "te" : "en"; // Set the language parameter to 'te' or 'en'
-  const path = `/news/${newsData.slug || newsData.id}?language=${languageParam}`; // Construct URL with language query parameter
+  const path = `/news/${newsData.slug || newsData.newsId}?language=${languageParam}`; // Construct URL with language query parameter
 
   const url = `${baseUrl}${path}`; // Assuming newsData contains the URLs for Telugu (urlTe) and English (urlEn)
   // URL of the current page
