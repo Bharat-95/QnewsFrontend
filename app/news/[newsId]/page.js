@@ -98,7 +98,9 @@ const formatTime = (dateString) => {
 
   
   const handleSocialShare = (platform) => {
-    const url = window.location.href; // URL of the current page
+    const baseUrl = window.location.origin; // Get the base URL (without the path)
+    const path = language === "te" ? newsData.urlTe : newsData.urlEn; // Assuming newsData contains the URLs for Telugu (urlTe) and English (urlEn)
+    const url = `${baseUrl}${path}`; // URL of the current page
     const title = language === "te" ? newsData.headlineTe : newsData.headlineEn // Title of the post
     const text = `${title} - ${url}`;
     const photo = newsData.image;
