@@ -98,13 +98,10 @@ const Trending = () => {
                   className="rounded-md"
                 />
               </div>
-              <div className={`line-clamp-3 text-ellipsis overflow-hidden font-semibold ${language === "te" ? ` ${ramaraja.className} text-[16px]`:` text-[13px]`}`}>
+              <div className={`line-clamp-2 text-ellipsis overflow-hidden font-semibold ${language === "te" ? ` ${ramaraja.className} text-[16px]`:` text-[13px]`}`}>
                 {language === 'te' ? trending.headlineTe : trending.headlineEn}
               </div>
-              <div className="text-[12px] flex justify-between font-light text-gray-500">
-                <p>{formatDate(trending.createdAt)}</p>
-                <p>{timeAgo(trending.createdAt)}</p>
-              </div>
+             
             </Link>
           </div>
         ))
