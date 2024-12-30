@@ -35,7 +35,6 @@ export default function RootLayout({ children }) {
     <html lang="en" className="bg-orange-50">
       <head></head>
       <body className="font-sans">
-        {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-REH7Y6Y3XH"
           strategy="afterInteractive"
@@ -47,7 +46,6 @@ export default function RootLayout({ children }) {
           crossorigin="anonymous"
           strategy="afterInteractive"
         />
-
         <Script
           id="google-analytics"
           strategy="afterInteractive"
@@ -60,49 +58,13 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
-        
         <LanguageProvider>
           <FontWrapper>
-            {/* Header with Ad */}
             <Header />
-            <div className="ad-container">
-              {/* Example: Ad unit in the header */}
-              <ins className="adsbygoogle"
-                  style={{display: 'block', width: '100%', height: '90px'}}
-                  data-ad-client="ca-pub-5147970592590624"
-                  data-ad-slot="XXXXXXXXX"></ins>
-              <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-              </script>
-            </div>
-            
-            {/* Main content */}
+
             <div className="lg:pt-[10%] md:pt-[20%] pt-[35%]">{children}</div>
 
-            {/* Ad Container: Can be placed anywhere like between sections */}
-            <div className="ad-main">
-              {/* Example: Sidebar or any space you want to fill */}
-              <ins className="adsbygoogle"
-                  style={{display: 'block', width: '300px', height: '250px'}}
-                  data-ad-client="ca-pub-5147970592590624"
-                  data-ad-slot="XXXXXXXXX"></ins>
-              <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-              </script>
-            </div>
-            
-            {/* Footer with Ad */}
             <Footer />
-            <div className="ad-footer">
-              {/* Footer Ad */}
-              <ins className="adsbygoogle"
-                  style={{display: 'block', width: '100%', height: '90px'}}
-                  data-ad-client="ca-pub-5147970592590624"
-                  data-ad-slot="XXXXXXXXX"></ins>
-              <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-              </script>
-            </div>
           </FontWrapper>
         </LanguageProvider>
       </body>
