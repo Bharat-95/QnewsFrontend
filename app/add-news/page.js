@@ -19,6 +19,7 @@ const Page = () => {
 
   const categories = [
     translations.selectcategory,
+    translations.spadex,
     translations.home,
     translations.hyderabad,
     translations.politics,

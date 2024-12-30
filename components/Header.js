@@ -152,6 +152,7 @@ const Header = () => {
   };
 
   const navItems = [
+    { path: "/spadex", label: translations.spadex},
     { path: "/", label: translations.home },
     { path: "/hyderabad", label: translations.hyderabad },
     { path: "/telangana", label: translations.telangana },
@@ -403,6 +404,11 @@ const Header = () => {
             <div className="flex items-center w-max p-1 whitespace-nowrap">
               {smallScreenNavItems.map((item, index) => (
                 <React.Fragment key={item.path}>
+                  <li
+                    className="inline-block lg:p-2 md:p-2 p-1 hover:rounded-md hover:bg-orange-600 hover:text-white lg:hover:translate-x-1 lg:hover:-translate-y-1 duration-150"
+                  >
+                    <Link href='/spadex'>{translations.spadex}</Link>
+                  </li>
                   <li
                     className={`inline-block lg:p-2 md:p-2 p-1 hover:rounded-md hover:bg-orange-600 hover:text-white lg:hover:translate-x-1 lg:hover:-translate-y-1 duration-150 ${
                       pathname === item.path

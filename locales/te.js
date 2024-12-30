@@ -172,6 +172,7 @@ const te = {
     sportsmews:'స్పోర్ట్స్ న్యూస్',
     filmnews:'ఫిల్మ్ న్యూస్',
     othernews:'ఇతర వార్తలు',
+    spadex:'స్పేడెక్స్'
 
     
 

@@ -93,8 +93,8 @@ const Trending = () => {
                 <Image
                   alt="No Image Found"
                   src={trending.image}
-                  layout="fill"  // Makes the image fill the container
-                  objectFit="cover"  // Ensures the image covers the full container without stretching
+                  layout="fill"  
+                  objectFit="cover"
                   className="rounded-md"
                 />
               </div>
