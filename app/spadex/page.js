@@ -32,7 +32,7 @@ const Page = () => {
 
   const filteredData = data
     .filter(
-      (news) => news.category === "Spadex" && news.status === "Approved"
+      (news) => news.category === "Spadex" && news.category === "ISRO" && news.status === "Approved"
     )
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
