@@ -174,7 +174,7 @@ const en = {
      sportsmews:'Sports News',
      filmnews:'Film News',
      othernews:'Other News',
-     spadex:"ISRO Spadex",
+     spadex:"ISRO",
 
 
 
