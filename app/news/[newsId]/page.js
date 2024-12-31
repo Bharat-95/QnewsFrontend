@@ -472,6 +472,20 @@ const formatTime = (dateString) => {
   };
 
   return (
+    <div>
+      <div className="w-[100%] mb-[10px]">
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          data-ad-client="ca-pub-5147970592590624"
+          data-ad-slot="7547677944"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+        <script>
+          {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+        </script>
+      </div>
     <div className="lg:mx-10 md:mx-5 mx-4 lg:my-10 flex justify-between">
       <div className="lg:w-[60%] md:space-y-6 lg:space-y-6 space-y-4">
         {newsData ? (
@@ -777,14 +791,14 @@ const formatTime = (dateString) => {
         )}
       </div>
       <div className="lg:w-[30%] md:w-[30%]  lg:block hidden space-y-4">
-        <Link href='https://www.nandak.co' className=" rounded-md shadow-md m-20">
+        {/*<Link href='https://www.nandak.co' className=" rounded-md shadow-md m-20">
           <Image 
           src={Add}
           alt="No Image Found"
           width={500}
           height={500}
           className="rounded-md border border-orange-300"/>
-        </Link> 
+        </Link>*/}
         <h3 className={`font-bold  text-xl flex justify-center ${language === "te" ? `${ramaraja.className} text-[26px]`:``}`}>{translations.related}</h3>
         <div>
           {relatedNews.length > 0 ? (
@@ -819,6 +833,7 @@ const formatTime = (dateString) => {
           )}
         </div>
       </div>
+    </div>
     </div>
   );
 };
