@@ -91,64 +91,63 @@ const Trending = () => {
 
   return (
     <div className="space-y-4 m-[10px]">
-      <div>
-        <ins
-          className="adsbygoogle"
-          style={{ display: "block", width: "400px", height: "100px" }}
-          data-ad-format="autorelaxed"
-          data-ad-client="ca-pub-5147970592590624"
-          data-ad-slot="5927474515"
-        ></ins>
-      </div>
+  <div className="mb-2"> {/* Reduced margin-bottom to bring ad closer to title */}
+    <ins
+      className="adsbygoogle"
+      style={{ display: "block", width: "400px", height: "100px" }}
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-5147970592590624"
+      data-ad-slot="5927474515"
+    ></ins>
+  </div>
 
-      <div className="flex items-center justify-evenly">
-        <div className="h-[1px] w-[20%] bg-gray-400"></div>
-        <div className="lg:text-[20px] md:text-[16px] text-orange-600 text-[16px]">
-          {translations.trendingHeadlines}
-        </div>
-        <div className="h-[1px] w-[20%] bg-gray-400"></div>
-      </div>
-
-      <div className="space-y-10 overflow-y-auto scrollbar-hide">
-        {data.length > 0 ? (
-          data
-            .slice(0, 14)
-            .filter((trending) => trending.status === "Approved")
-            .map((trending) => (
-              <div key={trending.newsId}>
-                <Link
-                  href={`/news/${trending.newsId}`}
-                  passHref
-                  className="flex-shrink-0 space-y-2 gap-10"
-                >
-                  <div className="flex justify-center rounded-md w-full h-[200px] relative">
-                    <Image
-                      alt="No Image Found"
-                      src={trending.image}
-                      layout="fill"
-                      objectFit="cover"
-                      className="rounded-md"
-                    />
-                  </div>
-                  <div
-                    className={`line-clamp-2 text-ellipsis overflow-hidden font-semibold ${
-                      language === "te"
-                        ? `${ramaraja.className} text-[16px]`
-                        : `text-[13px]`
-                    }`}
-                  >
-                    {language === "te"
-                      ? trending.headlineTe
-                      : trending.headlineEn}
-                  </div>
-                </Link>
-              </div>
-            ))
-        ) : (
-          <p className="text-center text-gray-500">Loading trending news...</p>
-        )}
-      </div>
+  <div className="flex items-center justify-evenly mb-2"> {/* Reduced margin-bottom */}
+    <div className="h-[1px] w-[20%] bg-gray-400"></div>
+    <div className="lg:text-[20px] md:text-[16px] text-orange-600 text-[16px]">
+      {translations.trendingHeadlines}
     </div>
+    <div className="h-[1px] w-[20%] bg-gray-400"></div>
+  </div>
+
+  <div className="space-y-10 overflow-y-auto scrollbar-hide">
+    {data.length > 0 ? (
+      data
+        .slice(0, 14)
+        .filter((trending) => trending.status === "Approved")
+        .map((trending) => (
+          <div key={trending.newsId}>
+            <Link
+              href={`/news/${trending.newsId}`}
+              passHref
+              className="flex-shrink-0 space-y-2 gap-10"
+            >
+              <div className="flex justify-center rounded-md w-full h-[200px] relative">
+                <Image
+                  alt="No Image Found"
+                  src={trending.image}
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-md"
+                />
+              </div>
+              <div
+                className={`line-clamp-2 text-ellipsis overflow-hidden font-semibold ${
+                  language === "te"
+                    ? `${ramaraja.className} text-[16px]`
+                    : `text-[13px]`
+                }`}
+              >
+                {language === "te" ? trending.headlineTe : trending.headlineEn}
+              </div>
+            </Link>
+          </div>
+        ))
+    ) : (
+      <p className="text-center text-gray-500">Loading trending news...</p>
+    )}
+  </div>
+</div>
+
   );
 };
 
