@@ -507,9 +507,6 @@ const formatTime = (dateString) => {
               <div className="lg:flex md:flex flex items-center lg:px-0 md:px-0 px-2  lg:gap-10 md:gap-5 gap-2 lg:text-sm md:text-sm text-[10px]">
                <div><span className="font-semibold" >{newsData.employeeId}</span> {"|"}  On {formatDate(newsData.createdAt)} {"|"} {formatTime(newsData.createdAt)}  </div>
               </div>
-
-
-              
              
               
               <div className="flex gap-4 px-2">

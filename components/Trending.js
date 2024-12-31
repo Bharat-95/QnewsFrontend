@@ -94,7 +94,7 @@ const Trending = () => {
       <div>
         <ins
           className="adsbygoogle"
-          style={{ display: "block", width: "400px", height: "200px" }}
+          style={{ display: "block", width: "400px", height: "100px" }}
           data-ad-format="autorelaxed"
           data-ad-client="ca-pub-5147970592590624"
           data-ad-slot="5927474515"
