@@ -92,15 +92,7 @@ const Trending = () => {
   return (
     <div className="space-y-4 m-[10px]">
 
-<div className="mb-2"> {/* Reduced margin-bottom to bring ad closer to title */}
-    <ins
-      className="adsbygoogle"
-      style={{ display: "block", width:"400px", height:"200px"}}
-      data-ad-format="autorelaxed"
-      data-ad-client="ca-pub-5147970592590624"
-      data-ad-slot="7384828746"
-    ></ins>
-  </div>
+
   
   <div className="flex items-center justify-evenly mb-2"> {/* Reduced margin-bottom */}
     <div className="h-[1px] w-[20%] bg-gray-400"></div>
@@ -148,6 +140,15 @@ const Trending = () => {
     ) : (
       <p className="text-center text-gray-500">Loading trending news...</p>
     )}
+  </div>
+  <div className="mb-2"> {/* Reduced margin-bottom to bring ad closer to title */}
+    <ins
+      className="adsbygoogle"
+      style={{ display: "block", width:"400px", height:"200px"}}
+      data-ad-format="autorelaxed"
+      data-ad-client="ca-pub-5147970592590624"
+      data-ad-slot="7384828746"
+    ></ins>
   </div>
 </div>
 
