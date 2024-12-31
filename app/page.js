@@ -18,7 +18,7 @@ const Page = () => {
   return (
     <div className="lg:p-[32px] md:p-[20px] p-[10px] space-y-[32px]">
       {/* AdSense Ad */}
-      <div className="w-[100%] mb-[10px]">
+      <div className="w-screen mb-[10px]">
         <ins
           className="adsbygoogle"
           style={{ display: 'block' }}
