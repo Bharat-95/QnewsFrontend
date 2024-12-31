@@ -144,7 +144,7 @@ const Trending = () => {
   <div className="mb-2"> {/* Reduced margin-bottom to bring ad closer to title */}
     <ins
       className="adsbygoogle"
-      style={{ display: "block", width:"400px", height:"200px"}}
+      style={{ display: "block", width:"400px", height:"20px"}}
       data-ad-format="autorelaxed"
       data-ad-client="ca-pub-5147970592590624"
       data-ad-slot="7384828746"
