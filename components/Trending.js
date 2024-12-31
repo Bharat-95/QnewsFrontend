@@ -91,7 +91,8 @@ const Trending = () => {
 
   return (
     <div className="space-y-4 m-[10px]">
-  <div className="mb-2"> {/* Reduced margin-bottom to bring ad closer to title */}
+  <div className="flex items-center justify-evenly mb-2"> {/* Reduced margin-bottom */}
+    <div className="mb-2"> {/* Reduced margin-bottom to bring ad closer to title */}
     <ins
       className="adsbygoogle"
       style={{ display: "block"}}
@@ -101,7 +102,6 @@ const Trending = () => {
     ></ins>
   </div>
 
-  <div className="flex items-center justify-evenly mb-2"> {/* Reduced margin-bottom */}
     <div className="h-[1px] w-[20%] bg-gray-400"></div>
     <div className="lg:text-[20px] md:text-[16px] text-orange-600 text-[16px]">
       {translations.trendingHeadlines}
