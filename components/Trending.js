@@ -92,12 +92,13 @@ const Trending = () => {
   return (
     <div className="space-y-4 m-[20px]">
       <div>
-      <ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-5147970592590624"
-     data-ad-slot="5927474515"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
+        <ins
+          className="adsbygoogle"
+          style={{ display: "block", width: "300px", height: "200px" }}
+          data-ad-format="autorelaxed"
+          data-ad-client="ca-pub-5147970592590624"
+          data-ad-slot="5927474515"
+        ></ins>
       </div>
 
       <div className="flex items-center justify-evenly">
