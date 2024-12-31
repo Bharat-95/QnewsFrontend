@@ -1,11 +1,12 @@
 import localFont from "next/font/local";
-import Script from "next/script";
+import Script from "next/script"; // Import next/script
 import "./globals.css";
 import { LanguageProvider } from "@/context/languagecontext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Poppins } from "next/font/google";
 import FontWrapper from "@/components/Fontwrapper";
+
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -60,23 +61,6 @@ export default function RootLayout({ children }) {
         <LanguageProvider>
           <FontWrapper>
             <Header />
-            <div className="flex justify-center my-4">
-              <ins
-                className="adsbygoogle"
-                style={{ display: "inline-block", width: "728px", height: "90px" }}
-                data-ad-client="ca-pub-5147970592590624"
-                data-ad-slot="7547677944"
-              ></ins>
-              <Script
-                id="adsbygoogle"
-                strategy="afterInteractive"
-                dangerouslySetInnerHTML={{
-                  __html: `
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                  `,
-                }}
-              />
-            </div>
 
             <div className="lg:pt-[10%] md:pt-[20%] pt-[35%]">{children}</div>
 
