@@ -79,7 +79,7 @@ const Page = () => {
 
   return (
     <div>
-      <div className="lg:h-64 h-32 md:h-56 w-[100%] border border-orange-300 rounded-md shadow-md mb-10">
+      {/*<div className="lg:h-64 h-32 md:h-56 w-[100%] border border-orange-300 rounded-md shadow-md mb-10">
         <Image
           src={advertisement}
           height={500}
@@ -87,7 +87,7 @@ const Page = () => {
           alt="No Image Found"
           className="w-[100%] h-[100%]"
         />
-      </div>
+      </div>*/}
       <div className="lg:flex lg:gap-10 md:gap-5 lg:space-y-0 md:space-y-10 space-y-10">
         {mainPost && (
           <Link
