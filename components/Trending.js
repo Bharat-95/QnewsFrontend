@@ -90,11 +90,11 @@ const Trending = () => {
   }, []);
 
   return (
-    <div className="space-y-4 m-[20px]">
+    <div className="space-y-4 m-[10px]">
       <div>
         <ins
           className="adsbygoogle"
-          style={{ display: "block", width: "300px", height: "200px" }}
+          style={{ display: "block", width: "400px", height: "200px" }}
           data-ad-format="autorelaxed"
           data-ad-client="ca-pub-5147970592590624"
           data-ad-slot="5927474515"
