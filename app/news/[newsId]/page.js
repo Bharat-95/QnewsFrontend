@@ -473,7 +473,7 @@ const formatTime = (dateString) => {
 
   return (
     <div>
-      <div className="w-[100%] border m-[10px]">
+      <div className="w-full border m-[10px]">
         <ins
           className="adsbygoogle"
           style={{ display: 'block' }}
