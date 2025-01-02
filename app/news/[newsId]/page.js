@@ -497,6 +497,7 @@ const formatTime = (dateString) => {
                 width={900}
                 height={500}
                 className="lg:w-[806px] object-contain  w-[100%] rounded-md lg:h-[500px] md:h-[400px] h-[300px]"
+                unoptimized={true}
               />
             </div>
             <div className={`line-clamp-2 font-semibold ${language === "te" ? `${ramaraja.className} text-[30px]`:`text-[24px] `}`}>
@@ -814,6 +815,7 @@ const formatTime = (dateString) => {
                     layout="fill"
                     objectFit="cover"
                     className="object-cover rounded-md shadow-md"
+                    unoptimized={true}
                   />
                 </div>
 
