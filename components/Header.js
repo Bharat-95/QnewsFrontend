@@ -156,7 +156,7 @@ const Header = () => {
     { path: "/spadex", label: translations.spadex },
     { path: "/", label: translations.home },
     { path: "/hyderabad", label: translations.hyderabad },
-    { path: '#', label: translations.telangana, hasDropdown: true },
+    { path: '/telangana', label: translations.telangana, hasDropdown: true },
     { path: "/india", label: translations.india },
     { path: "/world", label: translations.world },
     { path: "/politics", label: translations.politics },
