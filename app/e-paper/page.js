@@ -63,6 +63,7 @@ const PapersPage = () => {
               width={500}
               height={500}
               className="w-full h-48 object-cover rounded-md cursor-pointer"
+              unoptimized={true}
             />
 
             <h3 className="text-xl font-semibold mb-2 mt-4 cursor-pointer">
