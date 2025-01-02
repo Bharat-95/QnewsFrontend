@@ -124,6 +124,7 @@ const Latest = () => {
                   width={300}
                   height={200}
                   className="w-full h-[200px] object-cover shadow-md rounded-md"
+                  unoptimized={true}
                 />
                 <div className={` line-clamp-2 text-ellipsis overflow-hidden hover:underline ${language === "te" ? `${ramaraja.className} text-[16px]`:`text-[13px] font-semibold`} `}>
                   {language === "te" ? latest.headlineTe : latest.headlineEn}

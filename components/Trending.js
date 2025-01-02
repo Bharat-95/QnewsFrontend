@@ -123,6 +123,7 @@ const Trending = () => {
                   layout="fill"
                   objectFit="cover"
                   className="rounded-md"
+                  unoptimized={true}
                 />
               </div>
               <div

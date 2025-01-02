@@ -221,6 +221,7 @@ const Page = () => {
                   height={500}
                   className="w-full h-48 object-cover rounded"
                   onClick={() => document.getElementById('imageInput').click()} // Trigger file input on image click
+                  unoptimized={true}
                 />
                 <input
                   id="imageInput"
