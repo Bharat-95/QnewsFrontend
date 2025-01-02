@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
@@ -8,24 +8,30 @@ import advertisement from "../public/shanarti.png";
 import { Ramaraja } from "next/font/google";
 
 const ramaraja = Ramaraja({
-  subsets: ["latin", "telugu"], 
+  subsets: ["latin", "telugu"],
   weight: "400",
 });
 
 const Page = () => {
   const { language } = useLanguage();
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const fetchData = async () => {
+    setIsLoading(true);
     try {
       const response = await axios.get(
         "https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn"
       );
       const responseData = response.data.data;
-      responseData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); 
+      responseData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // Sort on frontend if needed
       setData(responseData);
-    } catch (error) {
-      console.log("Unable to Fetch News", error);
+      setError(null); // Reset any previous errors
+    } catch (err) {
+      setError("Unable to Fetch News");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -45,21 +51,11 @@ const Page = () => {
     const hoursDifference = Math.floor(difference / (1000 * 60 * 60));
     const daysDifference = Math.floor(difference / (1000 * 60 * 60 * 24));
 
-    if (secondsDifference < 60) {
-      return `${secondsDifference} s`;
-    } else if (minutesDifference < 60) {
-      return `${minutesDifference} m`;
-    } else if (hoursDifference < 24) {
-      return `${hoursDifference} h`;
-    } else if (daysDifference < 30) {
-      return `${daysDifference} d`;
-    } else {
-      return postDate.toLocaleDateString("en-GB", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      });
-    }
+    if (secondsDifference < 60) return `${secondsDifference} s`;
+    if (minutesDifference < 60) return `${minutesDifference} m`;
+    if (hoursDifference < 24) return `${hoursDifference} h`;
+    if (daysDifference < 30) return `${daysDifference} d`;
+    return postDate.toLocaleDateString("en-GB", { year: "numeric", month: "short", day: "numeric" });
   };
 
   useEffect(() => {
@@ -69,17 +65,28 @@ const Page = () => {
   }, []);
 
   const getMainPost = () => {
-    return data.find(post => post.status === "Approved");
+    return data.find((post) => post.status === "Approved");
   };
 
   const mainPost = getMainPost();
-  const latestPosts = data
-    .slice(1, 20)
-    .filter(post => post.status === "Approved" && post.newsId !== mainPost?.newsId); // Remove the main post
+  
+  const latestPosts = useMemo(() => {
+    return data
+      .slice(1, 20)
+      .filter((post) => post.status === "Approved" && post.newsId !== mainPost?.newsId); // Remove the main post
+  }, [data, mainPost]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <div>
-      {/*<div className="lg:h-64 h-32 md:h-56 w-[100%] border border-orange-300 rounded-md shadow-md mb-10">
+      {/* <div className="lg:h-64 h-32 md:h-56 w-[100%] border border-orange-300 rounded-md shadow-md mb-10">
         <Image
           src={advertisement}
           height={500}
@@ -87,7 +94,7 @@ const Page = () => {
           alt="No Image Found"
           className="w-[100%] h-[100%]"
         />
-      </div>*/}
+      </div> */}
       <div className="lg:flex lg:gap-10 md:gap-5 lg:space-y-0 md:space-y-10 space-y-10">
         {mainPost && (
           <Link
@@ -106,6 +113,7 @@ const Page = () => {
                 width={500}
                 height={500}
                 className="w-[100%] lg:h-[420px] md:h-[393px] h-[250px] object-cover rounded-md shadow-md"
+                loading="lazy"  // Enabling lazy loading
               />
             </div>
             <div>
@@ -124,7 +132,6 @@ const Page = () => {
             <div className="flex items-center gap-10 font-light text-gray-500">
               <div>{formatDate(mainPost.createdAt)}</div>
               <div>{timeAgo(mainPost.createdAt)}</div>
-              
             </div>
           </Link>
         )}
@@ -149,6 +156,7 @@ const Page = () => {
                     width={160} // Fixed aspect ratio
                     height={96} // Fixed aspect ratio
                     className="object-cover w-full h-full"
+                    loading="lazy" // Enabling lazy loading
                   />
                 </div>
                 {/* Text container with 60% width */}
@@ -176,5 +184,3 @@ const Page = () => {
 };
 
 export default Page;
-
-
