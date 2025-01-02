@@ -175,11 +175,39 @@ const en = {
      filmnews:'Film News',
      othernews:'Other News',
      spadex:"ISRO",
-
-
-
-
-  
+     adilabad:"Adilabad",
+     bhadradri:"Bhadradri Kothagudem",
+     hanumakonda:"Hanumakonda",
+     hyderabad:"Hyderabad",
+     jagitial:'jagitial',
+     jangoan:"Jangoan",
+     bupalpally:"Jayashankar Bhupalpally",
+     gadwal:"Jogulamba Gadwal",
+     kamareddy:"Kamareddy",
+     karimnagar:"Karimnagar",
+     khammam:"Khammam",
+     bheem:"Kumuram Bheem Asifabad",
+     mahabubabad:"Mahabubabad",
+     mahabubnagar:"Mahabubnagar",
+     mancherial:"Mancherial",
+     medak:"Medak",
+     malkajgiri:"Medchal Malkajgiri",
+     mulugu:"Mulugu",
+     nagarkurnool:"Nagarkurnool",
+     nalgonda:"Nalgonda",
+     narayanpet:"Narayanpet",
+     nirmal:"Nirmal",
+     nizamabad:"Nizamabad",
+     peddapalli:"Peddapalli",
+     sircilla:"Rajanna Sircilla",
+     rangareddy:"Rangareddy",
+     sangareddy:"Sangareddy",
+     siddipet:"Siddipet",
+     suryapet:"Suryapet",
+     vikarabad:"Vikarabad",
+     wanaparthy:"Wanaparthy",
+     warangal:"Warangal",
+     yadadri:"యాదాద్రి భువనగిరి",
   };
   
   export default en;

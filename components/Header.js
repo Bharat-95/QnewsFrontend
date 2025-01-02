@@ -10,6 +10,7 @@ import { useLanguage } from "../context/languagecontext";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useRouter, usePathname } from "next/navigation";
 import { Ramaraja } from "next/font/google";
+import { FaAngleDown } from "react-icons/fa";
 
 const ramaraja = Ramaraja({
   subsets: ["latin", "telugu"],
@@ -152,10 +153,10 @@ const Header = () => {
   };
 
   const navItems = [
-    { path: "/spadex", label: translations.spadex},
+    { path: "/spadex", label: translations.spadex },
     { path: "/", label: translations.home },
     { path: "/hyderabad", label: translations.hyderabad },
-    { path: "/telangana", label: translations.telangana },
+    { path: '#', label: translations.telangana, hasDropdown: true },
     { path: "/india", label: translations.india },
     { path: "/world", label: translations.world },
     { path: "/politics", label: translations.politics },
@@ -164,6 +165,42 @@ const Header = () => {
     { path: "/sports", label: translations.sports },
     { path: "/film", label: translations.film },
     { path: "/others", label: translations.others },
+  ];
+
+  const Districts = [
+    { path: "/adialabad", label: translations.adilabad },
+    { path: "/badradri", label: translations.badradri },
+    { path: "/hanumakonda", label: translations.hanumakonda },
+    { path: "/hyderabad", label: translations.hyderabad },
+    { path: "/jagityal", label: translations.jagityal },
+    { path: "/janagam", label: translations.janagam },
+    { path: "/bhupalpally", label: translations.bhupalpally },
+    { path: "/gadwal", label: translations.gadwal },
+    { path: "/kamareddy", label: translations.kamareddy },
+    { path: "/karimnagar", label: translations.karimnagar },
+    { path: "/khammam", label: translations.khammam },
+    { path: "/bheem", label: translations.bheem },
+    { path: "/mahabubabad", label: translations.mahabubabad },
+    { path: "/mahabubnagar", label: translations.mahabubnagar },
+    { path: "/mancherial", label: translations.mancherial },
+    { path: "/medak", label: translations.medak },
+    { path: "/malkajgiri", label: translations.malkajgiri },
+    { path: "/mulugu", label: translations.mulugu },
+    { path: "/nagarkurnool", label: translations.nagarkurnool },
+    { path: "/nalgonda", label: translations.nalgonda },
+    { path: "/narayanpet", label: translations.narayanpet },
+    { path: "/nirmal", label: translations.nirmal },
+    { path: "/nizamabad", label: translations.nizamabad },
+    { path: "/peddapalli", label: translations.peddapalli },
+    { path: "/sircilla", label: translations.sircilla },
+    { path: "/rangareddy", label: translations.rangareddy },
+    { path: "/sangareddy", label: translations.sangareddy },
+    { path: "/siddipet", label: translations.siddipet },
+    { path: "/suryapet", label: translations.suryapet },
+    { path: "/vikarabad", label: translations.vikarabad },
+    { path: "/wanaparthy", label: translations.wanaparthy },
+    { path: "/warangal", label: translations.warangal },
+    { path: "/yadadri", label: translations.yadadri },
   ];
 
   const smallScreenNavItems = navItems;
@@ -251,7 +288,6 @@ const Header = () => {
                       >
                         {translations.add}
                         <span className="ml-2">&#x25BC;</span>
-                        {/* Down arrow symbol */}
                       </button>
                       {showDropdown && (
                         <div
@@ -356,9 +392,7 @@ const Header = () => {
                         )}
 
                         <li className="hover:text-black/70 hover:transform hover:translate-x-[1px] hover:translate-y-[1px] duration-200">
-                          <Link href="/settings">
-                            {translations.settings}
-                          </Link>
+                          <Link href="/settings">{translations.settings}</Link>
                         </li>
                         <li
                           className="hover:text-black/70 cursor-pointer hover:transform hover:translate-x-[1px] hover:translate-y-[1px] duration-200"
@@ -394,13 +428,15 @@ const Header = () => {
               : `lg:text-[17px] md:text-[14px] text-[14px] ${ramaraja.className}`
           }`}
         >
+       
           <div
             className="flex lg:hidden md:justify-center  w-full overflow-x-auto scrollbar-hide"
             style={{
-              scrollbarWidth: "none", // Firefox
-              msOverflowStyle: "none", // IE and Edge
+              scrollbarWidth: "none", 
+              msOverflowStyle: "none", 
             }}
           >
+           
             <div className="flex items-center w-max p-1 whitespace-nowrap">
               {smallScreenNavItems.map((item, index) => (
                 <React.Fragment key={item.path}>
@@ -421,45 +457,45 @@ const Header = () => {
             </div>
           </div>
 
-
           <div className="flex justify-between items-center w-[100%]">
-  {/* Scrollable Nav Items */}
-  <div className="flex items-center w-[70%] overflow-x-scroll scrollbar-hide space-x-4">
-    {navItems.map((item, index) => (
-      <React.Fragment key={item.path}>
-        <li
-          className={`hidden lg:flex md:hidden justify-between p-2 hover:rounded-md hover:bg-white hover:text-orange-600 hover:translate-x-[1px] hover:-translate-y-[1px] duration-150 ${
-            pathname === item.path
-              ? "bg-white rounded-md text-orange-600"
-              : ""
-          }`}
-        >
-          <Link href={item.path}>{item.label}</Link>
-        </li>
-        {index < navItems.length - 1 && (
-          <span className="hidden lg:flex md:hidden px-2 text-white">
-            |
-          </span>
-        )}
-      </React.Fragment>
-    ))}
-  </div>
-
-  {/* Time and Temperature */}
-  <div className="flex space-x-4 items-center">
-    <li className="lg:flex md:hidden hidden space-x-1 text-white text-[14px]">
-      <TiWeatherCloudy size={20} />
-      <div>{temperature ? `${temperature}°C` : ""}</div>
-    </li>
-    <li className="lg:flex md:hidden justify-between items-center gap-2 hidden text-white">
-      <span>{currentTime}</span>
-      <span>{currentDate}</span>
-    </li>
-  </div>
-</div>
-
-
-         
+            <div className="flex items-center w-[70%] overflow-x-scroll scrollbar-hide space-x-4">
+              {navItems.map((item, index) => (
+                <React.Fragment key={item.path}>
+                  <li
+                    className={`hidden lg:flex md:hidden justify-between p-2 hover:rounded-md hover:bg-white hover:text-orange-600 hover:translate-x-[1px] hover:-translate-y-[1px] duration-150 ${
+                      pathname === item.path
+                        ? "bg-white rounded-md text-orange-600"
+                        : ""
+                    }`}
+                  >
+                    <Link href={item.path} className="flex gap-2 items-center">
+                      {item.label}
+                      {item.hasDropdown && (
+                        <span>
+                          <FaAngleDown />
+                        </span>
+                      )}
+                    </Link>
+                  </li>
+                  {index < navItems.length - 1 && (
+                    <span className="hidden lg:flex md:hidden px-2 text-white">
+                      |
+                    </span>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
+            <div className="flex space-x-4 items-center">
+              <li className="lg:flex md:hidden hidden space-x-1 text-white text-[14px]">
+                <TiWeatherCloudy size={20} />
+                <div>{temperature ? `${temperature}°C` : ""}</div>
+              </li>
+              <li className="lg:flex md:hidden justify-between items-center gap-2 hidden text-white">
+                <span>{currentTime}</span>
+                <span>{currentDate}</span>
+              </li>
+            </div>
+          </div>
         </ul>
       </div>
     </div>

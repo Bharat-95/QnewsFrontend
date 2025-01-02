@@ -172,14 +172,41 @@ const te = {
     sportsmews:'స్పోర్ట్స్ న్యూస్',
     filmnews:'ఫిల్మ్ న్యూస్',
     othernews:'ఇతర వార్తలు',
-    spadex:'ఇస్రో '
-
-    
-
-
-
-
-  };
+    spadex:'ఇస్రో ',
+    adilabad:"ఆదిలాబాద్",
+     bhadradri:"భద్రాద్రి కొత్తగూడెం",
+     hanumakonda:"హనుమకొండ",
+     hyderabad:"హైదరాబాద్",
+     jagitial:'జగిత్యాల',
+     jangoan:"జనగాం",
+     bupalpally:"జయశంకర్ భూపాలపల్లి",
+     gadwal:"జోగులాంబ గద్వాల్",
+     kamareddy:"కామారెడ్డి",
+     karimnagar:"కరీంనగర్",
+     khammam:"ఖమ్మం",
+     bheem:"కొమరం భీమ్",
+     mahabubabad:"మహబూబాబాద్",
+     mahabubnagar:"మహబూబ్‌నగర్",
+     mancherial:"మంచిర్యాల",
+     medak:"మెదక్",
+     malkajgiri:"మెడ్చల్",
+     mulugu:"ములుగు",
+     nagarkurnool:"నాగర్‌కర్నూల్",
+     nalgonda:"నల్గొండ",
+     narayanpet:"నారాయణపేట",
+     nirmal:"నిర్మల్",
+     nizamabad:"నిజామాబాద్",
+     peddapalli:"పెద్దపల్లి",
+     sircilla:"రాజన్న సిరిసిల్ల",
+     rangareddy:"రంగారెడ్డి",
+     sangareddy:"సంగారెడ్డి",
+     siddipet:"సిద్ధిపేట",
+     suryapet:"సూర్యాపేట",
+     vikarabad:"వికారాబాద్",
+     wanaparthy:"వనపర్తి",
+     warangal:"Warangal",
+     yadadri:"Yadadri Bhuvanagiri",
+    };
   
   export default te;
   
