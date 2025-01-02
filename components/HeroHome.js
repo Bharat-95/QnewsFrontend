@@ -151,6 +151,7 @@ const Page = () => {
                     height={96} // Fixed aspect ratio
                     className="object-cover w-full h-full"
                     loading="lazy"
+                    unoptimized={true}
                   />
                 </div>
                 {/* Text container with 60% width */}
