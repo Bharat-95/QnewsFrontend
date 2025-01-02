@@ -140,6 +140,8 @@ const Page = () => {
                   width={500}
                   height={500}
                   className="w-full h-48 object-fit mb-4 rounded"
+                  unoptimized={true}
+                  
                 />
                 <h3 className="text-xl font-semibold">{news.headline}</h3>
               </div>
