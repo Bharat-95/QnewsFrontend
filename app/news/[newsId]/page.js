@@ -500,7 +500,7 @@ const formatTime = (dateString) => {
                 unoptimized={true}
               />
             </div>
-            <div className={`line-clamp-2 font-semibold ${language === "te" ? `${ramaraja.className} text-[30px]`:`text-[24px] `}`}>
+            <div className={`line-clamp-2 font-semibold ${language === "te" ? `${ramaraja.className} lg:text-[30px] md:text-[24px] text-[24px]`:`lg:text-[24px] md:text-[20px] text-[20px]  `}`}>
               {language === "te" ? newsData.headlineTe : newsData.headlineEn}
             </div>
             <div className="lg:flex md:flex lg:space-y-0 md:space-y-0 space-y-4 justify-between font-light text-gray-700">
@@ -767,7 +767,7 @@ const formatTime = (dateString) => {
                 ))}
               </div>
             )}
-            <div className={` pt-5 border-orange-300 border-t-[1px] pb-10 leading-relaxed ${language === "te" ? `text-[22px]`:`text-[18px]`}`}>
+            <div className={` pt-5 border-orange-300 border-t-[1px] pb-10 leading-relaxed ${language === "te" ? `lg:text-[22px] md:text-[20px] text-[20px]`:`lg:text-[18px] md:text-[16px] text-[16px] `}`}>
               {language === "te"
                 ? newsData.newsTe.split("\n").map((line, index) => (
                     <React.Fragment key={index}>

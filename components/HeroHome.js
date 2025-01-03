@@ -113,8 +113,8 @@ const Page = () => {
               <div
                 className={`font-semibold hover:underline line-clamp-2 overflow-hidden text-ellipsis ${
                   language === "en"
-                    ? `text-[24px]`
-                    : `text-[28px] ${ramaraja.className}`
+                    ? `lg:text-[24px] md:text-[20px] text-[20px]`
+                    : `lg:text-[28px] md:text-[24px] text-[24px] ${ramaraja.className}`
                 }`}
               >
                 {language === "en"
