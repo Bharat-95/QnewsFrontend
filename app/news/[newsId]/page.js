@@ -487,16 +487,16 @@ const formatTime = (dateString) => {
         </script>
       </div>
     <div className="lg:mx-10 md:mx-5 mx-4 lg:my-10 flex justify-between">
-      <div className="lg:w-[60%] md:space-y-6 lg:space-y-6 space-y-4">
+      <div className="lg:w-[60%] md:space-y-6 lg:space-y-6 space-y-2">
         {newsData ? (
           <>
-            <div className="lg:w-[806px] w-[100%] lg:h-[500px] md:h-[400px] h-[300px]">
+            <div className="lg:w-[806px] w-[100%] lg:h-[500px] md:h-[400px] h-[250px]">
               <Image
                 alt="No Image Found"
                 src={newsData.image}
                 width={900}
                 height={500}
-                className="lg:w-[806px] object-contain  w-[100%] rounded-md lg:h-[500px] md:h-[400px] h-[300px]"
+                className="lg:w-[806px] object-contain  w-[100%] rounded-md lg:h-[500px] md:h-[400px] h-[250px]"
                 unoptimized={true}
               />
             </div>

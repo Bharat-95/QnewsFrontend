@@ -153,10 +153,8 @@ const Header = () => {
   };
 
   const navItems = [
-    { path: "/spadex", label: translations.spadex },
     { path: "/", label: translations.home },
     { path: "/hyderabad", label: translations.hyderabad },
-    { path: '/telangana', label: translations.telangana, hasDropdown: true },
     { path: "/india", label: translations.india },
     { path: "/world", label: translations.world },
     { path: "/politics", label: translations.politics },
@@ -438,10 +436,11 @@ const Header = () => {
           >
            
             <div className="flex items-center w-max p-1 whitespace-nowrap">
+            <div className="flex items-center gap-2">{translations.telangana} <FaAngleDown /> {"|"}</div>
               {smallScreenNavItems.map((item, index) => (
                 <React.Fragment key={item.path}>
                   <li
-                    className={`inline-block lg:p-2 md:p-2 p-1 hover:rounded-md hover:bg-orange-600 hover:text-white lg:hover:translate-x-1 lg:hover:-translate-y-1 duration-150 ${
+                    className={`inline-block lg:p-2 md:p-2 py-1 px-2 mx-1 hover:rounded-md hover:bg-white hover:text-orange-600 lg:hover:translate-x-1 lg:hover:-translate-y-1 duration-150 ${
                       pathname === item.path
                         ? "bg-white rounded-md text-orange-600"
                         : ""
@@ -458,7 +457,8 @@ const Header = () => {
           </div>
 
           <div className="flex justify-between items-center w-[100%]">
-            <div className="flex items-center w-[70%] overflow-x-scroll scrollbar-hide space-x-4">
+            <div className="lg:flex items-center gap-2 md:hidden hidden ">{translations.telangana} <FaAngleDown /> {"|"}</div>
+            <div className="flex items-center w-[70%] overflow-x-scroll scrollbar-hide space-x-2">
               {navItems.map((item, index) => (
                 <React.Fragment key={item.path}>
                   <li
@@ -470,11 +470,6 @@ const Header = () => {
                   >
                     <Link href={item.path} className="flex gap-2 items-center">
                       {item.label}
-                      {item.hasDropdown && (
-                        <span>
-                          <FaAngleDown />
-                        </span>
-                      )}
                     </Link>
                   </li>
                   {index < navItems.length - 1 && (

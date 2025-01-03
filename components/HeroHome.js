@@ -46,13 +46,13 @@ const Page = () => {
     const daysDifference = Math.floor(difference / (1000 * 60 * 60 * 24));
 
     if (secondsDifference < 60) {
-      return `${secondsDifference} s`;
+      return `${secondsDifference} s ago`;
     } else if (minutesDifference < 60) {
-      return `${minutesDifference} m`;
+      return `${minutesDifference} m ago`;
     } else if (hoursDifference < 24) {
-      return `${hoursDifference} h`;
+      return `${hoursDifference} h ago`;
     } else if (daysDifference < 30) {
-      return `${daysDifference} d`;
+      return `${daysDifference} d ago`;
     } else {
       return postDate.toLocaleDateString("en-GB", {
         year: "numeric",
@@ -74,7 +74,7 @@ const Page = () => {
 
   const mainPost = getMainPost();
   const latestPosts = data
-    .slice(1, 20)
+    .slice(1, 40)
     .filter(post => post.status === "Approved" && post.newsId !== mainPost?.newsId); // Remove the main post
 
   return (
@@ -142,19 +142,19 @@ const Page = () => {
               className=""
             >
               <div className="flex w-full gap-4 pb-4">
-                {/* Image container with 40% width */}
+        
                 <div className="w-[30%] h-24 overflow-hidden rounded-md flex items-center justify-center bg-gray-200">
                   <Image
                     alt="No Image Found"
                     src={post.image}
-                    width={160} // Fixed aspect ratio
-                    height={96} // Fixed aspect ratio
+                    width={160} 
+                    height={96}
                     className="object-cover w-full h-full"
                     loading="lazy"
                     unoptimized={true}
                   />
                 </div>
-                {/* Text container with 60% width */}
+             
                 <div className="w-[70%]">
                   <div
                     className={`font-semibold hover:underline line-clamp-2 overflow-hidden text-ellipsis ${
