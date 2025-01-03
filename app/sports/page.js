@@ -62,6 +62,7 @@ const Page = () => {
                   width={600}
                   height={400}
                   className="object-cover w-full h-full rounded-lg"
+                  unoptimized={true}
                 />
               </div>
               <div className={`  font-bold ${language === "te"? `${ramaraja.className} text-[34px]`:`text-[30px] md:text-2xl lg:text-3xl`}`}>
@@ -106,6 +107,7 @@ const Page = () => {
                       width={200}
                       height={150}
                       className="object-cover w-full lg:h-48 h-28 md:h-40 rounded-md"
+                      unoptimized={true}
                     />
                   </Link>
                 </div>
@@ -133,6 +135,7 @@ const Page = () => {
                     width={400}
                     height={300}
                     className="object-cover w-full h-full rounded-md"
+                    unoptimized={true}
                   />
                 </Link>
               </div>
