@@ -205,7 +205,9 @@ const te = {
      vikarabad:"వికారాబాద్",
      wanaparthy:"వనపర్తి",
      warangal:"Warangal",
-     yadadri:"Yadadri Bhuvanagiri",
+     yadadri:"యాదాద్రి భువనగిరి",
+     districts:"జిల్లా",
+     selectdistrict:"జిల్లాను ఎంచుకోండి"
     };
   
   export default te;

@@ -186,7 +186,7 @@ const en = {
      kamareddy:"Kamareddy",
      karimnagar:"Karimnagar",
      khammam:"Khammam",
-     bheem:"Kumuram Bheem Asifabad",
+     bheem:"Komaram Bheem Asifabad",
      mahabubabad:"Mahabubabad",
      mahabubnagar:"Mahabubnagar",
      mancherial:"Mancherial",
@@ -207,7 +207,9 @@ const en = {
      vikarabad:"Vikarabad",
      wanaparthy:"Wanaparthy",
      warangal:"Warangal",
-     yadadri:"యాదాద్రి భువనగిరి",
+     yadadri:"Yadadri Bhuvanagiri",
+     districts:"District",
+     selectdistrict:"Select District"
   };
   
   export default en;

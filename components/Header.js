@@ -31,11 +31,9 @@ const Header = () => {
   const pathname = usePathname();
   const [showDropdown, setShowDropdown] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [districtsOpen, setDistrictsOpen] = useState(false);
 
-  const getActiveClass = (href) => {
-    return router.pathname === href ? "active-tab" : "";
-  };
-
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -103,7 +101,7 @@ const Header = () => {
     };
   }, []);
 
-  useEffect(() => {
+  {/*useEffect(() => {
     const fetchWeather = async () => {
       try {
         const response = await fetch(
@@ -121,7 +119,7 @@ const Header = () => {
     };
 
     fetchWeather();
-  }, []);
+  }, []);*/}
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -137,6 +135,7 @@ const Header = () => {
     event.stopPropagation();
     setMenu(!menu);
   };
+  
 
   const handleSignOut = () => {
     localStorage.removeItem("token");
@@ -152,9 +151,15 @@ const Header = () => {
     setMenu(false);
   };
 
+  const handleDistricts = () => {
+    setDistrictsOpen(!districtsOpen);
+  };
+
+
   const navItems = [
     { path: "/", label: translations.home },
     { path: "/hyderabad", label: translations.hyderabad },
+    { path: "/telangana", label: translations.telangana },
     { path: "/india", label: translations.india },
     { path: "/world", label: translations.world },
     { path: "/politics", label: translations.politics },
@@ -166,39 +171,39 @@ const Header = () => {
   ];
 
   const Districts = [
-    { path: "/adialabad", label: translations.adilabad },
-    { path: "/badradri", label: translations.badradri },
-    { path: "/hanumakonda", label: translations.hanumakonda },
-    { path: "/hyderabad", label: translations.hyderabad },
-    { path: "/jagityal", label: translations.jagityal },
-    { path: "/janagam", label: translations.janagam },
-    { path: "/bhupalpally", label: translations.bhupalpally },
-    { path: "/gadwal", label: translations.gadwal },
-    { path: "/kamareddy", label: translations.kamareddy },
-    { path: "/karimnagar", label: translations.karimnagar },
-    { path: "/khammam", label: translations.khammam },
-    { path: "/bheem", label: translations.bheem },
-    { path: "/mahabubabad", label: translations.mahabubabad },
-    { path: "/mahabubnagar", label: translations.mahabubnagar },
-    { path: "/mancherial", label: translations.mancherial },
-    { path: "/medak", label: translations.medak },
-    { path: "/malkajgiri", label: translations.malkajgiri },
-    { path: "/mulugu", label: translations.mulugu },
-    { path: "/nagarkurnool", label: translations.nagarkurnool },
-    { path: "/nalgonda", label: translations.nalgonda },
-    { path: "/narayanpet", label: translations.narayanpet },
-    { path: "/nirmal", label: translations.nirmal },
-    { path: "/nizamabad", label: translations.nizamabad },
-    { path: "/peddapalli", label: translations.peddapalli },
-    { path: "/sircilla", label: translations.sircilla },
-    { path: "/rangareddy", label: translations.rangareddy },
-    { path: "/sangareddy", label: translations.sangareddy },
-    { path: "/siddipet", label: translations.siddipet },
-    { path: "/suryapet", label: translations.suryapet },
-    { path: "/vikarabad", label: translations.vikarabad },
-    { path: "/wanaparthy", label: translations.wanaparthy },
-    { path: "/warangal", label: translations.warangal },
-    { path: "/yadadri", label: translations.yadadri },
+    { path: "/Adilabad", label: translations.adilabad },
+    { path: "/Bhadradri Kothagudem", label: translations.bhadradri },
+    { path: "/Hanumakonda", label: translations.hanumakonda },
+    { path: "/Hyderabad", label: translations.hyderabad },
+    { path: "/Jagityal", label: translations.jagitial },
+    { path: "/Janagam", label: translations.jangoan },
+    { path: "/Jayashankar Bhupalpally", label: translations.bupalpally },
+    { path: "/Jogulamba Gadwal", label: translations.gadwal },
+    { path: "/Kamareddy", label: translations.kamareddy },
+    { path: "/Karimnagar", label: translations.karimnagar },
+    { path: "/Khammam", label: translations.khammam },
+    { path: "/Komaram Bheem Asifabad", label: translations.bheem },
+    { path: "/Mahabubabad", label: translations.mahabubabad },
+    { path: "/Mahabubnagar", label: translations.mahabubnagar },
+    { path: "/Mancherial", label: translations.mancherial },
+    { path: "/Medak", label: translations.medak },
+    { path: "/Medchal Malkajgiri", label: translations.malkajgiri },
+    { path: "/Mulugu", label: translations.mulugu },
+    { path: "/Nagarkurnool", label: translations.nagarkurnool },
+    { path: "/Nalgonda", label: translations.nalgonda },
+    { path: "/Narayanpet", label: translations.narayanpet },
+    { path: "/Nirmal", label: translations.nirmal },
+    { path: "/Nizamabad", label: translations.nizamabad },
+    { path: "/Peddapalli", label: translations.peddapalli },
+    { path: "/Rajanna Sircilla", label: translations.sircilla },
+    { path: "/Rangareddy", label: translations.rangareddy },
+    { path: "/Sangareddy", label: translations.sangareddy },
+    { path: "/Siddipet", label: translations.siddipet },
+    { path: "/Suryapet", label: translations.suryapet },
+    { path: "/Vikarabad", label: translations.vikarabad },
+    { path: "/Wanaparthy", label: translations.wanaparthy },
+    { path: "/Warangal", label: translations.warangal },
+    { path: "/Yadadri Bhuvanagiri", label: translations.yadadri },
   ];
 
   const smallScreenNavItems = navItems;
@@ -426,17 +431,15 @@ const Header = () => {
               : `lg:text-[17px] md:text-[14px] text-[14px] ${ramaraja.className}`
           }`}
         >
-       
           <div
             className="flex lg:hidden md:justify-center  w-full overflow-x-auto scrollbar-hide"
             style={{
-              scrollbarWidth: "none", 
-              msOverflowStyle: "none", 
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
             }}
           >
-           
             <div className="flex items-center w-max p-1 whitespace-nowrap">
-            <div className="flex items-center gap-2">{translations.telangana} <FaAngleDown /> {"|"}</div>
+              <div className="flex items-center gap-2" onClick={handleDistricts}>{translations.districts}   <FaAngleDown /> {"|"}</div>
               {smallScreenNavItems.map((item, index) => (
                 <React.Fragment key={item.path}>
                   <li
@@ -456,9 +459,32 @@ const Header = () => {
             </div>
           </div>
 
-          <div className="flex justify-between items-center w-[100%]">
-            <div className="lg:flex items-center gap-2 md:hidden hidden ">{translations.telangana} <FaAngleDown /> {"|"}</div>
-            <div className="flex items-center w-[70%] overflow-x-scroll scrollbar-hide space-x-2">
+          <div className="flex justify-between items-center">
+            <div
+              className="lg:flex items-center gap-2 md:hidden hidden relative"
+              onClick={handleDistricts}
+            >
+              {translations.districts} <FaAngleDown /> {"|"}
+            </div>
+
+            {districtsOpen && (
+              <div className="absolute top-full left-0 w-72 bg-white text-black opacity-90  overflow-scroll scrollbar-hide h-screen pb-40 pt-4">
+                <div className="flex flex-col ">
+                  {Districts.map((item) => (
+                    <div key={item.path} className="py-2">
+                      <Link
+                        href={`/districts/${item.path}`}
+                        className={`px-10 hover:text-orange-600 font-semibold block w-full ${language === "te"? "text-[16px]":"text-[14px]"}`}
+                      >
+                        {item.label}
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className="flex items-center space-x-2 ml-2">
               {navItems.map((item, index) => (
                 <React.Fragment key={item.path}>
                   <li
@@ -480,7 +506,7 @@ const Header = () => {
                 </React.Fragment>
               ))}
             </div>
-            <div className="flex space-x-4 items-center">
+            {/*<div className="flex space-x-4 items-center">
               <li className="lg:flex md:hidden hidden space-x-1 text-white text-[14px]">
                 <TiWeatherCloudy size={20} />
                 <div>{temperature ? `${temperature}°C` : ""}</div>
@@ -489,7 +515,7 @@ const Header = () => {
                 <span>{currentTime}</span>
                 <span>{currentDate}</span>
               </li>
-            </div>
+            </div>*/}
           </div>
         </ul>
       </div>

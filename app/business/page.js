@@ -42,7 +42,7 @@ const Page = () => {
     .slice(0, 4);
 
     const mostRecentPost = filteredData[0];
-    const otherPosts = filteredData.slice(1, 11);
+    const otherPosts = filteredData.slice(1, 61);
 
   return (
     <div className="flex min-h-screen  flex-col lg:flex-row gap-8 mx-4 md:mx-6 lg:mx-10 my-6 md:my-8 lg:my-10">
@@ -60,7 +60,7 @@ const Page = () => {
                   unoptimized={true}
                 />
               </div>
-              <div className={` font-bold ${language === "te"? `${ramaraja.className} text-[34px]`:`text-[30px]  md:text-2xl lg:text-3xl`}`}>
+              <div className={` font-bold line-clamp-2 ${language === "te"? `${ramaraja.className} lg:text-[28px] md:text-[24px] text-[24px]`:`lg:text-[24px] md:text-[20px] text-[20px]`}`}>
                 {language === "te"
                   ? mostRecentPost.headlineTe
                   : mostRecentPost.headlineEn}
@@ -74,7 +74,7 @@ const Page = () => {
           </div>
         )}
 
-        <div className="w-full flex flex-col gap-6">
+        <div className="w-full flex flex-col gap-6 overflow-x-scroll h-screen">
           {otherPosts.length > 0 ? (
             otherPosts.map((news) => (
               <div

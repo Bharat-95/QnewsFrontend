@@ -5,6 +5,7 @@ import { useLanguage } from "@/context/languagecontext";
 import Image from "next/image";
 import Link from "next/link";
 import { Ramaraja } from "next/font/google";
+import { useParams } from "next/navigation";
 
 
 const ramaraja = Ramaraja({
@@ -15,6 +16,9 @@ const ramaraja = Ramaraja({
 const Page = () => {
   const [data, setData] = useState([]);
   const { language, translations } = useLanguage();
+  const {district} = useParams();
+  const decodedDistrict = decodeURIComponent(district);
+  console.log(decodedDistrict);
 
   const fetchData = async () => {
     try {
@@ -32,7 +36,7 @@ const Page = () => {
 
   const filteredData = data
   .filter(
-    (news) => news.category === "Political" && news.status === "Approved"
+    (news) => news.category === decodedDistrict && news.status === "Approved"
   )
   .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
@@ -43,6 +47,8 @@ const Page = () => {
 
     const mostRecentPost = filteredData[0];
     const otherPosts = filteredData.slice(1, 61);
+
+    console.log("filteredData", filteredData);
 
   return (
     <div className="flex min-h-screen  flex-col lg:flex-row gap-8 mx-4 md:mx-6 lg:mx-10 my-6 md:my-8 lg:my-10">

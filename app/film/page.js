@@ -16,7 +16,6 @@ const Page = () => {
   const [data, setData] = useState([]);
   const { language, translations } = useLanguage();
 
-  // Fetch data from API
   const fetchData = async () => {
     try {
       const response = await axios.get("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn");
@@ -31,26 +30,23 @@ const Page = () => {
     fetchData();
   }, []);
 
-  // Filter and sort the data
   const filteredData = data
-    .filter(
-      (news) => news.category === "Film" && news.status === "Approved"
-    )
-    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // Sort posts by date in descending order
+  .filter(
+    (news) => news.category === "Film" && news.status === "Approved"
+  )
+  .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   const trendingNews = [...data]
     .filter((news) => news.status === "Approved")
-    .sort((a, b) => b.likes - a.likes) // Sort by most likes
-    .slice(0, 4); // Top 4 trending news
+    .sort((a, b) => b.likes - a.likes)
+    .slice(0, 4);
 
-  const mostRecentPost = filteredData[0]; // The most recent post
-  const otherPosts = filteredData.slice(1, 11); // Limit to the next 6 posts
+    const mostRecentPost = filteredData[0];
+    const otherPosts = filteredData.slice(1, 61);
 
   return (
-    <div className="flex min-h-screen flex-col lg:flex-row gap-8 mx-4 md:mx-6 lg:mx-10 my-6 md:my-8 lg:my-10">
-      {/* 70% Section: Latest News */}
+    <div className="flex min-h-screen  flex-col lg:flex-row gap-8 mx-4 md:mx-6 lg:mx-10 my-6 md:my-8 lg:my-10">
       <div className="flex-[7]">
-        {/* Show most recent post */}
         {mostRecentPost && (
           <div className="w-full mb-8 md:mb-10">
             <Link href={`/news/${mostRecentPost.newsId}`}>
@@ -60,11 +56,11 @@ const Page = () => {
                   alt="No Image Found"
                   width={600}
                   height={400}
-                  className="object-contain w-full h-full rounded-lg"
+                  className="object-cover w-full h-full rounded-lg"
                   unoptimized={true}
                 />
               </div>
-              <div className={`  font-bold ${language === "te"? `${ramaraja.className} text-[34px]`:`md:text-2xl lg:text-3xl`}`}>
+              <div className={` font-bold line-clamp-2 ${language === "te"? `${ramaraja.className} lg:text-[28px] md:text-[24px] text-[24px]`:`lg:text-[24px] md:text-[20px] text-[20px]`}`}>
                 {language === "te"
                   ? mostRecentPost.headlineTe
                   : mostRecentPost.headlineEn}
@@ -78,15 +74,13 @@ const Page = () => {
           </div>
         )}
 
-        {/* Show other posts */}
-        <div className="w-full flex flex-col gap-6">
+        <div className="w-full flex flex-col gap-6 overflow-x-scroll h-screen">
           {otherPosts.length > 0 ? (
             otherPosts.map((news) => (
               <div
                 key={news.newsId}
                 className="flex gap-4 items-center border border-orange-300 rounded-md"
               >
-                {/* 70% Text Section */}
                 <div className="flex-[7] p-4">
                   <Link href={`/news/${news.newsId}`}>
                     <div className={`font-bold line-clamp-1 hover:underline  ${language === "te" ?`text-[20px] ${ramaraja.className}`:`text-[20px] md:text-base`}`}>
@@ -97,7 +91,6 @@ const Page = () => {
                     </div>
                   </Link>
                 </div>
-                {/* 30% Image Section */}
                 <div className="flex-[3]">
                   <Link href={`/news/${news.newsId}`}>
                     <Image
@@ -105,7 +98,7 @@ const Page = () => {
                       alt="No Image Found"
                       width={200}
                       height={150}
-                      className="object-contain w-full lg:h-48 h-28 md:h-40 rounded-md"
+                      className="object-cover w-full lg:h-48 h-28 md:h-40 rounded-md"
                       unoptimized={true}
                     />
                   </Link>
@@ -126,6 +119,7 @@ const Page = () => {
               key={news.newsId}
               className="flex flex-col gap-2 p-4 rounded-md mb-4"
             >
+              {/* Image Section */}
               <div className="w-full h-[160px] md:h-[200px] lg:h-[250px]">
                 <Link href={`/news/${news.newsId}`}>
                   <Image
@@ -138,6 +132,7 @@ const Page = () => {
                   />
                 </Link>
               </div>
+              {/* Text Section */}
               <div className="flex-grow">
                 <Link href={`/news/${news.newsId}`}>
                   <div className={`font-bold hover:underline ${language === "te" ? `${ramaraja.className} text-[20px]`:`text-xs md:text-sm` }`}>

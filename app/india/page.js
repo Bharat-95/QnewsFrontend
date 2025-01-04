@@ -12,7 +12,6 @@ const ramaraja = Ramaraja({
   weight: "400", 
 });
 
-
 const Page = () => {
   const [data, setData] = useState([]);
   const { language, translations } = useLanguage();
@@ -32,21 +31,21 @@ const Page = () => {
   }, []);
 
   const filteredData = data
-    .filter(
-      (news) => news.category === "India" && news.status === "Approved"
-    )
-    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  .filter(
+    (news) => news.category === "India" && news.status === "Approved"
+  )
+  .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   const trendingNews = [...data]
     .filter((news) => news.status === "Approved")
     .sort((a, b) => b.likes - a.likes)
-    .slice(0, 4); 
+    .slice(0, 4);
 
-  const mostRecentPost = filteredData[0];
-  const otherPosts = filteredData.slice(1, 11);
+    const mostRecentPost = filteredData[0];
+    const otherPosts = filteredData.slice(1, 61);
 
   return (
-    <div className="flex min-h-screen flex-col lg:flex-row gap-8 mx-4 md:mx-6 lg:mx-10 my-6 md:my-8 lg:my-10">
+    <div className="flex min-h-screen  flex-col lg:flex-row gap-8 mx-4 md:mx-6 lg:mx-10 my-6 md:my-8 lg:my-10">
       <div className="flex-[7]">
         {mostRecentPost && (
           <div className="w-full mb-8 md:mb-10">
@@ -61,12 +60,12 @@ const Page = () => {
                   unoptimized={true}
                 />
               </div>
-              <div className={` font-bold ${language === "te"? `${ramaraja.className} text-[34px]`:`text-[30px]  md:text-2xl lg:text-3xl`}`}>
+              <div className={` font-bold line-clamp-2 ${language === "te"? `${ramaraja.className} lg:text-[28px] md:text-[24px] text-[24px]`:`lg:text-[24px] md:text-[20px] text-[20px]`}`}>
                 {language === "te"
                   ? mostRecentPost.headlineTe
                   : mostRecentPost.headlineEn}
               </div>
-              <div className={`line-clamp-2 mt-2 ${language === "te" ? `text-[20px]`:`text-sm md:text-lg`}`}>
+              <div className={`line-clamp-2  mt-2 ${language === "te" ? `text-[20px]`:`text-sm  md:text-lg`}`}>
                 {language === "te"
                   ? mostRecentPost.newsTe
                   : mostRecentPost.newsEn}
@@ -75,7 +74,7 @@ const Page = () => {
           </div>
         )}
 
-        <div className="w-full flex flex-col gap-6">
+        <div className="w-full flex flex-col gap-6 overflow-x-scroll h-screen">
           {otherPosts.length > 0 ? (
             otherPosts.map((news) => (
               <div
@@ -120,6 +119,7 @@ const Page = () => {
               key={news.newsId}
               className="flex flex-col gap-2 p-4 rounded-md mb-4"
             >
+              {/* Image Section */}
               <div className="w-full h-[160px] md:h-[200px] lg:h-[250px]">
                 <Link href={`/news/${news.newsId}`}>
                   <Image
@@ -132,6 +132,7 @@ const Page = () => {
                   />
                 </Link>
               </div>
+              {/* Text Section */}
               <div className="flex-grow">
                 <Link href={`/news/${news.newsId}`}>
                   <div className={`font-bold hover:underline ${language === "te" ? `${ramaraja.className} text-[20px]`:`text-xs md:text-sm` }`}>

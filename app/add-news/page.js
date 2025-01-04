@@ -13,6 +13,7 @@ const Page = () => {
   const [newsEn, setNewsEn] = useState("");
   const [newsTe, setNewsTe] = useState("");
   const [category, setCategory] = useState("");
+  const [selectedDistrict, setSelectedDistrict] = useState("");
   const [employeeId, setEmployeeId] = useState("");
   const [image, setImage] = useState(null);
   const [loading, setIsLoading] = useState(false);
@@ -21,6 +22,7 @@ const Page = () => {
     translations.selectcategory,
     translations.spadex,
     translations.home,
+    translations.districts,
     translations.hyderabad,
     translations.politics,
     translations.telangana,
@@ -33,8 +35,41 @@ const Page = () => {
     translations.others,
   ];
 
-  
-
+  const districts = [
+    translations.adilabad,
+    translations.bhadradri,
+    translations.hanumakonda,
+    translations.hyderabad,
+    translations.jagitial,
+    translations.jangoan,
+    translations.bupalpally,
+    translations.gadwal,
+    translations.kamareddy,
+    translations.karimnagar,
+    translations.khammam,
+    translations.bheem,
+    translations.mahabubabad,
+    translations.mahabubnagar,
+    translations.mancherial,
+    translations.medak,
+    translations.malkajgiri,
+    translations.mulugu,
+    translations.nagarkurnool,
+    translations.nalgonda,
+    translations.narayanpet,
+    translations.nirmal,
+    translations.nizamabad,
+    translations.peddapalli,
+    translations.sircilla,
+    translations.rangareddy,
+    translations.sangareddy,
+    translations.siddipet,
+    translations.suryapet,
+    translations.vikarabad,
+    translations.wanaparthy,
+    translations.warangal,
+    translations.yadadri,
+  ];
 
   useEffect(() => {
     const role = localStorage.getItem("role");
@@ -55,20 +90,32 @@ const Page = () => {
     e.preventDefault();
     setIsLoading(true);
 
+    if (category === translations.districts && !selectedDistrict) {
+      alert(translations.selectdistrict);
+      setIsLoading(false);
+      return;
+    }
+
     const formData = new FormData();
     formData.append("headlineEn", headlineEn);
     formData.append("headlineTe", headlineTe);
     formData.append("newsEn", newsEn);
     formData.append("newsTe", newsTe);
-    formData.append("category", category);
+    formData.append(
+      "category",
+      category === translations.districts ? selectedDistrict : category
+    ); // Send the district name as category if selected
     formData.append("employeeId", employeeId);
     formData.append("image", image);
 
     try {
-      const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        "https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (response.ok) {
         alert("News added successfully!");
@@ -78,6 +125,7 @@ const Page = () => {
         setNewsEn("");
         setNewsTe("");
         setCategory("");
+        setSelectedDistrict("");
         setEmployeeId("");
         setImage("");
       } else {
@@ -171,6 +219,27 @@ const Page = () => {
             </select>
           </div>
 
+          {/* Conditional rendering for districts */}
+          {category === translations.districts && (
+            <div>
+              <label className="block text-[18px] mb-2">
+                {translations.districts} :
+              </label>
+              <select
+                className="w-full border bg-orange-50 border-orange-300 p-2 rounded-md"
+                value={selectedDistrict}
+                onChange={(e) => setSelectedDistrict(e.target.value)}
+                required
+              >
+                <option value="">{translations.selectdistrict}</option>
+                {districts.map((district, index) => (
+                  <option key={index} value={district}>
+                    {district}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
 
           <div>
             <label className="block text-[18px] mb-2">
@@ -185,7 +254,6 @@ const Page = () => {
               required
             />
           </div>
-
 
           <div>
             <label className="block text-[18px] mb-2">
