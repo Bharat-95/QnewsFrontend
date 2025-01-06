@@ -204,7 +204,7 @@ const te = {
      suryapet:"సూర్యాపేట",
      vikarabad:"వికారాబాద్",
      wanaparthy:"వనపర్తి",
-     warangal:"Warangal",
+     warangal:"వరంగల్",
      yadadri:"యాదాద్రి భువనగిరి",
      districts:"జిల్లా",
      selectdistrict:"జిల్లాను ఎంచుకోండి"
