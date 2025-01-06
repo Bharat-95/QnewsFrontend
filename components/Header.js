@@ -175,7 +175,7 @@ const Header = () => {
     { path: "/Bhadradri Kothagudem", label: translations.bhadradri },
     { path: "/Hanumakonda", label: translations.hanumakonda },
     { path: "/Hyderabad", label: translations.hyderabad },
-    { path: "/Jagityal", label: translations.jagitial },
+    { path: "/jagitial", label: translations.jagitial },
     { path: "/Janagam", label: translations.jangoan },
     { path: "/Jayashankar Bhupalpally", label: translations.bupalpally },
     { path: "/Jogulamba Gadwal", label: translations.gadwal },
