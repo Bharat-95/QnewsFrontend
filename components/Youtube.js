@@ -36,7 +36,7 @@ const Latest = () => {
   const [visibleCount, setVisibleCount] = useState(20);
   const loaderRef = useRef(null); 
 
-  {/*const fetchData = async () => {
+  const fetchData = async () => {
     try {
       const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/video", { timeout: 20000 });
       const responseData = await response.json();
@@ -48,9 +48,9 @@ const Latest = () => {
     } catch (error) {
       console.log("Unable to fetch the Latest News", error);
     }
-  }; */}
+  }; 
 
-  const fetchData = async () => {
+  {/*const fetchData = async () => {
     try {
       const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/video", { timeout: 20000 });
       const responseData = await response.json();
@@ -102,7 +102,7 @@ const Latest = () => {
     } catch (error) {
       console.log("Unable to fetch the Latest News", error);
     }
-  };
+  }; */}
   
   
   
@@ -155,37 +155,8 @@ const Latest = () => {
 
   <div className="overflow-x-auto scrollbar-hide sm:w-screen lg:w-auto md:w-auto py-4">
     <div className="flex gap-4">
-      {/* Filter videos that include "BC" in the title, case-insensitive */}
-      {data
-        .filter((video) => video.title.toLowerCase().includes("bc"))
-        .map((video) => (
-          <div key={video.videoId} className="flex-shrink-0 w-[80%] md:w-[40%] lg:w-[30%] md:border border-orange-600 lg:p-3 p-2 rounded-md shadow-lg space-y-2 hover:transform duration-500 hover:translate-x-2 hover:-translate-y-2">
-            <div className="w-full">
-              {/* YouTube Video Embed */}
-              <iframe
-                width="100%"
-                height="200"
-                src={`https://www.youtube.com/embed/${video.videoId}`}
-                title={video.title}
-                frameBorder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="rounded-md"
-              ></iframe>
-            </div>
-            <div className={`line-clamp-2 text-ellipsis overflow-hidden hover:underline ${language === "te" ? `${ramaraja.className} text-[16px]` : `text-[13px] font-semibold`}`}>
-              {video.title}
-            </div>
-            <div className="text-[12px] flex justify-between font-light text-gray-500">
-              <p>{formatDate(video.published)}</p>
-              <p>{timeAgo(video.published)}</p>
-            </div>
-          </div>
-      ))}
-
       {/* Display other videos */}
       {data.slice(0, visibleCount)
-        .filter((video) => !video.title.toLowerCase().includes("bc")) // exclude "BC" videos already shown
         .map((video) => (
           <div key={video.videoId} className="flex-shrink-0 w-[80%] md:w-[40%] lg:w-[30%] md:border border-orange-600 lg:p-3 p-2 rounded-md shadow-lg space-y-2 hover:transform duration-500 hover:translate-x-2 hover:-translate-y-2">
             <div className="w-full">
