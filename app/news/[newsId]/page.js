@@ -98,15 +98,14 @@ const formatTime = (dateString) => {
 
   
   const handleSocialShare = (platform) => {
-    const baseUrl = window.location.origin; // Get the base URL (without the path)
+    const baseUrl = window.location.origin;
 
-  // Construct the URL with the appropriate language query parameter
-  const languageParam = language === "te" ? "te" : "en"; // Set the language parameter to 'te' or 'en'
-  const path = `/news/${newsData.slug || newsData.newsId}?language=${languageParam}`; // Construct URL with language query parameter
+  const languageParam = language === "te" ? "te" : "en"; 
+  const path = `/news/${newsData.slug || newsData.newsId}?language=${languageParam}`; 
 
-  const url = `${baseUrl}${path}`; // Assuming newsData contains the URLs for Telugu (urlTe) and English (urlEn)
-  // URL of the current page
-    const title = language === "te" ? newsData.headlineTe : newsData.headlineEn // Title of the post
+  const url = `${baseUrl}${path}`; 
+
+    const title = language === "te" ? newsData.headlineTe : newsData.headlineEn;
     const text = `${title} - ${url}`;
     const photo = newsData.image;
 
@@ -423,7 +422,6 @@ const formatTime = (dateString) => {
 
 
   useEffect(() => {
-    // Check if the language query param is passed in the URL using searchParams
     const languageParam = searchParams.get("language");
     if (languageParam === "te") {
       setLanguage("te");
@@ -435,7 +433,7 @@ const formatTime = (dateString) => {
 
 
 
-  const handleRating = (selectedRating) => {
+  {/*const handleRating = (selectedRating) => {
     const userEmail = localStorage.getItem("email");
     if (!userEmail) {
       alert("Please log in to rate.");
@@ -469,7 +467,7 @@ const formatTime = (dateString) => {
         }
       })
       .catch((error) => console.log("Error submitting rating:", error));
-  };
+  }; */}
 
   return (
     <div>
@@ -515,7 +513,7 @@ const formatTime = (dateString) => {
                     ? newsData.newsTe
                     : newsData.newsEn} 
                     language={language === "te" ? "te-IN" : "en-IN"}/></div>
-                <button>
+                {/*<button>
                   <div className="flex items-center">
                     {[...Array(5)].map((_, index) => {
                       const starFill = averageRating - index;
@@ -550,7 +548,7 @@ const formatTime = (dateString) => {
                       );
                     })}
                   </div>
-                </button>
+                </button>*/}
                 <div className="flex gap-4 px-2">
                   <div className="relative">
                     {/* Share Icon */}

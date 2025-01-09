@@ -7,7 +7,6 @@ import Footer from "@/components/Footer";
 import { Poppins } from "next/font/google";
 import FontWrapper from "@/components/Fontwrapper";
 
-
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -35,6 +34,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className="bg-orange-50">
       <head></head>
       <body className="font-sans">
+        {/* Google Analytics Script */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-REH7Y6Y3XH"
           strategy="afterInteractive"
@@ -46,6 +46,7 @@ export default function RootLayout({ children }) {
           crossorigin="anonymous"
           strategy="afterInteractive"
         />
+
         <Script
           id="google-analytics"
           strategy="afterInteractive"
@@ -58,6 +59,15 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
+
+        {/* Clicky Analytics Script */}
+        <Script
+          async
+          data-id="101474780"
+          src="https://static.getclicky.com/js"
+          strategy="afterInteractive"
+        />
+
         <LanguageProvider>
           <FontWrapper>
             <Header />
