@@ -460,29 +460,7 @@ const Header = () => {
           </div>
 
           <div className="flex justify-between items-center">
-            <div
-              className="lg:flex items-center gap-2 md:hidden hidden relative"
-              onClick={handleDistricts}
-            >
-              {translations.districts} <FaAngleDown /> {"|"}
-            </div>
-
-            {districtsOpen && (
-              <div className="absolute top-full left-0 w-72 bg-white text-black opacity-90  overflow-scroll scrollbar-hide h-screen pb-40 pt-4">
-                <div className="flex flex-col ">
-                  {Districts.map((item) => (
-                    <div key={item.path} className="py-2">
-                      <Link
-                        href={`/districts/${item.path}`}
-                        className={`px-10 hover:text-orange-600 font-semibold block w-full ${language === "te"? "text-[16px]":"text-[14px]"}`}
-                      >
-                        {item.label}
-                      </Link>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+            
 
             <div className="flex items-center space-x-2 ml-2">
               {navItems.map((item, index) => (
@@ -498,13 +476,36 @@ const Header = () => {
                       {item.label}
                     </Link>
                   </li>
-                  {index < navItems.length - 1 && (
+                  {index < navItems.length && (
                     <span className="hidden lg:flex md:hidden px-2 text-white">
                       |
                     </span>
                   )}
                 </React.Fragment>
               ))}
+              <div
+              className="lg:flex items-center gap-2 md:hidden hidden relative"
+              onClick={handleDistricts}
+            >
+             {translations.districts} <FaAngleDown /> 
+            </div>
+
+            {districtsOpen && (
+              <div className="absolute top-full right-0 w-72 bg-white text-black opacity-90  overflow-scroll scrollbar-hide h-screen pb-40 pt-4">
+                <div className="flex flex-col ">
+                  {Districts.map((item) => (
+                    <div key={item.path} className="py-2">
+                      <Link
+                        href={`/districts/${item.path}`}
+                        className={`px-10 hover:text-orange-600 font-semibold block w-full ${language === "te"? "text-[16px]":"text-[14px]"}`}
+                      >
+                        {item.label}
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
             </div>
             {/*<div className="flex space-x-4 items-center">
               <li className="lg:flex md:hidden hidden space-x-1 text-white text-[14px]">

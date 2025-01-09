@@ -20,6 +20,7 @@ import { FaCopy } from "react-icons/fa";
 import Speak from "@/components/Speak";
 import Add from '../../../public/Nandak Add.png'
 import { Ramaraja } from "next/font/google";
+import PostViewCount from "../../../components/pagecount";
 
 
 const ramaraja = Ramaraja({
@@ -29,7 +30,7 @@ const ramaraja = Ramaraja({
 
 
 
-const NewsPost = () => {
+const NewsPost = ({postData}) => {
   const searchParams = useSearchParams();
   const { newsId } = useParams();
   const urlLanguage = searchParams.get("language");
@@ -508,11 +509,15 @@ const formatTime = (dateString) => {
               </div>
              
               
-              <div className="flex gap-4 px-2">
+              <div className="flex justify-between gap-4 px-2">
               <div> <Speak newsText={language === "te"
                     ? newsData.newsTe
                     : newsData.newsEn} 
                     language={language === "te" ? "te-IN" : "en-IN"}/></div>
+
+                    <div>
+                    <PostViewCount  postUrl={`/news/${newsData.newsId}`} />
+                    </div>
                 {/*<button>
                   <div className="flex items-center">
                     {[...Array(5)].map((_, index) => {
@@ -765,21 +770,17 @@ const formatTime = (dateString) => {
                 ))}
               </div>
             )}
-            <div className={` pt-5 border-orange-300 border-t-[1px] pb-10 leading-relaxed ${language === "te" ? `lg:text-[22px] md:text-[20px] text-[20px]`:`lg:text-[18px] md:text-[16px] text-[16px] `}`}>
-              {language === "te"
-                ? newsData.newsTe.split("\n").map((line, index) => (
-                    <React.Fragment key={index}>
-                      {line}
-                      <br />
-                    </React.Fragment>
-                  ))
-                : newsData.newsEn.split("\n").map((line, index) => (
-                    <React.Fragment key={index}>
-                      {line}
-                      <br />
-                    </React.Fragment>
-                  ))}
-            </div>
+            <div
+  className={`pt-5 border-orange-300 border-t-[1px] pb-10 leading-relaxed ${
+    language === "te"
+      ? `lg:text-[22px] md:text-[20px] text-[20px]`
+      : `lg:text-[18px] md:text-[16px] text-[16px]`
+  }`}
+  dangerouslySetInnerHTML={{
+    __html: language === "te" ? newsData.newsTe : newsData.newsEn,
+  }}
+></div>
+
             
           </>
         ) : (

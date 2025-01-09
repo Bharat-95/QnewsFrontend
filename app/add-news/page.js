@@ -2,6 +2,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "../../context/languagecontext";
+import { Editor, EditorState, RichUtils } from "draft-js";
+import "draft-js/dist/Draft.css";
+import { stateToHTML } from "draft-js-export-html";
 
 const Page = () => {
   const router = useRouter();
@@ -10,13 +13,23 @@ const Page = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [headlineEn, setHeadlineEn] = useState("");
   const [headlineTe, setHeadlineTe] = useState("");
-  const [newsEn, setNewsEn] = useState("");
-  const [newsTe, setNewsTe] = useState("");
+  const [newsEn, setNewsEn] = useState(EditorState.createEmpty()); // Initialize editor state
+  const [newsTe, setNewsTe] = useState(EditorState.createEmpty()); // Initialize editor state
   const [category, setCategory] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [employeeId, setEmployeeId] = useState("");
   const [image, setImage] = useState(null);
   const [loading, setIsLoading] = useState(false);
+
+  const handleInlineStyleClick = (style) => {
+    const newState = RichUtils.toggleInlineStyle(newsEn, style);
+    setNewsEn(newState); // Update the English editor state
+  };
+
+  const handleTeInlineStyleClick = (style) => {
+    const newState = RichUtils.toggleInlineStyle(newsTe, style);
+    setNewsTe(newState); // Update the Telugu editor state
+  };
 
   const categories = [
     translations.selectcategory,
@@ -99,12 +112,12 @@ const Page = () => {
     const formData = new FormData();
     formData.append("headlineEn", headlineEn);
     formData.append("headlineTe", headlineTe);
-    formData.append("newsEn", newsEn);
-    formData.append("newsTe", newsTe);
+    formData.append("newsEn", stateToHTML(newsEn.getCurrentContent())); // Use getPlainText to get the editor content
+    formData.append("newsTe", stateToHTML(newsTe.getCurrentContent())); // Send HTML for newsTe
     formData.append(
       "category",
       category === translations.districts ? selectedDistrict : category
-    ); // Send the district name as category if selected
+    );
     formData.append("employeeId", employeeId);
     formData.append("image", image);
 
@@ -122,8 +135,8 @@ const Page = () => {
         // Reset form fields
         setHeadlineEn("");
         setHeadlineTe("");
-        setNewsEn("");
-        setNewsTe("");
+        setNewsEn(EditorState.createEmpty());
+        setNewsTe(EditorState.createEmpty());
         setCategory("");
         setSelectedDistrict("");
         setEmployeeId("");
@@ -140,7 +153,7 @@ const Page = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen  my-10">
-      <div className="  p-10  w-[90%] md:w-[80%]">
+      <div className="p-10 w-[90%] md:w-[80%]">
         <div className="text-center text-[24px] font-bold py-5">
           {translations.addnews} :
         </div>
@@ -177,29 +190,85 @@ const Page = () => {
             <label className="block text-[18px] mb-2">
               {translations.newsEn} :
             </label>
-            <textarea
-              type="text"
-              value={newsEn}
+
+            {/* Toolbar for RichUtils */}
+            <div className="flex mb-2">
+              <button
+                type="button"
+                onClick={() => handleInlineStyleClick("BOLD")}
+                className="px-3 py-1 bg-gray-300 rounded-md text-black"
+              >
+                B
+              </button>
+              <button
+                type="button"
+                onClick={() => handleInlineStyleClick("ITALIC")}
+                className="px-3 py-1 bg-gray-300 rounded-md text-black"
+              >
+                I
+              </button>
+              <button
+                type="button"
+                onClick={() => handleInlineStyleClick("UNDERLINE")}
+                className="px-3 py-1 bg-gray-300 rounded-md text-black"
+              >
+                U
+              </button>
+            </div>
+            <div className="w-full border bg-orange-50 p-2 border-orange-300 h-[1000px] rounded-md">
+
+            <Editor
+              editorState={newsEn} // Bind the editor state to the component
+              onChange={setNewsEn} // Update editor state
               placeholder={translations.newsEn}
-              className="w-full border bg-orange-50 border-orange-300 p-2 rounded-md"
-              onChange={(e) => setNewsEn(e.target.value)}
-              required
+             className="w-full border bg-orange-50 border-orange-300 h-[1000px] rounded-md"
             />
+            </div>
           </div>
 
+          {/* Editor for Telugu News */}
           <div>
             <label className="block text-[18px] mb-2">
               {translations.newsTe} :
             </label>
-            <textarea
-              type="text"
-              value={newsTe}
+
+            {/* Toolbar for RichUtils */}
+            <div className="flex mb-2">
+              <button
+                type="button"
+                onClick={() => handleTeInlineStyleClick("BOLD")}
+                className="px-3 py-1 bg-gray-300 rounded-md text-black"
+              >
+                B
+              </button>
+              <button
+                type="button"
+                onClick={() => handleTeInlineStyleClick("ITALIC")}
+                className="px-3 py-1 bg-gray-300 rounded-md text-black"
+              >
+                I
+              </button>
+              <button
+                type="button"
+                onClick={() => handleTeInlineStyleClick("UNDERLINE")}
+                className="px-3 py-1 bg-gray-300 rounded-md text-black"
+              >
+                U
+              </button>
+            </div>
+
+            <div className="w-full border bg-orange-50 p-2 border-orange-300 h-[1000px] rounded-md">
+
+            <Editor
+              editorState={newsTe} // Bind the editor state to the component
+              onChange={setNewsTe} // Update editor state
               placeholder={translations.newsTe}
-              className="w-full border bg-orange-50 border-orange-300 p-2 rounded-md"
-              onChange={(e) => setNewsTe(e.target.value)}
-              required
+             
+            
             />
+            </div>
           </div>
+
 
           <div>
             <label className="block text-[18px] mb-2">
