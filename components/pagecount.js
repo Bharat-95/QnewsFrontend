@@ -26,10 +26,10 @@ const PostViewCount = ({ postUrl }) => {
         // Fetch view counts for both URLs
         const [responseTe, responseEn] = await Promise.all([
           fetch(
-            `https://api.clicky.com/api/stats/4?site_id=${siteId}&sitekey=${siteKey}&type=pages&item=${encodeURIComponent(urlTe)}&date=last30days&output=json`
+            `https://api.clicky.com/api/stats/4?site_id=${siteId}&sitekey=${siteKey}&type=pages&item=${encodeURIComponent(urlTe)}&date=this-month&output=json`
           ),
           fetch(
-            `https://api.clicky.com/api/stats/4?site_id=${siteId}&sitekey=${siteKey}&type=pages&item=${encodeURIComponent(urlEn)}&date=last30days&output=json`
+            `https://api.clicky.com/api/stats/4?site_id=${siteId}&sitekey=${siteKey}&type=pages&item=${encodeURIComponent(urlEn)}&date=this-months&output=json`
           ),
 
 
@@ -46,9 +46,11 @@ const PostViewCount = ({ postUrl }) => {
 
         // Extract and combine the view counts
          const viewCountTe = parseInt(dataTe?.[0]?.dates?.[0]?.items?.[0]?.value || 0);
-         const viewCountEn = parseInt(dataEn?.[0]?.dates?.[0]?.items?.[0]?.value || 0);
+         const viewCountEn =parseInt(dataEn?.[0]?.dates?.[0]?.items?.[0]?.value || 0);
 
          const combinedView = viewCountTe + viewCountEn;
+
+
     
         
         setViewCount(combinedView);

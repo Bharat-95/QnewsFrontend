@@ -43,9 +43,9 @@ const NewsPost = ({postData}) => {
   const [newComment, setNewComment] = useState("");
   const [replyInput, setReplyInput] = useState({});
   const [showReplyInput, setShowReplyInput] = useState({});
-  const [rating, setRating] = useState(0);
-  const [averageRating, setAverageRating] = useState(3.5);
-  const [isRated, setIsRated] = useState(false);
+  //const [rating, setRating] = useState(0);
+  //const [averageRating, setAverageRating] = useState(3.5);
+  //const [isRated, setIsRated] = useState(false);
   const [relatedNews, setRelatedNews] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -192,7 +192,7 @@ const formatTime = (dateString) => {
             likes,
             likedBy = [],
             comments,
-            ratings,
+            //ratings,
             category,
           } = res.data.data;
           setNewsData(res.data.data);
@@ -201,10 +201,10 @@ const formatTime = (dateString) => {
 
           setHasLiked(Array.isArray(likedBy) && likedBy.includes(userEmail));
 
-          if (ratings) {
+          {/*{if (ratings) {
             const averageRating = ratings.total / ratings.count;
             setAverageRating(averageRating);
-          }
+          }*/}
 
           if (category) {
             axios
@@ -219,7 +219,7 @@ const formatTime = (dateString) => {
         })
         .catch((error) => console.log("Error fetching news:", error));
 
-      axios
+      {/*axios
         .get(
           `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/rating`,
           {
@@ -233,7 +233,7 @@ const formatTime = (dateString) => {
             localStorage.setItem("hasRated_" + newsId, "true"); // Save in localStorage
           }
         })
-        .catch((error) => console.log("Error fetching user rating:", error));
+        .catch((error) => console.log("Error fetching user rating:", error));*/}
     }
   }, [newsId]);
 
