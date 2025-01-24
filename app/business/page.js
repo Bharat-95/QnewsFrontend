@@ -65,10 +65,12 @@ const Page = () => {
                   ? mostRecentPost.headlineTe
                   : mostRecentPost.headlineEn}
               </div>
-              <div className={`line-clamp-2  mt-2 ${language === "te" ? `text-[20px]`:`text-sm  md:text-lg`}`}>
-                {language === "te"
-                  ? mostRecentPost.newsTe
-                  : mostRecentPost.newsEn}
+              <div className={`line-clamp-2  mt-2 ${language === "te" ? `text-[20px]`:`text-sm  md:text-lg`}`}     dangerouslySetInnerHTML={{
+                  __html:
+                    language === "te"
+                      ? mostRecentPost.newsTe
+                      : mostRecentPost.newsEn,
+                }}>
               </div>
             </Link>
           </div>
@@ -86,8 +88,13 @@ const Page = () => {
                     <div className={`font-bold line-clamp-1 hover:underline  ${language === "te" ?`text-[20px] ${ramaraja.className}`:`text-[20px] md:text-base`}`}>
                       {language === "te" ? news.headlineTe : news.headlineEn}
                     </div>
-                    <div className={`line-clamp-3  mt-2 ${language === "te" ?`text-[15px]`:`text-xs md:text-sm`}`}>
-                      {language === "te" ? news.newsTe : news.newsEn}
+                    <div className={`line-clamp-3  mt-2 ${language === "te" ?`text-[15px]`:`text-xs md:text-sm`}`}     dangerouslySetInnerHTML={{
+                  __html:
+                    language === "te"
+                      ? news.newsTe
+                      : news.newsEn,
+                }}>
+                    
                     </div>
                   </Link>
                 </div>
