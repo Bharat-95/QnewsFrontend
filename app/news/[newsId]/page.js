@@ -486,7 +486,7 @@ const formatTime = (dateString) => {
         </script>
       </div>
     <div className="lg:mx-10 md:mx-5 mx-4 lg:my-10 flex justify-between">
-      <div className="lg:w-[60%] md:space-y-6 lg:space-y-6 space-y-2">
+      <div className="lg:w-[60%] md:space-y-6 lg:space-y-2 space-y-2">
         {newsData ? (
           <>
             <div className="lg:w-[806px] w-[100%] lg:h-[500px] md:h-[400px] h-[250px]">
@@ -499,7 +499,7 @@ const formatTime = (dateString) => {
                 unoptimized={true}
               />
             </div>
-            <div className={`line-clamp-2 font-semibold ${language === "te" ? `${ramaraja.className} lg:text-[30px] md:text-[24px] text-[24px]`:`lg:text-[24px] md:text-[20px] text-[20px]  `}`}>
+            <div className={`line-clamp-2 font-semibold ${language === "te" ? `${ramaraja.className} lg:text-[24px] md:text-[20px] text-[20px]`:`lg:text-[18px] md:text-[16px] text-[16px]  `}`}>
               {language === "te" ? newsData.headlineTe : newsData.headlineEn}
             </div>
             <div className="lg:flex md:flex lg:space-y-0 md:space-y-0 space-y-4 justify-between font-light text-gray-700">
@@ -773,8 +773,8 @@ const formatTime = (dateString) => {
             <div
   className={`pt-5 border-orange-300 border-t-[1px] pb-10 leading-relaxed ${
     language === "te"
-      ? `lg:text-[22px] md:text-[20px] text-[20px]`
-      : `lg:text-[18px] md:text-[16px] text-[16px]`
+      ? `lg:text-[18px] md:text-[16px] text-[16px]`
+      : `lg:text-[15px] md:text-[12px] text-[12px]`
   }`}
   dangerouslySetInnerHTML={{
     __html: language === "te" ? newsData.newsTe : newsData.newsEn,
