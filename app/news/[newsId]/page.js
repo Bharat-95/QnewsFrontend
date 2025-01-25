@@ -499,7 +499,7 @@ const formatTime = (dateString) => {
                 unoptimized={true}
               />
             </div>
-            <div className={`line-clamp-2 font-semibold ${language === "te" ? `${ramaraja.className} lg:text-[24px] md:text-[20px] text-[20px]`:`lg:text-[18px] md:text-[16px] text-[16px]  `}`}>
+            <div className={`line-clamp-2 font-semibold text-justify ${language === "te" ? `${ramaraja.className} lg:text-[24px] md:text-[20px] text-[20px]`:`lg:text-[18px] md:text-[16px] text-[16px]  `}`}>
               {language === "te" ? newsData.headlineTe : newsData.headlineEn}
             </div>
             <div className="lg:flex md:flex lg:space-y-0 md:space-y-0 space-y-4 justify-between font-light text-gray-700">
@@ -771,7 +771,7 @@ const formatTime = (dateString) => {
               </div>
             )}
             <div
-  className={`pt-5 border-orange-300 border-t-[1px] pb-10 leading-relaxed ${
+  className={`pt-5 border-orange-300 border-t-[1px] pb-10 leading-relaxed text-justify ${
     language === "te"
       ? `lg:text-[18px] md:text-[16px] text-[16px]`
       : `lg:text-[15px] md:text-[12px] text-[12px]`
@@ -818,7 +818,7 @@ const formatTime = (dateString) => {
                   />
                 </div>
 
-                <div className={`font-semibold line-clamp-2 rounded-md flex justify-center ${language === "te" ? `${ramaraja.className} text-[24px]`:`text-lg`}`}>
+                <div className={`font-semibold line-clamp-2 rounded-md flex justify-center ${language === "te" ? `${ramaraja.className} lg:text-[20px] md:text-[20px] text-[20px]`:`lg:text-[16px] md:text-[16px] text-[16px]`}`}>
                   {language === "te"
                     ? newsItem.headlineTe
                     : newsItem.headlineEn}
