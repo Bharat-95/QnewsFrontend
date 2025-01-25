@@ -37,7 +37,7 @@ const Page = () => {
 
       {/* Main Content */}
       <div className="flex justify-between gap-4">
-        <div className="lg:w-[70%] md:w-[100%] w-[100%]">
+        <div className=" w-[100%]">
           <Youtube />
           <Politics />
           <Hyderabad />
@@ -49,9 +49,7 @@ const Page = () => {
           <Film />
           <Others />
         </div>
-        <div className="w-[30%] lg:flex md:hidden hidden">
-          <Trending />
-        </div>
+       
       </div>
     </div>
   );

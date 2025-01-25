@@ -489,17 +489,17 @@ const formatTime = (dateString) => {
       <div className="lg:w-[60%] md:space-y-6 lg:space-y-2 space-y-2">
         {newsData ? (
           <>
-            <div className="lg:w-[806px] w-[100%] lg:h-[500px] md:h-[400px] h-[250px]">
+            <div className=" lg:h-[400px] md:h-[400px] h-[250px]">
               <Image
                 alt="No Image Found"
                 src={newsData.image}
                 width={900}
                 height={500}
-                className="lg:w-[806px] object-contain  w-[100%] rounded-md lg:h-[500px] md:h-[400px] h-[250px]"
+                className=" object-contain rounded-md lg:h-[400px] md:h-[400px] h-[250px]"
                 unoptimized={true}
               />
             </div>
-            <div className={`line-clamp-2 font-semibold text-justify ${language === "te" ? `${ramaraja.className} lg:text-[24px] md:text-[20px] text-[20px]`:`lg:text-[18px] md:text-[16px] text-[16px]  `}`}>
+            <div className={`line-clamp-2 font-semibold ${language === "te" ? `${ramaraja.className} lg:text-[24px] md:text-[20px] text-[20px]`:`lg:text-[18px] md:text-[16px] text-[16px]  `}`}>
               {language === "te" ? newsData.headlineTe : newsData.headlineEn}
             </div>
             <div className="lg:flex md:flex lg:space-y-0 md:space-y-0 space-y-4 justify-between font-light text-gray-700">

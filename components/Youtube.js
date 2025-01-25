@@ -158,12 +158,12 @@ const Latest = () => {
       {/* Display other videos */}
       {data.slice(0, visibleCount)
         .map((video) => (
-          <div key={video.videoId} className="flex-shrink-0 w-[80%] md:w-[40%] lg:w-[30%] md:border border-orange-600 lg:p-3 p-2 rounded-md shadow-lg space-y-2 hover:transform duration-500 hover:translate-x-2 hover:-translate-y-2">
+          <div key={video.videoId} className="flex-shrink-0 w-[50%] md:w-[40%] lg:w-[20%] md:border border-orange-600 lg:p-3 p-2 rounded-md shadow-lg space-y-2 hover:transform duration-500 hover:translate-x-2 hover:-translate-y-2">
             <div className="w-full">
               {/* YouTube Video Embed */}
               <iframe
                 width="100%"
-                height="200"
+                height="150"
                 src={`https://www.youtube.com/embed/${video.videoId}`}
                 title={video.title}
                 frameBorder="0"

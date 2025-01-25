@@ -47,7 +47,7 @@ const timeAgo = (dateString) => {
 const Latest = () => {
   const [data, setData] = useState([]);
   const { language, translations } = useLanguage();
-  const [visibleCount, setVisibleCount] = useState(10); // Set the initial visible count to 8
+  const [visibleCount, setVisibleCount] = useState(20); // Set the initial visible count to 8
   const loaderRef = useRef(null);
 
   const fetchData = async () => {
@@ -133,14 +133,14 @@ const Latest = () => {
               <Link
                 href={`/news/${latest.newsId}`}
                 key={latest.newsId}
-                className="flex-shrink-0  w-[80%] md:w-[40%] lg:w-[30%]  md: border border-orange-600 lg:p-3 p-2 rounded-md shadow-lg space-y-2 hover:transform duration-500 hover:translate-x-2 hover:-translate-y-2"
+                className="flex-shrink-0  w-[80%] md:w-[40%] lg:w-[20%]  md: border border-orange-600 lg:p-3 p-2 rounded-md shadow-lg space-y-2 hover:transform duration-500 hover:translate-x-2 hover:-translate-y-2"
               >
                 <Image
                   alt="No Image Found"
                   src={latest.image}
                   width={300}
                   height={200}
-                  className="w-full h-[200px] object-cover shadow-md rounded-md"
+                  className="w-full h-[150px] object-cover shadow-md rounded-md"
                   unoptimized={true}
                 />
                 <div
