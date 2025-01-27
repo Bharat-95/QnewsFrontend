@@ -56,7 +56,10 @@ const Page = () => {
       <div className="flex-[7]">
         {mostRecentPost && (
           <div className="w-full mb-8 md:mb-10">
-            <Link href={`/news/${mostRecentPost.newsId}`}>
+            <Link href={{
+                pathname: `/news/${mostRecentPost.newsId}`,
+                query: { language },
+              }}>
               <div className="w-full h-[300px] md:h-[400px] lg:h-[500px] flex justify-center mb-4">
                 <Image
                   src={mostRecentPost.image}
@@ -101,7 +104,10 @@ const Page = () => {
                 className="flex gap-4 items-center border border-orange-300 rounded-md"
               >
                 <div className="flex-[7] p-4">
-                  <Link href={`/news/${news.newsId}`}>
+                  <Link href={{
+                pathname: `/news/${news.newsId}`,
+                query: { language },
+              }}>
                     <div
                       className={`font-bold line-clamp-1 hover:underline  ${
                         language === "te"
@@ -125,7 +131,10 @@ const Page = () => {
                   </Link>
                 </div>
                 <div className="flex-[3]">
-                  <Link href={`/news/${news.newsId}`}>
+                  <Link href={{
+                pathname: `/news/${news.newsId}`,
+                query: { language },
+              }}>
                     <Image
                       src={news.image}
                       alt="No Image Found"
@@ -162,7 +171,10 @@ const Page = () => {
             >
               {/* Image Section */}
               <div className="w-full h-[160px] md:h-[200px] lg:h-[250px]">
-                <Link href={`/news/${news.newsId}`}>
+                <Link href={{
+                pathname: `/news/${news.newsId}`,
+                query: { language },
+              }}>
                   <Image
                     src={news.image}
                     alt="No Image Found"
@@ -175,7 +187,10 @@ const Page = () => {
               </div>
               {/* Text Section */}
               <div className="flex-grow">
-                <Link href={`/news/${news.newsId}`}>
+                <Link href={{
+                pathname: `/news/${news.newsId}`,
+                query: { language },
+              }}>
                   <div
                     className={`font-bold hover:underline ${
                       language === "te"

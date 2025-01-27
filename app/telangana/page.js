@@ -6,10 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Ramaraja } from "next/font/google";
 
-
 const ramaraja = Ramaraja({
   subsets: ["latin", "telugu"],
-  weight: "400", 
+  weight: "400",
 });
 
 const Page = () => {
@@ -18,7 +17,9 @@ const Page = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn");
+      const response = await axios.get(
+        "https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn"
+      );
       const responseData = response.data;
       setData(responseData.data || []);
     } catch (error) {
@@ -49,7 +50,12 @@ const Page = () => {
       <div className="flex-[7]">
         {mostRecentPost && (
           <div className="w-full mb-8 md:mb-10">
-            <Link href={`/news/${mostRecentPost.newsId}`}>
+            <Link
+              href={{
+                pathname: `/news/${mostRecentPost.newsId}`,
+                query: { language },
+              }}
+            >
               <div className="w-full h-[300px] md:h-[400px] lg:h-[500px] flex justify-center mb-4">
                 <Image
                   src={mostRecentPost.image}
@@ -60,18 +66,28 @@ const Page = () => {
                   unoptimized={true}
                 />
               </div>
-              <div className={`  font-bold ${language === "te"? `${ramaraja.className} text-[34px]`:`text-[30px] md:text-2xl lg:text-3xl`}`}>
+              <div
+                className={`  font-bold ${
+                  language === "te"
+                    ? `${ramaraja.className} text-[34px]`
+                    : `text-[30px] md:text-2xl lg:text-3xl`
+                }`}
+              >
                 {language === "te"
                   ? mostRecentPost.headlineTe
                   : mostRecentPost.headlineEn}
               </div>
-              <div className={`line-clamp-2 mt-2 ${language === "te" ? `text-[20px]`:`text-sm md:text-lg`}`}     dangerouslySetInnerHTML={{
+              <div
+                className={`line-clamp-2 mt-2 ${
+                  language === "te" ? `text-[20px]` : `text-sm md:text-lg`
+                }`}
+                dangerouslySetInnerHTML={{
                   __html:
                     language === "te"
                       ? mostRecentPost.newsTe
                       : mostRecentPost.newsEn,
-                }}>
-              </div>
+                }}
+              ></div>
             </Link>
           </div>
         )}
@@ -84,22 +100,39 @@ const Page = () => {
                 className="flex gap-4 items-center border border-orange-300 rounded-md"
               >
                 <div className="flex-[7] p-4">
-                  <Link href={`/news/${news.newsId}`}>
-                    <div className={`font-bold line-clamp-1 hover:underline  ${language === "te" ?`text-[20px] ${ramaraja.className}`:`text-[20px] md:text-base`}`}>
+                  <Link
+                    href={{
+                      pathname: `/news/${news.newsId}`,
+                      query: { language },
+                    }}
+                  >
+                    <div
+                      className={`font-bold line-clamp-1 hover:underline  ${
+                        language === "te"
+                          ? `text-[20px] ${ramaraja.className}`
+                          : `text-[20px] md:text-base`
+                      }`}
+                    >
                       {language === "te" ? news.headlineTe : news.headlineEn}
                     </div>
-                    <div className={`line-clamp-3  mt-2 ${language === "te" ?`text-[15px]`:`text-xs md:text-sm`}`}     dangerouslySetInnerHTML={{
-                  __html:
-                    language === "te"
-                      ? news.newsTe
-                      : news.newsEn,
-                }}>
-                    </div>
+                    <div
+                      className={`line-clamp-3  mt-2 ${
+                        language === "te" ? `text-[15px]` : `text-xs md:text-sm`
+                      }`}
+                      dangerouslySetInnerHTML={{
+                        __html: language === "te" ? news.newsTe : news.newsEn,
+                      }}
+                    ></div>
                   </Link>
                 </div>
                 {/* 30% Image Section */}
                 <div className="flex-[3]">
-                  <Link href={`/news/${news.newsId}`}>
+                  <Link
+                    href={{
+                      pathname: `/news/${news.newsId}`,
+                      query: { language },
+                    }}
+                  >
                     <Image
                       src={news.image}
                       alt="No Image Found"
@@ -119,7 +152,15 @@ const Page = () => {
       </div>
 
       <div className="hidden lg:block flex-[3] p-4 rounded-lg">
-        <h2 className={`  font-bold mb-4 flex justify-center ${language === "te" ?`text-[24px] ${ramaraja.className}`:`text-lg md:text-xl`}`}>{translations.trendingHeadlines}</h2>
+        <h2
+          className={`  font-bold mb-4 flex justify-center ${
+            language === "te"
+              ? `text-[24px] ${ramaraja.className}`
+              : `text-lg md:text-xl`
+          }`}
+        >
+          {translations.trendingHeadlines}
+        </h2>
         {trendingNews.length > 0 ? (
           trendingNews.map((news) => (
             <div
@@ -127,7 +168,12 @@ const Page = () => {
               className="flex flex-col gap-2 p-4 rounded-md mb-4"
             >
               <div className="w-full h-[160px] md:h-[200px] lg:h-[250px]">
-                <Link href={`/news/${news.newsId}`}>
+                <Link
+                  href={{
+                    pathname: `/news/${news.newsId}`,
+                    query: { language },
+                  }}
+                >
                   <Image
                     src={news.image}
                     alt="No Image Found"
@@ -139,8 +185,19 @@ const Page = () => {
                 </Link>
               </div>
               <div className="flex-grow">
-                <Link href={`/news/${news.newsId}`}>
-                  <div className={`font-bold hover:underline ${language === "te" ? `${ramaraja.className} text-[20px]`:`text-xs md:text-sm` }`}>
+                <Link
+                  href={{
+                    pathname: `/news/${news.newsId}`,
+                    query: { language },
+                  }}
+                >
+                  <div
+                    className={`font-bold hover:underline ${
+                      language === "te"
+                        ? `${ramaraja.className} text-[20px]`
+                        : `text-xs md:text-sm`
+                    }`}
+                  >
                     {language === "te" ? news.headlineTe : news.headlineEn}
                   </div>
                 </Link>
