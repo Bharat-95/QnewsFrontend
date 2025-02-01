@@ -86,6 +86,7 @@ const Page = () => {
           width={500}
           alt="No Image Found"
           className="w-[100%] h-[100%]"
+          unoptimized={true}
         />
       </div>
       <div className="lg:flex lg:gap-10 md:gap-5 lg:space-y-0 md:space-y-10 space-y-10">
