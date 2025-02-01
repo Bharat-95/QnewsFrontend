@@ -18,7 +18,7 @@ const Page = () => {
   return (
     <div className="lg:p-[32px] md:p-[20px] p-[10px] space-y-[32px]">
       {/* AdSense Ad */}
-      <div className="w-full m-[10px]">
+      {/*<div className="w-full m-[10px]">
         <ins
           className="adsbygoogle"
           style={{ display: 'block' }}
@@ -30,7 +30,7 @@ const Page = () => {
         <script>
           {`(adsbygoogle = window.adsbygoogle || []).push({});`}
         </script>
-      </div>
+      </div> */}
 
       {/* Hero Section */}
       <HeroHome />
