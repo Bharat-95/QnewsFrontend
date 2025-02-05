@@ -155,6 +155,7 @@ const Page = () => {
                     className="object-cover w-full h-full"
                     loading="lazy"
                     unoptimized={true}
+                    priority={false}
                   />
                 </div>
              
