@@ -108,6 +108,8 @@ const Page = () => {
                 height={500}
                 className="w-[100%] lg:h-[420px] md:h-[393px] h-[250px] object-cover rounded-md shadow-md"
                 unoptimized={true}
+                priority={false}
+                loading="lazy"
               />
             </div>
             <div>
