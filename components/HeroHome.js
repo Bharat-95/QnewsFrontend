@@ -18,35 +18,47 @@ const Page = () => {
   const [showModal, setShowModal] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [vote, setVote] = useState("");
+
+  const handleVote = (option) => {
+    setVote(option);
+    setShowModal(true);
+  };
+
 
   const handleSubmit = async () => {
-    if (!name || !phone) {
-      alert("దయచేసి మీ పేరు మరియు ఫోన్ నెంబర్ నమోదు చేయండి!");
+    if (!name || !phone || !vote) {  // ✅ Check if vote is missing
+      alert("దయచేసి మీ పేరు, ఫోన్ నెంబర్ మరియు ఓటు నమోదు చేయండి!");
       return;
     }
-
-    const formData = { name, phone };
-
+  
+    const formData = { name, phone, vote };
+    console.log("Submitting Vote:", formData); // ✅ Debugging log
+  
     try {
       const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/submit-vote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
+  
+      const data = await response.json();
       if (response.ok) {
-        alert("ధన్యవాదాలు! మీ ఓటు నమోదైంది.");
+        alert("✅ ధన్యవాదాలు! మీ ఓటు నమోదైంది.");
         setShowModal(false);
         setName("");
         setPhone("");
+        setVote("");  // ✅ Reset vote after submission
       } else {
-        alert("క్షమించండి, మళ్లీ ప్రయత్నించండి.");
+        alert(data.message);
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("సర్వర్ సమస్య, దయచేసి మళ్లీ ప్రయత్నించండి.");
+      console.error("Error submitting vote:", error);
+      alert("❌ సర్వర్ సమస్య, దయచేసి మళ్లీ ప్రయత్నించండి.");
     }
   };
+  
+
 
   const fetchData = async () => {
     try {
@@ -125,19 +137,19 @@ const Page = () => {
       {/* Buttons Positioned Over Image */}
       <div className="absolute lg:top-[70%] md:top-[70%] top-[60%] inset-0 flex items-center justify-center gap-4">
         <button 
-          onClick={() => setShowModal(true)} 
+          onClick={() => handleVote("అవును")} 
           className="lg:px-4 lg:py-2 md:px-4 md:py-2 p-1 bg-green-500 text-white border border-black rounded-md hover:bg-green-600"
         >
           అవును
         </button>
         <button 
-          onClick={() => setShowModal(true)} 
+          onClick={() => handleVote("కాదు")} 
           className="lg:px-4 lg:py-2 md:px-4 md:py-2 p-1 bg-red-500 text-white border border-black rounded-md hover:bg-red-600"
         >
           కాదు
         </button>
         <button 
-          onClick={() => setShowModal(true)} 
+          onClick={() => handleVote("చెప్పలేను")} 
           className="lg:px-4 lg:py-2 md:px-4 md:py-2 p-1 bg-gray-500 text-white border border-black rounded-md hover:bg-gray-600"
         >
           చెప్పలేను
