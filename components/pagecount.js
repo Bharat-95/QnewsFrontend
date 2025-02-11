@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 
 const PostViewCount = ({ postUrl }) => {
-  const [viewCount, setViewCount] = useState(null);
+  const [viewCount, setViewCount] = useState(100);
   const [error, setError] = useState(null);
 
   const siteId = "101474780"; // Replace with your Clicky Site ID
