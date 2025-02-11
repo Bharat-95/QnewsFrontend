@@ -15,6 +15,38 @@ const ramaraja = Ramaraja({
 const Page = () => {
   const { language } = useLanguage();
   const [data, setData] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const handleSubmit = async () => {
+    if (!name || !phone) {
+      alert("దయచేసి మీ పేరు మరియు ఫోన్ నెంబర్ నమోదు చేయండి!");
+      return;
+    }
+
+    const formData = { name, phone };
+
+    try {
+      const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/submit-vote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        alert("ధన్యవాదాలు! మీ ఓటు నమోదైంది.");
+        setShowModal(false);
+        setName("");
+        setPhone("");
+      } else {
+        alert("క్షమించండి, మళ్లీ ప్రయత్నించండి.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("సర్వర్ సమస్య, దయచేసి మళ్లీ ప్రయత్నించండి.");
+    }
+  };
 
   const fetchData = async () => {
     try {
@@ -89,14 +121,73 @@ const Page = () => {
         className="w-[100%] h-[100%]"
         unoptimized={true}
       />
-      
+
       {/* Buttons Positioned Over Image */}
-      <div className="absolute lg:top-[70%] md:top-[70%] top-[60%] md: inset-0 flex items-center justify-center gap-4 ">
-        <button className="lg:px-4 lg:py-2 md:px-4 md:py-2 p-1 bg-green-500 text-white border border-black rounded-md hover:bg-green-600">అవును</button>
-        <button className="lg:px-4 lg:py-2 md:px-4 md:py-2 p-1 bg-red-500 text-white border border-black rounded-md hover:bg-red-600">కాదు</button>
-        <button className="lg:px-4 lg:py-2 md:px-4 md:py-2 p-1 bg-gray-500 text-white border border-black rounded-md hover:bg-gray-600">చెప్పలేను</button>
+      <div className="absolute lg:top-[70%] md:top-[70%] top-[60%] inset-0 flex items-center justify-center gap-4">
+        <button 
+          onClick={() => setShowModal(true)} 
+          className="lg:px-4 lg:py-2 md:px-4 md:py-2 p-1 bg-green-500 text-white border border-black rounded-md hover:bg-green-600"
+        >
+          అవును
+        </button>
+        <button 
+          onClick={() => setShowModal(true)} 
+          className="lg:px-4 lg:py-2 md:px-4 md:py-2 p-1 bg-red-500 text-white border border-black rounded-md hover:bg-red-600"
+        >
+          కాదు
+        </button>
+        <button 
+          onClick={() => setShowModal(true)} 
+          className="lg:px-4 lg:py-2 md:px-4 md:py-2 p-1 bg-gray-500 text-white border border-black rounded-md hover:bg-gray-600"
+        >
+          చెప్పలేను
+        </button>
       </div>
+
+      {/* Popup Modal */}
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-80">
+            <h2 className="text-lg font-bold text-center mb-4">మీ వివరాలు ఇవ్వండి</h2>
+
+            <label className="block mb-2">పేరు:</label>
+            <input 
+              type="text" 
+              className="w-full px-3 py-2 border rounded-md mb-3" 
+              placeholder="మీ పేరు రాయండి" 
+              value={name} 
+              onChange={(e) => setName(e.target.value)} 
+            />
+
+            <label className="block mb-2">ఫోన్ నెంబర్:</label>
+            <input 
+              type="tel" 
+              className="w-full px-3 py-2 border rounded-md mb-4" 
+              placeholder="మీ ఫోన్ నెంబర్ రాయండి" 
+              value={phone} 
+              onChange={(e) => setPhone(e.target.value)} 
+            />
+
+            {/* Submit Button */}
+            <button 
+              onClick={handleSubmit} 
+              className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
+            >
+              సమర్పించు
+            </button>
+
+            {/* Close Button */}
+            <button 
+              onClick={() => setShowModal(false)} 
+              className="w-full bg-gray-400 text-white py-2 rounded-md mt-2 hover:bg-gray-500"
+            >
+              మూసివేయి
+            </button>
+          </div>
+        </div>
+      )}
     </div>
+
       <div className="lg:flex lg:gap-10 md:gap-5 lg:space-y-0 md:space-y-10 space-y-10">
         {mainPost && (
           <Link
