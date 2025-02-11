@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 import { useLanguage } from "../context/languagecontext";
-import advertisement from "../public/BC.jpg";
+import advertisement from "../public/BC.png";
 import { Ramaraja } from "next/font/google";
 
 const ramaraja = Ramaraja({
@@ -79,16 +79,24 @@ const Page = () => {
 
   return (
     <div>
-      {/*<div className="lg:h-64 h-32 md:h-56 w-[100%] border border-orange-300 rounded-md shadow-md mb-10">
-        <Image
-          src={advertisement}
-          height={500}
-          width={500}
-          alt="No Image Found"
-          className="w-[100%] h-[100%]"
-          unoptimized={true}
-        />
-      </div>*/}
+   <div className="relative lg:h-64 h-32 md:h-56 w-[100%] border border-orange-300 rounded-md shadow-md mb-10 overflow-hidden">
+      {/* Image */}
+      <Image
+        src={advertisement}
+        height={500}
+        width={500}
+        alt="No Image Found"
+        className="w-[100%] h-[100%]"
+        unoptimized={true}
+      />
+      
+      {/* Buttons Positioned Over Image */}
+      <div className="absolute lg:top-[70%] md:top-[70%] top-[60%] md: inset-0 flex items-center justify-center gap-4 ">
+        <button className="lg:px-4 lg:py-2 md:px-4 md:py-2 p-1 bg-green-500 text-white border border-black rounded-md hover:bg-green-600">అవును</button>
+        <button className="lg:px-4 lg:py-2 md:px-4 md:py-2 p-1 bg-red-500 text-white border border-black rounded-md hover:bg-red-600">కాదు</button>
+        <button className="lg:px-4 lg:py-2 md:px-4 md:py-2 p-1 bg-gray-500 text-white border border-black rounded-md hover:bg-gray-600">చెప్పలేను</button>
+      </div>
+    </div>
       <div className="lg:flex lg:gap-10 md:gap-5 lg:space-y-0 md:space-y-10 space-y-10">
         {mainPost && (
           <Link
