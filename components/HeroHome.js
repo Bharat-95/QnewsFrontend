@@ -22,37 +22,47 @@ const Page = () => {
       const response = await axios.get(
         "https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn"
       );
-
+  
       if (!response.data || !response.data.data || !Array.isArray(response.data.data)) {
         console.error("Invalid API response format");
         return;
       }
-
+  
       let responseData = response.data.data;
-
-      // Ensure sorting is done correctly
+  
+      // Sorting first before slicing
       const sortedData = responseData
-        .filter(post => post.status === "Approved" && post.createdAt)
-        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-
-
+        .filter(news => news.status === "Approved")
+        .sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() -
+            new Date(a.createdAt).getTime()
+        );
+  
       setData(sortedData);
     } catch (error) {
       console.error("Unable to fetch news:", error);
     }
   };
-
+  
   useEffect(() => {
     fetchData();
     const interval = setInterval(fetchData, 30000);
     return () => clearInterval(interval);
   }, []);
 
-  // Select the latest post (most recent news)
-  const mainPost = data.length > 0 ? data[0] : null;
 
-  // Select next 39 latest posts (excluding mainPost)
-  const latestPosts = data.slice(1, 40);
+  const mainPost = data.length > 0 ? data[0] : null;
+  const latestPosts = data
+  .filter(news => news.status === "Approved") // Ensure only Approved posts
+  .sort(
+    (a, b) =>
+      new Date(b.createdAt).getTime() -
+      new Date(a.createdAt).getTime()
+  )
+  .slice(1, 40);
+
+
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -75,7 +85,7 @@ const Page = () => {
 
   return (
     <div>
-      <div className="relative lg:h-64 h-32 md:h-56 w-[100%] border border-orange-300 rounded-md shadow-md mb-10 overflow-hidden">
+     {/* <div className="relative lg:h-64 h-32 md:h-56 w-[100%] border border-orange-300 rounded-md shadow-md mb-10 overflow-hidden">
         <Image
           src={advertisement}
           height={500}
@@ -84,7 +94,7 @@ const Page = () => {
           className="w-[100%] h-[100%]"
           unoptimized={true}
         />
-      </div>
+      </div> */}
 
       <div className="lg:flex lg:gap-10 md:gap-5 lg:space-y-0 md:space-y-10 space-y-10">
         {/* Main Post */}
