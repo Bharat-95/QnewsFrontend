@@ -4,11 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 import { useLanguage } from "../context/languagecontext";
-import advertisement from "../public/BC.png";
 import { Ramaraja } from "next/font/google";
 
 const ramaraja = Ramaraja({
-  subsets: ["latin", "telugu"], 
+  subsets: ["latin", "telugu"],
   weight: "400",
 });
 
@@ -16,53 +15,49 @@ const Page = () => {
   const { language } = useLanguage();
   const [data, setData] = useState([]);
 
-  // Fetch News Data
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn"
+        `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn?t=${new Date().getTime()}`
       );
-  
+
       if (!response.data || !response.data.data || !Array.isArray(response.data.data)) {
         console.error("Invalid API response format");
         return;
       }
-  
+
       let responseData = response.data.data;
-  
-      // Sorting first before slicing
-      const sortedData = responseData
-        .filter(news => news.status === "Approved")
-        .sort(
-          (a, b) =>
-            new Date(b.createdAt).getTime() -
-            new Date(a.createdAt).getTime()
-        );
-  
-      setData(sortedData);
+
+      // ✅ Filter only 'Approved' news before sorting
+      const approvedNews = responseData.filter(news => news.status === "Approved");
+
+      // ✅ Sort latest news using `getTime()`
+      const sortedNews = approvedNews.sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
+
+      // ✅ Set sorted data to state
+      setData([...sortedNews]);
+
+      console.log("✅ First Item in Next.js (Should be Latest):", sortedNews[0]);
+
     } catch (error) {
-      console.error("Unable to fetch news:", error);
+      console.error("❌ Unable to fetch news:", error);
     }
   };
-  
+
   useEffect(() => {
     fetchData();
     const interval = setInterval(fetchData, 30000);
     return () => clearInterval(interval);
   }, []);
 
-
+  // ✅ Main Post (Latest News)
   const mainPost = data.length > 0 ? data[0] : null;
-  const latestPosts = data
-  .filter(news => news.status === "Approved") // Ensure only Approved posts
-  .sort(
-    (a, b) =>
-      new Date(b.createdAt).getTime() -
-      new Date(a.createdAt).getTime()
-  )
-  .slice(1, 40);
 
-
+  // ✅ Latest Posts (Next 39 most recent)
+  const latestPosts = data.slice(1, 40);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -85,17 +80,6 @@ const Page = () => {
 
   return (
     <div>
-     {/* <div className="relative lg:h-64 h-32 md:h-56 w-[100%] border border-orange-300 rounded-md shadow-md mb-10 overflow-hidden">
-        <Image
-          src={advertisement}
-          height={500}
-          width={500}
-          alt="No Image Found"
-          className="w-[100%] h-[100%]"
-          unoptimized={true}
-        />
-      </div> */}
-
       <div className="lg:flex lg:gap-10 md:gap-5 lg:space-y-0 md:space-y-10 space-y-10">
         {/* Main Post */}
         {mainPost && (
@@ -128,9 +112,7 @@ const Page = () => {
                     : `lg:text-[28px] md:text-[24px] text-[24px] ${ramaraja.className}`
                 }`}
               >
-                {language === "en"
-                  ? mainPost.headlineEn
-                  : mainPost.headlineTe}
+                {language === "en" ? mainPost.headlineEn : mainPost.headlineTe}
               </div>
             </div>
             <div className="flex items-center gap-10 font-light text-gray-500">
@@ -157,7 +139,7 @@ const Page = () => {
                   <Image
                     alt="No Image Found"
                     src={post.image}
-                    width={160} 
+                    width={160}
                     height={96}
                     className="object-cover w-full h-full"
                     loading="lazy"
