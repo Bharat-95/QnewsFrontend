@@ -18,46 +18,39 @@ const Page = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn?t=${new Date().getTime()}`
+        "https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/latest50"
       );
-
+  
       if (!response.data || !response.data.data || !Array.isArray(response.data.data)) {
         console.error("Invalid API response format");
         return;
       }
-
+  
       let responseData = response.data.data;
-
-      // ✅ Filter only 'Approved' news before sorting
-      const approvedNews = responseData.filter(news => news.status === "Approved");
-
-      // ✅ Sort latest news using `getTime()`
-      const sortedNews = approvedNews.sort(
-        (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  
+      // ✅ Sort all news (without filtering by 'Approved' status)
+      const sortedNews = responseData.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
-
+  
       // ✅ Set sorted data to state
-      setData([...sortedNews]);
-
-      console.log("✅ First Item in Next.js (Should be Latest):", sortedNews[0]);
-
+      setData(sortedNews);
+  
+      console.log("Latest Post After Sorting:", sortedNews[0]); // Debugging Latest News
     } catch (error) {
-      console.error("❌ Unable to fetch news:", error);
+      console.error("Unable to fetch news:", error);
     }
   };
+  
+useEffect(() => {
+  fetchData();
+  const interval = setInterval(fetchData, 30000);
+  return () => clearInterval(interval);
+}, []);
 
-  useEffect(() => {
-    fetchData();
-    const interval = setInterval(fetchData, 30000);
-    return () => clearInterval(interval);
-  }, []);
 
-  // ✅ Main Post (Latest News)
   const mainPost = data.length > 0 ? data[0] : null;
-
-  // ✅ Latest Posts (Next 39 most recent)
-  const latestPosts = data.slice(1, 40);
+  const latestPosts = data.slice(1, 40); // Take next 40 latest posts
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
