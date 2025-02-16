@@ -803,7 +803,10 @@ const formatTime = (dateString) => {
             .slice(0, 3) 
             .map((newsItem) => (
               <Link
-                href={`/news/${newsItem.newsId}`}
+                href={{
+                  pathname: `/news/${newsItem.newsId}`,
+                  query: { language },
+                }}
                 key={newsItem.newsId}
                 className=" p-4 h-screen overflow-y-scroll rounded-md space-y-4"
               >

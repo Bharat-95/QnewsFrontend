@@ -88,6 +88,7 @@ const Latest = () => {
 
     return () => {
       if (loaderRef.current) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         observer.unobserve(loaderRef.current);
       }
     };
