@@ -209,7 +209,8 @@ const en = {
      warangal:"Warangal",
      yadadri:"Yadadri Bhuvanagiri",
      districts:"District",
-     selectdistrict:"Select District"
+     selectdistrict:"Select District",
+     participate:"Click Here to Participate"
   };
   
   export default en;

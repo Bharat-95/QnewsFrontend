@@ -13,6 +13,7 @@ import Health from '@/components/Health';
 import Sports from '@/components/Sports';
 import Film from '@/components/Film';
 import Others from '@/components/Others';
+import Survey from '@/components/Survey';
 
 const Page = () => {
   return (
@@ -33,6 +34,7 @@ const Page = () => {
       </div> */}
 
       {/* Hero Section */}
+      <Survey />
       <HeroHome />
 
       {/* Main Content */}

@@ -207,7 +207,8 @@ const te = {
      warangal:"వరంగల్",
      yadadri:"యాదాద్రి భువనగిరి",
      districts:"జిల్లా",
-     selectdistrict:"జిల్లాను ఎంచుకోండి"
+     selectdistrict:"జిల్లాను ఎంచుకోండి",
+     participate:"పాల్గొనడానికి ఇక్కడ క్లిక్ చేయండి"
     };
   
   export default te;
