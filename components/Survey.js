@@ -13,8 +13,8 @@ const Survey = () => {
         <Image 
           src="/BC.png" 
           alt="No Image Found" 
-          width={500} 
-          height={500} 
+          width={1000} 
+          height={1000} 
           className="w-full"
         />
         
