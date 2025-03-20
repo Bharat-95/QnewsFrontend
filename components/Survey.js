@@ -11,7 +11,7 @@ const Survey = () => {
       <div className="w-full relative"> 
         {/* Image */}
         <Image 
-          src="/BC.png" 
+          src="/BC1.jpg" 
           alt="No Image Found" 
           width={1000} 
           height={1000} 
@@ -19,7 +19,7 @@ const Survey = () => {
         />
         
         {/* Button Positioned on Image */}
-        <Link href='https://docs.google.com/forms/d/e/1FAIpQLSe7SEyuWDb83CzHAoyzWfr3F6wJIluuR6t2YRIEt4g8rexxZQ/viewform' target='_blank' className="absolute top-[70%] lg:left-[50%] left-[60%] transform -translate-x-1/2 -translate-y-1/2 bg-orange-500 text-white lg:px-4 p-1 lg:py-2 rounded-lg text-[10px] lg:text-[16px] shadow-lg font-bold">
+        <Link href='https://docs.google.com/forms/d/e/1FAIpQLSe7SEyuWDb83CzHAoyzWfr3F6wJIluuR6t2YRIEt4g8rexxZQ/viewform' target='_blank' className="flex justify-center absolute lg:top-[80%] top-[80%] lg:left-[45%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 bg-green-900 text-white lg:px-4 p-1 lg:py-2 lg:rounded-lg rounded-md text-[10px] lg:text-[20px] shadow-lg font-bold w-[30%] lg:w-[40%]">
           {translations.participate}
         </Link>
       </div>
