@@ -56,7 +56,7 @@ const Survey = () => {
           target='_blank' 
           className="absolute lg:bottom-5 bottom-2 left-1/2 transform -translate-x-1/2 text-white font-bold text-sm md:text-2xl lg:text-3xl animate-blink bg-green-900 bg-opacity-60 px-4 py-2 rounded-md text-center"
         >
-          పలుగొనడానికి ఇక్కడ క్లిక్ చేయండి
+          పాల్గొనడానికి ఇక్కడ క్లిక్ చేయండి
         </Link>
       </div>
     </div>
