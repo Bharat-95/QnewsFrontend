@@ -139,6 +139,7 @@ const Header = () => {
 
   const handleSignOut = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
     setIsLoggedIn(false);
     router.push("/");
   };
