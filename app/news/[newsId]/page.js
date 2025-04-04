@@ -48,6 +48,15 @@ const NewsPost = ({postData}) => {
   //const [isRated, setIsRated] = useState(false);
   const [relatedNews, setRelatedNews] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedHeadline, setEditedHeadline] = useState("");
+  const [editedContent, setEditedContent] = useState("");
+
+  useEffect(() => {
+    const role = localStorage.getItem("role");
+    setIsAdmin(role && role.toLowerCase() === "admin");
+  }, []);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -470,6 +479,43 @@ const formatTime = (dateString) => {
       .catch((error) => console.log("Error submitting rating:", error));
   }; */}
 
+
+  const handleEditToggle = () => {
+    if (newsData) {
+      setEditedHeadline(language === "te" ? newsData.headlineTe : newsData.headlineEn);
+      setEditedContent(language === "te" ? newsData.newsTe : newsData.newsEn);
+      setIsEditing(true);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+  };
+
+  const handleSaveEdit = async () => {
+    const email = localStorage.getItem("email");
+    if (!isAdmin || !email) return;
+
+    const payload = language === "te"
+      ? { headlineTe: editedHeadline, newsTe: editedContent }
+      : { headlineEn: editedHeadline, newsEn: editedContent };
+
+    try {
+      await fetch(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsData.newsId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      setNewsData((prev) => ({ ...prev, ...payload }));
+      setIsEditing(false);
+      alert("News updated successfully.");
+    } catch (err) {
+      console.error("Failed to update news:", err);
+      alert("Failed to update.");
+    }
+  };
+
   return (
     <div>
       <div className="w-full border m-[10px]">
@@ -495,13 +541,56 @@ const formatTime = (dateString) => {
                 src={newsData.image}
                 width={900}
                 height={500}
-                className=" object-contain rounded-md lg:h-[400px] md:h-[400px] h-[250px]"
+                className=" object-contain  rounded-md lg:h-[400px] md:h-[400px] h-[250px]"
                 unoptimized={true}
               />
             </div>
-            <div className={`line-clamp-2 font-semibold ${language === "te" ? `${ramaraja.className} lg:text-[24px] md:text-[20px] text-[20px]`:`lg:text-[18px] md:text-[16px] text-[16px]  `}`}>
+           {isEditing ? (
+            <input
+              value={editedHeadline}
+              onChange={(e) => setEditedHeadline(e.target.value)}
+              className="w-full p-2 border mt-2 font-semibold text-lg"
+            />
+          ) : (
+            <div className={`line-clamp-2 font-semibold ${language === "te" ? `${ramaraja.className} text-[24px]` : `text-[18px]`}`}>
               {language === "te" ? newsData.headlineTe : newsData.headlineEn}
             </div>
+          )}
+
+          {isAdmin && !isEditing && (
+            <button
+              onClick={handleEditToggle}
+              className="bg-blue-600 text-white px-3 py-1 rounded mt-2"
+            >
+              Edit Post
+            </button>
+          )}
+
+          {isEditing && (
+            <>
+              <textarea
+                value={editedContent}
+                onChange={(e) => setEditedContent(e.target.value)}
+                rows={10}
+                className="w-full mt-4 p-3 border border-gray-400 rounded text-sm"
+              />
+              <div className="flex gap-4 mt-4">
+                <button
+                  onClick={handleSaveEdit}
+                  className="bg-green-600 text-white px-4 py-2 rounded"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={handleCancelEdit}
+                  className="bg-gray-500 text-white px-4 py-2 rounded"
+                >
+                  Cancel
+                </button>
+              </div>
+            </>
+          )}
+
             <div className="lg:flex md:flex lg:space-y-0 md:space-y-0 space-y-4 justify-between font-light text-gray-700">
               
               <div className="lg:flex md:flex flex items-center lg:px-0 md:px-0 px-2  lg:gap-10 md:gap-5 gap-2 lg:text-sm md:text-sm text-[10px]">
@@ -770,16 +859,17 @@ const formatTime = (dateString) => {
                 ))}
               </div>
             )}
+               {!isEditing && (
             <div
-  className={`pt-5 border-orange-300 border-t-[1px] pb-10 leading-relaxed text-justify ${
-    language === "te"
-      ? `lg:text-[18px] md:text-[16px] text-[16px]`
-      : `lg:text-[15px] md:text-[12px] text-[12px]`
-  }`}
-  dangerouslySetInnerHTML={{
-    __html: language === "te" ? newsData.newsTe : newsData.newsEn,
-  }}
-></div>
+              className={`pt-5 border-orange-300 border-t-[1px] pb-10 leading-relaxed text-justify ${
+               language === "te" ? `lg:text-[18px] md:text-[16px] text-[16px]` : `lg:text-[15px] md:text-[12px] text-[12px]`
+              }`}
+              dangerouslySetInnerHTML={{
+                __html: language === "te" ? newsData.newsTe : newsData.newsEn,
+              }}
+            ></div>
+          )}
+
 
             
           </>
