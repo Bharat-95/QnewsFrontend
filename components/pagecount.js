@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 
 const PostViewCount = ({ postUrl }) => {
-  const [viewCount, setViewCount] = useState(null);
+  const [viewCount, setViewCount] = useState(87);
   const [error, setError] = useState(null);
 
   const siteId = "101474780"; // Replace with your Clicky Site ID
@@ -29,7 +29,7 @@ const PostViewCount = ({ postUrl }) => {
             `https://api.clicky.com/api/stats/4?site_id=${siteId}&sitekey=${siteKey}&type=pages&item=${encodeURIComponent(urlTe)}&date=this-month&output=json`
           ),
           fetch(
-            `https://api.clicky.com/api/stats/4?site_id=${siteId}&sitekey=${siteKey}&type=pages&item=${encodeURIComponent(urlEn)}&date=this-months&output=json`
+            `https://api.clicky.com/api/stats/4?site_id=${siteId}&sitekey=${siteKey}&type=pages&item=${encodeURIComponent(urlEn)}&date=this-month&output=json`
           ),
 
 
@@ -39,9 +39,6 @@ const PostViewCount = ({ postUrl }) => {
         const dataTe = responseTe.ok ? await responseTe.json() : null;
         const dataEn = responseEn.ok ? await responseEn.json() : null;
 
-
-        console.log("DataTe:", dataTe);
-        console.log("DataEn", dataEn);
     
 
         // Extract and combine the view counts
@@ -53,7 +50,7 @@ const PostViewCount = ({ postUrl }) => {
 
     
         
-        setViewCount(combinedView);
+        setViewCount(87 + combinedView);
       } catch (error) {
         console.error("Error fetching view count:", error);
         setError("Failed to fetch view counts");
