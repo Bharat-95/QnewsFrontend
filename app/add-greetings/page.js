@@ -28,7 +28,7 @@ const GreetingUploader = () => {
     }
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!file || !mediaType || !title) {
