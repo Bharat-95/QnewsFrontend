@@ -283,69 +283,81 @@ const Header = () => {
                   </li>
                 )}
 
-                {userRole === "Employee" && (
-                  <li className="lg:space-x-4 md:space-x-5 space-x-4">
-                    <div className=" relative">
-                      <button
-                        className="text-orange-600 bg-white shadow-md rounded-md lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-1 border-orange-600 p-1 font-semibold flex items-center justify-center"
-                        onClick={() => setShowDropdown(!showDropdown)}
-                      >
-                        {translations.add}
-                        <span className="ml-2">&#x25BC;</span>
-                      </button>
-                      {showDropdown && (
-                        <div
-                          className={`absolute w-28 md:w-40 bg-white text-orange-600 border border-orange-600 mt-1 rounded  z-10 ${
-                            language === "en"
-                              ? ` lg:w-36 md:w-32 w-32`
-                              : `lg:w-40 md:w-40 w-32`
-                          }`}
-                        >
-                          <button
-                            onClick={() => router.push("/add-news")}
-                            className="block w-full text-left px-4 py-2 hover:bg-orange-100"
-                          >
-                            {translations.addnews}
-                          </button>
-                          <button
-                            onClick={() => router.push("/add-video")}
-                            className="block w-full text-left px-4 py-2 hover:bg-orange-100"
-                          >
-                            {translations.addVideo}
-                          </button>
-                          <button
-                            onClick={() => router.push("/add-paper")}
-                            className="block w-full text-left px-4 py-2 hover:bg-orange-100"
-                          >
-                            {translations.addPaper}
-                          </button>
-                        </div>
-                      )}
-                    </div>
+               {userRole === "Employee" && (
+  <li className="lg:space-x-4 md:space-x-5 space-x-4">
+    <div className="relative">
+      <button
+        className="text-orange-600 bg-white shadow-md rounded-md lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-1 border-orange-600 p-1 font-semibold flex items-center justify-center"
+        onClick={() => setShowDropdown(!showDropdown)}
+      >
+        {translations.add}
+        <span className="ml-2">&#x25BC;</span>
+      </button>
 
-                    {/* Buttons for large screens */}
-                    <div className="hidden  space-x-4">
-                      <button
-                        onClick={() => router.push("/add-news")}
-                        className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold"
-                      >
-                        {translations.addnews}
-                      </button>
-                      <button
-                        onClick={() => router.push("/add-video")}
-                        className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold"
-                      >
-                        {translations.addVideo}
-                      </button>
-                      <button
-                        onClick={() => router.push("/add-paper")}
-                        className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-1 hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold"
-                      >
-                        {translations.addPaper}
-                      </button>
-                    </div>
-                  </li>
-                )}
+      {showDropdown && (
+        <div
+          className={`absolute bg-white text-orange-600 border border-orange-600 mt-1 rounded z-10 ${
+            language === "en" ? `lg:w-36 md:w-32 w-32` : `lg:w-40 md:w-40 w-32`
+          }`}
+        >
+          <button
+            onClick={() => router.push("/add-news")}
+            className="block w-full text-left px-4 py-2 hover:bg-orange-100"
+          >
+            {translations.addnews}
+          </button>
+          <button
+            onClick={() => router.push("/add-video")}
+            className="block w-full text-left px-4 py-2 hover:bg-orange-100"
+          >
+            {translations.addVideo}
+          </button>
+          <button
+            onClick={() => router.push("/add-paper")}
+            className="block w-full text-left px-4 py-2 hover:bg-orange-100"
+          >
+            {translations.addPaper}
+          </button>
+          <button
+            onClick={() => router.push("/add-greeting")}
+            className="block w-full text-left px-4 py-2 hover:bg-orange-100"
+          >
+            {translations.addGreeting || "Add Greeting"}
+          </button>
+        </div>
+      )}
+    </div>
+
+    {/* Buttons for large screens */}
+    <div className="hidden space-x-4">
+      <button
+        onClick={() => router.push("/add-news")}
+        className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-orange-600 lg:p-2 md:p-2 p-1 font-semibold hover:transform hover:translate-x-1 hover:-translate-y-1 duration-150"
+      >
+        {translations.addnews}
+      </button>
+      <button
+        onClick={() => router.push("/add-video")}
+        className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-orange-600 lg:p-2 md:p-2 p-1 font-semibold hover:transform hover:translate-x-1 hover:-translate-y-1 duration-150"
+      >
+        {translations.addVideo}
+      </button>
+      <button
+        onClick={() => router.push("/add-paper")}
+        className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-orange-600 lg:p-2 md:p-2 p-1 font-semibold hover:transform hover:translate-x-1 hover:-translate-y-1 duration-150"
+      >
+        {translations.addPaper}
+      </button>
+      <button
+        onClick={() => router.push("/add-greetings")}
+        className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-orange-600 lg:p-2 md:p-2 p-1 font-semibold hover:transform hover:translate-x-1 hover:-translate-y-1 duration-150"
+      >
+        {translations.addGreeting}
+      </button>
+    </div>
+  </li>
+)}
+
 
                 <li style={{ position: "relative" }}>
                   <GiHamburgerMenu

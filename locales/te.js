@@ -208,7 +208,8 @@ const te = {
      yadadri:"యాదాద్రి భువనగిరి",
      districts:"జిల్లా",
      selectdistrict:"జిల్లాను ఎంచుకోండి",
-     participate:"పాల్గొనడానికి ఇక్కడ క్లిక్ చేయండి"
+     participate:"పాల్గొనడానికి ఇక్కడ క్లిక్ చేయండి",
+     addGreeting: "గ్రీటింగ్స్ చేర్చు",
     };
   
   export default te;

@@ -210,7 +210,8 @@ const en = {
      yadadri:"Yadadri Bhuvanagiri",
      districts:"District",
      selectdistrict:"Select District",
-     participate:"Click Here to Participate"
+     participate:"Click Here to Participate",
+      addGreeting: "Add Greeting",
   };
   
   export default en;
