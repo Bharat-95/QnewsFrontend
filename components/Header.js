@@ -33,7 +33,6 @@ const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [districtsOpen, setDistrictsOpen] = useState(false);
 
- 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -101,7 +100,8 @@ const Header = () => {
     };
   }, []);
 
-  {/*useEffect(() => {
+  {
+    /*useEffect(() => {
     const fetchWeather = async () => {
       try {
         const response = await fetch(
@@ -119,7 +119,8 @@ const Header = () => {
     };
 
     fetchWeather();
-  }, []);*/}
+  }, []);*/
+  }
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -135,7 +136,6 @@ const Header = () => {
     event.stopPropagation();
     setMenu(!menu);
   };
-  
 
   const handleSignOut = () => {
     localStorage.removeItem("token");
@@ -155,7 +155,6 @@ const Header = () => {
   const handleDistricts = () => {
     setDistrictsOpen(!districtsOpen);
   };
-
 
   const navItems = [
     { path: "/", label: translations.home },
@@ -283,81 +282,82 @@ const Header = () => {
                   </li>
                 )}
 
-               {userRole === "Employee" && (
-  <li className="lg:space-x-4 md:space-x-5 space-x-4">
-    <div className="relative">
-      <button
-        className="text-orange-600 bg-white shadow-md rounded-md lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-1 border-orange-600 p-1 font-semibold flex items-center justify-center"
-        onClick={() => setShowDropdown(!showDropdown)}
-      >
-        {translations.add}
-        <span className="ml-2">&#x25BC;</span>
-      </button>
+                {userRole === "Employee" && (
+                  <li className="lg:space-x-4 md:space-x-5 space-x-4">
+                    <div className="relative">
+                      <button
+                        className="text-orange-600 bg-white shadow-md rounded-md lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-1 border-orange-600 p-1 font-semibold flex items-center justify-center"
+                        onClick={() => setShowDropdown(!showDropdown)}
+                      >
+                        {translations.add}
+                        <span className="ml-2">&#x25BC;</span>
+                      </button>
 
-      {showDropdown && (
-        <div
-          className={`absolute bg-white text-orange-600 border border-orange-600 mt-1 rounded z-10 ${
-            language === "en" ? `lg:w-36 md:w-32 w-32` : `lg:w-40 md:w-40 w-32`
-          }`}
-        >
-          <button
-            onClick={() => router.push("/add-news")}
-            className="block w-full text-left px-4 py-2 hover:bg-orange-100"
-          >
-            {translations.addnews}
-          </button>
-          <button
-            onClick={() => router.push("/add-video")}
-            className="block w-full text-left px-4 py-2 hover:bg-orange-100"
-          >
-            {translations.addVideo}
-          </button>
-          <button
-            onClick={() => router.push("/add-paper")}
-            className="block w-full text-left px-4 py-2 hover:bg-orange-100"
-          >
-            {translations.addPaper}
-          </button>
-          <button
-            onClick={() => router.push("/add-greeting")}
-            className="block w-full text-left px-4 py-2 hover:bg-orange-100"
-          >
-            {translations.addGreeting || "Add Greeting"}
-          </button>
-        </div>
-      )}
-    </div>
+                      {showDropdown && (
+                        <div
+                          className={`absolute bg-white text-orange-600 border border-orange-600 mt-1 rounded z-10 ${
+                            language === "en"
+                              ? `lg:w-36 md:w-32 w-32`
+                              : `lg:w-40 md:w-40 w-32`
+                          }`}
+                        >
+                          <button
+                            onClick={() => router.push("/add-news")}
+                            className="block w-full text-left px-4 py-2 hover:bg-orange-100"
+                          >
+                            {translations.addnews}
+                          </button>
+                          <button
+                            onClick={() => router.push("/add-video")}
+                            className="block w-full text-left px-4 py-2 hover:bg-orange-100"
+                          >
+                            {translations.addVideo}
+                          </button>
+                          <button
+                            onClick={() => router.push("/add-paper")}
+                            className="block w-full text-left px-4 py-2 hover:bg-orange-100"
+                          >
+                            {translations.addPaper}
+                          </button>
+                          <button
+                            onClick={() => router.push("/add-greetings")}
+                            className="block w-full text-left px-4 py-2 hover:bg-orange-100"
+                          >
+                            {translations.addGreeting || "Add Greeting"}
+                          </button>
+                        </div>
+                      )}
+                    </div>
 
-    {/* Buttons for large screens */}
-    <div className="hidden space-x-4">
-      <button
-        onClick={() => router.push("/add-news")}
-        className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-orange-600 lg:p-2 md:p-2 p-1 font-semibold hover:transform hover:translate-x-1 hover:-translate-y-1 duration-150"
-      >
-        {translations.addnews}
-      </button>
-      <button
-        onClick={() => router.push("/add-video")}
-        className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-orange-600 lg:p-2 md:p-2 p-1 font-semibold hover:transform hover:translate-x-1 hover:-translate-y-1 duration-150"
-      >
-        {translations.addVideo}
-      </button>
-      <button
-        onClick={() => router.push("/add-paper")}
-        className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-orange-600 lg:p-2 md:p-2 p-1 font-semibold hover:transform hover:translate-x-1 hover:-translate-y-1 duration-150"
-      >
-        {translations.addPaper}
-      </button>
-      <button
-        onClick={() => router.push("/add-greetings")}
-        className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-orange-600 lg:p-2 md:p-2 p-1 font-semibold hover:transform hover:translate-x-1 hover:-translate-y-1 duration-150"
-      >
-        {translations.addGreeting}
-      </button>
-    </div>
-  </li>
-)}
-
+                    {/* Buttons for large screens */}
+                    <div className="hidden space-x-4">
+                      <button
+                        onClick={() => router.push("/add-news")}
+                        className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-orange-600 lg:p-2 md:p-2 p-1 font-semibold hover:transform hover:translate-x-1 hover:-translate-y-1 duration-150"
+                      >
+                        {translations.addnews}
+                      </button>
+                      <button
+                        onClick={() => router.push("/add-video")}
+                        className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-orange-600 lg:p-2 md:p-2 p-1 font-semibold hover:transform hover:translate-x-1 hover:-translate-y-1 duration-150"
+                      >
+                        {translations.addVideo}
+                      </button>
+                      <button
+                        onClick={() => router.push("/add-paper")}
+                        className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-orange-600 lg:p-2 md:p-2 p-1 font-semibold hover:transform hover:translate-x-1 hover:-translate-y-1 duration-150"
+                      >
+                        {translations.addPaper}
+                      </button>
+                      <button
+                        onClick={() => router.push("/add-greetings")}
+                        className="text-black lg:w-40 md:w-40 w-16 h-8 lg:h-10 md:h-10 border border-orange-600 lg:p-2 md:p-2 p-1 font-semibold hover:transform hover:translate-x-1 hover:-translate-y-1 duration-150"
+                      >
+                        {translations.addGreeting}
+                      </button>
+                    </div>
+                  </li>
+                )}
 
                 <li style={{ position: "relative" }}>
                   <GiHamburgerMenu
@@ -452,7 +452,12 @@ const Header = () => {
             }}
           >
             <div className="flex items-center w-max p-1 whitespace-nowrap">
-              <div className="flex items-center gap-2" onClick={handleDistricts}>{translations.districts}   <FaAngleDown /> {"|"}</div>
+              <div
+                className="flex items-center gap-2"
+                onClick={handleDistricts}
+              >
+                {translations.districts} <FaAngleDown /> {"|"}
+              </div>
               {smallScreenNavItems.map((item, index) => (
                 <React.Fragment key={item.path}>
                   <li
@@ -473,8 +478,6 @@ const Header = () => {
           </div>
 
           <div className="flex justify-between items-center">
-            
-
             <div className="flex items-center space-x-2 ml-2">
               {navItems.map((item, index) => (
                 <React.Fragment key={item.path}>
@@ -497,28 +500,30 @@ const Header = () => {
                 </React.Fragment>
               ))}
               <div
-              className="lg:flex items-center gap-2 md:hidden hidden relative"
-              onClick={handleDistricts}
-            >
-             {translations.districts} <FaAngleDown /> 
-            </div>
-
-            {districtsOpen && (
-              <div className="absolute top-full right-0 w-72 bg-white text-black opacity-90  overflow-scroll scrollbar-hide h-screen pb-40 pt-4">
-                <div className="flex flex-col ">
-                  {Districts.map((item) => (
-                    <div key={item.path} className="py-2">
-                      <Link
-                        href={`/districts/${item.path}`}
-                        className={`px-10 hover:text-orange-600 font-semibold block w-full ${language === "te"? "text-[16px]":"text-[14px]"}`}
-                      >
-                        {item.label}
-                      </Link>
-                    </div>
-                  ))}
-                </div>
+                className="lg:flex items-center gap-2 md:hidden hidden relative"
+                onClick={handleDistricts}
+              >
+                {translations.districts} <FaAngleDown />
               </div>
-            )}
+
+              {districtsOpen && (
+                <div className="absolute top-full right-0 w-72 bg-white text-black opacity-90  overflow-scroll scrollbar-hide h-screen pb-40 pt-4">
+                  <div className="flex flex-col ">
+                    {Districts.map((item) => (
+                      <div key={item.path} className="py-2">
+                        <Link
+                          href={`/districts/${item.path}`}
+                          className={`px-10 hover:text-orange-600 font-semibold block w-full ${
+                            language === "te" ? "text-[16px]" : "text-[14px]"
+                          }`}
+                        >
+                          {item.label}
+                        </Link>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
             {/*<div className="flex space-x-4 items-center">
               <li className="lg:flex md:hidden hidden space-x-1 text-white text-[14px]">
