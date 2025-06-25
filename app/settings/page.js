@@ -92,7 +92,9 @@ const UserProfilePage = () => {
           }}
         >
           <div className="flex flex-col">
-            <label className="mb-2 font-medium">{translations.firstName}:</label>
+            <label className="mb-2 font-medium">
+              {translations.firstName}:
+            </label>
             <input
               type="text"
               name="firstName"
@@ -112,7 +114,9 @@ const UserProfilePage = () => {
             />
           </div>
           <div className="flex flex-col">
-            <label className="mb-2 font-medium">{translations.phoneNumber}:</label>
+            <label className="mb-2 font-medium">
+              {translations.phoneNumber}:
+            </label>
             <input
               type="text"
               name="phoneNumber"
@@ -122,7 +126,9 @@ const UserProfilePage = () => {
             />
           </div>
           <div className="flex flex-col">
-            <label className="mb-2 font-medium">{translations.emailAddress}:</label>
+            <label className="mb-2 font-medium">
+              {translations.emailAddress}:
+            </label>
             <input
               type="text"
               name="email"
@@ -139,6 +145,35 @@ const UserProfilePage = () => {
           </button>
         </form>
       )}
+      <button
+        type="button"
+        onClick={async () => {
+          const confirmDelete = window.confirm(
+            "Are you sure you want to delete your account? This action cannot be undone."
+          );
+          if (!confirmDelete) return;
+
+          try {
+            const response = await axios.delete(
+              `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/users/${email}`
+            );
+
+            if (response.data.success) {
+              alert("Account deleted successfully.");
+              localStorage.clear();
+              window.location.href = "/"; // or redirect to login page
+            } else {
+              alert("Failed to delete account. Please try again.");
+            }
+          } catch (error) {
+            console.error("Error deleting account:", error);
+            alert("An error occurred while deleting your account.");
+          }
+        }}
+        className="w-full py-3 bg-red-600 text-white rounded font-medium hover:bg-red-700 transition mt-5"
+      >
+        Delete Account
+      </button>
     </div>
   );
 };
