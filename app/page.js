@@ -34,7 +34,7 @@ const Page = () => {
       </div> */}
 
       {/* Hero Section */}
-      <Survey />
+      {/*<Survey /> */}
       <HeroHome />
 
       {/* Main Content */}
