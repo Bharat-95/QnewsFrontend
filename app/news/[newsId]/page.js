@@ -21,13 +21,14 @@ import Speak from "@/components/Speak";
 import Add from "../../../public/Nandak Add.png";
 import { Ramaraja } from "next/font/google";
 import PostViewCount from "../../../components/pagecount";
-
+import { useRouter } from "next/navigation";
 const ramaraja = Ramaraja({
   subsets: ["latin", "telugu"],
   weight: "400",
 });
 
 const NewsPost = ({ postData }) => {
+    const router = useRouter();
   const searchParams = useSearchParams();
   const { newsId } = useParams();
   const urlLanguage = searchParams.get("language");
@@ -285,8 +286,7 @@ const NewsPost = ({ postData }) => {
 
     alert("News deleted successfully!");
 
-    // Redirect back to homepage or news list
-    window.location.href = "/news";
+    router.push('/')
   } catch (err) {
     console.error("Failed to delete news:", err);
     alert("Failed to delete. Please try again.");
