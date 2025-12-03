@@ -270,6 +270,30 @@ const NewsPost = ({ postData }) => {
       );
   };
 
+  const handleDelete = async () => {
+  const confirmed = confirm("Are you sure you want to delete this news post?");
+
+  if (!confirmed) return;
+
+  try {
+    await fetch(
+      `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    alert("News deleted successfully!");
+
+    // Redirect back to homepage or news list
+    window.location.href = "/news";
+  } catch (err) {
+    console.error("Failed to delete news:", err);
+    alert("Failed to delete. Please try again.");
+  }
+};
+
+
   const handleCommentSubmit = () => {
     const userEmail = localStorage.getItem("email");
     const firstName = localStorage.getItem("firstName") || "Anonymous";
@@ -568,12 +592,21 @@ const NewsPost = ({ postData }) => {
               )}
 
               {isRoleChecked && isAdmin && !isEditing && (
-                <button
-                  onClick={handleEditToggle}
-                  className="bg-blue-600 text-white px-3 py-1 rounded mt-2"
-                >
-                  Edit Post
-                </button>
+                <div className="flex gap-4 mt-2">
+                  <button
+                    onClick={handleEditToggle}
+                    className="bg-blue-600 text-white px-3 py-1 rounded"
+                  >
+                    Edit Post
+                  </button>
+
+                  <button
+                    onClick={handleDelete}
+                    className="bg-red-600 text-white px-3 py-1 rounded"
+                  >
+                    Delete Post
+                  </button>
+                </div>
               )}
 
               {isEditing && (
