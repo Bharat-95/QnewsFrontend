@@ -1,3 +1,5 @@
+import { all } from "axios";
+
 const en = {
     welcome: "Welcome",
     languageToggle: "Switch to Telugu",
@@ -212,6 +214,7 @@ const en = {
      selectdistrict:"Select District",
      participate:"Click Here to Participate",
       addGreeting: "Add Greeting",
+      allnews: "All News",
   };
   
   export default en;

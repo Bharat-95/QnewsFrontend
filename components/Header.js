@@ -380,6 +380,14 @@ const Header = () => {
                       >
                         {userRole === "Admin" && (
                           <>
+                          <li className="hover:text-black/70 hover:transform hover:translate-x-[1px] hover:translate-y-[1px] duration-200">
+                              <Link
+                                href="/all-news"
+                                onClick={handleLinkClick}
+                              >
+                                {translations.allnews}
+                              </Link>
+                            </li>
                             <li className="hover:text-black/70 hover:transform hover:translate-x-[1px] hover:translate-y-[1px] duration-200">
                               <Link
                                 href="/register-users"
