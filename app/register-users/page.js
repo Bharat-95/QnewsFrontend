@@ -47,7 +47,7 @@ const Page = () => {
     const emailInLowerCase = email.trim().toLowerCase();
   
     try {
-      const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/auth/signup", {
+      const response = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -146,6 +146,7 @@ const Page = () => {
             >
               <option value="">{translations.selectRole}</option>
               <option value="Admin">Admin</option>
+              <option value="SuperAdmin">SuperAdmin</option>
               <option value="Employee">Employee</option>
             </select>
           </div>

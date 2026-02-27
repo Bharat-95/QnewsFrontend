@@ -12,7 +12,7 @@ const PapersPage = () => {
   useEffect(() => {
     const fetchPapers = async () => {
       try {
-        const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/paper"); // Replace with your actual API endpoint
+        const response = await fetch("/api/paper"); // Replace with your actual API endpoint
         const data = await response.json();
 
         console.log(data)

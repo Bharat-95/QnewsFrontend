@@ -17,7 +17,7 @@ const UserProfilePage = () => {
   const fetchData = useCallback(async () => {
     try {
       const response = await axios.get(
-        "https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/users"
+        "/api/users"
       );
       const responseData = response.data;
       setData(responseData.data);
@@ -46,7 +46,7 @@ const UserProfilePage = () => {
     try {
       const { firstName, lastName, phoneNumber } = formData;
       const response = await axios.put(
-        `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/users/${email}`,
+        `/api/users/${email}`,
         {
           firstName,
           lastName,
@@ -155,7 +155,7 @@ const UserProfilePage = () => {
 
           try {
             const response = await axios.delete(
-              `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/users/${email}`
+              `/api/users/${email}`
             );
 
             if (response.data.success) {

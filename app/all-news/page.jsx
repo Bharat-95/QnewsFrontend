@@ -14,7 +14,7 @@ const ManageNews = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        "https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/all"
+        "/api/newsEn/all"
       );
       setNewsList(response.data);
       setLoading(false);
@@ -46,7 +46,7 @@ const ManageNews = () => {
 
     try {
       await axios.delete(
-        "https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/bulk",
+        "/api/newsEn/bulk",
         { data: { ids: selectedIds } }
       );
       alert("Selected news deleted successfully!");

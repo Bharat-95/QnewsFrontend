@@ -38,7 +38,7 @@ const Latest = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/video", { timeout: 20000 });
+      const response = await fetch("/api/video", { timeout: 20000 });
       const responseData = await response.json();
       const filteredData = responseData.data;
       
@@ -52,7 +52,7 @@ const Latest = () => {
 
   {/*const fetchData = async () => {
     try {
-      const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/video", { timeout: 20000 });
+      const response = await fetch("/api/video", { timeout: 20000 });
       const responseData = await response.json();
       let filteredData = responseData.data;
   

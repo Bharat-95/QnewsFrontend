@@ -13,7 +13,7 @@ const PaperDetailPage = () => {
       // Fetch paper details using the paperId
       const fetchPaper = async () => {
         try {
-          const response = await axios.get(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/paper/${paperId}`);
+          const response = await axios.get(`/api/paper/${paperId}`);
           const responseData = response.data;
           
           setPaper(responseData.data); // Assuming data is the paper object

@@ -54,7 +54,7 @@ const NewsPost = ({ postData }) => {
 
   useEffect(() => {
     const role = localStorage.getItem("role");
-    setIsAdmin(role && role.toLowerCase() === "admin");
+    setIsAdmin(["admin", "superadmin"].includes((role || "").toLowerCase()));
     setIsRoleChecked(true); // Mark check complete
   }, []);
 
@@ -189,7 +189,7 @@ const NewsPost = ({ postData }) => {
 
       axios
         .get(
-          `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}`,
+          `/api/newsEn/${newsId}`,
           {
             params: { userEmail },
           }
@@ -218,7 +218,7 @@ const NewsPost = ({ postData }) => {
           if (category) {
             axios
               .get(
-                `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/related`
+                `/api/newsEn/${newsId}/related`
               )
               .then((response) => setRelatedNews(response.data.data))
               .catch((error) =>
@@ -231,7 +231,7 @@ const NewsPost = ({ postData }) => {
       {
         /*axios
         .get(
-          `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/rating`,
+          `/api/newsEn/${newsId}/rating`,
           {
             params: { userEmail },
           }
@@ -257,8 +257,8 @@ const NewsPost = ({ postData }) => {
     }
 
     const endpoint = hasLiked
-      ? `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/unlike`
-      : `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/like`;
+      ? `/api/newsEn/${newsId}/unlike`
+      : `/api/newsEn/${newsId}/like`;
 
     axios
       .put(endpoint, { userEmail, newsId })
@@ -278,7 +278,7 @@ const NewsPost = ({ postData }) => {
 
   try {
     await fetch(
-      `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}`,
+      `/api/newsEn/${newsId}`,
       {
         method: "DELETE",
       }
@@ -311,7 +311,7 @@ const NewsPost = ({ postData }) => {
 
     axios
       .put(
-        `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/comment`,
+        `/api/newsEn/${newsId}/comment`,
         {
           userEmail,
           firstName,
@@ -322,11 +322,7 @@ const NewsPost = ({ postData }) => {
       .then((res) => {
         setNewComment("");
         axios
-          .get(
-            `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/${
-              language === "te" ? "newsTe" : "newsEn"
-            }/${newsId}`
-          )
+          .get(`/api/${language === "te" ? "newsTe" : "newsEn"}/${newsId}`)
           .then((response) => {
             const { comments } = response.data.data;
             setComments(comments || []);
@@ -365,7 +361,7 @@ const NewsPost = ({ postData }) => {
 
     axios
       .put(
-        `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/reply`,
+        `/api/newsEn/${newsId}/reply`,
         {
           commentId,
           userEmail,
@@ -407,7 +403,7 @@ const NewsPost = ({ postData }) => {
     if (commentLiked) {
       axios
         .put(
-          `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/comment/unlike`,
+          `/api/newsEn/${newsId}/comment/unlike`,
           {
             commentId,
             userEmail,
@@ -432,7 +428,7 @@ const NewsPost = ({ postData }) => {
     } else {
       axios
         .put(
-          `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/comment/like`,
+          `/api/newsEn/${newsId}/comment/like`,
           {
             commentId,
             userEmail,
@@ -481,7 +477,7 @@ const NewsPost = ({ postData }) => {
 
     axios
       .put(
-        `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsId}/rate`,
+        `/api/newsEn/${newsId}/rate`,
         {
           userEmail,
           newsId,
@@ -527,7 +523,7 @@ const NewsPost = ({ postData }) => {
 
     try {
       await fetch(
-        `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${newsData.newsId}`,
+        `/api/newsEn/${newsData.newsId}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

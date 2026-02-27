@@ -8,7 +8,7 @@ const Page = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/users");
+      const response = await fetch("/api/users");
       const responseData = await response.json();
       setData(responseData.data);
     } catch (error) {
@@ -20,7 +20,7 @@ const Page = () => {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
 
     try {
-      const response = await fetch(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/users/${qnews}`, {
+      const response = await fetch(`/api/users/${qnews}`, {
         method: "DELETE",
       });
 
@@ -43,7 +43,7 @@ const Page = () => {
     try {
       const newStatus = currentStatus === "Blocked" ? "Active" : "Blocked";
 
-      const response = await fetch(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/users/${qnews}`, {
+      const response = await fetch(`/api/users/${qnews}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

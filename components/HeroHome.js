@@ -18,7 +18,7 @@ const Page = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/latest50"
+        "/api/newsEn/latest50"
       );
   
       if (!response.data || !response.data.data || !Array.isArray(response.data.data)) {

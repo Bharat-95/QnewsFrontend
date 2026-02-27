@@ -12,12 +12,15 @@ const Page = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false); 
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setError("");
 
     try {
-      const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/auth/signin", {
+      const response = await fetch("/api/auth/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,6 +48,8 @@ const Page = () => {
       }
     } catch (error) {
       setError("Network error, please try again");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -62,6 +67,7 @@ const Page = () => {
               className="w-[90%] h-10 bg-orange-200 rounded-md p-2 text-black focus:outline-none" 
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              disabled={isSubmitting}
             />
           </div>
 
@@ -74,10 +80,12 @@ const Page = () => {
                 className="w-[90%] h-10 bg-orange-200 rounded-md p-2 text-black pr-10 focus:outline-none"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                disabled={isSubmitting}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)} 
+                disabled={isSubmitting}
               >
                 {showPassword ? <FaEyeSlash color="black" /> : <FaEye color="black" />}
               </button>
@@ -96,15 +104,16 @@ const Page = () => {
           {error && <div className="text-red-500">{error}</div>}
 
           <div className="flex gap-2">
-            <input type="checkbox" required/>
+            <input type="checkbox" required disabled={isSubmitting}/>
             <div className="lg:text-[14px] md:text-[14px] text-[8px]">{translations.acceptTerms}</div>
           </div>
           <div className="py-4">
             <button
               type="submit"
-              className="flex justify-center  bg-orange-500 text-white rounded-md font-bold h-10 w-[90%] items-center shadow-md hover:bg-orange-600 hover:transform hover:translate-x-[1px] hover:-translate-y-[1px] duration-200"
+              disabled={isSubmitting}
+              className="flex justify-center bg-orange-500 text-white rounded-md font-bold h-10 w-[90%] items-center shadow-md hover:bg-orange-600 hover:transform hover:translate-x-[1px] hover:-translate-y-[1px] duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              {translations.logIn}
+              {isSubmitting ? "Logging in..." : translations.logIn}
             </button>
           </div>
           <div className="flex justify-center gap-2 lg:text-[14px] md:text-[14px] text-[10px]">

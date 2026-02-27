@@ -15,7 +15,7 @@ const Page = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await fetch('https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn');
+        const response = await fetch('/api/newsEn');
         const data = await response.json();
         console.log(data);
         setNewsList(data.data);
@@ -41,7 +41,7 @@ const Page = () => {
     const role = localStorage.getItem("role"); 
     const token = localStorage.getItem("token");
 
-    if (token && role === "Admin") {
+    if (token && ["Admin", "SuperAdmin"].includes(role)) {
       setIsAuthorized(true);
     } else {
       router.push("/unauthorized");
@@ -56,7 +56,7 @@ const Page = () => {
     try {
       const { newsId, ...newsDataWithoutId } = selectedNews;
       const updatedNews = { ...newsDataWithoutId, status, image: newImage || selectedNews.image };
-      const response = await fetch(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${selectedNews.newsId}`, {
+      const response = await fetch(`/api/newsEn/${selectedNews.newsId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ const Page = () => {
   const handleEdit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/${selectedNews.newsId}`, {
+      const response = await fetch(`/api/newsEn/${selectedNews.newsId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

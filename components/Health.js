@@ -53,7 +53,7 @@ const Latest = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn"
+        "/api/newsEn"
       );
       const responseData = await response.data;
       const filteredData = responseData.data;

@@ -83,7 +83,7 @@ const Page = () => {
     try {
       setMessage('');
       setError('');
-      const response = await axios.post('https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/users/reset-password', { email, newPassword });
+      const response = await axios.post('/api/users/reset-password', { email, newPassword });
       if (response.data.success) {
         setMessage('Password reset successfully. You can now log in with your new password.');
         setStep(1);

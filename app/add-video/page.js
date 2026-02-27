@@ -17,7 +17,7 @@ const Page = () => {
     const role = localStorage.getItem("role");
     const token = localStorage.getItem("token");
 
-    if (token && role === "Employee") {
+    if (token && ["Employee", "Admin", "SuperAdmin"].includes(role)) {
       setIsAuthorized(true);
     } else {
       router.push("/unauthorized");
@@ -39,7 +39,7 @@ const Page = () => {
     formData.append("thumbnail", thumbnail);
 
     try {
-      const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/video", {
+      const response = await fetch("/api/video", {
         method: "POST",
         body: formData,
       });

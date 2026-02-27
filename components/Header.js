@@ -32,12 +32,14 @@ const Header = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [districtsOpen, setDistrictsOpen] = useState(false);
+  const isAdminLike = ["Admin", "SuperAdmin"].includes(userRole);
+  const canAddContent = ["Employee", "Admin", "SuperAdmin"].includes(userRole);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/users"
+          "/api/users"
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -243,7 +245,7 @@ const Header = () => {
 
             {isLoggedIn && (
               <ul className="flex lg:gap-10 md:gap-4 gap-4 items-center">
-                {userRole === "Admin" && (
+                {isAdminLike && (
                   <li className="lg:space-x-10 md:space-x-2 space-x-2 flex justify-center items-center relative">
                     <button
                       className="text-orange-600 bg-white shadow-md rounded-md border lg:w-40 md:w-32 w-20 h-8 lg:h-10 md:h-10 border-1 lg:text-[14px] md:text-[10px] text-[8px] hover:transform duration-150 hover:translate-x-1 hover:-translate-y-1 border-orange-600 lg:p-2 md:p-2 p-1 font-semibold"
@@ -282,7 +284,7 @@ const Header = () => {
                   </li>
                 )}
 
-                {userRole === "Employee" && (
+                {canAddContent && (
                   <li className="lg:space-x-4 md:space-x-5 space-x-4">
                     <div className="relative">
                       <button
@@ -378,7 +380,7 @@ const Header = () => {
                             : ``
                         } `}
                       >
-                        {userRole === "Admin" && (
+                        {isAdminLike && (
                           <>
                           <li className="hover:text-black/70 hover:transform hover:translate-x-[1px] hover:translate-y-[1px] duration-200">
                               <Link

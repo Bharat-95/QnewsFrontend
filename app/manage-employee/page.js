@@ -11,7 +11,7 @@ const Page = () => {
   // Fetch employees
   const fetchData = async () => {
     try {
-      const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/users");
+      const response = await fetch("/api/users");
       const responseData = await response.json();
       setData(responseData.data);
     } catch (error) {
@@ -22,7 +22,7 @@ const Page = () => {
   // Delete user
   const deleteUser = async (qnews) => {
     try {
-      const response = await fetch(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/users/${qnews}`, {
+      const response = await fetch(`/api/users/${qnews}`, {
         method: "DELETE",
       });
       const responseData = await response.json();
@@ -51,7 +51,7 @@ const Page = () => {
   // Handle employee update
   const handleUpdate = async () => {
     try {
-      const response = await fetch(`https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/users/${selectedEmployee.qnews}`, {
+      const response = await fetch(`/api/users/${selectedEmployee.qnews}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(selectedEmployee),
@@ -199,6 +199,7 @@ const Page = () => {
             >
               <option value="">{translations.selectRole}</option>
               <option value="Admin">Admin</option>
+              <option value="SuperAdmin">SuperAdmin</option>
               <option value="Employee">Employee</option>
             </select>
               </div>

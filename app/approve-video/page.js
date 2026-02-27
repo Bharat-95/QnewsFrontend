@@ -15,7 +15,7 @@ const VideoApproval = () => {
     useEffect(() => {
       const fetchVideos = async () => {
         try {
-          const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/video");
+          const response = await fetch("/api/video");
           const data = await response.json();
           setVideosList(data.data);
         } catch (error) {
@@ -43,7 +43,7 @@ const VideoApproval = () => {
       try {
         const updatedVideo = { ...selectedVideo, status };
         const response = await fetch(
-          `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/video/${selectedVideo.videoId}`,
+          `/api/video/${selectedVideo.videoId}`,
           {
             method: "PUT",
             headers: {
@@ -73,7 +73,7 @@ const VideoApproval = () => {
       try {
         const updatedVideo = { ...selectedVideo, thumbnail: thumbnailPreview };
         const response = await fetch(
-          `https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/video/${selectedVideo.videoId}`,
+          `/api/video/${selectedVideo.videoId}`,
           {
             method: "PUT",
             headers: {

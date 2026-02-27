@@ -42,7 +42,7 @@ const Latest = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn"
+        "/api/newsEn"
       );
 
       if (!response.data || !response.data.data || !Array.isArray(response.data.data)) {

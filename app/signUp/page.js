@@ -18,16 +18,20 @@ const SignUpPage = () => {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false); 
   const [showConfirmPassword, setShowConfirmPassword] = useState(false); 
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const userRole = "User"; 
 
   
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setError("");
   
   
     if (password !== confirmPassword) {
       setError("Passwords do not match");
+      setIsSubmitting(false);
       return;
     }
   
@@ -38,6 +42,7 @@ const SignUpPage = () => {
       setError(
         "Password must be at least 8 characters, including uppercase, lowercase, a number, and a special character."
       );
+      setIsSubmitting(false);
       return;
     }
   
@@ -45,6 +50,7 @@ const SignUpPage = () => {
     const phoneNumberWithoutCountryCode = phoneNumber.replace("+91 ", "").trim();
     if (phoneNumberWithoutCountryCode.length !== 10 || isNaN(phoneNumberWithoutCountryCode)) {
       setError("Phone number must be 10 digits long.");
+      setIsSubmitting(false);
       return;
     }
   
@@ -53,7 +59,7 @@ const SignUpPage = () => {
   
 
     try {
-      const response = await fetch("https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/auth/signup", {
+      const response = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -84,6 +90,8 @@ const SignUpPage = () => {
       }
     } catch (error) {
       setError("Network error, please try again");
+    } finally {
+      setIsSubmitting(false);
     }
   };
   
@@ -111,6 +119,7 @@ const SignUpPage = () => {
               className="w-[90%] bg-orange-200 h-10 rounded-md p-2 text-black"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
+              disabled={isSubmitting}
             />
           </div>
 
@@ -122,6 +131,7 @@ const SignUpPage = () => {
               className="w-[90%] bg-orange-200 h-10 rounded-md p-2 text-black"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
+              disabled={isSubmitting}
             />
           </div>
 
@@ -133,6 +143,7 @@ const SignUpPage = () => {
               className="w-[90%] bg-orange-200 h-10 rounded-md p-2 text-black"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
+              disabled={isSubmitting}
             />
           </div>
 
@@ -144,6 +155,7 @@ const SignUpPage = () => {
               className="w-[90%] h-10 bg-orange-200 rounded-md p-2 text-black"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              disabled={isSubmitting}
             />
           </div>
 
@@ -156,10 +168,12 @@ const SignUpPage = () => {
                 className="w-[90%] h-10 bg-orange-200 rounded-md p-2 text-black pr-10 focus:outline-none"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                disabled={isSubmitting}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
+                disabled={isSubmitting}
               >
                 {showPassword ? (
                   <FaEyeSlash color="black" />
@@ -179,10 +193,12 @@ const SignUpPage = () => {
                 className="w-[90%] h-10 bg-orange-200 rounded-md p-2 text-black pr-10 focus:outline-none"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                disabled={isSubmitting}
               />
               <button
                 type="button"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                disabled={isSubmitting}
               >
                 {showConfirmPassword ? (
                   <FaEyeSlash color="black" />
@@ -196,16 +212,17 @@ const SignUpPage = () => {
           {error && <div className="text-black text-[10px]">{error}</div>}
 
           <div className="flex gap-2">
-            <input type="checkbox" required />
+            <input type="checkbox" required disabled={isSubmitting} />
             <div className="lg:text-[14px] md:text-[14px] text-[10px]">{translations.acceptTerms}</div>
           </div>
 
           <div className="py-4">
             <button
               type="submit"
-              className="flex justify-center  bg-orange-500 text-white font-bold  rounded-md h-10 w-[90%] items-center shadow-md hover:bg-orange-600 hover:transform hover:translate-x-[1px] hover:-translate-y-[1px] duration-200"
+              disabled={isSubmitting}
+              className="flex justify-center bg-orange-500 text-white font-bold rounded-md h-10 w-[90%] items-center shadow-md hover:bg-orange-600 hover:transform hover:translate-x-[1px] hover:-translate-y-[1px] duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              {translations.signUp}
+              {isSubmitting ? "Signing up..." : translations.signUp}
             </button>
           </div>
 

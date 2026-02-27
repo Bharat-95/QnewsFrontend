@@ -18,7 +18,7 @@ const Page = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn"
+        "/api/newsEn"
       );
       const responseData = response.data;
       setData(responseData.data || []);

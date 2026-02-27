@@ -52,7 +52,7 @@ const Trending = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn"
+        "/api/newsEn"
       );
       const responseData = await response.data;
       const trendingData = responseData.data.sort((a, b) => b.likes - a.likes);

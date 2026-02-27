@@ -43,7 +43,7 @@ const GreetingUploader = () => {
 
     try {
       setUploading(true);
-      const res = await fetch('https://3jvmmmwqx6.execute-api.ap-south-1.amazonaws.com/newsEn/greetings/upload', {
+      const res = await fetch('/api/newsEn/greetings/upload', {
         method: 'POST',
         body: formData,
       });
