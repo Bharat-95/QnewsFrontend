@@ -25,16 +25,21 @@ export async function POST(req) {
     const formData = await req.formData();
     const file = formData.get("file");
     const thumbnail = formData.get("thumbnail");
+    const fileUrlInput = formData.get("fileUrl")?.toString() || "";
+    const thumbnailUrlInput = formData.get("thumbnailUrl")?.toString() || "";
     const date = (formData.get("date") || "").toString().trim();
     const month = (formData.get("month") || "").toString().trim();
     const year = (formData.get("year") || "").toString().trim();
 
-    if (!file || !thumbnail || !date || !month || !year) {
-      return NextResponse.json({ success: false, message: "file, thumbnail, date, month, year are required" }, { status: 400 });
+    if ((!file && !fileUrlInput) || (!thumbnail && !thumbnailUrlInput) || !date || !month || !year) {
+      return NextResponse.json(
+        { success: false, message: "file/fileUrl, thumbnail/thumbnailUrl, date, month, year are required" },
+        { status: 400 }
+      );
     }
 
-    const fileUrl = await savePaperFile(file);
-    const thumbnailUrl = await savePaperThumbnail(thumbnail);
+    const fileUrl = fileUrlInput || (await savePaperFile(file));
+    const thumbnailUrl = thumbnailUrlInput || (await savePaperThumbnail(thumbnail));
     const publishedAt = new Date(Number(year), Number(month) - 1, Number(date)).toISOString();
 
     const rows = await supabaseRest("papers", {

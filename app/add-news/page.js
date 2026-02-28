@@ -5,6 +5,7 @@ import { useLanguage } from "../../context/languagecontext";
 import { Editor, EditorState, RichUtils } from "draft-js";
 import "draft-js/dist/Draft.css";
 import { stateToHTML } from "draft-js-export-html";
+import { uploadFileToSupabaseStorage } from "@/lib/client/storageUpload";
 
 const Page = () => {
   const router = useRouter();
@@ -156,21 +157,25 @@ const Page = () => {
       return;
     }
 
-    const compressedImage = await compressImageFile(image);
-
-    const formData = new FormData();
-    formData.append("headlineEn", headlineEn);
-    formData.append("headlineTe", headlineTe);
-    formData.append("newsEn", stateToHTML(newsEn.getCurrentContent())); // Use getPlainText to get the editor content
-    formData.append("newsTe", stateToHTML(newsTe.getCurrentContent())); // Send HTML for newsTe
-    formData.append(
-      "category",
-      category === translations.districts ? selectedDistrict : category
-    );
-    formData.append("employeeId", employeeId);
-    formData.append("image", compressedImage);
-
     try {
+      const compressedImage = await compressImageFile(image);
+      const uploadedImageUrl = await uploadFileToSupabaseStorage(compressedImage, {
+        bucket: process.env.NEXT_PUBLIC_SUPABASE_BUCKET_NEWS_IMAGES || "news-images",
+        folder: "news-images",
+      });
+
+      const formData = new FormData();
+      formData.append("headlineEn", headlineEn);
+      formData.append("headlineTe", headlineTe);
+      formData.append("newsEn", stateToHTML(newsEn.getCurrentContent())); // Use getPlainText to get the editor content
+      formData.append("newsTe", stateToHTML(newsTe.getCurrentContent())); // Send HTML for newsTe
+      formData.append(
+        "category",
+        category === translations.districts ? selectedDistrict : category
+      );
+      formData.append("employeeId", employeeId);
+      formData.append("image", uploadedImageUrl);
+
       const response = await fetch(
         "/api/newsEn",
         {

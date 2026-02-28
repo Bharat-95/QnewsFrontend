@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/context/languagecontext";
+import { uploadFileToSupabaseStorage } from "@/lib/client/storageUpload";
 
 const Page = () => {
   const router = useRouter();
@@ -37,15 +38,26 @@ const Page = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("date", date);
-    formData.append("month", month);
-    formData.append("year", year);
-    formData.append("thumbnail", thumbnail);
-  
+
     try {
+      const [fileUrl, thumbnailUrl] = await Promise.all([
+        uploadFileToSupabaseStorage(file, {
+          bucket: process.env.NEXT_PUBLIC_SUPABASE_BUCKET_PAPERS || "papers",
+          folder: "papers",
+        }),
+        uploadFileToSupabaseStorage(thumbnail, {
+          bucket: process.env.NEXT_PUBLIC_SUPABASE_BUCKET_PAPER_THUMBNAILS || "paper-thumbnails",
+          folder: "paper-thumbnails",
+        }),
+      ]);
+
+      const formData = new FormData();
+      formData.append("fileUrl", fileUrl);
+      formData.append("thumbnailUrl", thumbnailUrl);
+      formData.append("date", date);
+      formData.append("month", month);
+      formData.append("year", year);
+
       const response = await fetch("/api/paper", {
         method: "POST",
         body: formData,

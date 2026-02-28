@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/context/languagecontext";
+import { uploadFileToSupabaseStorage } from "@/lib/client/storageUpload";
 
 const Page = () => {
   const router = useRouter();
@@ -31,14 +32,19 @@ const Page = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("titleEn", titleEn);
-    formData.append("titleTe", titleTe);
-    formData.append("category", category);
-    formData.append("URL", URL);
-    formData.append("thumbnail", thumbnail);
-
     try {
+      const thumbnailUrl = await uploadFileToSupabaseStorage(thumbnail, {
+        bucket: process.env.NEXT_PUBLIC_SUPABASE_BUCKET_VIDEO_THUMBNAILS || "video-thumbnails",
+        folder: "video-thumbnails",
+      });
+
+      const formData = new FormData();
+      formData.append("titleEn", titleEn);
+      formData.append("titleTe", titleTe);
+      formData.append("category", category);
+      formData.append("URL", URL);
+      formData.append("thumbnail", thumbnailUrl);
+
       const response = await fetch("/api/video", {
         method: "POST",
         body: formData,

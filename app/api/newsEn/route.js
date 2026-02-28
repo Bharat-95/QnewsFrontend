@@ -29,13 +29,18 @@ export async function POST(req) {
     const newsTe = formData.get("newsTe")?.toString() || "";
     const category = formData.get("category")?.toString() || "";
     const employeeId = formData.get("employeeId")?.toString() || "";
-    const imageFile = formData.get("image");
+    const imageInput = formData.get("image");
 
     if (!headlineEn || !headlineTe || !newsEn || !newsTe || !category || !employeeId) {
       return NextResponse.json({ message: "Missing required fields" }, { status: 400 });
     }
 
-    const imagePath = imageFile && typeof imageFile === "object" ? await saveNewsImage(imageFile) : null;
+    const imagePath =
+      typeof imageInput === "string"
+        ? imageInput
+        : imageInput && typeof imageInput === "object"
+          ? await saveNewsImage(imageInput)
+          : "";
 
     const inserted = await supabaseRest("news", {
       method: "POST",
@@ -47,7 +52,7 @@ export async function POST(req) {
         newsTe,
         category,
         employeeId,
-        image: imagePath || "",
+        image: imagePath,
         status: "Pending",
         likes: 0,
         likedBy: [],

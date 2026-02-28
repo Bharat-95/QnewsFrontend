@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import CustomModal from "../../components/CustomModal.js"; 
 import Image from "next/image.js";// Assuming you have a CustomModal component
+import { uploadFileToSupabaseStorage } from "@/lib/client/storageUpload";
 
 // Inside your main component
 
@@ -10,6 +11,7 @@ const VideoApproval = () => {
     const [selectedVideo, setSelectedVideo] = useState(null);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [thumbnailPreview, setThumbnailPreview] = useState("");
+    const [thumbnailFile, setThumbnailFile] = useState(null);
   
     // Fetch videos from the backend
     useEffect(() => {
@@ -37,6 +39,7 @@ const VideoApproval = () => {
       setModalIsOpen(false);
       setSelectedVideo(null);
       setThumbnailPreview("");
+      setThumbnailFile(null);
     };
   
     const updateStatus = async (status) => {
@@ -71,7 +74,15 @@ const VideoApproval = () => {
     const handleEdit = async (e) => {
       e.preventDefault();
       try {
-        const updatedVideo = { ...selectedVideo, thumbnail: thumbnailPreview };
+        let thumbnailUrl = selectedVideo.thumbnail;
+        if (thumbnailFile) {
+          thumbnailUrl = await uploadFileToSupabaseStorage(thumbnailFile, {
+            bucket: process.env.NEXT_PUBLIC_SUPABASE_BUCKET_VIDEO_THUMBNAILS || "video-thumbnails",
+            folder: "video-thumbnails",
+          });
+        }
+
+        const updatedVideo = { ...selectedVideo, thumbnail: thumbnailUrl };
         const response = await fetch(
           `/api/video/${selectedVideo.videoId}`,
           {
@@ -101,11 +112,8 @@ const VideoApproval = () => {
     const handleThumbnailChange = (e) => {
       const file = e.target.files[0];
       if (file) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          setThumbnailPreview(reader.result);
-        };
-        reader.readAsDataURL(file);
+        setThumbnailFile(file);
+        setThumbnailPreview(URL.createObjectURL(file));
       }
     };
   
