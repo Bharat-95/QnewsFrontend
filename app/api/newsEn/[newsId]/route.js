@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { toSlug, updateNewsById } from "@/lib/server/news";
+import { deleteNewsImageByUrl, toSlug, updateNewsById } from "@/lib/server/news";
 import { fetchSingleNews, supabaseRest } from "@/lib/server/supabase";
 
 export async function GET(_req, { params }) {
@@ -42,6 +42,10 @@ export async function PUT(req, { params }) {
 export async function DELETE(_req, { params }) {
   try {
     const { newsId } = await params;
+    const existing = await fetchSingleNews(newsId);
+    if (!existing) {
+      return NextResponse.json({ success: false, message: "News not found" }, { status: 404 });
+    }
 
     await supabaseRest("news", {
       method: "DELETE",
@@ -49,6 +53,14 @@ export async function DELETE(_req, { params }) {
         newsId: `eq.${newsId}`,
       },
     });
+
+    if (existing.image) {
+      try {
+        await deleteNewsImageByUrl(existing.image);
+      } catch (cleanupError) {
+        console.error("Failed to delete related news image:", cleanupError);
+      }
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {
