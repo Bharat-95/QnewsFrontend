@@ -8,8 +8,8 @@ const awsConfig = {
       oauth: {
         domain: "https://ap-south-1buvn5jiyn.auth.ap-south-1.amazoncognito.com", // Correct domain URL without https:// prefix
         scope: ["email", "openid", "phone"],
-        redirectSignIn: "https://localhost:3000", // The URL to which the user will be redirected after login
-        redirectSignOut: "https://localhost:3000", // The URL to which the user will be redirected after logout
+        redirectSignIn: "https://www.qgroupmedia.com", // The URL to which the user will be redirected after login
+        redirectSignOut: "https://www.qgroupmedia.com", // The URL to which the user will be redirected after logout
         responseType: "code", // Can be 'code' or 'token'
       },
     },
