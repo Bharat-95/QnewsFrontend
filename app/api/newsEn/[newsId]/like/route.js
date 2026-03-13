@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { fetchSingleNews } from "@/lib/server/supabase";
-import { updateNewsById } from "@/lib/server/news";
+import { supabaseRpc } from "@/lib/server/supabase";
 
 export async function PUT(req, { params }) {
   try {
@@ -11,18 +10,14 @@ export async function PUT(req, { params }) {
       return NextResponse.json({ message: "userEmail is required" }, { status: 400 });
     }
 
-    const news = await fetchSingleNews(newsId);
-    if (!news) return NextResponse.json({ message: "News not found" }, { status: 404 });
-
-    const likedBy = Array.isArray(news.likedBy) ? news.likedBy : [];
-    if (likedBy.includes(userEmail)) {
-      return NextResponse.json({ success: true, data: news });
-    }
-
-    const updated = await updateNewsById(newsId, {
-      likes: (news.likes || 0) + 1,
-      likedBy: [...likedBy, userEmail],
+    const updated = await supabaseRpc("like_news", {
+      p_news_id: newsId,
+      p_user_email: userEmail,
     });
+
+    if (!updated) {
+      return NextResponse.json({ message: "News not found" }, { status: 404 });
+    }
 
     return NextResponse.json({ success: true, data: updated });
   } catch (error) {
