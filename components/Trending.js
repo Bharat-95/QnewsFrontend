@@ -51,9 +51,9 @@ const Trending = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        "/api/newsEn"
-      );
+      const response = await axios.get("/api/newsEn", {
+        params: { status: "Approved", sort: "likes", limit: 14 },
+      });
       const responseData = await response.data;
       const trendingData = responseData.data.sort((a, b) => b.likes - a.likes);
 

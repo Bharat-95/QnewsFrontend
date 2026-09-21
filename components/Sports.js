@@ -41,9 +41,9 @@ const Latest = () => {
   // Fetch news data
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        "/api/newsEn"
-      );
+      const response = await axios.get("/api/newsEn", {
+        params: { category: "Sports", status: "Approved", limit: 40 },
+      });
       const responseData = response.data.data;
 
       // Sort by latest date first (descending order)

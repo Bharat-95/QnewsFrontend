@@ -41,9 +41,9 @@ const Latest = () => {
   // Fetch Film News Data
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        "/api/newsEn"
-      );
+      const response = await axios.get("/api/newsEn", {
+        params: { category: "Film", status: "Approved", limit: 40 },
+      });
 
       if (!response.data || !response.data.data || !Array.isArray(response.data.data)) {
         console.error("Invalid API response format");

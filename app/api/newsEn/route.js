@@ -1,9 +1,29 @@
 import { NextResponse } from "next/server";
-import { saveNewsImage, toSlug } from "@/lib/server/news";
+import { fetchNewsList, saveNewsImage, toSlug } from "@/lib/server/news";
 import { supabaseRest } from "@/lib/server/supabase";
 
-export async function GET() {
+const LIST_PARAMS = ["category", "status", "sort", "limit"];
+
+export async function GET(req) {
   try {
+    const { searchParams } = new URL(req.url);
+
+    // List mode: filtered, limited, card columns only. Used by the public pages.
+    if (LIST_PARAMS.some((key) => searchParams.has(key))) {
+      const data = await fetchNewsList({
+        category: searchParams.get("category") || undefined,
+        status: searchParams.get("status") || undefined,
+        sort: searchParams.get("sort") || undefined,
+        limit: searchParams.get("limit") || undefined,
+      });
+
+      return NextResponse.json(
+        { data },
+        { headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300" } }
+      );
+    }
+
+    // No params: full rows for the admin pages (approve-news, add-news).
     const data = await supabaseRest("news", {
       query: {
         select: "*",

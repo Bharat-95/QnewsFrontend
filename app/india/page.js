@@ -13,15 +13,21 @@ const ramaraja = Ramaraja({
 
 const Page = () => {
   const [data, setData] = useState([]);
+  const [trending, setTrending] = useState([]);
   const { language, translations } = useLanguage();
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        "/api/newsEn"
-      );
-      const responseData = response.data;
-      setData(responseData.data || []);
+      const [categoryRes, trendingRes] = await Promise.all([
+        axios.get("/api/newsEn", {
+          params: { category: "India", status: "Approved", limit: 61 },
+        }),
+        axios.get("/api/newsEn", {
+          params: { status: "Approved", sort: "likes", limit: 4 },
+        }),
+      ]);
+      setData(categoryRes.data.data || []);
+      setTrending(trendingRes.data.data || []);
     } catch (error) {
       console.log("Unable to retrieve the news");
     }
@@ -35,7 +41,7 @@ const Page = () => {
     .filter((news) => news.category === "India" && news.status === "Approved")
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-  const trendingNews = [...data]
+  const trendingNews = [...trending]
     .filter((news) => news.status === "Approved")
     .sort((a, b) => b.likes - a.likes)
     .slice(0, 4);

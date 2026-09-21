@@ -53,7 +53,9 @@ const Latest = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("/api/newsEn");
+      const response = await axios.get("/api/newsEn", {
+        params: { status: "Approved", limit: 20 },
+      });
       const responseData = await response.data;
       const filteredData = responseData.data;
 

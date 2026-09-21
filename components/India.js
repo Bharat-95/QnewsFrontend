@@ -52,9 +52,9 @@ const Latest = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        "/api/newsEn"
-      );
+      const response = await axios.get("/api/newsEn", {
+        params: { category: "India", status: "Approved", limit: 10 },
+      });
       const responseData = await response.data;
       const filteredData = responseData.data;
 
