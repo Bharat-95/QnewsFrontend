@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { PUBLIC_CACHE_HEADERS } from "@/lib/server/cache";
 import { NEWS_LIST_COLUMNS } from "@/lib/server/news";
 import { supabaseRest } from "@/lib/server/supabase";
 
@@ -14,7 +15,7 @@ export async function GET() {
 
     return NextResponse.json(
       { data: data || [] },
-      { headers: { "Cache-Control": "public, s-maxage=30, stale-while-revalidate=120" } }
+      { headers: PUBLIC_CACHE_HEADERS }
     );
   } catch (error) {
     return NextResponse.json(

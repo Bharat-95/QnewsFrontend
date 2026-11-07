@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { PUBLIC_CACHE_HEADERS } from "@/lib/server/cache";
 import { deleteNewsImageByUrl, toSlug, updateNewsById } from "@/lib/server/news";
 import { fetchSingleNews, supabaseRest } from "@/lib/server/supabase";
 
@@ -11,7 +12,7 @@ export async function GET(_req, { params }) {
       return NextResponse.json({ message: "News not found" }, { status: 404 });
     }
 
-    return NextResponse.json({ data });
+    return NextResponse.json({ data }, { headers: PUBLIC_CACHE_HEADERS });
   } catch (error) {
     return NextResponse.json(
       { message: error.message || "Failed to fetch news", details: error.data || null },

@@ -17,7 +17,7 @@ const VideoApproval = () => {
     useEffect(() => {
       const fetchVideos = async () => {
         try {
-          const response = await fetch("/api/video");
+          const response = await fetch("/api/video?fresh=1");
           const data = await response.json();
           setVideosList(data.data);
         } catch (error) {

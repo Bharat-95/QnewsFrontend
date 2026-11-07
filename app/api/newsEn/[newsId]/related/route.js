@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { PUBLIC_CACHE_HEADERS } from "@/lib/server/cache";
 import { fetchSingleNews, supabaseRest } from "@/lib/server/supabase";
 
 export async function GET(_req, { params }) {
@@ -21,7 +22,10 @@ export async function GET(_req, { params }) {
       },
     });
 
-    return NextResponse.json({ data: data || [] });
+    return NextResponse.json(
+      { data: data || [] },
+      { headers: PUBLIC_CACHE_HEADERS }
+    );
   } catch (error) {
     return NextResponse.json(
       { message: error.message || "Failed to fetch related news", details: error.data || null },

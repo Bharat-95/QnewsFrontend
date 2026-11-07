@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { NO_STORE_HEADERS, PUBLIC_CACHE_HEADERS } from "@/lib/server/cache";
 import { extractVideoIdFromUrl, saveVideoThumbnail, syncYoutubeVideos } from "@/lib/server/video";
 import { supabaseRest } from "@/lib/server/supabase";
 
@@ -8,8 +9,14 @@ const SYNC_INTERVAL_MS = 10 * 60 * 1000;
 async function maybeSyncYoutube(force = false) {
   const now = Date.now();
   if (force || now - lastSyncAt > SYNC_INTERVAL_MS) {
-    await syncYoutubeVideos();
+    // Claim the slot before awaiting so concurrent requests don't all sync at once.
     lastSyncAt = now;
+    try {
+      await syncYoutubeVideos();
+    } catch (error) {
+      // A failed sync must never stop the video list from loading.
+      console.error("YouTube sync failed:", error?.message || error);
+    }
   }
 }
 
@@ -17,6 +24,7 @@ export async function GET(req) {
   try {
     const { searchParams } = new URL(req.url);
     const forceSync = searchParams.get("sync") === "1";
+    const fresh = forceSync || searchParams.get("fresh") === "1";
 
     await maybeSyncYoutube(forceSync);
 
@@ -28,11 +36,16 @@ export async function GET(req) {
       },
     });
 
-    return NextResponse.json({
-      success: true,
-      message: "Videos fetched successfully",
-      data: data || [],
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Videos fetched successfully",
+        data: data || [],
+      },
+      {
+        headers: fresh ? NO_STORE_HEADERS : PUBLIC_CACHE_HEADERS,
+      }
+    );
   } catch (error) {
     return NextResponse.json(
       { success: false, message: error.message || "Error fetching videos", error: error.data || null },

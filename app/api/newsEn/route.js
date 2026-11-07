@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { NO_STORE_HEADERS, PUBLIC_CACHE_HEADERS } from "@/lib/server/cache";
 import { fetchNewsList, saveNewsImage, toSlug } from "@/lib/server/news";
 import { supabaseRest } from "@/lib/server/supabase";
 
@@ -19,11 +20,15 @@ export async function GET(req) {
 
       return NextResponse.json(
         { data },
-        { headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300" } }
+        { headers: PUBLIC_CACHE_HEADERS }
       );
     }
 
-    // No params: full rows for the admin pages (approve-news, add-news).
+    // No params: full rows. The installed mobile app calls this on every
+    // category/trending screen, so it is served from the CDN cache. Admin pages
+    // pass ?fresh=1 to bypass the cache and always see the latest rows.
+    const fresh = searchParams.get("fresh") === "1";
+
     const data = await supabaseRest("news", {
       query: {
         select: "*",
@@ -31,7 +36,12 @@ export async function GET(req) {
       },
     });
 
-    return NextResponse.json({ data: data || [] });
+    return NextResponse.json(
+      { data: data || [] },
+      {
+        headers: fresh ? NO_STORE_HEADERS : PUBLIC_CACHE_HEADERS,
+      }
+    );
   } catch (error) {
     return NextResponse.json(
       { message: error.message || "Failed to fetch news", details: error.data || null },

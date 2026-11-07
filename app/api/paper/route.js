@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { PUBLIC_CACHE_HEADERS } from "@/lib/server/cache";
 import { supabaseRest } from "@/lib/server/supabase";
 import { savePaperFile, savePaperThumbnail } from "@/lib/server/paper";
 
@@ -11,7 +12,10 @@ export async function GET() {
       },
     });
 
-    return NextResponse.json({ success: true, data: rows || [] });
+    return NextResponse.json(
+      { success: true, data: rows || [] },
+      { headers: PUBLIC_CACHE_HEADERS }
+    );
   } catch (error) {
     return NextResponse.json(
       { success: false, message: error.message || "Failed to fetch papers", details: error.data || null },

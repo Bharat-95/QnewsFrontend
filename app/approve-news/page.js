@@ -15,7 +15,7 @@ const Page = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await fetch('/api/newsEn');
+        const response = await fetch('/api/newsEn?fresh=1');
         const data = await response.json();
         console.log(data);
         setNewsList(data.data);
