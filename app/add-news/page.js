@@ -22,53 +22,6 @@ const Page = () => {
   const [image, setImage] = useState(null);
   const [loading, setIsLoading] = useState(false);
 
-  const compressImageFile = async (file) => {
-    if (!file) return file;
-
-    // Keep already-small images as-is.
-    if (file.size <= 900 * 1024) return file;
-
-    const dataUrl = await new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-
-    const img = await new Promise((resolve, reject) => {
-      const image = new window.Image();
-      image.onload = () => resolve(image);
-      image.onerror = reject;
-      image.src = dataUrl;
-    });
-
-    const maxWidth = 1600;
-    const scale = Math.min(1, maxWidth / img.width);
-    const width = Math.round(img.width * scale);
-    const height = Math.round(img.height * scale);
-
-    const canvas = document.createElement("canvas");
-    canvas.width = width;
-    canvas.height = height;
-    const ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0, width, height);
-
-    let quality = 0.82;
-    let blob = await new Promise((resolve) =>
-      canvas.toBlob(resolve, "image/jpeg", quality)
-    );
-
-    while (blob && blob.size > 900 * 1024 && quality > 0.45) {
-      quality -= 0.08;
-      blob = await new Promise((resolve) =>
-        canvas.toBlob(resolve, "image/jpeg", quality)
-      );
-    }
-
-    if (!blob) return file;
-    return new File([blob], `${Date.now()}-news.jpg`, { type: "image/jpeg" });
-  };
-
   const handleInlineStyleClick = (style) => {
     const newState = RichUtils.toggleInlineStyle(newsEn, style);
     setNewsEn(newState); // Update the English editor state
@@ -158,8 +111,8 @@ const Page = () => {
     }
 
     try {
-      const compressedImage = await compressImageFile(image);
-      const uploadedImageUrl = await uploadFileToSupabaseStorage(compressedImage, {
+      // uploadFileToSupabaseStorage compresses the image (resize only, never crops).
+      const uploadedImageUrl = await uploadFileToSupabaseStorage(image, {
         bucket: process.env.NEXT_PUBLIC_SUPABASE_BUCKET_NEWS_IMAGES || "news-images",
         folder: "news-images",
       });
