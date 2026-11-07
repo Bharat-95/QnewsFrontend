@@ -24,7 +24,6 @@ const Header = () => {
   const [temperature, setTemperature] = useState(null);
   const { translations, toggleLanguage, language } = useLanguage();
   const [menu, setMenu] = useState(false);
-  const [data, setData] = useState([]);
   const [userRole, setUserRole] = useState("");
   const menuRef = useRef(null);
   const router = useRouter();
@@ -36,38 +35,21 @@ const Header = () => {
   const canAddContent = ["Employee", "Admin", "SuperAdmin"].includes(userRole);
 
   useEffect(() => {
-    const fetchData = async () => {
+    // Ask the server who the signed-in user is (role comes from the database,
+    // not from localStorage). Visitors who are not logged in skip the request.
+    const fetchMe = async () => {
+      if (!localStorage.getItem("token")) return;
       try {
-        const response = await fetch(
-          "/api/users"
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const responseData = await response.json();
-
-        const users = responseData.data;
-
-        if (!Array.isArray(users)) {
-          throw new Error("Invalid data format: Expected an array in 'data'.");
-        }
-
-        setData(users);
-
-        const storedEmail = localStorage.getItem("email");
-        const loggedInUser = users.find((user) => user.qnews === storedEmail);
-
-        if (loggedInUser) {
-          setUserRole(loggedInUser.role);
-        } else {
-          console.log("No matching user found for the logged-in session.");
-        }
+        const response = await fetch("/api/auth/me");
+        if (!response.ok) return;
+        const { user } = await response.json();
+        if (user?.role) setUserRole(user.role);
       } catch (error) {
-        console.log("Unable to fetch the data from the database", error);
+        console.log("Unable to load the signed-in user", error);
       }
     };
 
-    fetchData();
+    fetchMe();
   }, []);
 
   useEffect(() => {
@@ -141,6 +123,7 @@ const Header = () => {
 
   const handleSignOut = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
     localStorage.removeItem("role");
     setIsLoggedIn(false);
     router.push("/");

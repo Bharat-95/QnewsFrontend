@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
+import { ROLES, authErrorResponse, requireAuth } from "@/lib/server/auth";
 import { supabaseRest } from "@/lib/server/supabase";
 
 export async function PUT(req, { params }) {
   try {
+    await requireAuth(req, { roles: ROLES.ADMIN });
     const { videoId } = await params;
     const payload = await req.json();
 
@@ -20,6 +22,8 @@ export async function PUT(req, { params }) {
 
     return NextResponse.json({ success: true, data: rows?.[0] || null });
   } catch (error) {
+    const authRes = authErrorResponse(error);
+    if (authRes) return authRes;
     return NextResponse.json(
       { success: false, message: error.message || "Error updating video", error: error.data || null },
       { status: error.status || 500 }
@@ -27,8 +31,9 @@ export async function PUT(req, { params }) {
   }
 }
 
-export async function DELETE(_req, { params }) {
+export async function DELETE(req, { params }) {
   try {
+    await requireAuth(req, { roles: ROLES.ADMIN });
     const { videoId } = await params;
 
     await supabaseRest("videos", {
@@ -40,6 +45,8 @@ export async function DELETE(_req, { params }) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
+    const authRes = authErrorResponse(error);
+    if (authRes) return authRes;
     return NextResponse.json(
       { success: false, message: error.message || "Error deleting video", error: error.data || null },
       { status: error.status || 500 }

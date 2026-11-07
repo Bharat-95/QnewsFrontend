@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 import axios from 'axios';
-import emailjs from 'emailjs-com';
 import { useRouter } from 'next/navigation';
 
 const Page = () => {
@@ -13,65 +12,36 @@ const Page = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
-  const [sentOtp, setSentOtp] = useState(null); // Store the sent OTP
   const [isSendingOtp, setIsSendingOtp] = useState(false); // To disable button while sending OTP
   const [isVerifyingOtp, setIsVerifyingOtp] = useState(false); // To disable button while verifying OTP
 
-  // Handle sending OTP using EmailJS
+  // The server creates and emails the code; the browser never sees it.
   const sendOtp = async () => {
-    try {
-        setMessage('');
-        setError('');
-        setIsSendingOtp(true); // Disable button during OTP sending
-
-        // Generate a random OTP
-        const otpCode = Math.floor(100000 + Math.random() * 900000); // 6-digit OTP
-
-        setSentOtp(otpCode);
-
-        const templateParams = {
-            to_email: email,   // This remains the same as the recipient email
-            otp: otpCode,
-        };
-
-        const response = await emailjs.send(
-            'service_zemecne', // Replace with your service ID
-            'template_40yjuqe', // Replace with your template ID
-            templateParams,
-            'y7xRvo7Xp8BAipO4x' // Replace with your user ID
-        );
-
-        if (response.status === 200) {
-            setMessage('OTP sent to your email.');
-            setStep(2);
-        } else {
-            setError('Failed to send OTP. Please try again.');
-        }
-    } catch (err) {
-        setError('Error sending OTP. Please check the email address and try again.');
-    } finally {
-        setIsSendingOtp(false);
-    }
-};
-
-
-  const verifyOtp = () => {
     try {
       setMessage('');
       setError('');
-      setIsVerifyingOtp(true);
-
-      if (otp === sentOtp?.toString()) {
-        setMessage('OTP verified successfully.');
-        setStep(3);
-      } else {
-        setError('Invalid OTP. Please try again.');
-      }
+      setIsSendingOtp(true);
+      const response = await axios.post('/api/users/reset-password/request', {
+        email: email.trim().toLowerCase(),
+      });
+      setMessage(response.data?.message || 'If an account exists, a code has been sent to your email.');
+      setStep(2);
     } catch (err) {
-      setError('Error verifying OTP. Please try again.');
+      setError(err?.response?.data?.message || 'Error sending OTP. Please try again.');
     } finally {
-      setIsVerifyingOtp(false); 
+      setIsSendingOtp(false);
     }
+  };
+
+  // The code is checked by the server together with the new password.
+  const verifyOtp = () => {
+    setMessage('');
+    setError('');
+    if (!/^\d{6}$/.test(otp.trim())) {
+      setError('Please enter the 6-digit code from your email.');
+      return;
+    }
+    setStep(3);
   };
 
 
@@ -83,7 +53,11 @@ const Page = () => {
     try {
       setMessage('');
       setError('');
-      const response = await axios.post('/api/users/reset-password', { email, newPassword });
+      const response = await axios.post('/api/users/reset-password', {
+        email: email.trim().toLowerCase(),
+        code: otp.trim(),
+        newPassword,
+      });
       if (response.data.success) {
         setMessage('Password reset successfully. You can now log in with your new password.');
         setStep(1);
@@ -96,7 +70,10 @@ const Page = () => {
         setError('Failed to reset password. Please try again.');
       }
     } catch (err) {
-      setError('Error resetting password. Please try again.');
+      const msg = err?.response?.data?.message;
+      setError(msg || 'Error resetting password. Please try again.');
+      // Wrong or expired code: let the user fix it.
+      if (msg && /code/i.test(msg)) setStep(2);
     }
   };
 

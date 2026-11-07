@@ -33,6 +33,7 @@ const Page = () => {
 
       if (response.ok) {
         localStorage.setItem("token", data.token);
+        if (data.refreshToken) localStorage.setItem("refreshToken", data.refreshToken);
         localStorage.setItem("email", data.user.email);
         localStorage.setItem("role", data.user.role); 
         localStorage.setItem("firstName", data.user.firstName);

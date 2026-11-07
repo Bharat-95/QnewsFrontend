@@ -3,6 +3,7 @@ import Script from "next/script"; // Import next/script
 import "./globals.css";
 import { LanguageProvider } from "@/context/languagecontext";
 import Header from "@/components/Header";
+import AuthBridge from "@/components/AuthBridge";
 import Footer from "@/components/Footer";
 import { Poppins } from "next/font/google";
 import FontWrapper from "@/components/Fontwrapper";
@@ -68,6 +69,7 @@ export default function RootLayout({ children }) {
           strategy="afterInteractive"
         />
 
+        <AuthBridge />
         <LanguageProvider>
           <FontWrapper>
             <Header />

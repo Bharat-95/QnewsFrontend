@@ -1,9 +1,11 @@
 import fs from "fs/promises";
 import path from "path";
 import { NextResponse } from "next/server";
+import { ROLES, authErrorResponse, requireAuth } from "@/lib/server/auth";
 
 export async function POST(req) {
   try {
+    await requireAuth(req, { roles: ROLES.STAFF });
     const formData = await req.formData();
     const file = formData.get("file") || formData.get("media") || formData.get("image");
 
@@ -21,6 +23,8 @@ export async function POST(req) {
 
     return NextResponse.json({ success: true, url: `/uploads/greetings/${filename}` });
   } catch (error) {
+    const authRes = authErrorResponse(error);
+    if (authRes) return authRes;
     return NextResponse.json({ success: false, message: error.message || "Upload failed" }, { status: 500 });
   }
 }

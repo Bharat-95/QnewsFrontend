@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { ROLES, authErrorResponse, requireAuth } from "@/lib/server/auth";
 import { PUBLIC_CACHE_HEADERS } from "@/lib/server/cache";
 import { supabaseRest } from "@/lib/server/supabase";
 import { savePaperFile, savePaperThumbnail } from "@/lib/server/paper";
@@ -26,6 +27,7 @@ export async function GET() {
 
 export async function POST(req) {
   try {
+    await requireAuth(req, { roles: ROLES.STAFF });
     const formData = await req.formData();
     const file = formData.get("file");
     const thumbnail = formData.get("thumbnail");
@@ -61,6 +63,8 @@ export async function POST(req) {
 
     return NextResponse.json({ success: true, data: rows?.[0] || null });
   } catch (error) {
+    const authRes = authErrorResponse(error);
+    if (authRes) return authRes;
     return NextResponse.json(
       { success: false, message: error.message || "Failed to upload paper", details: error.data || null },
       { status: error.status || 500 }

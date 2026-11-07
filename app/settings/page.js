@@ -4,7 +4,6 @@ import { useLanguage } from "@/context/languagecontext";
 import axios from "axios";
 
 const UserProfilePage = () => {
-  const [data, setData] = useState([]);
   const [email, setEmail] = useState("");
   const [formData, setFormData] = useState({
     firstName: "",
@@ -16,19 +15,15 @@ const UserProfilePage = () => {
 
   const fetchData = useCallback(async () => {
     try {
-      const response = await axios.get(
-        "/api/users"
-      );
-      const responseData = response.data;
-      setData(responseData.data);
-
-      const user = responseData.data.find((user) => user.qnews === email);
+      // Only the signed-in user's own profile (the full users list is admin-only).
+      const response = await axios.get("/api/auth/me");
+      const user = response.data?.user;
       if (user) {
         setFormData({
           firstName: user.firstName || "",
           lastName: user.lastName || "",
           phoneNumber: user.phoneNumber || "",
-          email: user.qnews || "",
+          email: user.email || "",
         });
       }
     } catch (error) {

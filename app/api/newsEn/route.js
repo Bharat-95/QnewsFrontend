@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { ROLES, authErrorResponse, requireAuth } from "@/lib/server/auth";
 import { NO_STORE_HEADERS, PUBLIC_CACHE_HEADERS } from "@/lib/server/cache";
 import { fetchNewsList, saveNewsImage, toSlug } from "@/lib/server/news";
 import { supabaseRest } from "@/lib/server/supabase";
@@ -52,6 +53,7 @@ export async function GET(req) {
 
 export async function POST(req) {
   try {
+    await requireAuth(req, { roles: ROLES.STAFF });
     const formData = await req.formData();
     const headlineEn = formData.get("headlineEn")?.toString() || "";
     const headlineTe = formData.get("headlineTe")?.toString() || "";
@@ -93,6 +95,8 @@ export async function POST(req) {
 
     return NextResponse.json({ success: true, data: inserted?.[0] || null });
   } catch (error) {
+    const authRes = authErrorResponse(error);
+    if (authRes) return authRes;
     return NextResponse.json(
       { success: false, message: error.message || "Failed to add news", details: error.data || null },
       { status: error.status || 500 }

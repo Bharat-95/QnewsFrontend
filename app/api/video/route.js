@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { ROLES, authErrorResponse, requireAuth } from "@/lib/server/auth";
 import { NO_STORE_HEADERS, PUBLIC_CACHE_HEADERS } from "@/lib/server/cache";
 import { extractVideoIdFromUrl, saveVideoThumbnail, syncYoutubeVideos } from "@/lib/server/video";
 import { supabaseRest } from "@/lib/server/supabase";
@@ -56,6 +57,7 @@ export async function GET(req) {
 
 export async function POST(req) {
   try {
+    await requireAuth(req, { roles: ROLES.STAFF });
     const formData = await req.formData();
     const titleEn = (formData.get("titleEn") || "").toString().trim();
     const titleTe = (formData.get("titleTe") || "").toString().trim();
@@ -96,6 +98,8 @@ export async function POST(req) {
 
     return NextResponse.json({ success: true, data: rows?.[0] || null });
   } catch (error) {
+    const authRes = authErrorResponse(error);
+    if (authRes) return authRes;
     return NextResponse.json(
       { success: false, message: error.message || "Error adding video", error: error.data || null },
       { status: error.status || 500 }

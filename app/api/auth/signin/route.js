@@ -36,6 +36,7 @@ export async function POST(req) {
 
     return NextResponse.json({
       token: session.access_token,
+      refreshToken: session.refresh_token,
       user: {
         email: profile.qnews,
         role: profile.role,
